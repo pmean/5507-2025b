@@ -16,10 +16,6 @@ editor: source
 + UMKC Student labs
   + Royall Hall 303, Lab #17 and #38
 + UMKC Remote Labs
-+ Alternatives not covered in this class
-  + SAS University
-  + Jupyter lab
-  + SASMarkdown. StatWeave
 
 ::: notes
 
@@ -40,7 +36,6 @@ You can also access SAS on the UMKC Remote Labs. I'll also show this.
 + SASMarkdown. StatWeave
 
 ::: notes
-
 
 There are some alternatives which I will not show, but if you are interested in investigating, let me know. I am glad to talk privately with anyone about this.
 
