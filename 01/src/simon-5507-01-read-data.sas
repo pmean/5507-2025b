@@ -11,7 +11,7 @@ filename rawdata
   "q:/introduction-to-sas/data/six-numbers.txt";
 
 ods pdf file=
-    "q:/introduction-to-sas/results/5507-01-simon-read-data.pdf";
+  "q:/introduction-to-sas/results/5507-01-simon-read-data.pdf";
 
 data perm.small_example;
  infile rawdata;

@@ -1,0 +1,96 @@
+---
+title: "History of SAS"
+format: 
+  revealjs:
+    slide-number: true
+    embed-resources: true
+editor: source
+---
+
+## History of SAS, blog post
+
+![Blog post on the history of SAS](../images/m01-history-of-sas.png)
+
+::: notes
+
+History of SAS. If you understand where SAS comes from, you understand some of the limitations.
+
+This is on my blog.
+
+:::
+
+## Origins of SAS
+
++ SAS=Statistical Analysis System
++ Founders come from NCSU
+  + Anthony Barr
+  + James Goodnight
+  + Jane Helwig
+  + John Sall
++ Originally for IBM mainframes
+  + PL/1, FORTRAN, Assembler
+  + Translated to C in 1985
+
+::: notes
+
+SAS was developed at NC State. 
+
+In the 1960's, IBM mainframes dominated. So SAS was originally written just for these systems. Originally, SAS was written in a mix of PL/1, Fortran, and Assembler. Millions of lines of code re-written in C in 1985 so that SAS could run on personal computers.
+
+SAS was built in the 1960s. There is very little software written in the 1960s that is still in regular use. It shows the staying power of SAS, but it is "long in the tooth."
+
+:::
+
+## Corporate structure
+
++ SAS Institute
+  + Founded 1976
+  + Privately held
+  + Huge spending on R&D
+  + Great place to work
+
+::: notes
+
+SAS Institute was formed in 1976. It is a privately held company.
+
+SAS spends over a quarter of its budget, which is a huge fraction, on Research and Development.
+
+The SAS Headquarters is in Cary, NC, and it is huge. It is a pretty nice place to work with many family friendly policies even from the 1980s. SAS Institute has been rated in many magazine reviews as one of the top places to work.
+
+:::
+
+## Licensing and training
+
++ SAS licensing model
+  + Great for large organizations
+  + Prohibitively expensive for individuals
++ Excellent training resources
+  + SAS publications
+  + Certification program
+  + SAS user conferences
+
+::: notes
+
+SAS has a licensing model that is aggressively priced for large corporations but prohibitively expensive for individual consultants.
+
+SAS is oriented around various data sets and procedures. There is a menu driven version of SAS, but it is not very good. If you want a good package that is totally menu driven, use SPSS.
+
+SAS has a licensing model that is prohibitive for individual consultants. They offer a free product, SAS University, that is intended for teaching.
+
+SAS has literally hundreds of books published through an in-house publisher. It has a certification program that allows you to earn credentials that can help you in your job search. SAS also sponsors some very extravagant user conferences.
+
+:::
+
+## Other products from SAS Institute
+
++ JMP, 1989
++ Viya, 2017
+
+::: notes
+
+SAS Institute has many products beyond SAS. Most notable of these is JMP (pronounced "jump"). This is an acronym for John's Macintosh Product. it was released in 1989 when the Macintosh series of computers had many graphical user interface features that were not yet available for other personal computers. It pioneered (and continues to lead) in many interactive and dynamic graphic features.
+
+SAS Viya is a cloud based platform with many advanced visualization and machine learning algorithms not found in SAS.
+
+:::
+

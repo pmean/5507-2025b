@@ -1,0 +1,133 @@
+---
+title: "See bottom of file for title"
+format: 
+  revealjs:
+    slide-number: true
+    embed-resources: true
+params:
+  topic_01: "About this course and your instructors"
+  topic_02: "Where you can get SAS"
+  topic_03: "Your first SAS program"
+  topic_04: "History of SAS"
+  topic_05: "Documentation header"
+  topic_06: "Permanent storage"
+  topic_07: "Saving your output"
+  topic_08: "Getting data from a file"
+editor: source
+---
+
+```{r}
+# Preliminaries, if needed
+
+# Keep this chunk, even if no code, so that
+# params is populated from the yaml header.
+
+# To print speaker notes, add
+#   ?print-pdf&showNotes=separate-page 
+#   to the end of the URL. Then open the
+#   print dialog box (ctrl-P) and choose
+#   Save as PDF for the printer. Other 
+#   options, like Microsoft Print to PDF
+#   do not seem to work.
+```
+
+## Topics to be covered
+
+-   What you will learn
+    -   `r params$topic_01`
+    -   `r params$topic_02`
+    -   `r params$topic_03`
+    -   `r params$topic_04`
+    -   `r params$topic_05`
+    -   `r params$topic_06`
+    -   `r params$topic_07`
+    -   `r params$topic_08`
+
+{{< include _sas-01-01.qmd >}}
+
+## Break #1
+
+-   What you have learned
+    -   `r params$topic_01`
+-   What's coming next
+    -   `r params$topic_02`
+
+{{< include _sas-01-02.qmd >}}
+
+## Break #2
+
+-   What you have learned
+    -   `r params$topic_02`
+-   What's coming next
+    -   `r params$topic_03`
+    
+{{< include _sas-01-03.qmd >}}
+
+## Break #3
+
+-   What you have learned
+    -   `r params$topic_03`
+-   What's coming next
+    -   `r params$topic_04`
+    
+{{< include _sas-01-04.qmd >}}
+
+## Break #4
+
+-   What you have learned
+    -   `r params$topic_04`
+-   What's coming next
+    -   `r params$topic_05`
+    
+{{< include _sas-01-05.qmd >}}
+
+## Break #5
+
+-   What you have learned
+    -   `r params$topic_05`
+-   What's coming next
+    -   `r params$topic_06`
+    
+{{< include _sas-01-06.qmd >}}
+
+## Break #6
+
+-   What you have learned
+    -   `r params$topic_06`
+-   What's coming next
+    -   `r params$topic_07`
+    
+{{< include _sas-01-07.qmd >}}
+
+## Break #7
+
+-   What you have learned
+    -   `r params$topic_07`
+-   What's coming next
+    -   `r params$topic_08`
+    
+{{< include _sas-01-08.qmd >}}
+
+
+
+## Summary
+
+-   What you have learned
+    -   `r params$topic_01`
+    -   `r params$topic_02`
+    -   `r params$topic_03`
+    -   `r params$topic_04`
+    -   `r params$topic_05`
+    -   `r params$topic_06`
+    -   `r params$topic_07`
+    -   `r params$topic_08`
+
+<!---
+      You have to put the title down 
+      here to override the titles of
+      all the include files.
+--->
+
+---
+title: "simon-5507-01-slides"
+---

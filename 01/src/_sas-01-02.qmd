@@ -1,0 +1,199 @@
+---
+title: "Where you can get SAS"
+format: 
+  revealjs:
+    slide-number: true
+    embed-resources: true
+editor: source
+---
+
+## Where can you get SAS
+
++ SAS OnDemand for Academics (SODA)
++ On your UMKC computer
+  + Desktop, hard-wired to UMKC network
+  + No laptops, no home computers
++ UMKC Student labs
+  + Royall Hall 303, Lab #17 and #38
++ UMKC Remote Labs
++ Alternatives not covered in this class
+  + SAS University
+  + Jupyter lab
+  + SASMarkdown. StatWeave
+
+::: notes
+
+There are several ways that you can get access to SAS software. One of these three options should work for you.
+
+The recommended option is SAS OnDemand for Academics. This version of SAS runs in the cloud. It is restricted to educational uses only.
+
+You can get it running on your UMKC computer, and I will show you how to do this.
+
+You can also access SAS on the UMKC Remote Labs. I'll also show this.
+
+:::
+
+## Alternative places where you can get SAS
+
++ SAS University
++ Jupyter lab
++ SASMarkdown. StatWeave
+
+::: notes
+
+
+There are some alternatives which I will not show, but if you are interested in investigating, let me know. I am glad to talk privately with anyone about this.
+
+There is a very nice product that I have used in the past called SAS University. It is very difficult to install, but once you have it running, it is very easy to use.
+
+If anyone is a fan of Jupyter, you should note that Jupyter lab can run SAS code. You probably need to have SAS already running on your computer, and I have not had time to experiment with this. 
+
+If you are familiar with the R programming environment, there are a couple of packages, SASMarkdown and StatWeave, that allow you to integrate SAS code and output into your workflow. I have not had time to experiment with this either.
+
+:::
+
+## SAS on your UMKC computer
+
+![Screenshot of UMKC IS page on SAS software](../images/m01-umkc-sas.png)
+
+::: notes
+
+This screenshot may be too small for you to read, but you can find the proper link on the recommended readings list for this week on the Canvas website. SAS works for any desktop computer on the UMKC campus. But it has to be hard-wired to the UMKC network. By hard-wired, I mean that there is an ethernet cable connecting your computer to a socket on the wall.
+
+If you are fortunate enough to have access to a hard-wired computer, you can get SAS installed easily. Someone else will do it for you. It may already be sitting on your computer.
+
+With a very few rare exceptions, you cannot get UMKC to load SAS on a laptop computer or on a home computer. This because of the license agreement that UMKC signed with SAS Institute. It does not allow for home use of SAS.
+
+:::
+
+## UMKC Remote Labs
+
+![UMKC Remote Labs home page](../images/m01-umkc-remote-labs.png)
+
+::: notes
+
+You can also run SAS through the UMKC Remote Labs. It should run fine on most browsers, though it can be a bit fussy.
+
+:::
+
+## SODA login page
+
+![Screenshot of SODA login page](../images/m01-soda-login.png)
+
+::: notes
+
+Here is the login page for SAS OnDemand for Academics. If you have used SAS a lot in the past, you may already have a SAS profile sign-in. More likely, you do not have such an account. You set it up by clicking on the "Don't have a SAS Profile?" link.
+
+:::
+
+## SODA create profile (1 of 2)
+
+![Screenshot of First Time Visitor dialog box](../images/m01-soda-profile-01.png)
+
+::: notes
+
+SAS guides you through the process fairly nicely. Read this dialog box. In particular, note that the profile by itself is not enough. You will still have to register for SAS OnDemand for Academics once the profile is created.
+
+:::
+
+## SODA create profile (2 of 2)
+
+![Screenshot of First Time Visitor dialog box](../images/m01-soda-profile-02.png)
+
+::: notes
+
+I won't take you through all of the steps, but SAS is not asking for a lot of information. Note the box at the bottom of the screen (not shown in this screenshot) that asks if you want to get promotional emails from SAS Institute. It's easy enough to say "Yes" here and then unsubscribe later if you find the emails are not worth the trouble. Or you can say "No" right away if you prefer.
+
+:::
+
+## SODA dashboard (1 of 2)
+
+![Screenshot of SODA dashboard](../images/m01-soda-dashboard.png)
+
+::: notes
+
+This is the SAS OnDemand Dashboard. It offers two options, SAS Studio and a Python interface to SAS. I have not used the Python interface, but I'm sure it is pretty simple for someone already experienced with Python.
+
+The top of the page has links to Planned Events and Notices. Beneath that are links to Applications, Enrollments, and Courses.
+
+To load SAS Studio, click on the top link.
+
+:::
+
+
+## SODA enrollments
+
+![Screenshot of SODA enrollments page](../images/m01-soda-enrollments.png)
+
+::: notes
+
+The enrollments page allows you to "enroll" in my class. This isn't really needed. It adds a folder with all the data files that I use in this class, but you could also get these from my github site.
+
+:::
+
+## SODA dashboard (2 of 2)
+
+![Screenshot of SODA dashboard](../images/m01-soda-dashboard.png)
+
+::: notes
+
+Go back to the dashboard by clicking on the Applications link. To load SAS Studio, click on SAS Studio link.
+
+:::
+
+## SODA studio (1 of 3)
+
+![Screenshot of SODA dashboard](../images/m01-soda-studio-01.png)
+
+::: notes
+
+This is what SAS Studio looks like. The first thing you should do is to create a directory structure.
+
+:::
+
+## SODA studio (2 of 3)
+
+![Screenshot of SODA dashboard](../images/m01-soda-studio-02.png)
+
+::: notes
+
+Click on the leftmost icon beneath "Server Files and Folders".
+
+Create three directories: data, results, and src.
+
+:::
+
+## SODA studio (3 of 3)
+
+![Screenshot of SODA dashboard](../images/m01-soda-studio-03.png)
+
+::: notes
+
+Create three directories: data, results, and src.
+
+There are some folders already in there from SAS, my_shared_file_links, sasuser.v94, and student-files. Don't worry about these folders for now.
+
+:::
+
+## Directory structure
+
++ One directory for the entire class
+  + Possibly one directory for each module
++ Subdirectory structure
+  + src
+  + results
+  + data
+  + others?
+    + images
+    + doc
+    
+::: notes
+
+Make sure you store things consistently. This part of the requirements for this class.
+
+Store all your programs for this class in a single directory. You can call it "sas" or "5507" or anything you like. Some people may prefer to create a separate directory for each module in this class. That's fine also.
+
+Most importantly, create three subdirectories, src, results, and data. Store your programs in src, your output in results and your raw and intermediate datasets in data. You may wish to create other subdirectories, such an images folder for any graphs you produce, a doc folder for any documentation you collect, but the three important subdirectory folders are src, results, and data.
+
+:::
+
