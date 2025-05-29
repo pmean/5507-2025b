@@ -1,0 +1,29 @@
+---
+title: "Documentation header"
+format: 
+  revealjs:
+    slide-number: true
+    embed-resources: true
+editor: source
+---
+
+## Documentation header
+
+```{r}
+#| label: 01-05-documentation
+
+tx <- readLines("simon-5507-01-documentation-header.sas")
+```
+
+```{}
+`r extract(tx, "^\\*", ";")`
+```
+
+::: notes
+
+Here is a documentation header. It belongs on the top of every SAS program that you run. Suman is going to modify the documentation header in a live demo.
+
+:::
+
+## Live demonstration (2 of 5)
+

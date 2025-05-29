@@ -1,0 +1,132 @@
+---
+title: "Introduction to SAS, Working with categorical variables"
+author: "Steve Simon"
+date: "Created: 2021-05-30"
+output: powerpoint_presentation
+knit: (function(inputFile, encoding) {
+  rmarkdown::render(inputFile, encoding = encoding,
+  output_dir = "../results", output_format = "all") })  
+---
+
+```{r common-code, child="common-functions.Rmd"}
+```
+
+```{r}
+file_prefix <- "5507-04-simon-categorical-variables"
+sas_file <- paste0(file_prefix, ".sas")
+tx <- readLines(sas_file)
+```
+
+```{r show-general-structure}
+tx %>%
+  str_subset("^\\* ") %>%
+  paste(collapse="\n\n") -> general_structure
+tx %<>% str_trim(side="right") %>% paste0(collapse="\n") %>% str_split("\n\n\n") %>% unlist
+output_page <- 0
+```
+
+
+
+### Overview
+
++ Frequency counts
++ Convert string to numeric
++ Labels for number codes
++ Drawing bar charts
++ Converting continuous to categorical
++ Modifying categorical variables
++ Crosstabulations
+
+<div class="notes">
+
+author: Steve Simon
+date: created 2021-05-30
+purpose: to produce slides for module04 videos
+license: public domain
+
+Here is an overview of what I want to cover in this module.
+
+We're going to look at a different data set, one with mostly categorical variables. I'll introduce proc format, which allows you to attach labels to categorical data, talk about recoding, and show some tables using proc freq. I'll also show you a simple bar chart.
+
+[For my own use]General structure of this program.
+
+`r general_structure`
+
+</div>
+
+
+`r add_chunks(0:4, tx)`
+
+
+### Break #1
++ What have you learned
+  + Frequency counts
++ What's coming next
+  + Convert string to numeric
+
+
+`r add_chunks(5:5, tx)`
+
+
+### Break #2
++ What you have learned
+  + Convert string to numeric
++ What's coming next
+  + Labels for number codes
+
+
+`r add_chunks(6:6, tx)`
+
+
+### Break #3
++ What you have learned
+  + Labels for number codes
++ What's coming next
+  + Drawing bar charts
+
+
+`r add_chunks(7:9, tx)`
+
+
+### Break #4
++ What you have learned
+  + Drawing bar charts
++ What's coming next
+  + Converting continuous to categorical
+
+
+
+`r add_chunks(10:14, tx)`
+
+
+### Break #5
++ What you have learned
+  + Converting continuous to categorical
++ What's coming next
+  + Modifying categorical variables
+
+
+`r add_chunks(15:15, tx)`
+
+
+### Break #6
++ What you have learned
+  + Modifying categorical variables
++ What's coming next
+  + Crosstabulation
+
+
+
+`r add_chunks(16:19, tx)`
+
+
+
+### Review
++ Frequency counts
++ Convert string to numeric
++ Labels for number codes
++ Drawing bar charts
++ Converting continuous to categorical
++ Modifying categorical variables
++ Crosstabulations
+

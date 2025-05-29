@@ -1,0 +1,415 @@
+---
+title: "Introduction to SAS, Working with continuous variables"
+author: "Steve Simon"
+date: "Created 2021-05-30"
+output: 
+  powerpoint_presentation: 
+    reference_doc: ../results/wide-screen-template.pptx
+knit: (function(inputFile, encoding) {
+  rmarkdown::render(inputFile, encoding = encoding, 
+  output_dir = "../results", output_format = "all") })  
+---
+
+```{r, echo=FALSE}
+# Specify the SAS file you are parsing here.
+fn <- "5507-02-simon-continuous-variables" 
+```
+
+```{r common-code, child="test-code.Rmd"}
+```
+
+### Overview
+
++ Using variable labels
++ Simple descriptive statistics
++ Printing row with smallest/largest value
++ Missing value logic
++ Simple transformations
++ Histograms
++ Correlations
++ Scatterplots
+
+<div class="notes">
+
+author: Steve Simon
+
+date: created 2021-05-30
+
+purpose: to produce slides for module01 videos
+
+license: public domain
+
+</div>
+
+### Review definitions
+
++ Categorical
+  + Small number of possible values
+  + Each value associated with a category
++ Continuous
+  + Large number of possible values
+  + Potentially any value in an interval
+  
+<div class="notes">
+
+Before we start, let's review a couple of definitions. 
+
+A **categorical variable** is a variable that can only take on a small number of values. Each value is usually associated with a particular category.
+
+Examples of categorical variables are
+
+  * sex (Male or Female),
+  * race (White, Black, Native American, etc.),
+  * cancer stage (I, II, III, or IV),
+  * birth delivery type (Vaginal, C-section). 
+
+A **continuous variable** is a variable that can take on a large number of possible values, potentially any value in some interval.
+
+Examples of continuous variables are
+
+  * Birth weight in grams,
+  * gestational age,
+  * fasting LDL level.
+
+There are some variables that are on the boundary between categorical and continuous, but it is not worth quibbling about here. 
+
+The point to remember is that the types of graphs that you use and the types of statistics that you compute are dependent on many things, but first and foremost on whether the variables are categorical, continuous, or a mixture.
+
+Today, you will see examples involving mostly continuous variables. 
+  
+</div>
+  
+
+### Semicolons are important
+
++ Ends every SAS statement
++ Easy to forget
++ Use this to your advantage
+  + Several short lines
+  + Indent continuations
+
+<div class="notes">
+
+Before I go too far, let me mention and important thing. Every SAS statement ends in a semicolon. This is important. You will forget a semicolon and it will lead to a cryptic error message. So here's a quick hint. If you get an error message on a certain line of code, look to see if you forgot a semicolon on the previous line. It happens to me all the time and I've been using SAS for decades.
+
+</div>  
+
+### Example of stretching statement across multiple lines.
+
+One long line
+
+```{}
+statement option1 option2 option3 option4;
+```
+
+versus several short lines.
+
+```{}
+statement
+  option1
+  option2
+  option3
+  option4;
+```
+
+<div class="notes">
+
+The use of semicolons is nice, in a way, because it allows you to stretch a complicated SAS statement across two or more rows of your program. This can often make your program more readable. It is hard to read a long line of code. Your eye has to scan left to right and you can sometimes lose track of which line you are on. Most newspapers place their articles in narrow columns because it makes them easier to read.
+
+There is no official rule of thumb on this, but I do try to keep my lines below 50 characters. I also try to indent substatements with a data step or procedure. I use blank lines between data steps and procedures.
+
+
+Don't obsess about this now, but you'll see a fairly consistent coding style that I use for my SAS code. You don't have to follow my format, of course, which might be a bit too extreme for your tastes. Just experiment with things a bit until you can settle on a layout that you are comfortable with.
+
+</div> 
+
+### Rules for variable names (1/2)
+
++ Can use mix of
+  + letters (A-Z, a-z),
+  + numbers (0-9)
+  + underscore (_)
+  + no blanks, no symbols
+
+<div class="notes">
+
+There are important rules for variable names in SAS. You can use a mix of letters, numbers, and the underscore. You can't use blanks or any special symbols like the dollar sign ($) or the dash/minus sign.
+
+I'm using the variable names provided but if you create your own names, use brief (but descriptive) name for EVERY variable in your data set. There's no precise rule, but names should be around 8 characters long. Longer variable names make your typing tedious and much shorter variable names makes your code terse and cryptic.
+
+I'm a bit more terse with these variable names than I normally would be just to reduce the amount of typing you have to do.
+
+You should avoid special symbols in your variable names especially symbols that are likely to cause confusion (the dash symbol, for example, which is also the symbol for subtraction). You should also avoid blanks. These rules are pretty much universal across most statistical software packages.
+
+</div>
+
+### Rules for variable names (2/2)
+
++ Can't start with a number
+  + "a1" but not "1a"
++ Capitalization not important
+  + BMI, Bmi, bmi are same
++ Up to 32 characters in length
+
+<div class="notes">
+
+You can't start with a number. So "a1" is okay, but "1a" is not.
+
+Capitalization is not important in SAS. So you can call your variable "BMI" with all caps, or "Bmi" with mixed capitals or "bmi" with all lower case. SAS treats all of these the same.
+
+Your variable name has to be 32 characters or less in length.
+
+I'm using the variable names provided but if you create your own names, use brief (but descriptive) name for EVERY variable in your data set. There's no precise rule, but names should be around 8 characters long. Longer variable names make your typing tedious and much shorter variable names makes your code terse and cryptic.
+
+I'm a bit more terse with these variable names than I normally would be just to reduce the amount of typing you have to do.
+
+</div>
+
+### Recommendations for variable names (1/2)
+
++ Avoid generic names (x1, var01, etc.)
++ Keep it short
+  + Use commonly known abbreviations...
+  + ...but nothing cryptic
++ Use all lower case (age, not AGE or Age)
+
+<div class="notes">
+
+Your variable names should by descriptive. Avoid generic names like x1, var01, and so forth.
+
+Keep things short. You can use commonly known abbreviations, such as "wt" for "weight". But avoid any cryptic abbreviations.
+
+I like to keep everything in lower case. It is more readable than all upper case, and easier to remember than a mixture of upper and lower case. Some people prefer an initial upper case, and there's nothing wrong with that. It is important, however, to be consistent.
+
+</div>
+
+### Recommendations for variable names (2/2)
+
++ Separate words with underscores
+  + fat_brozek, not fatbrozek
++ Alternative: CamelCase
+  + FatBrozek
++ Caution: Writer's Exchange website
+  + www.writersexchange.com
+  
+<div class="notes">
+
+You can use two or three short words in a variable name, but be sure to separate them using underscores. So the variable for percentage body fat as measured by Brozek's equation is "fat" and "brozek" separated by an underscore. Some people prefer CamelCase, where each word starts with an initial capital letter: capital F fat, capital B brozek.
+
+The one thing you do want to avoid is just running two or three words together and all lower case. There's a story about a group that started up in the era before the web called Writer's Exchange. As you can guess this was a resource for new authors. When the web came out, they decided to put their resources up on a website, www.writersexchange.com. That seemed logical enough, but then someone notices that you could read the website as "www dot writer sex change dot com". Not exactly the image they wanted.
+
+
+</div>
+
+### SAS variable labels (1/2)
+
++ Longer description of a variable
+  + Can include blanks, special symbols
+  + Internal documentation
+  + Labels substituted on some (but not all) output
++ Required in this class (see grading rubric)
+
+<div class="notes">
+
+SAS offers an opportunity for you to add documentation to your program about individual variables. These are called variable labels. They have almost no restrictions. You can use blanks, or special symbols like a dollar sign or a dash. The documentation that variable labels provide is mostly internal, but these labels are substituted in a few places like some graphs.
+
+I strongly recommend use of variable labels and will require them for any homework you submit in this class. See the grading rubric for details.
+
+</div>
+
+### SAS variable labels (2/2)
+
++ Recommendations for variable labels
+  + Judicious use of upper and lower case
+  + Spell out abbreviations
+  + Specify units of measurement
+  + Any other important details
+
+<div class="notes">
+
+What makes a good variable label? First take advantage of a mixture of upper and lower case to make your labels more readable. Spell out any abbreviations, even obvious abbreviations. If your variable has a measurement unit, specify that unit in your variable label. If there are other important details, put these in the variable label as well.
+
+</div>
+
+### Break #1
+
++ What have you learned so far
+  + Rules for variable names
+  + Using variable labels
+  
++ What's next
+  + SAS code with variable labels
+
+
+<!---Part01. Documentation header--->
+
+`r paste0(sas_text[chunk_number==1], collapse="\n\n")`
+
+<!---Part02. Tell SAS where to find and store things.--->
+
+`r paste0(sas_text[chunk_number==2], collapse="\n\n")`
+
+<!---Part03. Read in your data--->
+
+`r paste0(sas_text[chunk_number==3], collapse="\n\n")`
+
+<!---Part04. Add variable labels--->
+
+`r paste0(sas_text[chunk_number==4], collapse="\n\n")`
+
+<!---Part05. Print a small piece of the data--->
+
+`r paste0(sas_text[chunk_number==5], collapse="\n\n")`
+
+
+### Break #2
+
++ What have you learned so far
+  + SAS code with variable labels
+  
++ What's next
+  + Simple statistics
+  + Printing row with smallest/largest value
+
+<!---Part06. Calculate simple statistics for ht--->       
+
+`r paste0(sas_text[chunk_number==6], collapse="\n\n")`
+
+<!---Part07. Look at smallest value--->
+
+`r paste0(sas_text[chunk_number==7], collapse="\n\n")`
+
+<!---Part08. Look at the largest value--->
+
+`r paste0(sas_text[chunk_number==8], collapse="\n\n")`
+
+<!---Part09. Removing the entire row--->
+
+`r paste0(sas_text[chunk_number==9], collapse="\n\n")`
+
+<!---Part10. Converting the outlier to a missing value--->"
+
+`r paste0(sas_text[chunk_number==10], collapse="\n\n")`
+
+<!---Part11. Faulty approach for filtering out negative values--->
+
+`r paste0(sas_text[chunk_number==11], collapse="\n\n")`
+
+### The proper way to search for negative ht values
+
+```{}
+where (ht < 0) & (ht ~= .) 
+```
+
+<div class="notes">
+
+You may hate having to do this and wish that SAS would have handled things differently. Different packages, like R, have a three valued logic system where every logic statement (well, almost every logic statement) involving missing values codes to MISSING rather than to TRUE or FALSE. This sometimes works better, but sometimes the SAS approach works better.
+
+</div>
+
+<!---Part12. Counting missing values--->
+
+`r paste0(sas_text[chunk_number==12], collapse="\n\n")`
+
+### Break #3
++ What have you learned
+  + Handling outliers
+  + Missing values
++ What's next
+  + Simple transformations
+  + Histograms
+
+<!---Part13. Simple transformations--->
+
+`r paste0(sas_text[chunk_number==13], collapse="\n\n")`
+
+<!---Part14. Display a histogram--->
+
+`r paste0(sas_text[chunk_number==14], collapse="\n\n")`
+
+<!---Part15. Revised histogram with narrow bins--->"
+
+`r paste0(sas_text[chunk_number==15], collapse="\n\n")`
+
+<!---Part16. Revised histogram with wide bins--->
+
+`r paste0(sas_text[chunk_number==16], collapse="\n\n")`
+
+### Break #4
++ What have you learned
+  + Simple transformations
+  + Histograms
++ What's next
+  + Correlations
+  + Scatterplots
+
+### Correlations
+
++ Informal interpretation
+  + between +0.7 and +1.0: strong positive association
+  + between +0.3 and +0.7: weak positive association
+  + between -0.3 and +0.3: little or no association
+  + between -0.3 and -0.7: weak positive association
+  + between -0.7 and -1.0: strong negative association
+
+<div class="notes">
+
+The correlation coefficient is a single number between -1 and +1 that quantifies the strength and direction of a relationship between two continuous variables. As a rough rule of thumb, a correlation larger than +0.7 indicates a strong positive association and a correlation smaller than -0.7 indicates a strong negative association. A correlation between +0.3 and +0.7 (-0.3 and -0.7) indicates a weak positive (negative) association. A correlation between -0.3 and +0.3 indicates little or no association.
+
+Don't take these rules too literally. You're not trying to make definitive statements about your data set. You are just trying to get comfortable with some general patterns that occur in your data set. A complex and definitive statistical analysis will almost certainly not agree with at least some of the preliminary correlations noted here.
+
+The corr procedure produces, by default, a square correlation matrix of all the numeric variables. The noprob and nosimple options cut down on the amount of information printed. The with statement produces a rectangular correlation matrix.
+  
+</div>
+
+<!---Part17. Calculate correlations--->
+
+`r paste0(sas_text[chunk_number==17], collapse="\n\n")`
+
+<!---Part18. Save the correlations in a separate data file.--->
+
+`r paste0(sas_text[chunk_number==18], collapse="\n\n")`
+
+<!---Part19. Modify these correlations.--->
+
+`r paste0(sas_text[chunk_number==19], collapse="\n\n")`
+
+<!---Part20. Print the modified correlations.--->
+
+`r paste0(sas_text[chunk_number==20], collapse="\n\n")`
+
+<!---Part21. Draw a scatterplot.--->
+
+`r paste0(sas_text[chunk_number==21], collapse="\n\n")`
+
+<!---Part22. Adding linear trend line.--->
+
+`r paste0(sas_text[chunk_number==22], collapse="\n\n")`
+
+<!---Part23. Adding a smooth curve.--->"
+
+`r paste0(sas_text[chunk_number==23], collapse="\n\n")`
+
+### Don't forget!
+
+```{}
+ods pdf close;
+```
+
+<div class="notes">
+
+I always seem to forget this last statement and then I get upset with SAS for not providing the PDF output. But SAS can't produce the PDF output until you tell it you are done. So don't yell at your computer when it's your own darn fault (just like Jimmy Buffet in the Margaritaville song).
+
+</div>
+
+### Summary
++ What have you learned
+  + Using variable labels
+  + Printing a small piece of data
+  + Simple descriptive statistics
+  + Printing row with smallest/largest value
+  + Missing value logic
+  + Simple transformations
+  + Histograms
+  + Correlations
+  + Scatterplots

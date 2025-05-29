@@ -1,0 +1,102 @@
+---
+title: "Topic-01"
+format: 
+  revealjs:
+    slide-number: true
+    embed-resources: true
+editor: source
+---
+
+```{r}
+#| message: false
+#| warning: false
+#| label: setup
+
+# I will not use too much R in a class called
+# "Introduction to SAS," but am including this
+# chunk just in case I need something from R.
+
+library(glue)
+library(tidyverse)
+```
+
+
+## Overview
+
++ Introducing your instructor
++ Where you can get SAS
++ Your first SAS program
++ History of SAS
++ Directory structure and documentation header
++ Permanent storage
++ Saving your output
++ Getting data from a file
+
+::: notes
+
+author: Steve Simon
+date: created 2018-08-29
+purpose: to produce slides for module01 videos
+license: public domain
+
+Here is an overview of what I want to cover in module02.
+
+Okay. I want to get you started using SAS. It's either going to be really easy or it's going to be really really hard. I want to give you as much guidance as I can without staring over your shoulder. Just quickly, I wrote this PowerPoint presentation and all the PowerPoint presentations using R Markdown. If you are curious I have a repository. It has some beautiful output.
+
+Greetings! My name is Steve Simon and I am the instructor for the class, MEDB 5507, Introduction to SAS.
+
+:::
+
+## Course instructor, Steve Simon
+
+![Photo of Steve Simon](../images/m01-steve-simon-pic01.png)
+
+::: notes
+
+This is Steve Simon, one of the instructors for MEDB 5507, Introduction to SAS.
+
+:::
+
+## Course instructor, Suman Sahil
+
+Insert image of Suman Sahil here.
+
+::: notes
+
+This is Steve Simon, one of the instructors for MEDB 5507, Introduction to SAS.
+
+:::
+
+## Original developer, Mary Gerkovich
+
+![Photo of Mary Gerkovich](../images/m01-mary-gerkovich.png)
+
+
+::: notes
+
+This course was originally developed by Dr. Mary Gerkovich. I've changed a few things, but I owe a big debt of gratitude to Mary for all of her hard work.
+
+:::
+
+## Github, https://github.com/pmean
+
+![](../images/m01-github.png)
+
+
+::: notes
+
+I have a github site. It includes some of the programs used in this class. All the material is public domain, but please do not plagiarize your homework from this github site.
+
+:::
+
+## Canvas site
+
+![Screenshot of Canvas site](../images/m01-canvas.png)
+
+
+::: notes
+
+My course is currently under development in Canvas. This is the instructors view. You will see a slightly different interface.
+
+:::
+

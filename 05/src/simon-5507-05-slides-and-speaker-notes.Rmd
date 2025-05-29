@@ -1,0 +1,106 @@
+---
+title: "Introduction to SAS, Working with a mix of categorical and continuous variables"
+author: "Steve Simon"
+date: "Created: 2019-07-19"
+output: powerpoint_presentation
+knit: (function(inputFile, encoding) {
+  rmarkdown::render(inputFile, encoding = encoding,
+  output_dir = "../results", output_format = "all") })  
+---
+
+```{r common-code, child="common-functions.Rmd"}
+```
+
+```{r}
+file_prefix <- "5507-05-simon-working-with-mix-of-variables"
+sas_file <- paste0(file_prefix, ".sas")
+tx <- readLines(sas_file)
+```
+
+```{r show-general-structure}
+tx %>%
+  str_subset("^\\* ") %>%
+  paste(collapse="\n\n") -> general_structure
+tx %<>% str_trim(side="right") %>% paste0(collapse="\n") %>% str_split("\n\n\n") %>% unlist
+output_page <- 0
+```
+
+### Overview
+
++ Review
+  + proc format, proc freq, proc means
++ proc corr
++ proc sgplot
+  + scatterplot
+  + boxplot
++ by statement
+
+<div class="notes">
+
+author: Steve Simon
+date: Created 2021-05-30
+purpose: to produce slides for module05 videos
+license: public domain
+
+Here is an overview of what I want to cover in module05. 
+
+</div>
+
+`r add_chunks(0:5, tx)`
+
+### Break #1
++ What have you learned
+  + Reviewing descriptive statistics
++ What's next
+  + Correlations and scatterplots
+
+`r add_chunks(6:8, tx)`
+
+### Break #2
++ What have you learned
+  + Correlations and scatterplots
++ What's next
+  + Boxplots
+  
+`r add_chunks(9:9, tx)`
+  
+### Break #3
++ What have you learned
+  + Boxplots
++ What's next
+  + Means by group
+
+`r add_chunks(10:10, tx)`
+
+### Break #4
++ What have you learned
+  + Means by group
++ What's next
+  + Investigating an odd association
+
+`r add_chunks(11:11, tx)`
+
+### Summary
++ Reviewing descriptive statistcs
++ Correlations and scatterplots
++ Boxplots
++ Means by group
++ Investigating an odd association
+
+
+```{r quality-check}
+fn <- "../results/qc05_chunks.txt"
+qc <- "QC check of chunks\n"
+for (i in 0:11) {
+  qc %<>% append("\n<!--Chunk " %0% i %0% "-->\n")
+  qc %<>% append(add_chunks(i:i, tx))
+}
+writeLines(qc, con=fn)
+fn <- "../results/qc05_tx.txt"
+qc <- "QC check of tx\n"
+for (i in 1:length(tx)) {
+  qc %<>% append("\n<!--Tx " %0% i %0% "-->\n")
+  qc %<>% append(tx[i])
+}
+writeLines(qc, con=fn)
+```

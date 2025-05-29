@@ -1,0 +1,130 @@
+---
+title: "Permanent storage"
+format: 
+  revealjs:
+    slide-number: true
+    embed-resources: true
+editor: source
+---
+
+## Permanent storage (1 of 4)
+
+```{r}
+#| label: 01-06-documentation-1
+
+tx <- readLines("simon-5507-01-permanent-storage.sas")
+```
+
+```{}
+`r extract(tx, "^\\*", ";")`
+```
+
+::: notes
+
+Let's look at a modified program that stores the data in a permanent location.
+
+Here is the documentation header. You should include a documentation header with any program you run for this class.
+
+:::
+
+## Permanent storage (2 of 4)
+
+```{}
+`r extract(tx, "^libname", "^libname")`
+```
+
+::: notes
+
+Notice the top line in this section. This is the libname statement. It tells SAS that you want to establish a permanent storage location at ../data. The ../data tells the computer system to go one level closer to the root directory, and then slide into the data subdirectory.
+
+You assign a brief name (no more than eight characters!) to this location. In my program, I use the name "perm" but anything is fine here.
+
+Then you prefix the dataset name simple_example with the libname location and a dot. This is called a two part name by SAS. The first part gives the permanent location folder and the second part gives the file name.
+
+Once you establish a two-part name for a dataset, you assure that it is stored for later re-use.
+
+:::
+
+## Permanent storage (3 of 4)
+
+```{}
+`r extract(tx, "^data", "^;$")`
+```
+
+::: notes
+
+Notice the top line in this section. This is the libname statement. It tells SAS that you want to establish a permanent storage location at ../data. The ../data tells the computer system to go one level closer to the root directory, and then slide into the data subdirectory.
+
+You assign a brief name (no more than eight characters!) to this location. In my program, I use the name "perm" but anything is fine here.
+
+Then you prefix the dataset name simple_example with the libname location and a dot. This is called a two part name by SAS. The first part gives the permanent location folder and the second part gives the file name.
+
+Once you establish a two-part name for a dataset, you assure that it is stored for later re-use.
+
+:::
+
+## Permanent storage (4 of 4)
+
+```{r}
+#| label: 01-06-print
+tx %>% str_which("proc") -> i
+tx %>% str_which("run;") -> j
+tx[i[1]:j[1]] %>% 
+  paste0(collapse="\n") -> tx4  
+```
+
+
+```{}
+`r extract(tx, "proc print", "run;")`
+```
+
+::: notes
+
+Once you establish a two-part name, use it everywhere.
+
+:::
+  
+## Re-using data in permanent storage, part 1
+
+```{r}
+#| label: 01-06-documentation-2
+
+tx <- readLines("simon-5507-01-re-use.sas")
+```
+
+```{}
+`r extract(tx, "^\\*", ";")`
+```
+
+::: notes
+
+Here's a program that re-uses the dataset you just placed in permanent storage.
+
+First, let's show the documentation header.
+
+:::
+
+## Re-using data in permanent storage, part 2
+
+```{r}
+#| label: 01-06-libname-2
+
+tx %>% str_which("^libname") -> i
+tx %>% str_which("run;") -> j
+tx[i[1]:j[1]] %>% 
+  paste0(collapse="\n") -> tx6
+```
+
+
+```{}
+`r extract(tx, "^libname", "run;")`
+```
+
+::: notes
+
+Notice that there is no data step in this program, you start with a libname statement that reminds SAS where you stored the permanent dataset. Then you just refer to the two-part name in the data= option of any SAS procedure. Here we are computing some simple descriptive statistics using proc means.
+
+:::
+
+## Live demonstration (3 of 5)
+

@@ -1,0 +1,78 @@
+---
+title: "Saving your output"
+format: 
+  revealjs:
+    slide-number: true
+    embed-resources: true
+editor: source
+---
+
+## Saving output as pdf (1 of 4)
+
+```{r}
+#| label: 01-07-documentation
+
+tx <- readLines("simon-5507-01-save-output.sas")
+```
+
+```{}
+`r extract(tx, "^\\*", ";")`
+```
+
+::: notes
+
+Let's look at a modified program that stores your output as a pdf file.
+
+Here is the documentation header.
+
+:::
+
+## Saving output as pdf (2 of 4)
+
+```{}
+`r extract(tx, "^libname", "output.pdf")`
+```
+
+::: notes
+
+The ods statement should be placed near the top of the code, certainly before any SAS procedure that produces output.
+
+:::
+
+## Saving output as pdf (3 of 4)
+
+```{}
+`r extract(tx, "^data", "^;$")`
+```
+
+::: notes
+
+The ods statement should be placed near the top of the code, certainly before any SAS procedure that produces output.
+
+:::
+
+## Saving output as pdf (4 of 4)
+
+```{r}
+#| label: 01-07-close
+
+tx %>% str_which("proc") -> i4
+tx %>% str_which("close;") -> j4
+
+tx[i4:j4] %>%
+  paste0(collapse="\n") -> tx4  
+```
+
+
+```{}
+`r extract(tx, "proc print", "close")`
+```
+
+::: notes
+
+Near the bottom, you turn off the output. Place this AFTER the last SAS procedure that produces output.
+
+:::
+
+## Live demonstration (4 of 5)
+

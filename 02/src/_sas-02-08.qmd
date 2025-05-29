@@ -1,0 +1,85 @@
+---
+title: "Reading data from a file"
+format: 
+  revealjs:
+    slide-number: true
+    embed-resources: true
+editor: source
+---
+
+## Reading data from a file (1 of 4)
+
+```{r}
+#| label: 01-08-documentation
+
+tx <- readLines("simon-5507-01-read-data.sas")
+```
+
+```{}
+`r extract(tx, "^\\*", ";")`
+```
+
+::: notes
+
+It is a very basic principle of good computing practices that you keep your data and your program in separate files. This code shows you how to do this using the infile statement.
+
+:::
+
+## Reading data from a file (2 of 4)
+
+```{}
+`r extract(tx, "^libname", "pdf")`
+```
+
+::: notes
+
+The filename statement tells SAS where a particular dataset is stored: both the path and the name of the file. It associates that path and filename with a variable that you refer to using the infile statement.
+
+:::
+
+## Reading data from a file (3 of 4)
+
+```{}
+`r extract(tx, "^data", "run;")`
+```
+
+::: notes
+
+The filename statement tells SAS where a particular dataset is stored: both the path and the name of the file. It associates that path and filename with a variable that you refer to using the infile statement.
+
+:::
+
+## Reading data from a file (4 of 4)
+
+```{}
+`r extract(tx, "proc", "close")`
+```
+
+::: notes
+
+The last part of the program remains unchanged.
+
+:::
+  
+## Reading data from a file, part 4
+
+```{r}
+tx <- readLines("../data/six-numbers.txt")
+tx %>% 
+  paste0(collapse="\n") -> tx1  
+```
+
+```{}
+`r tx1`
+```
+
+::: notes
+
+This is what your data file looks like. It is just six numbers arranged in a grid.
+
+You will see many variations on the layout of data, and SAS can handle just about any variation. You will see how to handle many of those variations in an upcoming module.
+
+:::
+
+## Live demonstration (5 of 5)
+

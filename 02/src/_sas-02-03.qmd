@@ -1,0 +1,174 @@
+---
+title: "Your first SAS program"
+format: 
+  revealjs:
+    slide-number: true
+    embed-resources: true
+editor: source
+---
+
+## SAS program editor
+
+![Program editor window with simple SAS program](../images/m01-basic-program.png)
+
+
+::: notes
+
+If you have SAS running, try running the following sample program. Here's a simple test program. After you type this program in, click on FILE | SAVE and store your program somewhere safe. Save it to a location where you can remember things.
+
+If you are using the computer labs, you need to save things on a network folder. You can't use a USB stick.
+
+:::
+
+## SAS Test program (1 of 2)
+
+```{r}
+#| label: 01-03-data
+
+tx <- readLines("simon-5507-01-basic-program.sas")
+
+extract <- function(tx, s1, s2) {
+  # extract lines starting at string s1
+  # and ending at string s2. If more
+  # than one match, choose the first.
+  
+  tx %>% str_which(s1) -> i
+  tx %>% str_which(s2) -> j
+
+  tx[i[1]:j[1]] %>% 
+    paste0(collapse="\n")
+}
+```
+
+```{}
+`r extract(tx, "data small_example", "^;$")`
+```
+
+::: notes
+
+Here is the program I want you to type in.
+
+I like to put lots of blank lines in.
+
+The data statement creates a dataset with the name "small_example". Normally you would use a two part name. Not here. This is a simple throw-away example, so it can use a one part name. That means it disappears once the program is done. We'll explain this further in a later video.
+
+The input statement tells SAS to expect two variables and assigns them the names x and y.
+
+The datalines statement tells SAS to read the data directly below this line. This is NOT a recommended practice. You should normally keep your data separate from your code. I am doing this only for the sake of simplicity. You will see in just a minute how to handle data that comes in a separate file.
+
+The three lines of data follow. A single semicolon tells SAS that this is the end of the data.
+
+:::
+
+## SAS Test program (2 of 2)
+
+```{}
+`r extract(tx, "print", "run")`
+```
+
+
+::: notes
+
+The print procedure will print part or all of a dataset. 
+
+You specify the name of the dataset with the data= option. The options obs=1 tells SAS to print only the first row. I like the obs option a lot.
+
+The title1 statement prints a descriptive title on the first line of output.
+
+The run statement tells SAS that there is no more information associated with this procedure.
+
+The thing I always worry about is leaving out a semicolon. Please watch these closely.
+
+Be careful and back up your programs regularly. There is no autosave feature in SAS. 
+
+When you finish the program, save it in the src directory. Then click on the run button. The run button is a guy who looks like he is running.
+
+Try this yourself. It's a baby step. If it works then you can take more baby steps.
+
+:::
+
+## SAS results window (1 of 2)
+
+![Screenshot of results window](../images/m01-output-window.png)
+
+
+::: notes
+
+When the program runs, your output appears in the results window.
+
+:::
+
+## SAS log window (1 of 4)
+
+![Screenshot of log window](../images/m01-log-window-01.png)
+
+
+::: notes
+
+The font here is a bit small, but notice that there are no red messages indicating warnings or errors. We're thrilled when we see no warnings or error messages. We're always looking for warnings and errors. We also watch closely the number of observations.
+
+:::
+
+## SAS log window (2 of 4)
+
+![Screenshot of log window](../images/m01-log-window-02.png)
+
+
+::: notes
+
+Always start looking from the top, and scroll slowly down to the bottom. No warnings or error messages here either.
+
+:::
+
+## SAS log window (3 of 4)
+
+
+```
+1    data test_example;
+2     input x y;
+3     cards;
+
+NOTE: The data set WORK.TEST_EXAMPLE has 3 observations and 2 variables.
+```
+
+::: notes
+
+Always watch the log to see that you have read in the proper number of observations.
+
+:::
+
+
+## Log messages (4 of 4)
+
+```
+ 75         ;
+ 76         proc print
+ 77             data=small_example(obs=1);
+ 78         title "First row of data";
+ 79         run;
+ 
+NOTE: There were 1 observations read from the data set WORK.SMALL_EXAMPLE.
+```
+
+::: notes
+
+..and that you are analyzing the proper number of observations.
+
+:::
+
+## Where is the output?
+
+SAS has several options for storing output.
+
+- In the output window
+- As an html file
+- As a pdf file
+
+::: notes
+
+Output is tricky. I want to talk in more detail later about this, but you can take the output and save it several different ways.
+
+:::
+
+## Live demonstration (1 of 5)
+
