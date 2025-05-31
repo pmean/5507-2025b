@@ -23,11 +23,24 @@ library(tidyverse)
 ```{r}
 #| label: 02-01-read
 
+clip <- function() {
+  read_lines(clipboard()) |>
+    paste0(collapse=" ") |>
+    writeLines(con="clipboard")
+  return(invisible())
+}
+
 read_lines("simon-5507-02-demo.sas") |>
+  str_remove("^ *$") |>
   paste0(collapse="\n") |>
-  str_split("\n\n") |>
-  unlist() |>
-  str_remove("^\n") -> sas
+  str_split("\n\n\n") |>
+  unlist() -> sas
+
+n <- length(sas)/2
+
+sas[2*(1:n)] |>
+  str_remove("\n.*") |>
+  str_remove("\\* Comments on the code: ")
 
 add_note <- function(i) {paste0("::: notes\n", sas[i],"\n:::")}
 add_code <- function(i) {paste0("```{}\n", sas[i], "\n```")}

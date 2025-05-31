@@ -5,13 +5,15 @@
   license: public domain;
 
 
-* Comments on the code: The comments on the code are
+* Comments on the code: Documenting your program.
+
+In general, the comments you see on the code are
 intended to help explain what SAS is doing. You can
 and should remove these if you re-use this code in one
 of your programming assignments. You should, however,
 get in the habit of documenting any unusual bits of SAS 
 code in all of your future programs. Only the unusual
-code. This os partly for the benefit of anyone who
+code. This is partly for the benefit of anyone who
 ends up working with your code. It's also for the 
 benefit of you. Six months from now, you will dust
 this code off and you'll wonder: what was I thinking
@@ -60,11 +62,13 @@ data module02.fat;
     forearm
     wrist;
 
-    
-* Comments on the code: This is the code to input all
-the variables in this data set. The infile statement 
-refers to module02, a location defined with the 
-earlier filename statement.;
+
+* Comments on the code: Reading in the data
+
+This is the code to input all the variables in
+this data set. The infile statement refers to 
+a location defined with the earlier filename
+statement.;
 
 
 label
@@ -90,11 +94,13 @@ label
 run;
 
 
-* Comments on the code: SAS offers an opportunity for 
-you to add documentation to your program about 
-individual variables. These are called variable
-labels. They have almost no restrictions. You can 
-use blanks, or special symbols like a dollar sign 
+* Comments on the code: Adding labels
+
+SAS offers an opportunity for you to add 
+documentation to your program about individual
+variables. These are called variable labels. 
+They have almost no restrictions. You can use 
+blanks, or special symbols like a dollar sign 
 or a dash. The documentation that variable labels 
 provide is mostly internal, but these labels are 
 substituted in a few places like some graphs.
@@ -133,12 +139,13 @@ in this Powerpoint slide, but that's okay.;
   styloid processes;
     
     
-* Comments on the code: I am including some additional
-details that would not fit easily into the 
-variable labels. How much documentation you
-include is a judgment call. I am including
-this extra documentation just to remind you
-that such documentation is possible.;
+* Comments on the code: Adding extra information
+
+I am including some additional details that would
+not fit easily into the variable labels. How much
+documentation you include is a judgment call. I 
+am including this extra documentation just to 
+remind you that such documentation is possible.;
 
 
 proc print
@@ -150,9 +157,11 @@ proc print
 run;
 
 
-* Comments on the code: It's always a good idea to
-print out a small piece of your data to make
-sure everything is okay.
+* Comments on the code: Printing a small piece of data
+
+It's always a good idea to print out a small 
+piece of your data to make sure everything is
+okay.
   
 The data option tells SAS what data set you want 
 to print. If you omit this, SAS will print the 
@@ -185,10 +194,12 @@ proc contents
 run;
 
 
-* Comments on the code. The contents procedure produces
-information about any dataset produced by SAS,
-including both temporary datasets (one part names)
-and permanent datasets (two part names).
+* Comments on the code. Displaying metadata
+
+The contents procedure produces information about
+any dataset produced by SAS, including both 
+temporary datasets (one part names) and permanent
+datasets (two part names).
 
 For a dataset that you just created and one that
 is not all that complicated, using proc contents
@@ -219,10 +230,12 @@ proc means
 run;
 
 
-* Comments on the code. The means procedure will produce 
-descriptive statistics for your data. By default, 
-it will produce the count of non-missing values, 
-the mean, the standard deviation, and the minimum 
+* Comments on the code. Computing simple statistics
+
+The means procedure will produce descriptive 
+statistics for your data. By default, it will
+produce the count of non-missing values, the 
+mean, the standard deviation, and the minimum 
 and maximum values, but I am listing them 
 explicitly here, just for show.
 
@@ -244,8 +257,10 @@ proc print
 run;
 
 
-* Comments on the code. First, let's look at this value in the 
-context of the other values in this row of data.
+* Comments on the code. Printing row with smallest value
+
+First, let's look at this value in the context of
+the other values in this row of data.
 
 You do this by sorting the data so that the 
 shortest subject becomes the first row of the 
@@ -263,11 +278,6 @@ by in order to get back ot the original order.
 If you don't have a case variable, store the 
 sorted data in a separate location: something 
 along the lines of proc sort data=x out=y.;
-
-
-* Interpretation of the output: There is no 
-possible way that a height of 29.5 inches
-could be paired with a weight of 205 pounds.
 
 With this outlier on the low end, you might 
 consider doing nothing other than noting the 
@@ -332,10 +342,11 @@ proc print
 run;
 
 
-* Comments on the code: Just for the sake of
-completeness, let's look at the row of data
-with the largest height value. Add the 
-keyword desc to sort the data in reverse
+* Comments on the code: Printing row with largest value
+
+Just for the sake of completeness, let's look at
+the row of data with the largest height value. 
+Add the keyword desc to sort the data in reverse
 order.;
 
 
@@ -345,25 +356,12 @@ data module02.fat1;
 run;
 
 
-* Comments on the code: This code removes the entire row
-of data. Notice that I store the modified data
-under a new name. That way, if I regret tossing
-the entire row out, I can easily revert to the 
-original data.;
+* Comments on the code: Removing a row of data
 
-
-proc contents
-    data=module02.fat;
-  title1 "Internal description of fat dataset";
-run;
-
-
-* Comments on the code: It is reasonable to check the contents
-when you create a new file. In this case, the change
-is so small that it is definitely overkill. I just
-want to encourage you to think about using proc
-contents as a way of reviewing your work in more
-complex settings.;
+This code removes the entire row of data. Notice
+that I store the modified data under a new name. 
+That way, if I regret tossing the entire row out, 
+I can easily revert to the original data.;
 
 
 data module02.fat2;
@@ -372,10 +370,10 @@ data module02.fat2;
 run;
 
 
-* Comments on the code: This code converts the height
-to a missing value, but keeps the original data.
+* Comments on the code: Converting outlier to missing
 
-I won't use proc contents a third time.
+This code converts the height to a missing value,
+but keeps the original data.
 
 There is no one method that is preferred in 
 this setting. If you encounter an unusual value, 
@@ -417,11 +415,13 @@ proc print
 run;
 
 
-* Comments on the code: Here's an important thing to
-remember about missing values. SAS stores 
-missing value codes as the most extreme legal
-negative number. This can sometimes lead to 
-surprising and misleading results.
+* Comments on the code: Printing negative values (wrong way)
+
+Here's an important thing to remember about 
+missing values. SAS stores missing value codes as
+the most extreme legal negative number. This can 
+sometimes lead to surprising and misleading 
+results.
 
 Every procedure in SAS has its own default 
 approach to missing values and often provides you 
@@ -440,7 +440,9 @@ proc print
 run;
 
 
-* Comments on the code: In order to prevent this from happening, you need 
+* Comments on the code: Printing negative values (right way)
+
+In order to prevent this from happening, you need 
 to check for missingness before applying any 
 other logic statement.
 
@@ -462,10 +464,11 @@ proc means
 run;
 
 
-* Comments on the code: If you are concerned at all 
-about missing values (and you should be), ask
-for the number of missing values in proc means
-using nmiss.;
+* Comments on the code: Counting missing values
+
+If you are concerned at all about missing values
+(and you should be), ask for the number of missing
+values in proc means using nmiss.;
 
 
 data converted_units;
@@ -480,14 +483,15 @@ proc print
 run;
 
 
-* Comments on the code: You can do simple transformations
-like unit conversions in SAS. Create a new dataset 
-with the data statement. Use the set command to 
-tell SAS that you plan to use and modify an 
-existing dataset.
+* Comments on the code: Transforming values
+
+You can do simple transformations like unit 
+conversions in SAS. Create a new dataset with the
+data statement. Use the set command to tell SAS
+that you plan to use and modify an existing 
+dataset.
 
 The conversion done here will turn weight into kilograms.;
-
 
 
 proc sgplot
@@ -497,10 +501,11 @@ proc sgplot
 run;
 
 
-* Comments on the code: Here is the code to create a
-histogram with the default option. Generally, it
-is wise to modify the defaults for any graphic
-image.;
+* Comments on the code: Drawing a histogram (default)
+
+Here is the code to create a histogram with the
+default option. Generally, it is wise to modify 
+the defaults for any graphic image.;
 
 
 proc sgplot
@@ -510,10 +515,12 @@ proc sgplot
 run;
 
 
-* Comments on the code: Here's the code to create a
-histogram with many bars. The first bar is 
-centered at 60, and each bin has a width of
-1 inch (plus or minus 0.5 inches);
+* Comments on the code: Drawing a histogram (more bars)
+
+Here's the code to create a histogram with many
+bars. The first bar is centered at 60, and each
+bin has a width of 1 inch (plus or minus 0.5
+inches);
 
 
 proc sgplot
@@ -523,7 +530,9 @@ proc sgplot
 run;
 
 
-* Comments on the code: Here's the code to create a 
+* Comments on the code: Drawing a histogram (fewer bars)
+
+Here's the code to create a 
 histogram with few bars. The first bar is again
 centered at 60, but now each bin has a width of
 5 inches (plus or minus 2.5 inches).
@@ -542,8 +551,9 @@ proc corr
 run;
 
 
-* Comments on the code: Here's the code to compute 
-correlations. 
+* Comments on the code: Computing correlations (default)
+
+Here's the code to compute correlations. 
 
 The output here really annoys me. The excessive number
 of decimals makes this table hard to read.;
@@ -563,8 +573,12 @@ proc print
 run;
 
 
-* Comments on the code: You can save the correlations
-in a separate data file.;
+* Comments on the code: Saving correlations as data
+
+You can save the correlations in a separate data
+file. I plan to process this data, but wanted to
+show you what the data looks like before 
+processing.;
 
 
 data correlations;
@@ -575,6 +589,14 @@ data correlations;
   fat_siri=round(fat_siri, 0.01);
 run;
 
+* Comments on the code: Processing correlations
+
+The output dataset in SAS includes a lot of 
+descriptive statistics other than just the 
+correlations. Select only those rows of data
+where _type_ equals "CORR". Once this is done,
+you no longer need the _type_ variable.
+
 
 proc sort
     data=correlations;
@@ -583,71 +605,45 @@ run;
 
 proc print 
     data=correlations;
-  title "Rounded and re-ordered correlation matrix";
+  title1 "Abdomen, hip, and chest show the strongest correlations";
 run;
 
 
-* Comments on the code: Saving as a data file allows
-you to manipulate the individual correlations.
-Here we multiply the correlations by 100, round
-them, and sort them. This can often simplify
-the interpretation of large correlation matrices.
+* Comments on the code: Sorting the correlations
 
-This code does the reordering and printing;
-
-
-
-* Comments on the code: This is the output. You can 
-see that measurements at the extremities are poor 
-predictors of body fat. Apparently, we grow fat 
-from the middle outward.;
+It also helps to sort the correlations from high to low before printing.
 
 
 proc sgplot
     data=module02.fat2;
   scatter x=abdomen y=fat_brozek;
-  title1 "Simple scatterplot";
+  title1 "Simple scatterplot shows a strong positive trend";
 run;
 
 
-* Comments on the code: A scatterplot is also useful for 
-examining the relationship among variables. You 
-can produce scatterplots several different ways, 
-but the scatterplots produced by the sgplot 
-procedure have the most flexibility.;
+* Comments on the code: Drawing a scatterplot
 
-
-* Comments on the code: This plot shows a general 
-upward trend.;
+A scatterplot is also useful for examining the
+relationship among variables. You can produce 
+scatterplots several different ways, but the 
+scatterplots produced by the sgplot procedure 
+have the most flexibility.;
 
 
 proc sgplot
     data=module02.fat2;
   scatter x=abdomen y=fat_brozek;
   reg x=abdomen y=fat_brozek;
-  title2 "with linear trend";
+  title2 "and the trend line slopes upward";
 run;
 
 
-* Comments on the code: The trend line is very useful for 
-large and noisy data sets. It also allows you to 
-more quickly visualize extreme values.
+* Comments on the code: Adding a linear trend
 
-Notice that there is no title1. When you leave this
-out, SAS will pull the title1 used in the previous
-procedure, if it is available. This allows you to
-repeat the top line title across broad sections of
-your program.;
-
-
-* Figure 26. proc sgplot.
-
-
-* Comments on the code: Notice, for example, that the 
-person with the largest abdomen measure (the 
-biggest gut, if I can be informal) is quite out 
-of line with what you might expect the 
-relationship to be.;
+A linear trend line is very useful, especially 
+for large and noisy data sets. It also allows
+you to more quickly visualize extreme values.
+;
 
 
 proc sgplot
@@ -659,33 +655,25 @@ run;
 
 
 
-* Comments on the code: Here's the code to compute a smoothing
-spline. It helps you visualize whether the trend
-is linear or not.;
+* Comments on the code: Adding a spline
 
-
-* Figure 27. proc sgplot.
-
-
-* Comments on the code: The smoothing spline provides 
-some evidence that the relationship is roughly 
-linear a low and medium abdomen measurements, but 
-tends to level off a bit at higher levels. 
-Interpret this with caution, of course, because 
-you have very little data at extrmemy high 
-adbomen measures.;
+Here's the code to compute a smoothing spline. It
+helps you visualize whether the trend is linear
+or not.;
 
 
 ods pdf close;
 
 
-* Comments on the code: I always seem to forget 
-this last statement and then I get upset with SAS
-for not providing the PDF output. But SAS can't 
-produce the PDF output until you tell it you are 
-done. So don't yell at your computer when it's 
-your own darn fault (just like Jimmy Buffet in 
-the Margaritaville song).
+* Comments on the code: Closing the pdf file
+
+I always seem to forget this last statement and 
+then I get upset with SAS for not providing the 
+PDF output. But SAS can't produce the PDF output
+until you tell it you are done. So don't yell at
+your computer when it's your own darn fault 
+(just like Jimmy Buffet in the Margaritaville
+song).
 
 If you don't get any pdf file when you are done,
 or your pdf file is the one left over from a
