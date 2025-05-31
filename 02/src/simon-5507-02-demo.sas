@@ -20,7 +20,7 @@ when I wrote this unusual code.;
 
 filename fat
   "../data/fat.txt";
-  
+
 libname module02
   "../data";
 
@@ -122,16 +122,15 @@ in this Powerpoint slide, but that's okay.;
 
 * Some additional details about this data:
 
-Brozek's equation is 457/Density - 414.2
+  Brozek's equation is 457/Density - 414.2
 
-Siri's equation is 495/Density - 450
+  Siri's equation is 495/Density - 450
 
+  Abdomen circumference is measured at the
+  umbilicus and level with the iliac crest
 
-Abdomen circumference is measured at the
-umbilicus and level with the iliac crest
-
-Wrist circumference is distal to the 
-styloid processes;
+  Wrist circumference is distal to the 
+  styloid processes;
     
     
 * Comments on the code: I am including some additional
@@ -140,9 +139,6 @@ variable labels. How much documentation you
 include is a judgment call. I am including
 this extra documentation just to remind you
 that such documentation is possible.;
-
-
-* Part05. Print a small piece of the data;
 
 
 proc print
@@ -183,20 +179,13 @@ The run statement says you're done with the
 procedure.;
 
 
-* Figure 1. proc print.;
-
-
-* Comments on the code: There are no obvious
-problems with this dataset.;
-
-
 proc contents
     data=module02.fat;
   title1 "Internal description of fat dataset";
 run;
 
 
-* Speaker notes. The contents procedure produces
+* Comments on the code. The contents procedure produces
 information about any dataset produced by SAS,
 including both temporary datasets (one part names)
 and permanent datasets (two part names).
@@ -208,51 +197,17 @@ to use proc contents for very complex datasets,
 especially ones that were created by someone other 
 than yourself.;
 
-
-* Figure 2. proc contents (1 of 4).;
-
-
-* Comments on the code: SAS produces a lot of information
+SAS produces a lot of information
 and much of it is only relevant for advanced
 applications. You have to wade through the details
 to get the important information. The important 
-information on this page is
+information is
 
-date created,
-
-date modified,
-
-observations, and
-
-variables.;
-
-
-* Figure 3. proc contents (2 of 4).;
-
-
-* Speaker notes. The only important things on 
-this page are 
-
-filename, and
-
-release created (which tells the precise 
-version of SAS that was used to create
-this dataset.;
-
-
-* Figure 4. proc contents (3 of 4).;
-
-
-* Comments on the code: This page and the following
-page lists all the variables in the dataset,
-their type (all numeric in this dataset), and
-the variable label.;
-
-
-* Figure 5. proc contents (4 of 4).;
-
-
-* Part06. Calculate simple statistics for ht;
+-   date created,
+-   date modified,
+-   observations,
+-   variables, and
+-   filename.;
 
 
 proc means
@@ -264,7 +219,7 @@ proc means
 run;
 
 
-* Speaker notes. The means procedure will produce 
+* Comments on the code. The means procedure will produce 
 descriptive statistics for your data. By default, 
 it will produce the count of non-missing values, 
 the mean, the standard deviation, and the minimum 
@@ -277,26 +232,10 @@ tells SAS which variable(s) you want descriptive
 statistics on.;
 
 
-* Figure 6. proc means. 
-
-
-* Comments on the code: This is what your output looks 
-like.
-
-Notice the unusual minimum value. While this is 
-not totally outside the realm of possibility, you 
-should always ask when you see something unusual 
-like this.;
-
-
-* Part07. Look at smallest value;
-
-
 proc sort
     data=module02.fat;
   by ht;
 run;
-
 
 proc print
     data=module02.fat(obs=1);
@@ -305,7 +244,7 @@ proc print
 run;
 
 
-* Speaker notes. First, let's look at this value in the 
+* Comments on the code. First, let's look at this value in the 
 context of the other values in this row of data.
 
 You do this by sorting the data so that the 
@@ -326,15 +265,9 @@ sorted data in a separate location: something
 along the lines of proc sort data=x out=y.;
 
 
-* Figure 7. proc print
-
-
-* Comments on the code: This is what your output looks 
-like.
-
-There is no possible way that a height of 29.5 
-inches could be paired with a weight of 205 
-pounds.
+* Interpretation of the output: There is no 
+possible way that a height of 29.5 inches
+could be paired with a weight of 205 pounds.
 
 With this outlier on the low end, you might 
 consider doing nothing other than noting the 
@@ -387,14 +320,10 @@ well.
    (ht < 0) & (ht ~= .);
 
 
-* Part08. Look at the largest value;
-
-
 proc sort
     data=module02.fat;
   by descending ht;
 run;
-
 
 proc print
     data=module02.fat(obs=1);
@@ -408,17 +337,6 @@ completeness, let's look at the row of data
 with the largest height value. Add the 
 keyword desc to sort the data in reverse
 order.;
-
-
-* Figure 8. proc print.;
-
-
-* Comments on the code: This is what your output
-looks like. These values seem reasonable 
-to me.;
-
-
-* Part09. Removing the entire row;
 
 
 data module02.fat1;
@@ -446,43 +364,6 @@ is so small that it is definitely overkill. I just
 want to encourage you to think about using proc
 contents as a way of reviewing your work in more
 complex settings.;
-
-
-* Figure 9. proc contents (1 of 5).;
-
-
-* Figure 10. proc contents (2 of 5).;
-
-
-* Speaker notes. The only important things on 
-this page are 
-
-filename, and
-
-release created (which tells the precise 
-version of SAS that was used to create
-this dataset.;
-
-
-* Figure 11. proc contents (3 of 5).;
-
-
-* Comments on the code: This page and the following
-page lists all the variables in the dataset,
-their type (all numeric in this dataset), and
-the variable label.;
-
-
-* Figure 12. proc contents (4 of 5).;
-
-
-* Figure 13. proc contents (5 of 5).;
-
-
-* Comments on the code: You get an extra page for this dataset because it notes that your data is sorted by descending height.;
-
-
-* Part10. Converting the outlier to a missing value;
 
 
 data module02.fat2;
@@ -529,9 +410,6 @@ missing value for all of the remaining analyses
 of this data set.;
 
 
-* Part11. Faulty approach for filtering out negative values;
-
-
 proc print
     data=module02.fat2;
   where ht < 0;
@@ -555,25 +433,32 @@ to make sure that the result correctly reflects
 what you want.;
 
 
-* Figure 14. proc print.;
+proc print
+    data=module02.fat2;
+  where ht ^= . & ht < 0;
+  title1 "The correct way to check for negative values";
+run;
 
 
-* Comments on the code: This is what your output looks 
-like.
-
-In order to prevent this from happening, you need 
+* Comments on the code: In order to prevent this from happening, you need 
 to check for missingness before applying any 
-other logic statement.;
+other logic statement.
 
-
-* Part12. Counting missing values;
+You may hate having to do this and wish that SAS 
+would have handled things differently. Different 
+packages, like R, have a three valued logic 
+system where every logic statement (well, almost
+every logic statement) involving missing values 
+codes to MISSING rather than to TRUE or FALSE. 
+This sometimes works better, but sometimes the 
+SAS approach works better.;
 
 
 proc means
     n nmiss mean std min max
     data=module02.fat2;
   var ht;
-  title "Using the nmiss statistic";
+  title1 "There is one missing value";
 run;
 
 
@@ -583,27 +468,14 @@ for the number of missing values in proc means
 using nmiss.;
 
 
-* Figure 15. proc means.
-
-
-* Comments on the code: This is what your output
-looks like. Note that your data set has 251 
-observations and 1 missing value.;
-
-
-* Part13. Simple transformations;
-
-
 data converted_units;
   set module02.fat2;
-  ht_cm = round(ht * 2.54, 0.01);
   wt_kg = round(wt / 2.2, 0.01);
 run;
 
-
 proc print 
     data=converted_units(obs=10);
-  var ht ht_cm wt wt_kg;
+  var wt wt_kg;
   title1 "Original and converted units";
 run;
 
@@ -614,21 +486,8 @@ with the data statement. Use the set command to
 tell SAS that you plan to use and modify an 
 existing dataset.
 
-The conversions done here will turn height and 
-weight into centimeters and kilograms, 
-respectively.;
+The conversion done here will turn weight into kilograms.;
 
-
-* Figure 16. proc print.;
-
-
-* Comments on the code: This is your output with 
-measurements both in the original units and 
-metric. Notice that I did not print any more than 
-10 rows of data.;
-
-
-* Part14. Display a histogram;
 
 
 proc sgplot
@@ -644,15 +503,6 @@ is wise to modify the defaults for any graphic
 image.;
 
 
-* Figure 17. proc sgplot.;
-
-
-* Comments on the code: This is the default histogram.;
-
-
-* Part15. Revised histogram with narrow bins;
-
-
 proc sgplot
     data=module02.fat2;
   histogram ht / binstart=60 binwidth=1;
@@ -666,16 +516,6 @@ centered at 60, and each bin has a width of
 1 inch (plus or minus 0.5 inches);
 
 
-* Figure 18. proc sgplot.;
-
-
-* Comments on the code: This is what you get. You can 
-also go in the opposite direction.;
-
-
-* Part16. Revised histogram with wide bins;
-
-
 proc sgplot
     data=module02.fat2;
   histogram ht / binstart=60 binwidth=5;
@@ -686,19 +526,11 @@ run;
 * Comments on the code: Here's the code to create a 
 histogram with few bars. The first bar is again
 centered at 60, but now each bin has a width of
-5 inches (plus or minus 2.5 inches).;
+5 inches (plus or minus 2.5 inches).
 
-
-* Figure 19. proc sgplot.;
-
-
-* Comments on the code: This is the revised histogram. 
 There is no "correct" version of the histogram. 
 Try several widths and see which one gives the 
 clearest picture of your data.;
-
-
-* Part17. Calculate correlations;
 
 
 proc corr
@@ -711,24 +543,10 @@ run;
 
 
 * Comments on the code: Here's the code to compute 
-correlations.;
+correlations. 
 
-
-* Figure 20. proc corr (1 of 2).;
-
-
-* Comments on the code: The output here extends to a
-fresh page.;
-
-
-* Figure 21. proc corr (2 of 2).;
-
-
-* Comments on the code: The output here really annoys
-me. I want to show something a bit advanced here.;
-
-
-* Part18. Save the correlations in a separate data file.;
+The output here really annoys me. The excessive number
+of decimals makes this table hard to read.;
 
 
 proc corr
@@ -749,37 +567,23 @@ run;
 in a separate data file.;
 
 
-* Figure 22. proc print (1 of 2).
-
-
-* Comments on the code: Continues on the next slide.;
-
-
-* Figure 23. proc print (2 of 2).
-
-
-* Comments on the code: The output is a bit unusual 
-because SAS wants to include means and standard 
-deviations in your output. You can and should 
-remove this. It would be easy enough to do (use 
-the where statement), but I wanted to show you 
-the full data set.;
-
-
-* Part19. Modify these correlations.;
-
-
 data correlations;
   set correlations;
   if _type_="CORR";
   drop _type_;
-  fat_brozek=round(100*fat_brozek);
-  fat_siri=round(100*fat_siri);
+  fat_brozek=round(fat_brozek, 0.01);
+  fat_siri=round(fat_siri, 0.01);
 run;
+
 
 proc sort
     data=correlations;
   by descending fat_brozek;
+run;
+
+proc print 
+    data=correlations;
+  title "Rounded and re-ordered correlation matrix";
 run;
 
 
@@ -792,29 +596,11 @@ the interpretation of large correlation matrices.
 This code does the reordering and printing;
 
 
-* Part20. Print the modified correlations.;
-
-
-proc print 
-    data=correlations;
-  title "Rounded and re-ordered correlation matrix";
-run;
-
-
-* Comments on the code: Just to help visualize things,
-let's print the file before we modify it.;
-
-
-* Figure 24. proc print.
-
 
 * Comments on the code: This is the output. You can 
 see that measurements at the extremities are poor 
 predictors of body fat. Apparently, we grow fat 
 from the middle outward.;
-
-
-* Part21. Draw a scatterplot.;
 
 
 proc sgplot
@@ -831,14 +617,8 @@ but the scatterplots produced by the sgplot
 procedure have the most flexibility.;
 
 
-* Figure 25. proc sgplot.;
-
-
 * Comments on the code: This plot shows a general 
 upward trend.;
-
-
-* Part22. Adding linear trend line.;
 
 
 proc sgplot
@@ -870,9 +650,6 @@ of line with what you might expect the
 relationship to be.;
 
 
-* Part23. Adding a smooth curve.;
-
-
 proc sgplot
     data=module02.fat2;
   scatter x=abdomen y=fat_brozek;
@@ -880,7 +657,6 @@ proc sgplot
   title2 "with a smooth curve";
 run;
 
-ods pdf close;
 
 
 * Comments on the code: Here's the code to compute a smoothing
@@ -898,3 +674,20 @@ tends to level off a bit at higher levels.
 Interpret this with caution, of course, because 
 you have very little data at extrmemy high 
 adbomen measures.;
+
+
+ods pdf close;
+
+
+* Comments on the code: I always seem to forget 
+this last statement and then I get upset with SAS
+for not providing the PDF output. But SAS can't 
+produce the PDF output until you tell it you are 
+done. So don't yell at your computer when it's 
+your own darn fault (just like Jimmy Buffet in 
+the Margaritaville song).
+
+If you don't get any pdf file when you are done,
+or your pdf file is the one left over from a
+previous analysis, it's probably because you
+forgot this last very important statement.;
