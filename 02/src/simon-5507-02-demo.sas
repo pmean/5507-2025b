@@ -33,7 +33,7 @@ libname module02
   "../data";
 
 ods pdf file=
-  "../results/5507-02-simon-continuous-variables.pdf";
+  "../results/5507-02-simon-demo.pdf";
 
 
 * Comments on the code: Specifying file locations
