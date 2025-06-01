@@ -36,10 +36,6 @@ Generally, an extreme value by itself does not support removal of a patient or c
     -   NULL, the SQL standard
     -   Extreme numbers (-1, 9, 99, 999)
     -   Blank ( ) or empty ()
--   Convert any non-standard missing codes
-    -   if iq=999 then iq=.
--   Read the data dictionary
--   Always ask **WHY** a value is missing
 
 ::: notes
 
@@ -50,6 +46,23 @@ You may see extreme numeric values, extreme meaning outside a reasonable range, 
 Sometimes, one or more nines would indicate a missing value. A Likert scale item coded 1 for strongly disagree through 5 for strongly agree will often code a non-response as 9. Make sure you have enough nines. An IQ score would not use 99 as the missing code because that is a legitimate value. A code of 999 makes more sense here because even Albert Einstein's IQ falls well below 999.
 
 One or more blanks might represent missing or an empty field (a zero length string) might represent missing. I discourage the use of blanks or empty fields for several reasons. First, when your computer diplays a single blank, it looks just like an empty field. Second, an empty or blank field might represent not missingness, but rather that the data entry person has not gotten to enter that value yet. Third, some systems (not SAS) might convert an empty field to zero, which is often not what you want.
+
+:::
+
+## Advice on importing missing values
+
+-   Read the data dictionary
+-   Always ask **WHY** a value is missing
+-   Convert any non-standard missing codes
+    -   if iq=999 then iq=.
+
+::: notes
+
+If there is a data dictionary, read it for information about how missing values are coded. If there is no data dictionary, you'll have to use a bit of guesswork, but you can usually figure things out.
+
+It's important to ask early why a missing value is missing.
+
+If the data you are importing uses anything other than a dot to designate missing, make sure you convert to the standard code for missing right away. You don't want to include a few 999's in your estimate of average IQ because it will make the group look a lot smarter than they really are.
 
 :::
 

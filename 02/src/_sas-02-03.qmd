@@ -31,4 +31,4 @@ If you don't see any shifting, look to see if there is coherence among all the v
 
 -   sort procedure
     -   by subcommand
-        -   desc option
+        -   descending option
