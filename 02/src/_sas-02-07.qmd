@@ -32,3 +32,12 @@ The corr procedure produces, by default, a square correlation matrix of all the 
 
 `r sas[21]`
 
+## Live demo, 7
+
+-   corr procedure
+        -   noprint option
+        -   outp option
+    with subcommand
+-   data step
+    -   drop subcommand
+-   round function

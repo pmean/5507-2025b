@@ -7,9 +7,38 @@ format:
 editor: source
 ---
 
+## Drawing histograms
+
+-   Histograms can assess normality/non-normality
+    -   Skewness
+    -   Bimodal distributions
+    -   Outliers
+-   How many bars? Multiple recommendations
+    -   Five to twenty bars
+    -   Square root of n bars
+    -   Trial and error
+
+::: notes
+
+A histogram can help you assess the distributional pattern of your data. Is it normally distributed (the classical bell shaped curve)? If so, you can make fairly strong assumptions about the data. The mean plus or minus one standard deviation will contain roughly 68% of the data. The mean plus or minus two standard deviations will contain roughly 95% of the data.
+
+Normality is also an assumption needed for a variety of confidence intervals and hypothesis tests. It is not a life-or-death assumption, especially when your sample size is large. Also, the normality assumption is often better assessed using residuals from your statistical model.
+
+The other nice thing about the histogram is that it can identify what type of deviation from normality you might have. Identifying bimodality is the trickiest, because if you have too few bars you might miss the gap between modes. If you have too many bars, you might see multiple modes because of the spikiness that is artificially produced when you have too many bars.
+
+There is no simple rule for deciding how many bars you should have in your histogram. Once sources suggests that 5 to 20 is a reasonable number of bars. Another suggests that the number of bars should be roughly equal to the square root of the sample size. To be honest, the best approach might be to try several different choices and see which one gives a reasonable picture of the distribution of your variable.
+
+:::
+
 `r sas[16]`
 
 `r sas[17]`
 
 `r sas[18]`
 
+## Live demo, 6
+
+-   sgplot procedure
+    -   histogram subcommand
+        -   binstart option
+        -   binwidth option
