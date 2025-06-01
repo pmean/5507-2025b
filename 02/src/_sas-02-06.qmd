@@ -7,4 +7,9 @@ format:
 editor: source
 ---
 
-## 02-06
+`r sas[16]`
+
+`r sas[17]`
+
+`r sas[18]`
+

@@ -7,5 +7,46 @@ format:
 editor: source
 ---
 
-## 02-05
+## Transforming values
 
+-   Use data step to create a new variable
+    -   Unit conversion: temperature = 5/9 * (temperature - 32)
+    -   New variable: bmi = wt_kg / ht_m^2
+    
+::: notes
+
+Sometimes you want to alter some of your data. This could be a units conversion, a body mass index calculation, or something else. This is done in the data step. You could do it along with the input statement, but it is often valuable to read in the data as is, and make changes which are stored in a different dataset.
+
+:::
+
+## Non destructive transformations
+
+-   Different variable name
+
+```{}
+data name1;
+  set name1;
+  wt_kg = wt / 2.2;
+run;
+```
+
+-   Different dataset name
+
+```{}
+data name2;
+  set name1;
+  wt = wt / 2.2;
+run;
+```
+
+::: notes
+
+Sometimes you want to alter some of your data. This could be a units conversion, a body mass index calculation, or something else. This is done in the data step. You could do it along with the input statement, but it is often valuable to read in the data as is, and make changes which are stored in a different dataset.
+
+If you make a transformation, you should do it in a non-destructive way, meaning a way that allows you to revert back, if needed. Do this by transforming into a new variable or storing the transformed data in a new dataset.
+
+:::
+
+`r sas[15]`
+
+## Live demo, 5

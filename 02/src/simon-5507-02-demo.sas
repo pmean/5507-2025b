@@ -4,6 +4,12 @@
   purpose: to work with continuous variables
   license: public domain;
 
+* datasets created in this program
+    body, original data
+    body1, row with ht=29.5 removed
+    body2, ht=29.5 converted to missing
+    body3, ht_cm calculated;
+
 
 * Comments on the code: Documenting your program.
 
@@ -20,7 +26,7 @@ this code off and you'll wonder: what was I thinking
 when I wrote this unusual code.;
 
 
-filename fat
+filename rawdata
   "../data/fat.txt";
 
 libname module02
@@ -30,17 +36,19 @@ ods pdf file=
   "../results/5507-02-simon-continuous-variables.pdf";
 
 
-* Comments on the code: You should already be familiar
+* Comments on the code: Specifying file locations
+
+You should already be familiar
 with this. The filename statement tells you where
 the raw data is stored. The libname statement
 tells you where SAS will store any permanent 
 datsets. The ods statement tells you that SAS is 
 going to store the results with a particular 
-filename and in pdf format.
+filename and in pdf format.;
 
 
-data module02.fat;
-  infile fat;
+data module02.body;
+  infile rawdata;
   input 
     case
     fat_brozek
@@ -149,10 +157,10 @@ remind you that such documentation is possible.;
 
 
 proc print
-    data=module02.fat(obs=10);
+    data=module02.body(obs=10);
   var case fat_brozek fat_siri dens age;
   title1 "Ten rows and five columns";
-  title2 "of the fat data set";
+  title2 "of the body data set";
   footnote1 "Created by Steve Simon on &sysdate using SAS &sysver";
 run;
 
@@ -189,12 +197,12 @@ procedure.;
 
 
 proc contents
-    data=module02.fat;
-  title1 "Internal description of fat dataset";
+    data=module02.body;
+  title1 "Internal description of body dataset";
 run;
 
 
-* Comments on the code. Displaying metadata
+* Comments on the code: Displaying metadata
 
 The contents procedure produces information about
 any dataset produced by SAS, including both 
@@ -206,7 +214,7 @@ is not all that complicated, using proc contents
 is overkill. I am showing it so you will know how
 to use proc contents for very complex datasets,
 especially ones that were created by someone other 
-than yourself.;
+than yourself.
 
 SAS produces a lot of information
 and much of it is only relevant for advanced
@@ -220,17 +228,21 @@ information is
 -   variables, and
 -   filename.;
 
+*---------------- End of part 1 ----------------;
 
 proc means
     n mean std min max
-    data=module02.fat;
+    data=module02.body;
   var ht;
   title1 "Descriptive statistics for ht";
-  title2 "Notice the unusual minimum";
+  title2 "The mean is normal for adults";
+  title3 "The standard deviation shows tightly packed data";
+  title4 "The maximum value is reasonable";
+  title2 "The minimum is very low";
 run;
 
 
-* Comments on the code. Computing simple statistics
+* Comments on the code: Computing simple statistics
 
 The means procedure will produce descriptive 
 statistics for your data. By default, it will
@@ -244,20 +256,21 @@ descriptive statistics on, and the var statement
 tells SAS which variable(s) you want descriptive 
 statistics on.;
 
+*---------------- End of part 2 ----------------;
 
 proc sort
-    data=module02.fat;
+    data=module02.body;
   by ht;
 run;
 
 proc print
-    data=module02.fat(obs=1);
+    data=module02.body(obs=1);
   title1 "The row with the smallest ht";
   title2 "Note the inconsistency with wt";
 run;
 
 
-* Comments on the code. Printing row with smallest value
+* Comments on the code: Printing row with smallest value
 
 First, let's look at this value in the context of
 the other values in this row of data.
@@ -277,7 +290,7 @@ by in order to get back ot the original order.
 
 If you don't have a case variable, store the 
 sorted data in a separate location: something 
-along the lines of proc sort data=x out=y.;
+along the lines of proc sort data=x out=y.
 
 With this outlier on the low end, you might 
 consider doing nothing other than noting the 
@@ -331,12 +344,12 @@ well.
 
 
 proc sort
-    data=module02.fat;
+    data=module02.body;
   by descending ht;
 run;
 
 proc print
-    data=module02.fat(obs=1);
+    data=module02.body(obs=1);
   title1 "The row with the largest ht";
   title2 "This seems quite normal to me";
 run;
@@ -349,9 +362,10 @@ the row of data with the largest height value.
 Add the keyword desc to sort the data in reverse
 order.;
 
+*---------------- End of part 3 ----------------;
 
-data module02.fat1;
-  set module02.fat;
+data module02.body1;
+  set module02.body;
   if ht > 29.5;
 run;
 
@@ -364,8 +378,8 @@ That way, if I regret tossing the entire row out,
 I can easily revert to the original data.;
 
 
-data module02.fat2;
-  set module02.fat;
+data module02.body2;
+  set module02.body;
   if ht=29.5 then ht=.;
 run;
 
@@ -409,9 +423,11 @@ of this data set.;
 
 
 proc print
-    data=module02.fat2;
+    data=module02.body2;
   where ht < 0;
-  title1 "ht < 0 will include ht = .";
+  title1 "Printing negative values for ht (wrong way)";
+  title2 "Use where ht ^= . & ht < 0 instead";
+
 run;
 
 
@@ -430,17 +446,7 @@ this carefully for each and every statistical
 procedure that you run. If you do data 
 manipulations involving missing values, you have 
 to make sure that the result correctly reflects 
-what you want.;
-
-
-proc print
-    data=module02.fat2;
-  where ht ^= . & ht < 0;
-  title1 "The correct way to check for negative values";
-run;
-
-
-* Comments on the code: Printing negative values (right way)
+what you want.
 
 In order to prevent this from happening, you need 
 to check for missingness before applying any 
@@ -458,7 +464,7 @@ SAS approach works better.;
 
 proc means
     n nmiss mean std min max
-    data=module02.fat2;
+    data=module02.body2;
   var ht;
   title1 "There is one missing value";
 run;
@@ -470,15 +476,18 @@ If you are concerned at all about missing values
 (and you should be), ask for the number of missing
 values in proc means using nmiss.;
 
+*---------------- End of part 4 ----------------;
 
-data converted_units;
-  set module02.fat2;
-  wt_kg = round(wt / 2.2, 0.01);
+data module02.body3;
+  set module02.body2;
+  ht_m = ht / 39.37;
+  wt_kg = wt / 2.2;
+  check_bmi = wt_kg / ht_m**2;
 run;
 
 proc print 
-    data=converted_units(obs=10);
-  var wt wt_kg;
+    data=module02.body3(obs=10);
+  var ht ht_m wt wt_kg bmi check_bmi;
   title1 "Original and converted units";
 run;
 
@@ -493,9 +502,10 @@ dataset.
 
 The conversion done here will turn weight into kilograms.;
 
+*---------------- End of part 5 ----------------;
 
 proc sgplot
-    data=module02.fat2;
+    data=module02.body3;
   histogram ht;
   title1 "Histogram with default bins";
 run;
@@ -509,7 +519,7 @@ the defaults for any graphic image.;
 
 
 proc sgplot
-    data=module02.fat2;
+    data=module02.body3;
   histogram ht / binstart=60 binwidth=1;
   title "Histogram with narrow bins";
 run;
@@ -524,7 +534,7 @@ inches);
 
 
 proc sgplot
-    data=module02.fat2;
+    data=module02.body3;
   histogram ht / binstart=60 binwidth=5;
   title "Histogram with wide bins";
 run;
@@ -541,13 +551,14 @@ There is no "correct" version of the histogram.
 Try several widths and see which one gives the 
 clearest picture of your data.;
 
+*---------------- End of part 6 ----------------;
 
 proc corr
-    data=module02.fat2
-    noprob nosimple;
+    data=module02.body3
+    noprint
+    outp=correlations;
   var fat_brozek fat_siri;
   with neck -- wrist;
-  title "Correlation matrix";
 run;
 
 
@@ -556,29 +567,9 @@ run;
 Here's the code to compute correlations. 
 
 The output here really annoys me. The excessive number
-of decimals makes this table hard to read.;
-
-
-proc corr
-    data=module02.fat2
-    noprint
-    outp=correlations;
-  var fat_brozek fat_siri;
-  with neck -- wrist;
-run;
-
-proc print 
-    data=correlations;
-  title "Correlation matrix output to a data set";
-run;
-
-
-* Comments on the code: Saving correlations as data
-
-You can save the correlations in a separate data
-file. I plan to process this data, but wanted to
-show you what the data looks like before 
-processing.;
+of decimals makes this table hard to read. So I include 
+the noprint option and store the correlations in as data
+so I can round and reorder the data.;
 
 
 data correlations;
@@ -589,6 +580,7 @@ data correlations;
   fat_siri=round(fat_siri, 0.01);
 run;
 
+
 * Comments on the code: Processing correlations
 
 The output dataset in SAS includes a lot of 
@@ -596,6 +588,9 @@ descriptive statistics other than just the
 correlations. Select only those rows of data
 where _type_ equals "CORR". Once this is done,
 you no longer need the _type_ variable.
+
+The round function will round the data to the
+nearest hundredths.;
 
 
 proc sort
@@ -613,11 +608,15 @@ run;
 
 It also helps to sort the correlations from high to low before printing.
 
+*---------------- End of part 7 ----------------;
 
 proc sgplot
-    data=module02.fat2;
+    data=module02.body3;
   scatter x=abdomen y=fat_brozek;
+  pbspline x=abdomen y=fat_brozek;
   title1 "Simple scatterplot shows a strong positive trend";
+  title2 "It levels off for high values.";
+  title3 "This may be due solely to a single outlier on the high end";
 run;
 
 
@@ -627,39 +626,11 @@ A scatterplot is also useful for examining the
 relationship among variables. You can produce 
 scatterplots several different ways, but the 
 scatterplots produced by the sgplot procedure 
-have the most flexibility.;
+have the most flexibility.
 
-
-proc sgplot
-    data=module02.fat2;
-  scatter x=abdomen y=fat_brozek;
-  reg x=abdomen y=fat_brozek;
-  title2 "and the trend line slopes upward";
-run;
-
-
-* Comments on the code: Adding a linear trend
-
-A linear trend line is very useful, especially 
-for large and noisy data sets. It also allows
-you to more quickly visualize extreme values.
-;
-
-
-proc sgplot
-    data=module02.fat2;
-  scatter x=abdomen y=fat_brozek;
-  pbspline x=abdomen y=fat_brozek;
-  title2 "with a smooth curve";
-run;
-
-
-
-* Comments on the code: Adding a spline
-
-Here's the code to compute a smoothing spline. It
-helps you visualize whether the trend is linear
-or not.;
+The pbspline subcmmand produces a smoothing 
+spline. It helps you visualize whether the 
+trend is linear or not.;
 
 
 ods pdf close;
@@ -679,3 +650,5 @@ If you don't get any pdf file when you are done,
 or your pdf file is the one left over from a
 previous analysis, it's probably because you
 forgot this last very important statement.;
+
+*---------------- End of part 8 ----------------;

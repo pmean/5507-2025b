@@ -7,4 +7,87 @@ format:
 editor: source
 ---
 
-## 02-04
+## How to handle outliers
+
+-   No option is best in all cases
+    -   Live with them
+    -   Remove the entire row
+    -   Convert outlier to missing
+-   Always report clearly
+
+::: notes
+
+When you encounter outliers, you have several options. Often the best approach is to live with them. You might report both a mean and a median, for example.
+
+You could remove a patient entirely from the analysis. This is a pretty radical step and should be done if you can argue that all of the patient's data is hopelessly compromised. You might also argue that the patient clearly is ineligible for the study and should never have been let in.
+
+You could also convert the outlier to a missing value. This is also a big step, but at least it allows you to use the rest of the data for that patient.
+
+Generally, an extreme value by itself does not support removal of a patient or converting an outlier to missing. You need to provide external evidence. A notation in a lab notebook, for example, of sample handling problems, might justify this step. You could also remove an outlier if you could argue that the value is incompatible with life, such as a patient with a body mass index of 5.1.
+
+:::
+
+## Importing missing values
+
+-   Different coding schemes
+    -   dot (.) or blank ( ), the SAS standard
+    -   other symbols (*, ?)
+    -   NA, the R standard
+    -   NULL, the SQL standard
+    -   Extreme numbers (-1, 9, 99, 999)
+    -   Blank ( ) or empty ()
+-   Convert any non-standard missing codes
+    -   if iq=999 then iq=.
+-   Read the data dictionary
+-   Always ask **WHY** a value is missing
+
+::: notes
+
+The data that you import into SAS may already have some values designated as missing. These could be coded as a single dot (.), which is the SAS standard for missing numeric data. You might also see some other symbol such as an asterisk or a question mark. R uses NA for missing and SQL uses NULL. 
+
+You may see extreme numeric values, extreme meaning outside a reasonable range, as codes for missing values. A birthweight of -1, for example, probably indicates missingness, as a baby weighing -1 kilograms would float up to the ceiling after being born. Other times, of course, -1 would not work, such as when recording your checking account balance the day before payday.
+
+Sometimes, one or more nines would indicate a missing value. A Likert scale item coded 1 for strongly disagree through 5 for strongly agree will often code a non-response as 9. Make sure you have enough nines. An IQ score would not use 99 as the missing code because that is a legitimate value. A code of 999 makes more sense here because even Albert Einstein's IQ falls well below 999.
+
+One or more blanks might represent missing or an empty field (a zero length string) might represent missing. I discourage the use of blanks or empty fields for several reasons. First, when your computer diplays a single blank, it looks just like an empty field. Second, an empty or blank field might represent not missingness, but rather that the data entry person has not gotten to enter that value yet. Third, some systems (not SAS) might convert an empty field to zero, which is often not what you want.
+
+:::
+
+## Missing value logic in SAS
+
+-   Stored internally as most extremely negative number
+    -   Approximately $-1.8 \times 10^{308}$ (on most computers)
+-   Can identify with = . or missing()
+    -   Differs from R
+-   Use caution with less than/greater than comparisons
+    -   age < 18 will include children **AND** missing ages
+    -   use age ^= . & age < 18 instead
+
+::: notes
+
+SAS stores missing values internally as the most extremely negative number. On most systems that would be -1.8 time ten to a ridiculously large number. It is more extreme than a negative googol (-1 times 10 to the 100 power) and far larger in absolute value than the number of atoms in the universe (approximately 10 to the 78 power or 10 to the 82 power). So you are unlikely to use such an extremely negative number in any real world calculations.
+
+You can identify a missing value using the missing function or the = . comparison. This is handy. In R trying to use an equality comparison involving missing values will evaluate not to true or false but to missing. This produces a complex three valued logic system. In SAS, any equality comparison will produce either true or false and no third value. This has its advantages.
+
+The disadvantage occurs when using less than and greater than comparisons. You might want to identify children in your dataset using age < 18, but this would include children and anyone in your dataset with a missing age. You should exclude missing values explicitly first before doing any less than or greater than calculations. That's a good rule to follow in R as well.
+
+:::
+
+`r sas[11]`
+
+`r sas[12]`
+
+`r sas[13]`
+
+`r sas[14]`
+
+## Live demo, 4
+
+-   data step
+    -   set subcommand
+    -   if subcommand
+    -   if ... then subcommand
+-   print procedure
+    -   where subcommand
+-   means procedure
+    -   nmiss option

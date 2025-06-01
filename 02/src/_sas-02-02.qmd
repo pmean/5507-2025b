@@ -7,4 +7,32 @@ format:
 editor: source
 ---
 
-## 02-02
+## Simple descriptive statistics
+
+-   Always look at first
+-   Is mean high, normal, or low?
+-   Is data spread out or tight?
+-   Are minimum and maximum reasonable?
+
+::: notes
+
+You should always look at simple descriptive statistics first before embarking on any data analysis. This is especially true for very complex data analyses. Often the complex analyses are largely opaque and difficult to follow. You will have a better time understanding how the mixture of variables in these models behave if you first have an understand how each variable behaves individually.
+
+First examine the mean relative to your expectations. Is it about what you'd expect or is it low or high relative to your expectations?
+
+Look at the standard deviation. A rough rule of thumb is that about 68% of the data will lie within one standard deviation of the mean and that about 95% of the data will lie within two standard deviations of the mean. That won't be true for highly skewed distributions, but it is still worthwhile to think about these calculations. Do they indicate that the data is widely spread or tightly packed?
+
+Look at the minimum and maximum values. Are they extreme to cause concern? If they are outside the range of possible values, investigate. Maybe there is a data entry error.
+
+:::
+
+`r sas[8]`
+
+## Live demo, 2
+
+-   means procedure
+    -   n option
+    -   mean option
+    -   std option
+    -   min option
+    -   max option

@@ -30,20 +30,30 @@ clip <- function() {
   return(invisible())
 }
 
-read_lines("simon-5507-02-demo.sas") |>
+mark <- "\\* Comments on the code: "
+
+txt <- read_lines("simon-5507-02-demo.sas")
+
+txt |>
   str_remove("^ *$") |>
+  str_subset("End of part", negate=TRUE) |>
   paste0(collapse="\n") |>
   str_split("\n\n\n") |>
-  unlist() -> sas
+  unlist() -> chunk
 
-n <- length(sas)/2
+txt |>
+  str_subset(mark) |>
+  str_replace(mark, "## ") -> titles
 
-sas[2*(1:n)] |>
-  str_remove("\n.*") |>
-  str_remove("\\* Comments on the code: ")
+n <- length(titles)
 
-add_note <- function(i) {paste0("::: notes\n", sas[i],"\n:::")}
-add_code <- function(i) {paste0("```{}\n", sas[i], "\n```")}
+sas <- paste0(
+  titles,
+  "\n\n```{}\n",
+  chunk[2*(1:n)-1],
+  "\n```\n\n::: notes\n",
+  chunk[2*(1:n)],
+  "\n:::\n\n\n")
 ```
 
 ## Review definitions
@@ -235,144 +245,22 @@ What makes a good variable label? First take advantage of a mixture of upper and
 
 :::
 
-## Documentation header
+`r sas[1]`
 
-`r add_code(1)`
+`r sas[2]`
 
-`r add_note(2)`
+`r sas[3]`
 
-## Tell SAS where to find and store things
+`r sas[4]`
 
-`r add_code(3)`
+`r sas[5]`
 
-`r add_note(4)`
+`r sas[6]`
 
-## Read in your data
+`r sas[7]`
 
-`r add_code(5)`
+## Live demo, 1
 
-`r add_note(6)`
-
-## Add variable labels
-
-`r add_code(7)`
-
-`r add_note(8)`
-
-## Print a small piece of the data
-
-`r add_code(9)`
-
-`r add_note(10)`
-
-## Calculate simple statistics for ht
-
-`r add_code(11)`
-
-`r add_note(12)`
-
-## Look at smallest value
-
-`r add_code(13)`
-
-`r add_note(14)`
-
-## Look at the largest value
-
-`r add_code(15)`
-
-`r add_note(16)`
-
-## Removing the entire row
-
-`r add_code(17)`
-
-`r add_note(18)`
-
-## Converting the outlier to a missing value
-
-`r add_code(19)`
-
-`r add_note(20)`
-
-## Displaying negative values (wrong way)
-
-`r add_code(21)`
-
-`r add_note(22)`
-
-## Displaying negative values (right way)
-
-`r add_code(21)`
-
-`r add_note(22)`
-
-## Counting missing values
-
-`r add_code(23)`
-
-`r add_note(24)`
-
-## Simple transformations
-
-`r add_code(25)`
-
-`r add_note(26)`
-
-## Display a histogram
-
-`r add_code(27)`
-
-`r add_note(28)`
-
-## Revised histogram with narrow bins
-
-`r add_code(29)`
-
-`r add_note(30)`
-
-## Revised histogram with wide bins--->
-
-`r add_code(31)`
-
-`r add_note(32)`
-
-## Correlations
-
-+ Informal interpretation
-  + between +0.7 and +1.0: strong positive association
-  + between +0.3 and +0.7: weak positive association
-  + between -0.3 and +0.3: little or no association
-  + between -0.3 and -0.7: weak positive association
-  + between -0.7 and -1.0: strong negative association
-
-::: notes
-
-The correlation coefficient is a single number between -1 and +1 that quantifies the strength and direction of a relationship between two continuous variables. As a rough rule of thumb, a correlation larger than +0.7 indicates a strong positive association and a correlation smaller than -0.7 indicates a strong negative association. A correlation between +0.3 and +0.7 (-0.3 and -0.7) indicates a weak positive (negative) association. A correlation between -0.3 and +0.3 indicates little or no association.
-
-Don't take these rules too literally. You're not trying to make definitive statements about your data set. You are just trying to get comfortable with some general patterns that occur in your data set. A complex and definitive statistical analysis will almost certainly not agree with at least some of the preliminary correlations noted here.
-
-The corr procedure produces, by default, a square correlation matrix of all the numeric variables. The noprob and nosimple options cut down on the amount of information printed. The with statement produces a rectangular correlation matrix.
-  
-:::
-
-## Calculate correlations
-
-`r add_code(33)`
-
-`r add_note(34)`
-
-## Save the correlations in a separate data file
-
-## Modify these correlations
-
-## Print the modified correlations
-
-## Draw a scatterplot
-
-## Adding linear trend line
-
-## Adding a smooth c
-
-## Don't forget!
-
+-   data step
+    -   label subcommand
+-   contents procedure

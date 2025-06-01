@@ -7,4 +7,28 @@ format:
 editor: source
 ---
 
-## 02-07
+## Correlations
+
++ Informal interpretation
+  + between +0.7 and +1.0: strong positive association
+  + between +0.3 and +0.7: weak positive association
+  + between -0.3 and +0.3: little or no association
+  + between -0.3 and -0.7: weak positive association
+  + between -0.7 and -1.0: strong negative association
+
+::: notes
+
+The correlation coefficient is a single number between -1 and +1 that quantifies the strength and direction of a relationship between two continuous variables. As a rough rule of thumb, a correlation larger than +0.7 indicates a strong positive association and a correlation smaller than -0.7 indicates a strong negative association. A correlation between +0.3 and +0.7 (-0.3 and -0.7) indicates a weak positive (negative) association. A correlation between -0.3 and +0.3 indicates little or no association.
+
+Don't take these rules too literally. You're not trying to make definitive statements about your data set. You are just trying to get comfortable with some general patterns that occur in your data set. A complex and definitive statistical analysis will almost certainly not agree with at least some of the preliminary correlations noted here.
+
+The corr procedure produces, by default, a square correlation matrix of all the numeric variables. The noprob and nosimple options cut down on the amount of information printed. The with statement produces a rectangular correlation matrix.
+  
+:::
+
+`r sas[19]`
+
+`r sas[20]`
+
+`r sas[21]`
+
