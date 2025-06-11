@@ -98,7 +98,6 @@ The disadvantage occurs when using less than and greater than comparisons. You m
 
 -   data step
     -   set subcommand
-    -   if subcommand
     -   if ... then subcommand
 -   print procedure
     -   where subcommand

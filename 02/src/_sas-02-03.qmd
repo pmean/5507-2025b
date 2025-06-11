@@ -17,7 +17,7 @@ editor: source
 
 If you spot an outlier, an unusually large or small value for a variable, look at the rest of the data for that individual. That may offer a clue about why that outlier is so extreme.
 
-Sometimes data gets misread during the process of importing it into SAS. It can occur because of a missing or duplicate delimiter. We'll talk about delimiters in the next module. Look to see if there is an unexpected missing value or if the data for one variable looks like it fits better for the variable to the left or to the right.
+Sometimes data gets misaligned read during the process of importing it into SAS. It can occur because of a missing or duplicate delimiter. We'll talk about delimiters in the next module. Look to see if there is an unexpected missing value or if the data for one variable looks like it fits better for the variable to the left or to the right.
 
 If you don't see any shifting, look to see if there is coherence among all the variables. A patient with a very small value for height, for example, should also have a very small value for weight.
 

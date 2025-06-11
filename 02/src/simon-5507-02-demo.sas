@@ -366,7 +366,7 @@ order.;
 
 data module02.body1;
   set module02.body;
-  if ht > 29.5;
+  if ht = 29.5 then delete;
 run;
 
 
