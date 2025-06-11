@@ -7,6 +7,92 @@ format:
 editor: source
 ---
 
+## Historial sidenote, IBM mainframe printer
+
+![](../images/ibm-mainfame-printer.png)
+
+::: notes
+
+When I was in graduate school, SAS would only print to a large printer attached to the IBM mainframe computer. I don't know the exact model, but it did look something like this. 
+
+This printer was fast, probably faster than many of today's printers. But it has a limited character set, mostly just the things you would find on a manual typewriter. It could only print in one color, black. And it could only use a fixed width font, not too much different that what you see today with the Courier New font.
+
+This led to some serious compromises that you had to make with 
+
+:::
+
+## Historical sidenote, Sample output from proc plot
+
+![](../images/proc-plot-output.png)
+
+::: notes
+
+Here's an example of output from proc plot. It's actually a bit better than what I had in graduate school because this graph is using some of the box drawing characters that cam with the IBM personal computers. 
+
+:::
+
+## Historical side note, box drawing characters
+
+```{}
+Box drawing characters
+
+░	▒	▓	│	┤	╡	╢	╖	╕	╣	║	╗	╝	╜	╛	┐
+└	┴	┬	├	─	┼	╞	╟	╚	╔	╩	╦	╠	═	╬	╧
+╨	╤	╥	╙	╘	╒	╓	╫	╪	┘	┌	█	▄	▌	▐	▀
+
+Before box drawing characters
+
+| - +
+
+```
+
+::: notes
+
+The box drawing characters allowed you to place a single line frame, a double line frame, or a thick frame around other text, and it looked pretty cool. Before box drawing characters, you had just three characters for drawing frames. The vertical bar was used for the Y axis, the minus sign for the X axis, and the plus sign for corners and tick marks.
+
+:::
+
+## Historical side note, Pen plotter
+
+[![](../images/pen-plotter.png)](https://www.youtube.com/watch?v=-W1_MsGS14E)
+
+::: notes
+
+There were pen plotters back then. It worked kind of like an etch-a-sketch. One part of the pen plotter moved the paper in a vertical direction, and the pen slid back and forth in a horizontal direction. It was a lot of fun to watch.
+
+The pen plotter allowed you to use multiple colors, but limited typically to four, six, or eight different pens. It also allowed you to draw diagonal lines and curves.
+
+The interesting thing about the pen plotter was when you have a lot of data points overlapping. The pen plotter would put so much ink down that parts of the paper would get soaked and start to tear.
+
+:::
+
+## Historical note, Dot matrix printer
+
+![](../images/dot-matrix-printer-output.png)
+
+## Today's technology, Ink jet or laser printer
+
+-   300 dots per inch or better
+-   Up to 16.7 million colors
+    -   CMYK system versus RGB system
+
+::: notes
+
+Today, most statistical graphs are printed using ink jet or laser technology. Starting with the Apple LaserWriter in 1985, laser printer technology allowed for very precise graphs with fine details. 
+
+:::
+
+## Today's technology, 3D printers (SAS does not support these)
+
+![](../images/3d-printer-output.png)
+
+::: notes
+
+As far as I know, you cannot use SAS to create solid objects using a 3D printer. It is possible to do this in R, but it is not easy. I expect this to become possible and easy for both R and SAS in the near future.
+
+:::
+
+
 ## Drawing histograms
 
 -   Histograms can assess normality/non-normality
