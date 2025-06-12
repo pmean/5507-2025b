@@ -1,5 +1,5 @@
 ---
-title: "sas-02-01"
+title: "sas-03-01"
 format: 
   revealjs:
     slide-number: true
@@ -10,356 +10,177 @@ editor: source
 ```{r}
 #| message: false
 #| warning: false
-#| label: 02-01-setup
-
-# I will not use too much R in a class called
-# "Introduction to SAS," but am including this
-# chunk just in case I need something from R.
+#| label: 03-01-setup
 
 library(glue)
 library(tidyverse)
 ```
 
 ```{r}
-#| label: 02-01-read
+#| label: 03-01-read
 
-read_lines("simon-5507-02-demo.sas") |>
+# Read the program and break it into 
+# "bite-sized" pieces that fit easily
+# on slides.
+
+read_lines("simon-5507-03-space-delimited.sas") |>
   paste0(collapse="\n") |>
-  str_split("\n\n") |>
+  str_split("\n\n\n") |>
   unlist() |>
   str_remove("^\n") -> sas
 
 add_note <- function(i) {paste0("::: notes\n", sas[i],"\n:::")}
 add_code <- function(i) {paste0("```{}\n", sas[i], "\n```")}
+
+text_data <- read_lines("../data/comma-delimited.csv")
 ```
 
-## Review definitions
+## Defining a macro variable
 
-+ Categorical
-  + Small number of possible values
-  + Each value associated with a category
-+ Continuous
-  + Large number of possible values
-  + Potentially any value in an interval
-  
+-   %let command
+    -   defines a macro value
+-   &macro_variable_name
+    -   substitutes that macro value in the code
+
 ::: notes
 
-Before we start, let's review a couple of definitions. 
+I find myself switching often between SAS On
+Demand for Academics and SAS on Remote Labs.
+One thing to simplify the code is to create a
+macro variable. A macro variable is a value
+that you specify once, typically right at the
+start of your program code, and then use 
+repeatedly later in your code.
 
-A **categorical variable** is a variable that can only take on a small number of values. Each value is usually associated with a particular category.
-
-Examples of categorical variables are
-
-  * sex (Male or Female),
-  * race (White, Black, Native American, etc.),
-  * cancer stage (I, II, III, or IV),
-  * birth delivery type (Vaginal, C-section). 
-
-A **continuous variable** is a variable that can take on a large number of possible values, potentially any value in some interval.
-
-Examples of continuous variables are
-
-  * Birth weight in grams,
-  * gestational age,
-  * fasting LDL level.
-
-There are some variables that are on the boundary between categorical and continuous, but it is not worth quibbling about here. 
-
-The point to remember is that the types of graphs that you use and the types of statistics that you compute are dependent on many things, but first and foremost on whether the variables are categorical, continuous, or a mixture.
-
-Today, you will see examples involving mostly continuous variables. 
-  
 :::
-  
 
-## Semicolons are important
-
-+ Ends every SAS statement
-+ Easy to forget
-+ Use this to your advantage
-  + Several short lines
-  + Indent continuations
-
-::: notes
-
-Before I go too far, let me mention and important thing. Every SAS statement ends in a semicolon. This is important. You will forget a semicolon and it will lead to a cryptic error message. So here's a quick hint. If you get an error message on a certain line of code, look to see if you forgot a semicolon on the previous line. It happens to me all the time and I've been using SAS for decades.
-
-:::  
-
-## Example of stretching statement across multiple lines.
-
-One long line
+## Simple example
 
 ```{}
-statement option1 option2 option3 option4;
+%let row_limit=10;
+
+(later on in your code)
+
+proc print
+    data=phase1(obs=&row_limit);
+    
+(this gets converted by SAS into)
+
+proc print
+    data=phase1(obs=10);
+    
 ```
 
-versus several short lines.
+::: notes
 
-```{}
-statement
-  option1
-  option2
-  option3
-  option4;
+Here's a simple example. You set a macro variable called row_limit equal to the string 10. Then later in your program, you include that macro variable as part of proc print to specify that 
+
+:::
+
+## When should you use a macro variable?
+
+-   Document important options at the top of your program
+    -   Quick and easy changes
+-   Reduce the amount of repetitive typing
+
+## Text files
+
+-   Each row is a separate observation
+-   How to specify individual columns?
+    -   Blanks
+    -   Delimiters
+    -   Fixed width
+
+### Importing choices (1 of 2)
++ A wide range of formats
+  + Space delimited
+  + Comma separated values
+  + Tab delimited
+  + Fixed format
++ Strings in your input
+
+<div class="notes">
+
+I want to show a few simple examples of importing data. There are several common formats and SAS can handle all of these easily.
+
+</div>
+
+### Importing choices (2 of 2)
++ proc import
+  + First row includes variable names
+  + Binary data files
++ Manual reformatting
+  + Global search and replace
+  + Not usually a good idea
++ Skipping rows
++ Converting strings to numbers
+
+<div class="notes">
+
+Some data sets use the first row to represent variable names while others don't.
+
+If you have to, you can manually reformat the data. Use the global search and replace function in your text editor program. I generally try to avoid this. If your data set changes, you have to redo the reformatting step, which is tedious and error prone. You'd be better off learning a few tricks to get SAS to read a nonstandard data set.
+
+Sometimes you have to skip a few rows. Sometimes you have to convert strings to numbers.
+
+</div>
+
+### Space delimited, example
+
+```{r space-delimited.txt}
+opts_current$get("label") %>%
+  paste0("../data/", .) %>%
+  readLines(warn=FALSE) %>%
+  paste0(collapse="\n") %>%
+  cat
 ```
 
-::: notes
+<div class="notes">
 
-The use of semicolons is nice, in a way, because it allows you to stretch a complicated SAS statement across two or more rows of your program. This can often make your program more readable. It is hard to read a long line of code. Your eye has to scan left to right and you can sometimes lose track of which line you are on. Most newspapers place their articles in narrow columns because it makes them easier to read.
+You've already imported a file similar to this. It is a space delimited file with one blank between each number. This is the simplest case, and requires very little code.
 
-There is no official rule of thumb on this, but I do try to keep my lines below 50 characters. I also try to indent substatements with a data step or procedure. I use blank lines between data steps and procedures.
+</div>
 
+### Space delimited, SAS code (1/3)
 
-Don't obsess about this now, but you'll see a fairly consistent coding style that I use for my SAS code. You don't have to follow my format, of course, which might be a bit too extreme for your tastes. Just experiment with things a bit until you can settle on a layout that you are comfortable with.
+```{r 5507-03-simon-import-space-delimited.sas}
+opts_current$get("label") %>%
+  readLines(warn=FALSE) %>%
+  str_trim(side="right") %>%
+  paste0(collapse="\n") %>% 
+  str_split(pattern="\n\n\n") %>%
+  unlist -> tx
 
-::: 
+tx[1] %>% cat
+```
 
-## Rules for variable names (1/2)
+<div class="notes">
 
-+ Can use mix of
-  + letters (A-Z, a-z),
-  + numbers (0-9)
-  + underscore (_)
-  + no blanks, no symbols
+Here is the SAS code to read and print this file, starting with the documentation header.
 
-::: notes
+</div>
 
-There are important rules for variable names in SAS. You can use a mix of letters, numbers, and the underscore. You can't use blanks or any special symbols like the dollar sign ($) or the dash/minus sign.
+### Space delimited, SAS code (2/3)
 
-I'm using the variable names provided but if you create your own names, use brief (but descriptive) name for EVERY variable in your data set. There's no precise rule, but names should be around 8 characters long. Longer variable names make your typing tedious and much shorter variable names makes your code terse and cryptic.
+```{r}
+tx[2] %>% cat
+```
 
-I'm a bit more terse with these variable names than I normally would be just to reduce the amount of typing you have to do.
+<div class="notes">
 
-You should avoid special symbols in your variable names especially symbols that are likely to cause confusion (the dash symbol, for example, which is also the symbol for subtraction). You should also avoid blanks. These rules are pretty much universal across most statistical software packages.
+Here are the lines to tell SAS where everything belongs
 
-:::
+</div>
 
-## Rules for variable names (2/2)
+### Space delimited, SAS code (3/3)
 
-+ Can't start with a number
-  + "a1" but not "1a"
-+ Capitalization not important
-  + BMI, Bmi, bmi are same
-+ Up to 32 characters in length
+```{r}
+tx[3] %>% cat
+```
 
-::: notes
+<div class="notes">
 
-You can't start with a number. So "a1" is okay, but "1a" is not.
+Here is the rest of the program.
 
-Capitalization is not important in SAS. So you can call your variable "BMI" with all caps, or "Bmi" with mixed capitals or "bmi" with all lower case. SAS treats all of these the same.
-
-Your variable name has to be 32 characters or less in length.
-
-I'm using the variable names provided but if you create your own names, use brief (but descriptive) name for EVERY variable in your data set. There's no precise rule, but names should be around 8 characters long. Longer variable names make your typing tedious and much shorter variable names makes your code terse and cryptic.
-
-I'm a bit more terse with these variable names than I normally would be just to reduce the amount of typing you have to do.
-
-:::
-
-## Recommendations for variable names (1/2)
-
-+ Avoid generic names (x1, var01, etc.)
-+ Keep it short
-  + Use commonly known abbreviations...
-  + ...but nothing cryptic
-+ Use all lower case (age, not AGE or Age)
-
-::: notes
-
-Your variable names should by descriptive. Avoid generic names like x1, var01, and so forth.
-
-Keep things short. You can use commonly known abbreviations, such as "wt" for "weight". But avoid any cryptic abbreviations.
-
-I like to keep everything in lower case. It is more readable than all upper case, and easier to remember than a mixture of upper and lower case. Some people prefer an initial upper case, and there's nothing wrong with that. It is important, however, to be consistent.
-
-:::
-
-## Recommendations for variable names (2/2)
-
-+ Separate words with underscores
-  + fat_brozek, not fatbrozek
-+ Alternative: CamelCase
-  + FatBrozek
-+ Caution: Writer's Exchange website
-  + www.writersexchange.com
-  
-::: notes
-
-You can use two or three short words in a variable name, but be sure to separate them using underscores. So the variable for percentage body fat as measured by Brozek's equation is "fat" and "brozek" separated by an underscore. Some people prefer CamelCase, where each word starts with an initial capital letter: capital F fat, capital B brozek.
-
-The one thing you do want to avoid is just running two or three words together and all lower case. There's a story about a group that started up in the era before the web called Writer's Exchange. As you can guess this was a resource for new authors. When the web came out, they decided to put their resources up on a website, www.writersexchange.com. That seemed logical enough, but then someone notices that you could read the website as "www dot writer sex change dot com". Not exactly the image they wanted.
-
-:::
-
-## SAS variable labels (1/2)
-
-+ Longer description of a variable
-  + Can include blanks, special symbols
-  + Internal documentation
-  + Labels substituted on some (but not all) output
-+ Required in this class (see grading rubric)
-
-::: notes
-
-SAS offers an opportunity for you to add documentation to your program about individual variables. These are called variable labels. They have almost no restrictions. You can use blanks, or special symbols like a dollar sign or a dash. The documentation that variable labels provide is mostly internal, but these labels are substituted in a few places like some graphs.
-
-I strongly recommend use of variable labels and will require them for any homework you submit in this class. See the grading rubric for details.
-
-:::
-
-## SAS variable labels (2/2)
-
-+ Recommendations for variable labels
-  + Judicious use of upper and lower case
-  + Spell out abbreviations
-  + Specify units of measurement
-  + Any other important details
-
-::: notes
-
-What makes a good variable label? First take advantage of a mixture of upper and lower case to make your labels more readable. Spell out any abbreviations, even obvious abbreviations. If your variable has a measurement unit, specify that unit in your variable label. If there are other important details, put these in the variable label as well.
-
-:::
-
-## Documentation header
-
-`r add_code(1)`
-
-`r add_note(2)`
-
-## Tell SAS where to find and store things
-
-`r add_code(3)`
-
-`r add_note(4)`
-
-## Read in your data
-
-`r add_code(5)`
-
-`r add_note(6)`
-
-## Add variable labels
-
-`r add_code(7)`
-
-`r add_note(8)`
-
-## Print a small piece of the data
-
-`r add_code(9)`
-
-`r add_note(10)`
-
-## Calculate simple statistics for ht
-
-`r add_code(11)`
-
-`r add_note(12)`
-
-## Look at smallest value
-
-`r add_code(13)`
-
-`r add_note(14)`
-
-## Look at the largest value
-
-`r add_code(15)`
-
-`r add_note(16)`
-
-## Removing the entire row
-
-`r add_code(17)`
-
-`r add_note(18)`
-
-## Converting the outlier to a missing value
-
-`r add_code(19)`
-
-`r add_note(20)`
-
-## Displaying negative values (wrong way)
-
-`r add_code(21)`
-
-`r add_note(22)`
-
-## Displaying negative values (right way)
-
-`r add_code(21)`
-
-`r add_note(22)`
-
-## Counting missing values
-
-`r add_code(23)`
-
-`r add_note(24)`
-
-## Simple transformations
-
-`r add_code(25)`
-
-`r add_note(26)`
-
-## Display a histogram
-
-`r add_code(27)`
-
-`r add_note(28)`
-
-## Revised histogram with narrow bins
-
-`r add_code(29)`
-
-`r add_note(30)`
-
-## Revised histogram with wide bins--->
-
-`r add_code(31)`
-
-`r add_note(32)`
-
-## Correlations
-
-+ Informal interpretation
-  + between +0.7 and +1.0: strong positive association
-  + between +0.3 and +0.7: weak positive association
-  + between -0.3 and +0.3: little or no association
-  + between -0.3 and -0.7: weak positive association
-  + between -0.7 and -1.0: strong negative association
-
-::: notes
-
-The correlation coefficient is a single number between -1 and +1 that quantifies the strength and direction of a relationship between two continuous variables. As a rough rule of thumb, a correlation larger than +0.7 indicates a strong positive association and a correlation smaller than -0.7 indicates a strong negative association. A correlation between +0.3 and +0.7 (-0.3 and -0.7) indicates a weak positive (negative) association. A correlation between -0.3 and +0.3 indicates little or no association.
-
-Don't take these rules too literally. You're not trying to make definitive statements about your data set. You are just trying to get comfortable with some general patterns that occur in your data set. A complex and definitive statistical analysis will almost certainly not agree with at least some of the preliminary correlations noted here.
-
-The corr procedure produces, by default, a square correlation matrix of all the numeric variables. The noprob and nosimple options cut down on the amount of information printed. The with statement produces a rectangular correlation matrix.
-  
-:::
-
-## Calculate correlations
-
-`r add_code(33)`
-
-`r add_note(34)`
-
-## Save the correlations in a separate data file
-
-## Modify these correlations
-
-## Print the modified correlations
-
-## Draw a scatterplot
-
-## Adding linear trend line
-
-## Adding a smooth c
-
-## Don't forget!
+</div>
 

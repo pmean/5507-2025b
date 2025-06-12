@@ -19,9 +19,7 @@ Sometimes you want to alter some of your data. This could be a units conversion,
 
 :::
 
-## Non destructive transformations
-
--   Different variable name
+## Non destructive transformations, Different variable name
 
 ```{}
 data name1;
@@ -30,7 +28,15 @@ data name1;
 run;
 ```
 
--   Different dataset name
+::: notes
+
+Sometimes you want to alter some of your data. This could be a units conversion, a body mass index calculation, or something else. This is done in the data step. You could do it along with the input statement, but it is often valuable to read in the data as is, and make changes which are stored in a different dataset.
+
+If you make a transformation, you should do it in a non-destructive way, meaning a way that allows you to revert back, if needed. Do this by transforming into a new variable, as shown here or by storing the transformed data in a new dataset, as shown on the next slide.
+
+:::
+
+## Non destructive transformations, Different dataset name
 
 ```{}
 data name2;
@@ -38,14 +44,6 @@ data name2;
   wt = wt / 2.2;
 run;
 ```
-
-::: notes
-
-Sometimes you want to alter some of your data. This could be a units conversion, a body mass index calculation, or something else. This is done in the data step. You could do it along with the input statement, but it is often valuable to read in the data as is, and make changes which are stored in a different dataset.
-
-If you make a transformation, you should do it in a non-destructive way, meaning a way that allows you to revert back, if needed. Do this by transforming into a new variable or storing the transformed data in a new dataset.
-
-:::
 
 `r sas[15]`
 
