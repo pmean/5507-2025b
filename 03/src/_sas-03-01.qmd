@@ -25,12 +25,14 @@ library(tidyverse)
 
 read_lines("simon-5507-03-import-comma-delimited.sas") |>
   paste0(collapse="\n") |>
-  str_split("\n\n") |>
+  str_split("\n\n\n") |>
   unlist() |>
   str_remove("^\n") -> sas
 
 add_note <- function(i) {paste0("::: notes\n", sas[i],"\n:::")}
 add_code <- function(i) {paste0("```{}\n", sas[i], "\n```")}
+
+text_data <- read_lines("../data/comma-delimited.csv")
 ```
 
 ## Defining a macro variable
@@ -40,12 +42,6 @@ add_code <- function(i) {paste0("```{}\n", sas[i], "\n```")}
 -   &macro_variable_name
     -   substitutes that macro value in the code
 
-```{}
-%let macro_variable_name = string_value
-
-&macro_variable_name
-```
-
 ::: notes
 
 I find myself switching often between SAS On
@@ -54,11 +50,7 @@ One thing to simplify the code is to create a
 macro variable. A macro variable is a value
 that you specify once, typically right at the
 start of your program code, and then use 
-repeatedly later in your code. In this
-program, I specified a variable path which
-is either q:/introduction-to-sas or
-/home/mail129/ depending on which system I 
-use.
+repeatedly later in your code.
 
 :::
 
@@ -72,7 +64,7 @@ use.
 proc print
     data=phase1(obs=&row_limit);
     
-(this gets converted by SAs into)
+(this gets converted by SAS into)
 
 proc print
     data=phase1(obs=10);
@@ -85,7 +77,7 @@ Here's a simple example. You set a macro variable called row_limit equal to the 
 
 :::
 
-## when should you use a macro variable?
+## When should you use a macro variable?
 
 -   Document important options at the top of your program
     -   Quick and easy changes
@@ -93,30 +85,46 @@ Here's a simple example. You set a macro variable called row_limit equal to the 
 
 ## Text files
 
--   Each rwo is a separate observation
+-   Each row is a separate observation
 -   How to specify individual columns?
     -   Delimiters
     -   White space
     -   Fixed width
 
-## Comma delimiters
+## A comma delimited file
 
+```{r}
+cat(text_data, sep="\n")
+```
 
+::: notes
 
-## Code 1
+This is an artificial dataset. Each row represents a different patient. Each patient has three numbers.
+
+:::
+
+## Demo-1, Documentation header
 
 `r add_code(1)`
 
-`r add_note(2)`
+## Demo-1, File locations
 
-## Code 3
+`r add_code(2)`
 
-`r add_code(3)`
+`r add_note(3)`
 
-`r add_note(4)`
+## Demo-1, Data step
 
-## code 5
+`r add_code(4)`
 
-`r add_code(5)`
+`r add_note(5)`
 
-`r add_note(6)`
+## Demo-1, Print procedure
+
+`r add_code(6)`
+
+## Live demo, 1
+
+-   %let command
+-   &path
+-   delimiter argument (infile subcommand, data step)

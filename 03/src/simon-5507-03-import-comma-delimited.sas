@@ -16,26 +16,13 @@ libname perm
 filename raw_data
     "&path/data/comma-delimited.csv";
 
-options papersize=(8in 4in) nonumber nodate;
 
-
-* Comments on the code: Key file locations
-
-I find myself switching often between SAS On
-Demand for Academics and SAS on Remote Labs.
-One thing to simplify the code is to create a
-macro variable. A macro variable is a value
-that you specify once, typically right at the
-start of your program code, and then use 
-repeatedly later in your code. In this
-program, I specified a variable path which
-is either q:/introduction-to-sas or
-/home/mail129/ depending on which system I 
-use.
+* Comments on the code: Using a macro variable to specify the location of your files
 
 The %let command defines a macro variable. In this case, 
-
-
+the macro variable path is set equal to the string
+q:/introduction-to-sas. Then that value is inserted
+in the ods, libname, and filename commands.;
 
 
 data perm.comma_delimited;
@@ -43,8 +30,19 @@ data perm.comma_delimited;
   input x y z;
 run;
 
+
+* Comments on the code: Specifying a comma delimiter
+
+Adding the delimiter keyword to the infile
+statement informs SAS that individual data
+values in a row of text are separated or
+delimited by a specific character. In this
+code, the delimiter is a comma.
+
+
 proc print
     data=perm.comma_delimited(obs=2);
   title1 "First two rows of data";
 run;
+
 ods pdf close;
