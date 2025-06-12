@@ -5,14 +5,14 @@ format:
     slide-number: true
     embed-resources: true
 params:
-  topic_01: "Importing comma-delimited files"
-  topic_02: "Simple descriptive statistics"
-  topic_03: "Printing row with smallest/largest value"
-  topic_04: "Missing value logic"
-  topic_05: "Simple transformations"
-  topic_06: "Histograms"
-  topic_07: "Correlations"
-  topic_08: "Scatterplots"
+  topic_01: "Importing space-delimited files"
+  topic_02: "Importing comma-delimited files"
+  topic_03: "Importing tab-delimited files"
+  topic_04: "Importing files with other delimiters"
+  topic_05: "Files with names in first row"
+  topic_06: "Fixed width files"
+  topic_07: "Importing files with strings"
+  topic_08: "TBA"
 editor: source
 ---
 

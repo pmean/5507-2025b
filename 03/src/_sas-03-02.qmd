@@ -7,4 +7,61 @@ format:
 editor: source
 ---
 
-## 03-02
+```{r}
+#| label: 03-02-read
+
+# Read the program and break it into 
+# "bite-sized" pieces that fit easily
+# on slides.
+
+read_lines("simon-5507-03-import-comma-delimited.sas") |>
+  paste0(collapse="\n") |>
+  str_split("\n\n\n") |>
+  unlist() |>
+  str_remove("^\n") -> sas
+
+add_note <- function(i) {paste0("::: notes\n", sas[i],"\n:::")}
+add_code <- function(i) {paste0("```{}\n", sas[i], "\n```")}
+
+text_data <- read_lines("../data/comma-delimited.csv")
+```
+
+
+
+## A comma delimited file
+
+```{r}
+cat(text_data, sep="\n")
+```
+
+::: notes
+
+This is an artificial dataset. Each row represents a different patient. Each patient has three numbers.
+
+:::
+
+## Demo-1, Documentation header
+
+`r add_code(1)`
+
+## Demo-1, File locations
+
+`r add_code(2)`
+
+`r add_note(3)`
+
+## Demo-1, Data step
+
+`r add_code(4)`
+
+`r add_note(5)`
+
+## Demo-1, Print procedure
+
+`r add_code(6)`
+
+## Live demo, 1
+
+-   %let command
+-   &path
+-   delimiter argument (infile subcommand, data step)
