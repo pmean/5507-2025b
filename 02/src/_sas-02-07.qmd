@@ -38,6 +38,5 @@ The corr procedure produces, by default, a square correlation matrix of all the 
         -   noprint option
         -   outp option
     with subcommand
--   data step
-    -   drop subcommand
+-   drop subcommand (data step)
 -   round function

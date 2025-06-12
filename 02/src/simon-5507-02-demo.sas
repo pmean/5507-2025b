@@ -13,17 +13,24 @@
 
 * Comments on the code: Documenting your program.
 
-In general, the comments you see on the code are
-intended to help explain what SAS is doing. You can
-and should remove these if you re-use this code in one
-of your programming assignments. You should, however,
-get in the habit of documenting any unusual bits of SAS 
-code in all of your future programs. Only the unusual
-code. This is partly for the benefit of anyone who
-ends up working with your code. It's also for the 
-benefit of you. Six months from now, you will dust
-this code off and you'll wonder: what was I thinking
-when I wrote this unusual code.;
+The demo programs in class will provide a short
+explanation of pretty much every new piece of
+SAS code. You can strip these comments out in
+your program. 
+
+Do not use so many comments in YOUR code. It is 
+still a good idea, however, to include comments
+on the code for anything unusual or  difficult 
+in SAS to remind yourself and others what is 
+going on.
+
+If you borrowed and adapted any code you found
+on the Internet, you should also document where 
+you found it.
+
+If you used a large language model to generate
+SAS code, you should acknowledge this and 
+include the prompt(s) that you used.;
 
 
 filename rawdata
@@ -38,13 +45,17 @@ ods pdf file=
 
 * Comments on the code: Specifying file locations
 
-You should already be familiar
-with this. The filename statement tells you where
-the raw data is stored. The libname statement
-tells you where SAS will store any permanent 
-datsets. The ods statement tells you that SAS is 
-going to store the results with a particular 
-filename and in pdf format.;
+You should already be familiar with this.
+
+The filename statement tells you where the raw data
+is stored.
+
+The libname statement tells you where SAS will 
+store any permanent datsets.
+
+The ods statement tells you that SAS is going to
+store the results with a particular filename and
+use pdf format.;
 
 
 data module02.body;
@@ -104,34 +115,11 @@ run;
 
 * Comments on the code: Adding labels
 
-SAS offers an opportunity for you to add 
-documentation to your program about individual
-variables. These are called variable labels. 
-They have almost no restrictions. You can use 
-blanks, or special symbols like a dollar sign 
-or a dash. The documentation that variable labels 
-provide is mostly internal, but these labels are 
-substituted in a few places like some graphs.
-
-I strongly recommend use of variable labels and 
-will require them for any homework you submit in 
-this class. See the grading rubric for details.
-
-What makes a good variable label? First take 
-advantage of a mixture of upper and lower case 
-to make your labels more readable. Spell out any 
-abbreviations, even obvious abbreviations. If 
-your variable has a measurement unit, specify 
-that unit in your variable label. If there are 
-other important details, put these in the 
-variable label as well.
-
-Every variable in a SAS program should have a 
-label. This label will make some (but not all) 
-of the SAS output more readable. it is also part 
-of the internal documentation of your program. 
-Note that some of these labels do not fit well 
-in this Powerpoint slide, but that's okay.;
+The label subcommand is part of the data step. 
+Specify the variable name and follow the
+equal sign with a longer description in
+quotes. You can use space, punctuation, and
+special symbols.;
 
 
 * Some additional details about this data:
@@ -165,35 +153,15 @@ proc print
 run;
 
 
-* Comments on the code: Printing a small piece of data
+* Comments on the code: The footnote subcommand
 
-It's always a good idea to print out a small 
-piece of your data to make sure everything is
-okay.
-  
-The data option tells SAS what data set you want 
-to print. If you omit this, SAS will print the 
-most recently created data set.
-  
-The obs=10 option limits the number of rows 
-printed to the first 10. For large data sets, you 
-should always take advantage of this option.
-  
-The var statement limits the variables that you 
-print to those that you specify. Again, this is 
-important for large data sets. 
-
-Please do not ever print more than ten rows or 
-more than five variables, if you can help it. 
-Excessively lengthy outputs will lose you a few 
-points (see the grading rubric).
-  
-The title statement tells SAS to provide a 
-descriptive title at the top of the page of 
-output.
-  
-The run statement says you're done with the 
-procedure.;
+The footnote statement is part of any SAS proc.
+It places information at the bottom of the page
+of any output produced by that proc. It is a 
+conventient place to note who wrote the program, 
+when it was run (using the sysdata macro variable),
+and what version of SAS was used (using the &sysver
+macro variable).;
 
 
 proc contents
@@ -230,6 +198,7 @@ information is
 
 *---------------- End of part 1 ----------------;
 
+
 proc means
     n mean std min max
     data=module02.body;
@@ -258,6 +227,7 @@ statistics on.;
 
 *---------------- End of part 2 ----------------;
 
+
 proc sort
     data=module02.body;
   by ht;
@@ -272,75 +242,13 @@ run;
 
 * Comments on the code: Printing row with smallest value
 
-First, let's look at this value in the context of
-the other values in this row of data.
+The sort procedure will take a dataset specified
+by data= and arrange the data in order from
+smallest to largest using the variable specified
+in the by subcommand.
 
-You do this by sorting the data so that the 
-shortest subject becomes the first row of the 
-data and the tallest subject becomes the last. 
-Then print just the very first row of your data.
-
-Warning! Be careful about sorting your data if 
-you can't get the data easily back to the 
-original order. It might be okay, but there are 
-times when you'd like your data all the way back 
-and that means data in the original order. This 
-data set has a case variable that you can resort 
-by in order to get back ot the original order.
-
-If you don't have a case variable, store the 
-sorted data in a separate location: something 
-along the lines of proc sort data=x out=y.
-
-With this outlier on the low end, you might 
-consider doing nothing other than noting the 
-unusual value.
-
-Alternately, you could delete the entire row 
-associated with this value. Finally, you might 
-consider converting the small ht value to a 
-missing value code.
-
-There is no one method that is preferred in this 
-setting. If you encounter an unusual value, you 
-should discuss it with your research team, 
-investigate the original data sources, if 
-possible, and review any procedures for handling 
-unusual data values that might be specified in 
-your research protocol.
-
-Your data set may arrive with missing values in 
-it already. Data might be designated as missing 
-for a variety of reasons (lab result lost, value 
-below the limit of detection, patient refused to 
-answer this question) and how you handle missing 
-values is way beyond the scope of this class. 
-Just remember to tread cautiously around missing 
-values as they are a minefield.
-
-Notice that I store the revised data sets with 
-the row removed and with the 29.5 replaced by a 
-missing value in different data frames. This is 
-good programming practice. If you ever have to 
-make a destructive change to your data set (a 
-change that wipes out one or more values or a 
-change that is difficult to undo), it is good 
-form to store the new results in a fresh spot. 
-That way, if you get cold feet, you can easily 
-backtrack.
-
-We'll use the data set with the 29.5 changed to a 
-missing value for all of the remaining analyses 
-of this data set.
-
-Logic statements involving missing value codes 
-are tricky. SAS stores missing value codes as the 
-most extreme legal negative number. So if you 
-want, for example, to exclude negative values, 
-make sure that you account for missing values as 
-well.
-
-   (ht < 0) & (ht ~= .);
+If you want to store the sorted data in a different
+location, use the out= option;
 
 
 proc sort
@@ -357,25 +265,26 @@ run;
 
 * Comments on the code: Printing row with largest value
 
-Just for the sake of completeness, let's look at
-the row of data with the largest height value. 
-Add the keyword desc to sort the data in reverse
+The descending option sorts the data in reverse 
 order.;
 
 *---------------- End of part 3 ----------------;
 
+
 data module02.body1;
   set module02.body;
-  if ht > 29.5;
+  if ht = 29.5 then delete;
 run;
 
 
 * Comments on the code: Removing a row of data
 
-This code removes the entire row of data. Notice
-that I store the modified data under a new name. 
-That way, if I regret tossing the entire row out, 
-I can easily revert to the original data.;
+The if ... then subcommand inside a data step will
+evaluate a logical comparison betweeh if and then
+and execute the subcommand following then only if
+the logical comparison evaluates to true.
+
+The delete subcommand remove a row from the dataset;
 
 
 data module02.body2;
@@ -387,39 +296,8 @@ run;
 * Comments on the code: Converting outlier to missing
 
 This code converts the height to a missing value,
-but keeps the original data.
-
-There is no one method that is preferred in 
-this setting. If you encounter an unusual value, 
-you should discuss it with your research team, 
-investigate the original data sources, if 
-possible, and review any procedures for handling 
-unusual data values that might be specified in 
-your research protocol.
-
-Your data set may arrive with missing values in 
-it already. Data might be designated as missing 
-for a variety of reasons (lab result lost, value 
-below the limit of detection, patient refused to 
-answer this question) and how you handle missing 
-values is way beyond the scope of this class. 
-Just remember to tread cautiously around missing 
-values as they are a minefield.
-
-Notice that I store the revised data sets with 
-the row removed and with the 29.5 replaced by a 
-missing value in different data frames. This is 
-good programming practice. If you ever have to 
-make a destructive change to your data set (a 
-change that wipes out one or more values or a 
-change that is difficult to undo), it is good 
-form to store the new results in a fresh spot. 
-That way, if you get cold feet, you can easily 
-backtrack.
-
-We'll use the data set with the 29.5 changed to a 
-missing value for all of the remaining analyses 
-of this data set.;
+but keeps the rest of the variables for that
+particular subject.;
 
 
 proc print
@@ -433,33 +311,17 @@ run;
 
 * Comments on the code: Printing negative values (wrong way)
 
-Here's an important thing to remember about 
-missing values. SAS stores missing value codes as
-the most extreme legal negative number. This can 
-sometimes lead to surprising and misleading 
-results.
+The where subcommand processes the data in a SAS
+procedure and only includs that data in the 
+procedure if the logical comparison evaluates to 
+true. 
 
-Every procedure in SAS has its own default 
-approach to missing values and often provides you 
-with one or more alternatives. You have to review 
-this carefully for each and every statistical 
-procedure that you run. If you do data 
-manipulations involving missing values, you have 
-to make sure that the result correctly reflects 
-what you want.
-
-In order to prevent this from happening, you need 
-to check for missingness before applying any 
-other logic statement.
-
-You may hate having to do this and wish that SAS 
-would have handled things differently. Different 
-packages, like R, have a three valued logic 
-system where every logic statement (well, almost
-every logic statement) involving missing values 
-codes to MISSING rather than to TRUE or FALSE. 
-This sometimes works better, but sometimes the 
-SAS approach works better.;
+This code is actually an example of what you should
+NOT do, because missing values will produce a true
+result for less than comparisons and false results
+for a greater than comparison. You should always
+include a check for missingness as part of any
+logical comparison.;
 
 
 proc means
@@ -478,34 +340,35 @@ values in proc means using nmiss.;
 
 *---------------- End of part 4 ----------------;
 
+
 data module02.body3;
-  set module02.body2;
-  ht_m = ht / 39.37;
-  wt_kg = wt / 2.2;
-  check_bmi = wt_kg / ht_m**2;
+  set module02.body;
+  check_bmi = (wt / 2.2) / (ht / 39.37)**2;
+  check_ht = sqrt((wt / 2.2) / bmi) * 39.37;
+  check_wt = (bmi * (ht / 39.37)**2) * 2.2;
 run;
 
 proc print 
-    data=module02.body3(obs=10);
-  var ht ht_m wt wt_kg bmi check_bmi;
-  title1 "Original and converted units";
+    data=module02.body3;
+  var ht check_ht wt check_wt bmi check_bmi;
+  where ht=29.5;
+  title1 "Recalculating ht, wt, and bmi";
+  title2 "Assuming two out of three are correct.";
 run;
 
 
 * Comments on the code: Transforming values
 
-You can do simple transformations like unit 
-conversions in SAS. Create a new dataset with the
-data statement. Use the set command to tell SAS
-that you plan to use and modify an existing 
-dataset.
-
-The conversion done here will turn weight into kilograms.;
+Transform variables inside of a data step using
+standard computer formulas. SAS uses a double
+astersk (**) instead of a caret (^) to denote
+raising to a power.;
 
 *---------------- End of part 5 ----------------;
 
+
 proc sgplot
-    data=module02.body3;
+    data=module02.body2;
   histogram ht;
   title1 "Histogram with default bins";
 run;
@@ -513,13 +376,13 @@ run;
 
 * Comments on the code: Drawing a histogram (default)
 
-Here is the code to create a histogram with the
-default option. Generally, it is wise to modify 
-the defaults for any graphic image.;
+The sgplot procedure produces a wide range of
+visualizations. The histogram subcommand will
+produce a histogram.;
 
 
 proc sgplot
-    data=module02.body3;
+    data=module02.body2;
   histogram ht / binstart=60 binwidth=1;
   title "Histogram with narrow bins";
 run;
@@ -527,14 +390,14 @@ run;
 
 * Comments on the code: Drawing a histogram (more bars)
 
-Here's the code to create a histogram with many
-bars. The first bar is centered at 60, and each
-bin has a width of 1 inch (plus or minus 0.5
-inches);
+The binstart option tells SAS that one of the bins
+(not necessarily the first one) starts at 60. The 
+bindwidth option tells SAS that each bin has a 
+width of 1 unit (or plus or minus 0.5 units);
 
 
 proc sgplot
-    data=module02.body3;
+    data=module02.body2;
   histogram ht / binstart=60 binwidth=5;
   title "Histogram with wide bins";
 run;
@@ -542,19 +405,15 @@ run;
 
 * Comments on the code: Drawing a histogram (fewer bars)
 
-Here's the code to create a 
-histogram with few bars. The first bar is again
-centered at 60, but now each bin has a width of
-5 inches (plus or minus 2.5 inches).
+This code produce wider bins, 5 units (or plus
+or minus 2.5 inches).;
 
-There is no "correct" version of the histogram. 
-Try several widths and see which one gives the 
-clearest picture of your data.;
 
 *---------------- End of part 6 ----------------;
 
+
 proc corr
-    data=module02.body3
+    data=module02.body2
     noprint
     outp=correlations;
   var fat_brozek fat_siri;
@@ -564,17 +423,32 @@ run;
 
 * Comments on the code: Computing correlations (default)
 
-Here's the code to compute correlations. 
+The corr procedure produces correlations. The noprint
+keytword tells SAS to not print anything. The noprint
+option is commonly used when a SAS proc is used to
+produce a new dataset rather than output. 
 
-The output here really annoys me. The excessive number
-of decimals makes this table hard to read. So I include 
-the noprint option and store the correlations in as data
-so I can round and reorder the data.;
+The outp option tells the procedure which dataset
+to create that will contain the correlations.
+
+The var subcommand tells SAS what variables to
+correlate.
+
+If there is no with subcommand, the variables 
+identified in var are correlated with each other
+in a square correlation matrix.
+
+If there is a with subcommand, the corr procedure
+will produce a rectangular matrix correlating 
+each varialbe in var with each variable in with.
+
+The double dash (--) tells SAS to use neck, wrist
+and every variable in between them.;
 
 
 data correlations;
   set correlations;
-  if _type_="CORR";
+  if _type_ NE "CORR" then delete;
   drop _type_;
   fat_brozek=round(fat_brozek, 0.01);
   fat_siri=round(fat_siri, 0.01);
@@ -585,12 +459,14 @@ run;
 
 The output dataset in SAS includes a lot of 
 descriptive statistics other than just the 
-correlations. Select only those rows of data
-where _type_ equals "CORR". Once this is done,
-you no longer need the _type_ variable.
+correlations. The if ... then statement will
+delete anything other than a correlation.
 
-The round function will round the data to the
-nearest hundredths.;
+The drop subcommand will remove the _type_
+variable, as it is no longer needed.
+
+The round function will round to the nearest
+multiploe of 0.01.;
 
 
 proc sort
@@ -606,12 +482,14 @@ run;
 
 * Comments on the code: Sorting the correlations
 
-It also helps to sort the correlations from high to low before printing.
+While not required, sorting the correlations can
+sometimes help interpretability.;
 
 *---------------- End of part 7 ----------------;
 
+
 proc sgplot
-    data=module02.body3;
+    data=module02.body2;
   scatter x=abdomen y=fat_brozek;
   pbspline x=abdomen y=fat_brozek;
   title1 "Simple scatterplot shows a strong positive trend";
@@ -622,15 +500,11 @@ run;
 
 * Comments on the code: Drawing a scatterplot
 
-A scatterplot is also useful for examining the
-relationship among variables. You can produce 
-scatterplots several different ways, but the 
-scatterplots produced by the sgplot procedure 
-have the most flexibility.
+The scatter subcommand in the sgplot procedure
+produces a scatterplot. 
 
-The pbspline subcmmand produces a smoothing 
-spline. It helps you visualize whether the 
-trend is linear or not.;
+The pbspline subcommand adds a smoothing to help
+you visualize whether the trend is linear or not.;
 
 
 ods pdf close;

@@ -7,6 +7,50 @@ format:
 editor: source
 ---
 
+## What to do with outliers
+
+-   Depends on the context, ask for help!
+    -   Live with it
+    -   Delete the entire observation
+    -   Convert the value to missing
+
+::: notes
+
+With this outlier on the low end, you might 
+consider doing nothing other than noting the 
+unusual value.
+
+Alternately, you could delete the entire row 
+associated with this value. Finally, you might 
+consider converting the small ht value to a 
+missing value code.
+
+There is no one method that is preferred in this 
+setting. If you encounter an unusual value, you 
+should discuss it with your research team, 
+investigate the original data sources, if 
+possible, and review any procedures for handling 
+unusual data values that might be specified in 
+your research protocol.
+
+Notice that I store the revised data sets with 
+the row removed and with the 29.5 replaced by a 
+missing value in different data frames. This is 
+good programming practice. If you ever have to 
+make a destructive change to your data set (a 
+change that wipes out one or more values or a 
+change that is difficult to undo), it is good 
+form to store the new results in a fresh spot. 
+That way, if you get cold feet, you can easily 
+backtrack.
+
+We'll use the data set with the 29.5 changed to a 
+missing value for all of the remaining analyses 
+of this data set.
+
+:::
+
+
 ## How to handle outliers
 
 -   No option is best in all cases
@@ -39,7 +83,16 @@ Generally, an extreme value by itself does not support removal of a patient or c
 
 ::: notes
 
-The data that you import into SAS may already have some values designated as missing. These could be coded as a single dot (.), which is the SAS standard for missing numeric data. You might also see some other symbol such as an asterisk or a question mark. R uses NA for missing and SQL uses NULL. 
+Your data set may arrive with missing values in 
+it already. Data might be designated as missing 
+for a variety of reasons (lab result lost, value 
+below the limit of detection, patient refused to 
+answer this question) and how you handle missing 
+values is way beyond the scope of this class. 
+Just remember to tread cautiously around missing 
+values as they are a minefield.
+
+Missing data could be coded as a single dot (.), which is the SAS standard for missing numeric data. You might also see some other symbol such as an asterisk or a question mark. R uses NA for missing and SQL uses NULL. 
 
 You may see extreme numeric values, extreme meaning outside a reasonable range, as codes for missing values. A birthweight of -1, for example, probably indicates missingness, as a baby weighing -1 kilograms would float up to the ceiling after being born. Other times, of course, -1 would not work, such as when recording your checking account balance the day before payday.
 
@@ -98,7 +151,6 @@ The disadvantage occurs when using less than and greater than comparisons. You m
 
 -   data step
     -   set subcommand
-    -   if subcommand
     -   if ... then subcommand
 -   print procedure
     -   where subcommand

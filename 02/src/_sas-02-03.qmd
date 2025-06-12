@@ -7,6 +7,38 @@ format:
 editor: source
 ---
 
+## Sorting your data
+
+-   Uses the sort procedure
+-   Specify the dataset with data=
+-   Specify the sorting variable with the by subcommand
+    - Use descending keyword to sort in reverse order
+
+::: notes
+
+If you have an outlier, you might want to look
+at that value in the context of the other values
+in its row of data.
+
+You do this by sorting the data so that the 
+shortest subject becomes the first row of the 
+data and the tallest subject becomes the last. 
+Then print just the very first row of your data.
+
+Warning! Be careful about sorting your data if 
+you can't get the data easily back to the 
+original order. It might be okay, but there are 
+times when you'd like your data all the way back 
+and that means data in the original order. This 
+data set has a case variable that you can resort 
+by in order to get back ot the original order.
+
+If you don't have a case variable, store the 
+sorted data in a separate location: something 
+along the lines of proc sort data=x out=y.
+
+:::
+
 ## Printing row with smallest or largest value
 
 -   Investigate other variables associated with outlier

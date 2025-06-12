@@ -227,8 +227,12 @@ The one thing you do want to avoid is just running two or three words together a
 
 SAS offers an opportunity for you to add documentation to your program about individual variables. These are called variable labels. They have almost no restrictions. You can use blanks, or special symbols like a dollar sign or a dash. The documentation that variable labels provide is mostly internal, but these labels are substituted in a few places like some graphs.
 
-I strongly recommend use of variable labels and will require them for any homework you submit in this class. See the grading rubric for details.
-
+Every variable in a SAS program should have a 
+label. This label will make some (but not all) 
+of the SAS output more readable. it is also part 
+of the internal documentation of your program. 
+Note that some of these labels do not fit well 
+in this Powerpoint slide, but that's okay.
 :::
 
 ## SAS variable labels (2/2)
@@ -242,6 +246,8 @@ I strongly recommend use of variable labels and will require them for any homewo
 ::: notes
 
 What makes a good variable label? First take advantage of a mixture of upper and lower case to make your labels more readable. Spell out any abbreviations, even obvious abbreviations. If your variable has a measurement unit, specify that unit in your variable label. If there are other important details, put these in the variable label as well.
+
+Every variable in a SAS program should have a label. This label will make some (but not all) of the SAS output more readable. it is also part of the internal documentation of your program. Note that some of these labels do not fit well in this Powerpoint slide, but that's okay.
 
 :::
 

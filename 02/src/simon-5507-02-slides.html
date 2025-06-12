@@ -1234,7 +1234,7 @@ display:block!important;
 </ul>
 <aside class="notes">
 <p>SAS offers an opportunity for you to add documentation to your program about individual variables. These are called variable labels. They have almost no restrictions. You can use blanks, or special symbols like a dollar sign or a dash. The documentation that variable labels provide is mostly internal, but these labels are substituted in a few places like some graphs.</p>
-<p>I strongly recommend use of variable labels and will require them for any homework you submit in this class. See the grading rubric for details.</p>
+<p>Every variable in a SAS program should have a label. This label will make some (but not all) of the SAS output more readable. it is also part of the internal documentation of your program. Note that some of these labels do not fit well in this Powerpoint slide, but that’s okay.</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1260,6 +1260,7 @@ display:block!important;
 </ul>
 <aside class="notes">
 <p>What makes a good variable label? First take advantage of a mixture of upper and lower case to make your labels more readable. Spell out any abbreviations, even obvious abbreviations. If your variable has a measurement unit, specify that unit in your variable label. If there are other important details, put these in the variable label as well.</p>
+<p>Every variable in a SAS program should have a label. This label will make some (but not all) of the SAS output more readable. it is also part of the internal documentation of your program. Note that some of these labels do not fit well in this Powerpoint slide, but that’s okay.</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1289,7 +1290,10 @@ display:block!important;
 <ul>
 <li>Comments on the code: Documenting your program.</li>
 </ul>
-<p>In general, the comments you see on the code are intended to help explain what SAS is doing. You can and should remove these if you re-use this code in one of your programming assignments. You should, however, get in the habit of documenting any unusual bits of SAS code in all of your future programs. Only the unusual code. This is partly for the benefit of anyone who ends up working with your code. It’s also for the benefit of you. Six months from now, you will dust this code off and you’ll wonder: what was I thinking when I wrote this unusual code.;</p>
+<p>The demo programs in class will provide a short explanation of pretty much every new piece of SAS code. You can strip these comments out in your program.</p>
+<p>Do not use so many comments in your code. It is still a good idea, however, to include comments on the code for anything unusual or difficult in SAS to remind yourself and others what is going on.</p>
+<p>If you borrowed and adapted any code you found on the Internet, you should also document where you found it.</p>
+<p>If you used a large language model to generate SAS code, you should acknowledge this and include the prompt(s) that you used.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1311,12 +1315,15 @@ libname module02
   &quot;../data&quot;;
 
 ods pdf file=
-  &quot;../results/5507-02-simon-continuous-variables.pdf&quot;;</code></pre>
+  &quot;../results/5507-02-simon-demo.pdf&quot;;</code></pre>
 <aside class="notes">
 <ul>
 <li>Comments on the code: Specifying file locations</li>
 </ul>
-<p>You should already be familiar with this. The filename statement tells you where the raw data is stored. The libname statement tells you where SAS will store any permanent datsets. The ods statement tells you that SAS is going to store the results with a particular filename and in pdf format.;</p>
+<p>You should already be familiar with this.</p>
+<p>The filename statement tells you where the raw data is stored.</p>
+<p>The libname statement tells you where SAS will store any permanent datsets.</p>
+<p>The ods statement tells you that SAS is going to store the results with a particular filename and use pdf format.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1397,10 +1404,7 @@ run;</code></pre>
 <ul>
 <li>Comments on the code: Adding labels</li>
 </ul>
-<p>SAS offers an opportunity for you to add documentation to your program about individual variables. These are called variable labels. They have almost no restrictions. You can use blanks, or special symbols like a dollar sign or a dash. The documentation that variable labels provide is mostly internal, but these labels are substituted in a few places like some graphs.</p>
-<p>I strongly recommend use of variable labels and will require them for any homework you submit in this class. See the grading rubric for details.</p>
-<p>What makes a good variable label? First take advantage of a mixture of upper and lower case to make your labels more readable. Spell out any abbreviations, even obvious abbreviations. If your variable has a measurement unit, specify that unit in your variable label. If there are other important details, put these in the variable label as well.</p>
-<p>Every variable in a SAS program should have a label. This label will make some (but not all) of the SAS output more readable. it is also part of the internal documentation of your program. Note that some of these labels do not fit well in this Powerpoint slide, but that’s okay.;</p>
+<p>The label subcommand is part of the data step. Specify the variable name and follow the equal sign with a longer description in quotes. You can use space, punctuation, and special symbols.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1443,8 +1447,8 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="printing-a-small-piece-of-data" class="slide level2">
-<h2>Printing a small piece of data</h2>
+<section id="the-footnote-subcommand" class="slide level2">
+<h2>The footnote subcommand</h2>
 <pre><code>proc print
     data=module02.body(obs=10);
   var case fat_brozek fat_siri dens age;
@@ -1454,15 +1458,9 @@ display:block!important;
 run;</code></pre>
 <aside class="notes">
 <ul>
-<li>Comments on the code: Printing a small piece of data</li>
+<li>Comments on the code: The footnote subcommand</li>
 </ul>
-<p>It’s always a good idea to print out a small piece of your data to make sure everything is okay.</p>
-<p>The data option tells SAS what data set you want to print. If you omit this, SAS will print the most recently created data set.</p>
-<p>The obs=10 option limits the number of rows printed to the first 10. For large data sets, you should always take advantage of this option.</p>
-<p>The var statement limits the variables that you print to those that you specify. Again, this is important for large data sets.</p>
-<p>Please do not ever print more than ten rows or more than five variables, if you can help it. Excessively lengthy outputs will lose you a few points (see the grading rubric).</p>
-<p>The title statement tells SAS to provide a descriptive title at the top of the page of output.</p>
-<p>The run statement says you’re done with the procedure.;</p>
+<p>The footnote statement is part of any SAS proc. It places information at the bottom of the page of any output produced by that proc. It is a conventient place to note who wrote the program, when it was run (using the sysdata macro variable), and what version of SAS was used (using the &amp;sysver macro variable).;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1557,7 +1555,8 @@ display:block!important;
 </section>
 <section id="computing-simple-statistics" class="slide level2">
 <h2>Computing simple statistics</h2>
-<pre><code>proc means
+<pre><code>
+proc means
     n mean std min max
     data=module02.body;
   var ht;
@@ -1611,6 +1610,33 @@ display:block!important;
 </ul></li>
 </ul>
 </section>
+<section id="sorting-your-data" class="slide level2">
+<h2>Sorting your data</h2>
+<ul>
+<li>Uses the sort procedure</li>
+<li>Specify the dataset with data=</li>
+<li>Specify the sorting variable with the by subcommand
+<ul>
+<li>Use descending keyword to sort in reverse order</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>If you have an outlier, you might want to look at that value in the context of the other values in its row of data.</p>
+<p>You do this by sorting the data so that the shortest subject becomes the first row of the data and the tallest subject becomes the last. Then print just the very first row of your data.</p>
+<p>Warning! Be careful about sorting your data if you can’t get the data easily back to the original order. It might be okay, but there are times when you’d like your data all the way back and that means data in the original order. This data set has a case variable that you can resort by in order to get back ot the original order.</p>
+<p>If you don’t have a case variable, store the sorted data in a separate location: something along the lines of proc sort data=x out=y.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
 <section id="printing-row-with-smallest-or-largest-value" class="slide level2">
 <h2>Printing row with smallest or largest value</h2>
 <ul>
@@ -1636,7 +1662,8 @@ display:block!important;
 </section>
 <section id="printing-row-with-smallest-value" class="slide level2">
 <h2>Printing row with smallest value</h2>
-<pre><code>proc sort
+<pre><code>
+proc sort
     data=module02.body;
   by ht;
 run;
@@ -1650,18 +1677,8 @@ run;</code></pre>
 <ul>
 <li>Comments on the code: Printing row with smallest value</li>
 </ul>
-<p>First, let’s look at this value in the context of the other values in this row of data.</p>
-<p>You do this by sorting the data so that the shortest subject becomes the first row of the data and the tallest subject becomes the last. Then print just the very first row of your data.</p>
-<p>Warning! Be careful about sorting your data if you can’t get the data easily back to the original order. It might be okay, but there are times when you’d like your data all the way back and that means data in the original order. This data set has a case variable that you can resort by in order to get back ot the original order.</p>
-<p>If you don’t have a case variable, store the sorted data in a separate location: something along the lines of proc sort data=x out=y.</p>
-<p>With this outlier on the low end, you might consider doing nothing other than noting the unusual value.</p>
-<p>Alternately, you could delete the entire row associated with this value. Finally, you might consider converting the small ht value to a missing value code.</p>
-<p>There is no one method that is preferred in this setting. If you encounter an unusual value, you should discuss it with your research team, investigate the original data sources, if possible, and review any procedures for handling unusual data values that might be specified in your research protocol.</p>
-<p>Your data set may arrive with missing values in it already. Data might be designated as missing for a variety of reasons (lab result lost, value below the limit of detection, patient refused to answer this question) and how you handle missing values is way beyond the scope of this class. Just remember to tread cautiously around missing values as they are a minefield.</p>
-<p>Notice that I store the revised data sets with the row removed and with the 29.5 replaced by a missing value in different data frames. This is good programming practice. If you ever have to make a destructive change to your data set (a change that wipes out one or more values or a change that is difficult to undo), it is good form to store the new results in a fresh spot. That way, if you get cold feet, you can easily backtrack.</p>
-<p>We’ll use the data set with the 29.5 changed to a missing value for all of the remaining analyses of this data set.</p>
-<p>Logic statements involving missing value codes are tricky. SAS stores missing value codes as the most extreme legal negative number. So if you want, for example, to exclude negative values, make sure that you account for missing values as well.</p>
-<p>(ht &lt; 0) &amp; (ht ~= .);</p>
+<p>The sort procedure will take a dataset specified by data= and arrange the data in order from smallest to largest using the variable specified in the by subcommand.</p>
+<p>If you want to store the sorted data in a different location, use the out= keyword;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1690,7 +1707,7 @@ run;</code></pre>
 <ul>
 <li>Comments on the code: Printing row with largest value</li>
 </ul>
-<p>Just for the sake of completeness, let’s look at the row of data with the largest height value. Add the keyword desc to sort the data in reverse order.;</p>
+<p>The descending keyword sorts the data in reverse order.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1710,7 +1727,7 @@ display:block!important;
 <ul>
 <li>by subcommand
 <ul>
-<li>desc option</li>
+<li>descending option</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1727,6 +1744,34 @@ display:block!important;
 <li>Missing value logic</li>
 </ul></li>
 </ul>
+</section>
+<section id="what-to-do-with-outliers" class="slide level2">
+<h2>What to do with outliers</h2>
+<ul>
+<li>Depends on the context, ask for help!
+<ul>
+<li>Live with it</li>
+<li>Delete the entire observation</li>
+<li>Convert the value to missing</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>With this outlier on the low end, you might consider doing nothing other than noting the unusual value.</p>
+<p>Alternately, you could delete the entire row associated with this value. Finally, you might consider converting the small ht value to a missing value code.</p>
+<p>There is no one method that is preferred in this setting. If you encounter an unusual value, you should discuss it with your research team, investigate the original data sources, if possible, and review any procedures for handling unusual data values that might be specified in your research protocol.</p>
+<p>Notice that I store the revised data sets with the row removed and with the 29.5 replaced by a missing value in different data frames. This is good programming practice. If you ever have to make a destructive change to your data set (a change that wipes out one or more values or a change that is difficult to undo), it is good form to store the new results in a fresh spot. That way, if you get cold feet, you can easily backtrack.</p>
+<p>We’ll use the data set with the 29.5 changed to a missing value for all of the remaining analyses of this data set.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
 </section>
 <section id="how-to-handle-outliers" class="slide level2">
 <h2>How to handle outliers</h2>
@@ -1768,18 +1813,39 @@ display:block!important;
 <li>Extreme numbers (-1, 9, 99, 999)</li>
 <li>Blank ( ) or empty ()</li>
 </ul></li>
+</ul>
+<aside class="notes">
+<p>Your data set may arrive with missing values in it already. Data might be designated as missing for a variety of reasons (lab result lost, value below the limit of detection, patient refused to answer this question) and how you handle missing values is way beyond the scope of this class. Just remember to tread cautiously around missing values as they are a minefield.</p>
+<p>Missing data could be coded as a single dot (.), which is the SAS standard for missing numeric data. You might also see some other symbol such as an asterisk or a question mark. R uses NA for missing and SQL uses NULL.</p>
+<p>You may see extreme numeric values, extreme meaning outside a reasonable range, as codes for missing values. A birthweight of -1, for example, probably indicates missingness, as a baby weighing -1 kilograms would float up to the ceiling after being born. Other times, of course, -1 would not work, such as when recording your checking account balance the day before payday.</p>
+<p>Sometimes, one or more nines would indicate a missing value. A Likert scale item coded 1 for strongly disagree through 5 for strongly agree will often code a non-response as 9. Make sure you have enough nines. An IQ score would not use 99 as the missing code because that is a legitimate value. A code of 999 makes more sense here because even Albert Einstein’s IQ falls well below 999.</p>
+<p>One or more blanks might represent missing or an empty field (a zero length string) might represent missing. I discourage the use of blanks or empty fields for several reasons. First, when your computer diplays a single blank, it looks just like an empty field. Second, an empty or blank field might represent not missingness, but rather that the data entry person has not gotten to enter that value yet. Third, some systems (not SAS) might convert an empty field to zero, which is often not what you want.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="advice-on-importing-missing-values" class="slide level2">
+<h2>Advice on importing missing values</h2>
+<ul>
+<li>Read the data dictionary</li>
+<li>Always ask <strong>WHY</strong> a value is missing</li>
 <li>Convert any non-standard missing codes
 <ul>
 <li>if iq=999 then iq=.</li>
 </ul></li>
-<li>Read the data dictionary</li>
-<li>Always ask <strong>WHY</strong> a value is missing</li>
 </ul>
 <aside class="notes">
-<p>The data that you import into SAS may already have some values designated as missing. These could be coded as a single dot (.), which is the SAS standard for missing numeric data. You might also see some other symbol such as an asterisk or a question mark. R uses NA for missing and SQL uses NULL.</p>
-<p>You may see extreme numeric values, extreme meaning outside a reasonable range, as codes for missing values. A birthweight of -1, for example, probably indicates missingness, as a baby weighing -1 kilograms would float up to the ceiling after being born. Other times, of course, -1 would not work, such as when recording your checking account balance the day before payday.</p>
-<p>Sometimes, one or more nines would indicate a missing value. A Likert scale item coded 1 for strongly disagree through 5 for strongly agree will often code a non-response as 9. Make sure you have enough nines. An IQ score would not use 99 as the missing code because that is a legitimate value. A code of 999 makes more sense here because even Albert Einstein’s IQ falls well below 999.</p>
-<p>One or more blanks might represent missing or an empty field (a zero length string) might represent missing. I discourage the use of blanks or empty fields for several reasons. First, when your computer diplays a single blank, it looks just like an empty field. Second, an empty or blank field might represent not missingness, but rather that the data entry person has not gotten to enter that value yet. Third, some systems (not SAS) might convert an empty field to zero, which is often not what you want.</p>
+<p>If there is a data dictionary, read it for information about how missing values are coded. If there is no data dictionary, you’ll have to use a bit of guesswork, but you can usually figure things out.</p>
+<p>It’s important to ask early why a missing value is missing.</p>
+<p>If the data you are importing uses anything other than a dot to designate missing, make sure you convert to the standard code for missing right away. You don’t want to include a few 999’s in your estimate of average IQ because it will make the group look a lot smarter than they really are.</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1827,15 +1893,17 @@ display:block!important;
 </section>
 <section id="removing-a-row-of-data" class="slide level2">
 <h2>Removing a row of data</h2>
-<pre><code>data module02.body1;
+<pre><code>
+data module02.body1;
   set module02.body;
-  if ht &gt; 29.5;
+  if ht = 29.5 then delete;
 run;</code></pre>
 <aside class="notes">
 <ul>
 <li>Comments on the code: Removing a row of data</li>
 </ul>
-<p>This code removes the entire row of data. Notice that I store the modified data under a new name. That way, if I regret tossing the entire row out, I can easily revert to the original data.;</p>
+<p>The if … then subcommand inside a data step will evaluate a logical comparison betweeh if and then and execute the subcommand following then only if the logical comparison evaluates to true.</p>
+<p>The delete subcommand remove a row from the dataset;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1858,11 +1926,7 @@ run;</code></pre>
 <ul>
 <li>Comments on the code: Converting outlier to missing</li>
 </ul>
-<p>This code converts the height to a missing value, but keeps the original data.</p>
-<p>There is no one method that is preferred in this setting. If you encounter an unusual value, you should discuss it with your research team, investigate the original data sources, if possible, and review any procedures for handling unusual data values that might be specified in your research protocol.</p>
-<p>Your data set may arrive with missing values in it already. Data might be designated as missing for a variety of reasons (lab result lost, value below the limit of detection, patient refused to answer this question) and how you handle missing values is way beyond the scope of this class. Just remember to tread cautiously around missing values as they are a minefield.</p>
-<p>Notice that I store the revised data sets with the row removed and with the 29.5 replaced by a missing value in different data frames. This is good programming practice. If you ever have to make a destructive change to your data set (a change that wipes out one or more values or a change that is difficult to undo), it is good form to store the new results in a fresh spot. That way, if you get cold feet, you can easily backtrack.</p>
-<p>We’ll use the data set with the 29.5 changed to a missing value for all of the remaining analyses of this data set.;</p>
+<p>This code converts the height to a missing value, but keeps the rest of the variables for that particular subject.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1888,10 +1952,8 @@ run;</code></pre>
 <ul>
 <li>Comments on the code: Printing negative values (wrong way)</li>
 </ul>
-<p>Here’s an important thing to remember about missing values. SAS stores missing value codes as the most extreme legal negative number. This can sometimes lead to surprising and misleading results.</p>
-<p>Every procedure in SAS has its own default approach to missing values and often provides you with one or more alternatives. You have to review this carefully for each and every statistical procedure that you run. If you do data manipulations involving missing values, you have to make sure that the result correctly reflects what you want.</p>
-<p>In order to prevent this from happening, you need to check for missingness before applying any other logic statement.</p>
-<p>You may hate having to do this and wish that SAS would have handled things differently. Different packages, like R, have a three valued logic system where every logic statement (well, almost every logic statement) involving missing values codes to MISSING rather than to TRUE or FALSE. This sometimes works better, but sometimes the SAS approach works better.;</p>
+<p>The where subcommand processes the data in a SAS procedure and only includs that data in the procedure if the logical comparison evaluates to true.</p>
+<p>This code is actually an example of what you should NOT do, because missing values will produce a true result for less than comparisons and false results for a greater than comparison. You should always include a check for missingness as part of any logical comparison.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1966,19 +2028,36 @@ display:block!important;
 <ul>
 <li>Use data step to create a new variable
 <ul>
-<li>Unit conversion (wt_kg = wt / 2.2)</li>
-<li>New variable (bmi = wt / ht^2)</li>
+<li>Unit conversion: temperature = 5/9 * (temperature - 32)</li>
+<li>New variable: bmi = wt_kg / ht_m^2</li>
 </ul></li>
-<li>Try to use a non-destructive transformation
+</ul>
+<aside class="notes">
+<p>Sometimes you want to alter some of your data. This could be a units conversion, a body mass index calculation, or something else. This is done in the data step. You could do it along with the input statement, but it is often valuable to read in the data as is, and make changes which are stored in a different dataset.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="non-destructive-transformations" class="slide level2">
+<h2>Non destructive transformations</h2>
 <ul>
 <li>Different variable name</li>
-<li>Different dataset name</li>
-</ul></li>
 </ul>
 <pre><code>data name1;
   set name1;
   wt_kg = wt / 2.2;
 run;</code></pre>
+<ul>
+<li>Different dataset name</li>
+</ul>
 <pre><code>data name2;
   set name1;
   wt = wt / 2.2;
@@ -2000,22 +2079,26 @@ display:block!important;
 </section>
 <section id="transforming-values-1" class="slide level2">
 <h2>Transforming values</h2>
-<pre><code>data module02.body3;
-  set module02.body2;
-  ht_cm = ht * 2.54;
+<pre><code>
+data module02.body3;
+  set module02.body;
+  check_bmi = (wt / 2.2) / (ht / 39.37)**2;
+  check_ht = sqrt((wt / 2.2) / bmi) * 39.37;
+  check_wt = (bmi * (ht / 39.37)**2) * 2.2;
 run;
 
 proc print 
-    data=module02.body3(obs=10);
-  var ht ht_kg;
-  title1 &quot;Original and converted units&quot;;
+    data=module02.body3;
+  var ht check_ht wt check_wt bmi check_bmi;
+  where ht=29.5;
+  title1 &quot;Recalculating ht, wt, and bmi&quot;;
+  title2 &quot;Assuming two out of three are correct.&quot;;
 run;</code></pre>
 <aside class="notes">
 <ul>
 <li>Comments on the code: Transforming values</li>
 </ul>
-<p>You can do simple transformations like unit conversions in SAS. Create a new dataset with the data statement. Use the set command to tell SAS that you plan to use and modify an existing dataset.</p>
-<p>The conversion done here will turn weight into kilograms.;</p>
+<p>Transform variables inside of a data step using standard computer formulas. SAS uses a double astersk (**) instead of a caret (^) to denote raising to a power.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -2030,6 +2113,9 @@ display:block!important;
 </section>
 <section id="live-demo-5" class="slide level2">
 <h2>Live demo, 5</h2>
+<ul>
+<li>No new keywords</li>
+</ul>
 </section>
 <section id="break-5" class="slide level2">
 <h2>Break #5</h2>
@@ -2044,10 +2130,44 @@ display:block!important;
 </ul></li>
 </ul>
 </section>
+<section id="drawing-histograms" class="slide level2">
+<h2>Drawing histograms</h2>
+<ul>
+<li>Histograms can assess normality/non-normality
+<ul>
+<li>Skewness</li>
+<li>Bimodal distributions</li>
+<li>Outliers</li>
+</ul></li>
+<li>How many bars? Multiple recommendations
+<ul>
+<li>Five to twenty bars</li>
+<li>Square root of n bars</li>
+<li>Trial and error</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>A histogram can help you assess the distributional pattern of your data. Is it normally distributed (the classical bell shaped curve)? If so, you can make fairly strong assumptions about the data. The mean plus or minus one standard deviation will contain roughly 68% of the data. The mean plus or minus two standard deviations will contain roughly 95% of the data.</p>
+<p>Normality is also an assumption needed for a variety of confidence intervals and hypothesis tests. It is not a life-or-death assumption, especially when your sample size is large. Also, the normality assumption is often better assessed using residuals from your statistical model.</p>
+<p>The other nice thing about the histogram is that it can identify what type of deviation from normality you might have. Identifying bimodality is the trickiest, because if you have too few bars you might miss the gap between modes. If you have too many bars, you might see multiple modes because of the spikiness that is artificially produced when you have too many bars.</p>
+<p>There is no simple rule for deciding how many bars you should have in your histogram. Once sources suggests that 5 to 20 is a reasonable number of bars. Another suggests that the number of bars should be roughly equal to the square root of the sample size. To be honest, the best approach might be to try several different choices and see which one gives a reasonable picture of the distribution of your variable.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
 <section id="drawing-a-histogram-default" class="slide level2">
 <h2>Drawing a histogram (default)</h2>
-<pre><code>proc sgplot
-    data=module02.body3;
+<pre><code>
+proc sgplot
+    data=module02.body2;
   histogram ht;
   title1 &quot;Histogram with default bins&quot;;
 run;</code></pre>
@@ -2055,7 +2175,7 @@ run;</code></pre>
 <ul>
 <li>Comments on the code: Drawing a histogram (default)</li>
 </ul>
-<p>Here is the code to create a histogram with the default option. Generally, it is wise to modify the defaults for any graphic image.;</p>
+<p>The sgplot procedure produces a wide range of visualizations. The histogram subcommand will produce a histogram.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -2071,7 +2191,7 @@ display:block!important;
 <section id="drawing-a-histogram-more-bars" class="slide level2">
 <h2>Drawing a histogram (more bars)</h2>
 <pre><code>proc sgplot
-    data=module02.body3;
+    data=module02.body2;
   histogram ht / binstart=60 binwidth=1;
   title &quot;Histogram with narrow bins&quot;;
 run;</code></pre>
@@ -2079,7 +2199,7 @@ run;</code></pre>
 <ul>
 <li>Comments on the code: Drawing a histogram (more bars)</li>
 </ul>
-<p>Here’s the code to create a histogram with many bars. The first bar is centered at 60, and each bin has a width of 1 inch (plus or minus 0.5 inches);</p>
+<p>The binstart keyword tells SAS that one of the bins (not necessarily the first one) starts at 60. The bindwidth keyword tells SAS that each bin has a width of 1 unit (or plus or minus 0.5 units);</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -2095,7 +2215,7 @@ display:block!important;
 <section id="drawing-a-histogram-fewer-bars" class="slide level2">
 <h2>Drawing a histogram (fewer bars)</h2>
 <pre><code>proc sgplot
-    data=module02.body3;
+    data=module02.body2;
   histogram ht / binstart=60 binwidth=5;
   title &quot;Histogram with wide bins&quot;;
 run;</code></pre>
@@ -2103,8 +2223,7 @@ run;</code></pre>
 <ul>
 <li>Comments on the code: Drawing a histogram (fewer bars)</li>
 </ul>
-<p>Here’s the code to create a histogram with few bars. The first bar is again centered at 60, but now each bin has a width of 5 inches (plus or minus 2.5 inches).</p>
-<p>There is no “correct” version of the histogram. Try several widths and see which one gives the clearest picture of your data.;</p>
+<p>This code produce wider bins, 5 units (or plus or minus 2.5 inches).;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -2116,6 +2235,19 @@ width: 1px!important;
 overflow: hidden!important;
 display:block!important;
 }</style></aside>
+</section>
+<section id="live-demo-6" class="slide level2">
+<h2>Live demo, 6</h2>
+<ul>
+<li>sgplot procedure
+<ul>
+<li>histogram subcommand
+<ul>
+<li>binstart option</li>
+<li>binwidth option</li>
+</ul></li>
+</ul></li>
+</ul>
 </section>
 <section id="break-6" class="slide level2">
 <h2>Break #6</h2>
@@ -2160,8 +2292,10 @@ display:block!important;
 </section>
 <section id="computing-correlations-default" class="slide level2">
 <h2>Computing correlations (default)</h2>
-<pre><code>proc corr
-    data=module02.body3
+<pre><code>
+
+proc corr
+    data=module02.body2
     noprint
     outp=correlations;
   var fat_brozek fat_siri;
@@ -2171,8 +2305,12 @@ run;</code></pre>
 <ul>
 <li>Comments on the code: Computing correlations (default)</li>
 </ul>
-<p>Here’s the code to compute correlations.</p>
-<p>The output here really annoys me. The excessive number of decimals makes this table hard to read. So I include the noprint option and store the correlations in as data so I can round and reorder the data.;</p>
+<p>The corr procedure produces correlations. The noprint keytword tells SAS to not print anything. The noprint keyword is commonly used when a SAS proc is used to produce a new dataset rather than output.</p>
+<p>The outp keyword tells the procedure which dataset to create that will contain the correlations.</p>
+<p>The var subcommand tells SAS what variables to correlate.</p>
+<p>If there is no with subcommand, the variables identified in var are correlated with each other in a square correlation matrix.</p>
+<p>If there is a with subcommand, the corr procedure will produce a rectangular matrix correlating each varialbe in var with each variable in with.</p>
+<p>The double dash (–) tells SAS to use neck, wrist and every variable in between them.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -2189,7 +2327,7 @@ display:block!important;
 <h2>Processing correlations</h2>
 <pre><code>data correlations;
   set correlations;
-  if _type_=&quot;CORR&quot;;
+  if _type_ NE &quot;CORR&quot; then delete;
   drop _type_;
   fat_brozek=round(fat_brozek, 0.01);
   fat_siri=round(fat_siri, 0.01);
@@ -2198,8 +2336,9 @@ run;</code></pre>
 <ul>
 <li>Comments on the code: Processing correlations</li>
 </ul>
-<p>The output dataset in SAS includes a lot of descriptive statistics other than just the correlations. Select only those rows of data where <em>type</em> equals “CORR”. Once this is done, you no longer need the <em>type</em> variable.</p>
-<p>The round function will round the data to the nearest hundredths.;</p>
+<p>The output dataset in SAS includes a lot of descriptive statistics other than just the correlations. The if … then statement will delete anything other than a correlation.</p>
+<p>The drop subcommand will remove the <em>type</em> variable, as it is no longer needed.</p>
+<p>The round function will round to the nearest multiploe of 0.01.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -2227,7 +2366,7 @@ run;</code></pre>
 <ul>
 <li>Comments on the code: Sorting the correlations</li>
 </ul>
-<p>It also helps to sort the correlations from high to low before printing.</p>
+<p>While not required, sorting the correlations can sometimes help interpretability.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -2239,6 +2378,17 @@ width: 1px!important;
 overflow: hidden!important;
 display:block!important;
 }</style></aside>
+</section>
+<section id="live-demo-7" class="slide level2">
+<h2>Live demo, 7</h2>
+<ul>
+<li>corr procedure - noprint option - outp option with subcommand</li>
+<li>data step
+<ul>
+<li>drop subcommand</li>
+</ul></li>
+<li>round function</li>
+</ul>
 </section>
 <section id="break-7" class="slide level2">
 <h2>Break #7</h2>
@@ -2255,8 +2405,9 @@ display:block!important;
 </section>
 <section id="drawing-a-scatterplot" class="slide level2">
 <h2>Drawing a scatterplot</h2>
-<pre><code>proc sgplot
-    data=module02.body3;
+<pre><code>
+proc sgplot
+    data=module02.body2;
   scatter x=abdomen y=fat_brozek;
   pbspline x=abdomen y=fat_brozek;
   title1 &quot;Simple scatterplot shows a strong positive trend&quot;;
@@ -2267,8 +2418,8 @@ run;</code></pre>
 <ul>
 <li>Comments on the code: Drawing a scatterplot</li>
 </ul>
-<p>A scatterplot is also useful for examining the relationship among variables. You can produce scatterplots several different ways, but the scatterplots produced by the sgplot procedure have the most flexibility.</p>
-<p>The pbspline subcmmand produces a smoothing spline. It helps you visualize whether the trend is linear or not.;</p>
+<p>The scatter subcommand in the sgplot procedure produces a scatterplot.</p>
+<p>The pbspline subcommand adds a smoothing to help you visualize whether the trend is linear or not.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
