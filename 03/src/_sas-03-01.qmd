@@ -23,16 +23,38 @@ library(tidyverse)
 # "bite-sized" pieces that fit easily
 # on slides.
 
-read_lines("simon-5507-03-space-delimited.sas") |>
-  paste0(collapse="\n") |>
-  str_split("\n\n\n") |>
-  unlist() |>
-  str_remove("^\n") -> sas
 
-add_note <- function(i) {paste0("::: notes\n", sas[i],"\n:::")}
-add_code <- function(i) {paste0("```{}\n", sas[i], "\n```")}
+chunk_sas <- function(fn) {
 
-text_data <- read_lines("../data/comma-delimited.csv")
+  text <- read_lines(fn)
+  mark <- "\\* Comments on the code: "
+
+  txt |>
+    str_remove("^ *$") |>
+    str_subset("End of part", negate=TRUE) |>
+    paste0(collapse="\n") |>
+    str_split("\n\n\n") |>
+    unlist() -> chunk
+
+  txt |>
+    str_subset(mark) |>
+    str_replace(mark, "## ") -> titles
+
+  n <- length(titles)
+
+  sas <- paste0(
+    titles,
+    "\n\n```{}\n",
+    chunk[2*(1:n)-1],
+    "\n```\n\n::: notes\n",
+    chunk[2*(1:n)],
+    "\n:::\n\n\n")
+  
+  return(sas)
+}
+
+sas <- chunk_sas("simon-5507-03-demo-01-space-delimited.sas")
+text_data <- read_lines("../data/text-space-delimited.txt")
 ```
 
 ## Defining a macro variable
@@ -82,6 +104,15 @@ Here's a simple example. You set a macro variable called row_limit equal to the 
 -   Document important options at the top of your program
     -   Quick and easy changes
 -   Reduce the amount of repetitive typing
+-   [Macro variables automatically available][ref-sas-nodate]
+
+[ref-sas-nodate]: https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/mcrolref/p14ym6slnzfstzn1t9yp5v31ijis.htm
+
+::: notes
+
+Macro variables have several uses. First, they allow you to place important options near the top of your code rather than buried somewhere in the code depths. Because they are easy to find, they allow you to quick changes. Finally, sometimes a piece of SAS code gets used multiple times. A macro variable allows you to write it once and then use the shorter macro name over and over again. This can sometimes save a lot of repetitive typing.
+
+:::
 
 ## Text files
 
@@ -91,39 +122,34 @@ Here's a simple example. You set a macro variable called row_limit equal to the 
     -   Delimiters
     -   Fixed width
 
-### Importing choices (1 of 2)
-+ A wide range of formats
-  + Space delimited
-  + Comma separated values
-  + Tab delimited
-  + Fixed format
-+ Strings in your input
+### Importing choices
 
-<div class="notes">
-
-I want to show a few simple examples of importing data. There are several common formats and SAS can handle all of these easily.
-
-</div>
-
-### Importing choices (2 of 2)
-+ proc import
-  + First row includes variable names
-  + Binary data files
-+ Manual reformatting
-  + Global search and replace
-  + Not usually a good idea
-+ Skipping rows
-+ Converting strings to numbers
-
+-   Add options to the infile statement
+-   Use proc import
+    -   Especially useful when the first row includes variable names
+    -   Also useful for binary data files (e.g., Excel)
+-   Use proc sql (not covered in this class)
+-   Manual reformatting
+    -    Global search and replace
+    -    Not usually a good idea
 <div class="notes">
 
 Some data sets use the first row to represent variable names while others don't.
 
 If you have to, you can manually reformat the data. Use the global search and replace function in your text editor program. I generally try to avoid this. If your data set changes, you have to redo the reformatting step, which is tedious and error prone. You'd be better off learning a few tricks to get SAS to read a nonstandard data set.
 
+:::
+
+## Options during data import
+
+-   Skipping rows
+-   Converting strings to numbers
+
+::: notes
+
 Sometimes you have to skip a few rows. Sometimes you have to convert strings to numbers.
 
-</div>
+:::
 
 ### Space delimited, example
 
