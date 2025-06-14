@@ -7,4 +7,37 @@ format:
 editor: source
 ---
 
-## 03-07
+```{r}
+#| label: 03-07-read
+sas <- chunk_sas("simon-5507-03-demo-07-first-line-names.sas")
+text_data <- read_lines("../data/text-first-line-names.csv")
+```
+
+## A file with names in the first line
+
+```{r}
+#| label: 03-07-text
+
+cat(text_data, sep="\n")
+```
+
+::: notes
+
+This is the same artificial dataset, with the variable names (x, y, and z) as the first line of the file.
+
+:::
+
+`r sas[1]`
+
+`r sas[2]`
+
+`r sas[3]`
+
+## Live demo, 7
+
+-   The import procedure
+    -   The data= option
+    -   The out= option
+    -   The replace option
+-   The dbms subcommand
+-   The getnames subcommand

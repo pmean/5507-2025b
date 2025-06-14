@@ -8,15 +8,6 @@ editor: source
 ---
 
 ```{r}
-#| message: false
-#| warning: false
-#| label: 03-01-setup
-
-library(glue)
-library(tidyverse)
-```
-
-```{r}
 #| label: 03-01-read
 sas <- chunk_sas("simon-5507-03-demo-01-space-delimited.sas")
 text_data <- read_lines("../data/text-space-delimited.txt")
@@ -150,4 +141,4 @@ Here is an example of a space-delimited file. It uses one or more blanks to sepa
 
 `r sas[3]`
 
-## Live demo
+## Live demo, 1

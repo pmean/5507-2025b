@@ -8,15 +8,6 @@ editor: source
 ---
 
 ```{r}
-#| message: false
-#| warning: false
-#| label: 03-04-setup
-
-library(glue)
-library(tidyverse)
-```
-
-```{r}
 #| label: 03-04-read
 sas <- chunk_sas("simon-5507-03-demo-04-tilde-delimited.sas")
 text_data <- read_lines("../data/text-tilde-delimited.txt")
@@ -42,6 +33,6 @@ This is the same artificial dataset, using the tilde symbol (~) as the delimiter
 
 `r sas[3]`
 
-## Live demo, 2
+## Live demo, 4
 
 -   "09"X (SAS code for the tab character)

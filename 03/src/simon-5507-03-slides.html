@@ -1279,8 +1279,8 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="live-demo" class="slide level2">
-<h2>Live demo</h2>
+<section id="live-demo-1" class="slide level2">
+<h2>Live demo, 1</h2>
 </section>
 <section id="break-1" class="slide level2">
 <h2>Break #1</h2>
@@ -1659,8 +1659,8 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="live-demo-2-1" class="slide level2">
-<h2>Live demo, 2</h2>
+<section id="live-demo-4" class="slide level2">
+<h2>Live demo, 4</h2>
 <ul>
 <li>“09”X (SAS code for the tab character)</li>
 </ul>
@@ -1678,8 +1678,119 @@ display:block!important;
 </ul></li>
 </ul>
 </section>
-<section id="section" class="slide level2">
-<h2>03-05</h2>
+<section id="a-file-with-strings" class="slide level2">
+<h2>A file with strings</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Alpha 4 8
+Bravo 8 16
+Charlie 12 24
+Delta 16 32
+Echo 24 48</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>This is the same artificial dataset, with no delimiters. There are a few stray blanks, but only because some of the numbers are one digit instead of two or two digits instead of three.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="documentation-header-4" class="slide level2">
+<h2>Documentation header</h2>
+<pre><code>* 5507-03-simon-demo-05-string-data.sas
+* author: Steve Simon
+* creation date: 2019-07-02
+* purpose: to import data that includes a string
+* license: public domain;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Documentation header</li>
+</ul>
+<p>This is my standard for the documentation header. It specifies the filename, author, creation date, purpose, and license.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="file-locations-4" class="slide level2">
+<h2>File locations</h2>
+<pre><code>%let path=q:/introduction-to-sas;
+
+ods pdf file=
+    &quot;&amp;path/results/5507-03-simon-import-string-data.pdf&quot;;
+
+libname perm
+    &quot;&amp;path/data&quot;;
+
+filename raw_data
+    &quot;&amp;path/data/string-data.txt&quot;;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: File locations</li>
+</ul>
+<p>This code shows where to print output, where to store data, and where to find data.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="reading-string-data" class="slide level2">
+<h2>Reading string data</h2>
+<pre><code>data perm.string_data;
+  infile raw_data delimiter=&quot; &quot;;
+  input 
+    name $
+    x
+    y;
+run;
+
+proc print
+    data=perm.string_data(obs=2);
+  title1 &quot;First two rows of data&quot;;
+run;
+
+ods pdf close;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Reading string data</li>
+</ul>
+<p>use the dollar sign ($) to designate a particular variable as being string rather than numeric.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="live-demo-5" class="slide level2">
+<h2>Live demo, 5</h2>
 </section>
 <section id="break-5" class="slide level2">
 <h2>Break #5</h2>
@@ -1694,8 +1805,122 @@ display:block!important;
 </ul></li>
 </ul>
 </section>
-<section id="section-1" class="slide level2">
-<h2>03-06</h2>
+<section id="a-fixed-width-file" class="slide level2">
+<h2>A fixed-width file</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> 4 8 40
+ 816 80
+1224120
+1632160
+2448240</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>This is the same artificial dataset, using the tilde symbol (~) as the delimiter. You might use this when a more common symbol, like a comma, would lead to confusion.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="documentation-header-5" class="slide level2">
+<h2>Documentation header</h2>
+<pre><code>* 5507-03-simon-import-fixed-width.sas
+* author: Steve Simon
+* creation date: 2019-07-01
+* purpose: to import data in a fixed width format
+* license: public domain;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Documentation header</li>
+</ul>
+<p>This is my standard for the documentation header. It specifies the filename, author, creation date, purpose, and license.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="file-locations-5" class="slide level2">
+<h2>File locations</h2>
+<pre><code>%let path=q:/introduction-to-sas;
+
+ods pdf file=
+    &quot;&amp;path/results/5507-03-simon-import-fixed-width.pdf&quot;;
+
+libname perm
+    &quot;&amp;path/data&quot;;
+
+filename raw_data
+    &quot;&amp;path/data/fixed-width.txt&quot;;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: File locations</li>
+</ul>
+<p>This code shows where to print output, where to store data, and where to find data.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="reading-fixed-width-data" class="slide level2">
+<h2>Reading fixed width data</h2>
+<pre><code>data perm.fixed_width;
+  infile raw_data delimiter=&quot;,&quot;;
+  input 
+    x 1-2
+    y 3-4
+    z 5-7;
+run;
+
+proc print
+    data=perm.fixed_width(obs=2);
+  title1 &quot;First two rows of data&quot;;
+run;
+
+ods pdf close;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Reading fixed width data</li>
+</ul>
+<p>There are several options for reading fixed width data. This code shows how to use a start and end location for each variable. The variable X is located in columns 1 and 2. The variable y is located in columns 3 and 4. The variable z uses three columns: 5, 6, and 7.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="live-demo-6" class="slide level2">
+<h2>Live demo, 6</h2>
+<ul>
+<li>“09”X (SAS code for the tab character)</li>
+</ul>
 </section>
 <section id="break-6" class="slide level2">
 <h2>Break #6</h2>
@@ -1710,8 +1935,135 @@ display:block!important;
 </ul></li>
 </ul>
 </section>
-<section id="section-2" class="slide level2">
-<h2>03-07</h2>
+<section id="a-file-with-names-in-the-first-line" class="slide level2">
+<h2>A file with names in the first line</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>name,x,y
+Alpha,4,8
+Bravo,8,16
+Charlie,12,24
+Delta,16,32
+Echo,24,48</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>This is the same artificial dataset, with the variable names (x, y, and z) as the first line of the file.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="documentation-header-6" class="slide level2">
+<h2>Documentation header</h2>
+<pre><code>* 5507-03-simon-import-first-line-names.sas
+* author: Steve Simon
+* creation date: 2019-07-02
+* purpose: to import data with variable names on the first line
+* license: public domain;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Documentation header</li>
+</ul>
+<p>This is my standard for the documentation header. It specifies the filename, author, creation date, purpose, and license.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="file-locations-6" class="slide level2">
+<h2>File locations</h2>
+<pre><code>%let path=q:/introduction-to-sas;
+
+ods pdf file=
+    &quot;&amp;path/results/5507-03-simon-import-first-line-names.pdf&quot;;
+
+libname perm
+    &quot;&amp;path/data&quot;;
+
+filename raw_data
+    &quot;&amp;path/data/first-line-names.csv&quot;;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: File locations</li>
+</ul>
+<p>This code shows where to print output, where to store data, and where to find data.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="the-import-procedure-works-with-both-text-files-and-binary-files.-the-dataoption-tells-sas-the-location-of-the-text-or-binary-data" class="slide level2">
+<h2>The import procedure works with both text files and binary files. The data=option tells SAS the location of the text or binary data</h2>
+<pre><code>proc import
+    datafile=raw_data dbms=dlm
+    out=perm.first_line_names replace;
+  delimiter=&quot;,&quot;;
+  getnames=yes;
+run;
+
+proc print
+    data=perm.first_line_names(obs=2);
+  title1 &quot;First two rows of data&quot;;
+run;
+
+ods pdf close;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: The import procedure works with both text files and binary files. The data=option tells SAS the location of the text or binary data</li>
+</ul>
+<p>The dbms=delim option tells SAS that this is a delimited text file.</p>
+<p>The replace option tells SAS that it is okay to write this data set on top of another dataset with the same name, if it exists.</p>
+<p>The delimiter subcommand tells SAS to use a comma (,) as a delimiter.</p>
+<p>The getnames=yes subcommand tells SAS to use the first line of the file as the variable names.</p>
+<ul>
+<li></li>
+</ul>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="live-demo-7" class="slide level2">
+<h2>Live demo, 7</h2>
+<ul>
+<li>The import procedure
+<ul>
+<li>The data= option</li>
+<li>The out= option</li>
+<li>The replace option</li>
+</ul></li>
+<li>The dbms subcommand</li>
+<li>The getnames subcommand</li>
+</ul>
 </section>
 <section id="break-7" class="slide level2">
 <h2>Break #7</h2>
@@ -1726,7 +2078,7 @@ display:block!important;
 </ul></li>
 </ul>
 </section>
-<section id="section-3" class="slide level2">
+<section id="section" class="slide level2">
 <h2>03-08</h2>
 </section>
 <section id="summary" class="slide level2">

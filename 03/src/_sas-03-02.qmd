@@ -8,15 +8,6 @@ editor: source
 ---
 
 ```{r}
-#| message: false
-#| warning: false
-#| label: 03-02-setup
-
-library(glue)
-library(tidyverse)
-```
-
-```{r}
 #| label: 03-02-read
 sas <- chunk_sas("simon-5507-03-demo-02-comma-delimited.sas")
 text_data <- read_lines("../data/text-comma-delimited.csv")
