@@ -1,4 +1,4 @@
-* 5507-03-simon-import-fixed-width.sas
+* 5507-03-simon-demo-06-fixed-width.sas
 * author: Steve Simon
 * creation date: 2019-07-01
 * purpose: to import data in a fixed width format
@@ -12,16 +12,16 @@ header. It specifies the filename, author,
 creation date, purpose, and license.;
 
 
-%let path=q:/introduction-to-sas;
+%let path=q:/5507-2025b/03;
 
 ods pdf file=
-    "&path/results/5507-03-simon-import-fixed-width.pdf";
+    "&path/results/5507-03-simon-demo-06-fixed-width.pdf";
 
 libname perm
     "&path/data";
 
 filename raw_data
-    "&path/data/fixed-width.txt";
+    "&path/data/text-fixed-width.txt";
 
 
 * Comments on the code: File locations

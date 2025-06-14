@@ -12,16 +12,16 @@ header. It specifies the filename, author,
 creation date, purpose, and license.;
 
 
-%let path=q:/introduction-to-sas;
+%let path=q:/5507-2025b/03;
 
 ods pdf file=
-    "&path/results/5507-03-simon-import-string-data.pdf";
+    "&path/results/5507-03-simon-demo-05-string-data.pdf";
 
 libname perm
     "&path/data";
 
 filename raw_data
-    "&path/data/string-data.txt";
+    "&path/data/text-with-strings.txt";
 
 
 * Comments on the code: File locations
@@ -49,6 +49,6 @@ ods pdf close;
 
 * Comments on the code: Reading string data
 
-use the dollar sign ($) to designate a 
+Use the dollar sign ($) to designate a 
 particular variable as being string 
 rather than numeric.;

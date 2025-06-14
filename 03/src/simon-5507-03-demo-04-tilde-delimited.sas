@@ -1,7 +1,7 @@
-* 5507-03-simon-import-tilde-delimited.sas
+* 5507-03-simon-demo-04-tilde-delimited.sas
 * author: Steve Simon
 * creation date: 2019-07-01
-* purpose: to import comma delimited files
+* purpose: to import a tilde-delimited file into SAS
 * license: public domain;
 
 
@@ -12,16 +12,16 @@ header. It specifies the filename, author,
 creation date, purpose, and license.;
 
 
-%let path=q:/introduction-to-sas;
+%let path=q:/5507-2025b/03;
 
 ods pdf file=
-  "&path/results/5507-03-simon-import-tilde-delimited.pdf";
+    "&path/results/5507-03-simon-demo-04-tilde-delimited.pdf";
 
 libname perm
   "&path/data";
 
 filename raw_data
-  "&path/data/tilde-delimited.txt";
+  "&path/data/text-tilde-delimited.txt";
   
 
 * Comments on the code: File locations

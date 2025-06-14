@@ -1,4 +1,4 @@
-* 5507-03-simon-import-first-line-names.sas
+* 5507-03-simon-demo-07-first-line-names.sas
 * author: Steve Simon
 * creation date: 2019-07-02
 * purpose: to import data with variable names on the first line
@@ -12,16 +12,16 @@ header. It specifies the filename, author,
 creation date, purpose, and license.;
 
 
-%let path=q:/introduction-to-sas;
+%let path=q:/5507-2025b/03;
 
 ods pdf file=
-    "&path/results/5507-03-simon-import-first-line-names.pdf";
+    "&path/results/5507-03-simon-demo-07-first-line-names.pdf";
 
 libname perm
     "&path/data";
 
 filename raw_data
-    "&path/data/first-line-names.csv";
+    "&path/data/text-first-line-names.csv";
 
 
 * Comments on the code: File locations
@@ -50,13 +50,22 @@ ods pdf close;
 
 * Comments on the code: The import procedure
 
-The import procedure works with both text files and binary files. The data=option tells SAS the location of the text or binary data
+The import procedure works with both 
+text files and binary files. The 
+data=option tells SAS the location of
+the text or binary data
 
-The dbms=delim option tells SAS that this is a delimited text file.
+The dbms=delim option tells SAS that 
+this is a delimited text file.
 
-The replace option tells SAS that it is okay to write this data set on top of another dataset with the same name, if it exists.
+The replace option tells SAS that it 
+is okay to write this data set on top
+of another dataset with the same name,
+if it exists.
 
-The delimiter subcommand tells SAS to use a comma (,) as a delimiter.
+The delimiter subcommand tells SAS to
+use a comma (,) as a delimiter.
 
-The getnames=yes subcommand tells SAS to use the first line of the file as the variable names.
-
+The getnames=yes subcommand tells SAS
+to use the first line of the file as 
+the variable names.;

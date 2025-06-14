@@ -1,4 +1,4 @@
-* 5507-03-simon-import-comma-delimited.sas
+* 5507-03-simon-demo-02-comma-delimited.sas
 * author: Steve Simon
 * creation date: 2019-07-01
 * purpose: to import comma delimited files
@@ -12,16 +12,16 @@ header. It specifies the filename, author,
 creation date, purpose, and license.;
 
 
-%let path=q:/introduction-to-sas;
+%let path=q:/5507-2025b/03;
 
 ods pdf file=
-    "&path/results/5507-03-simon-import-comma-delimited.pdf";
+    "&path/results/5507-03-simon-demo-02-comma-delimited.pdf";
 
 libname perm
     "&path/data";
 
 filename raw_data
-    "&path/data/comma-delimited.csv";
+    "&path/data/text-comma-delimited.csv";
 
 
 * Comments on the code: File locations

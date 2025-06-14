@@ -1,4 +1,4 @@
-* 5507-03-simon-import-space-delimited.sas
+* 5507-03-simon-demo-01-space-delimited.sas
 * author: Steve Simon
 * creation date: 2019-07-01
 * purpose: to import data with spaces as delimiters
@@ -12,16 +12,16 @@ header. It specifies the filename, author,
 creation date, purpose, and license.;
 
 
-%let path=q:/introduction-to-sas;
+%let path=q:/5507-2025b/03;
 
 ods pdf file=
-    "&path/results/5507-03-simon-import-space-delimited.pdf";
+    "&path/results/5507-03-simon-demo-01-space-delimited.pdf";
 
 libname perm
     "&path/data";
 
 filename raw_data
-    "&path/data/space-delimited.txt";
+    "&path/data/text-space-delimited.txt";
 
 
 * Comments on the code: File locations
