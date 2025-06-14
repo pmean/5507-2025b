@@ -1,0 +1,54 @@
+---
+title: "chunk-sas-function"
+format: 
+  revealjs:
+    slide-number: true
+    embed-resources: true
+editor: source
+---
+
+```{r}
+#| message: false
+#| warning: false
+#| label: general-setup
+
+# I will not use too much R in a class called
+# "Introduction to SAS," but am including this
+# chunk just in case I need something from R.
+
+library(glue)
+library(tidyverse)
+```
+
+```{r}
+#| label: general-chunk
+
+chunk_sas <- function(fn) {
+
+  text <- read_lines(fn)
+  mark <- "\\* Comments on the code: "
+
+  text |>
+    str_remove("^ *$") |>
+    str_subset("End of part", negate=TRUE) |>
+    paste0(collapse="\n") |>
+    str_split("\n\n\n") |>
+    unlist() -> chunk
+
+  text |>
+    str_subset(mark) |>
+    str_replace(mark, "## ") -> titles
+
+  n <- length(titles)
+
+  sas <- paste0(
+    titles,
+    "\n\n```{}\n",
+    chunk[2*(1:n)-1],
+    "\n```\n\n::: notes\n",
+    chunk[2*(1:n)],
+    "\n:::\n\n\n")
+  
+  return(sas)
+}
+```

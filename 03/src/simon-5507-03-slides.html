@@ -996,14 +996,14 @@ margin-right: 0; }
 <ul>
 <li>What you will learn
 <ul>
+<li>Importing space-delimited files</li>
 <li>Importing comma-delimited files</li>
-<li>Simple descriptive statistics</li>
-<li>Printing row with smallest/largest value</li>
-<li>Missing value logic</li>
-<li>Simple transformations</li>
-<li>Histograms</li>
-<li>Correlations</li>
-<li>Scatterplots</li>
+<li>Importing tab-delimited files</li>
+<li>Importing files with other delimiters</li>
+<li>Files with names in first row</li>
+<li>Fixed width files</li>
+<li>Importing files with strings</li>
+<li>TBA</li>
 </ul></li>
 </ul>
 </section>
@@ -1019,11 +1019,8 @@ margin-right: 0; }
 <li>substitutes that macro value in the code</li>
 </ul></li>
 </ul>
-<pre><code>%let macro_variable_name = string_value
-
-&amp;macro_variable_name</code></pre>
 <aside class="notes">
-<p>I find myself switching often between SAS On Demand for Academics and SAS on Remote Labs. One thing to simplify the code is to create a macro variable. A macro variable is a value that you specify once, typically right at the start of your program code, and then use repeatedly later in your code. In this program, I specified a variable path which is either q:/introduction-to-sas or /home/mail129/ depending on which system I use.</p>
+<p>I find myself switching often between SAS On Demand for Academics and SAS on Remote Labs. One thing to simplify the code is to create a macro variable. A macro variable is a value that you specify once, typically right at thestart of your program code, and then use repeatedly later in your code.</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1072,7 +1069,25 @@ display:block!important;
 <li>Quick and easy changes</li>
 </ul></li>
 <li>Reduce the amount of repetitive typing</li>
+<li><a href="https://documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/mcrolref/p14ym6slnzfstzn1t9yp5v31ijis.htm">Macro variables automatically available</a>
+<ul>
+<li>My favorites, &amp;sasdate and &amp;sasver</li>
+</ul></li>
 </ul>
+<aside class="notes">
+<p>Macro variables have several uses. First, they allow you to place important options near the top of your code rather than buried somewhere in the code depths. Because they are easy to find, they allow you to quick changes. Finally, sometimes a piece of SAS code gets used multiple times. A macro variable allows you to write it once and then use the shorter macro name over and over again. This can sometimes save a lot of repetitive typing.</p>
+<p>SAS has a wide range of macro variables. Most of these are only needed for very advanced and very specialized applications. You’ve already seen two of these,</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
 </section>
 <section id="text-files" class="slide level2">
 <h2>Text files</h2>
@@ -1080,9 +1095,203 @@ display:block!important;
 <li>Each row is a separate observation</li>
 <li>How to specify individual columns?
 <ul>
+<li>Blanks</li>
 <li>Delimiters</li>
-<li>White space</li>
 <li>Fixed width</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>There’s a quip, “Time is nature’s way of keeping everything from happening all at once.” For text file that represents data, how do you keep one piece of data separate from another piece of data?</p>
+<p>The first thing that is commonly done is to put each patient’s data on a separate line. You don’t have to do it this way, but it works quite well for many types of data.</p>
+<p>Within a line, how do you keep one piece of data for a patient separate from another? The simplest choice, and one that works well with SAS is to separate using one or more blanks.</p>
+<p>You can use other marks, called delimiters, to separate pieces of data. The most common delimiter is a comma.</p>
+<p>You can also specify which pieces of data go into which columns. This is fixed width format.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="importing-choices" class="slide level2">
+<h2>Importing choices</h2>
+<ul>
+<li>Add options to the infile statement</li>
+<li>Use proc import
+<ul>
+<li>Especially useful when the first row includes variable names</li>
+<li>Also useful for binary data files (e.g., Excel)</li>
+</ul></li>
+<li>Use proc sql (not covered in this class)</li>
+<li>Manual reformatting
+<ul>
+<li>Global search and replace</li>
+<li>Not usually a good idea</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>Often, you will just need to add an option to the infile statement to get SAS to read a particular text file.</p>
+<p>You might also need to use the import procedure. This procedure is especially helpful when your first line of data includes the variable names.</p>
+<p>While we will not cover it in this class, the import procedure also lets you read in binary data files. A binary file is a file that uses a special storage approach that has some advantages. It often takes up less space and can be read in a lot faster. But the hallmark of a binary file is that you can’t view it in a text editor like Notepad or TextEdit.</p>
+<p>Sometimes a text file is difficult to import. If you have to, you can manually reformat the data. Use the global search and replace function in your text editor program. I generally try to avoid this. If your data set changes, you have to redo the reformatting step, which is tedious and error prone. You’d be better off learning a few tricks to get SAS to read a nonstandard data set.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="options-during-data-import" class="slide level2">
+<h2>Options during data import</h2>
+<ul>
+<li>Skipping rows</li>
+<li>Converting strings to numbers</li>
+</ul>
+<aside class="notes">
+<p>Sometimes you have to skip a few rows. Sometimes you have to convert strings to numbers. There are options for doing this in SAS.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="space-delimited-example" class="slide level2">
+<h2>Space delimited, example</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> 4  8  40
+ 8 16  80
+12 24 120
+16 32 160
+24 48 240</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>Here is an example of a space-delimited file. It uses one or more blanks to separate the indidvidual data values.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="documentation-header" class="slide level2">
+<h2>Documentation header</h2>
+<pre><code>* 5507-03-simon-import-space-delimited.sas
+* author: Steve Simon
+* creation date: 2019-07-01
+* purpose: to import data with spaces as delimiters
+* license: public domain;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Documentation header</li>
+</ul>
+<p>This is my standard for the documentation header. It specifies the filename, author, creation date, purpose, and license.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="file-locations" class="slide level2">
+<h2>File locations</h2>
+<pre><code>%let path=q:/introduction-to-sas;
+
+ods pdf file=
+    &quot;&amp;path/results/5507-03-simon-import-space-delimited.pdf&quot;;
+
+libname perm
+    &quot;&amp;path/data&quot;;
+
+filename raw_data
+    &quot;&amp;path/data/space-delimited.txt&quot;;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: File locations</li>
+</ul>
+<p>Since all three file locations (ods, libname, and filename) use the same path, a macro variable can simplify things. The %let command creates the macro variable path, and anywhere that SAS sees an &amp;path, it replaces it with the proper file location.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="read-space-delimited-file" class="slide level2">
+<h2>Read space-delimited file</h2>
+<pre><code>data perm.space_delimited;
+  infile raw_data;
+  input x y z;
+run;
+
+proc print
+    data=perm.space_delimited(obs=2);
+  title1 &quot;First two rows of data&quot;;
+run;
+
+ods pdf close;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Read space-delimited file</li>
+</ul>
+<p>Files with one or more blanks between each data value are easy to read in SAS and require no special code;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="live-demo-1" class="slide level2">
+<h2>Live demo, 1</h2>
+</section>
+<section id="break-1" class="slide level2">
+<h2>Break #1</h2>
+<ul>
+<li>What you have learned
+<ul>
+<li>Importing space-delimited files</li>
+</ul></li>
+<li>What’s coming next
+<ul>
+<li>Importing comma-delimited files</li>
 </ul></li>
 </ul>
 </section>
@@ -1098,7 +1307,7 @@ display:block!important;
 </div>
 </div>
 <aside class="notes">
-<p>This is an artificial dataset. Each row represents a different patient. Each patient has three numbers.</p>
+<p>This is the same artificial dataset, using commas as delimiters. This is the most common type of file that you will find on the Internet.</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1111,16 +1320,32 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="demo-1-documentation-header" class="slide level2">
-<h2>Demo-1, Documentation header</h2>
+<section id="documentation-header-1" class="slide level2">
+<h2>Documentation header</h2>
 <pre><code>* 5507-03-simon-import-comma-delimited.sas
 * author: Steve Simon
 * creation date: 2019-07-01
 * purpose: to import comma delimited files
 * license: public domain;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Documentation header</li>
+</ul>
+<p>This is my standard for the documentation header. It specifies the filename, author, creation date, purpose, and license.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
 </section>
-<section id="demo-1-file-locations" class="slide level2">
-<h2>Demo-1, File locations</h2>
+<section id="file-locations-1" class="slide level2">
+<h2>File locations</h2>
 <pre><code>%let path=q:/introduction-to-sas;
 
 ods pdf file=
@@ -1133,9 +1358,9 @@ filename raw_data
     &quot;&amp;path/data/comma-delimited.csv&quot;;</code></pre>
 <aside class="notes">
 <ul>
-<li>Comments on the code: Using a macro variable to specify the location of your files</li>
+<li>Comments on the code: File locations</li>
 </ul>
-<p>The %let command defines a macro variable. In this case, the macro variable path is set equal to the string q:/introduction-to-sas. Then that value is inserted in the ods, libname, and filename commands.;</p>
+<p>This code shows where to print output, where to store data, and where to find data.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1148,40 +1373,44 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="demo-1-data-step" class="slide level2">
-<h2>Demo-1, Data step</h2>
+<section id="specifying-a-comma-delimiter" class="slide level2">
+<h2>Specifying a comma delimiter</h2>
 <pre><code>data perm.comma_delimited;
   infile raw_data delimiter=&quot;,&quot;;
   input x y z;
-run;</code></pre>
-<aside class="notes">
-<ul>
-<li>Comments on the code: Specifying a comma delimiter</li>
-</ul>
-<p>Adding the delimiter keyword to the infile statement informs SAS that individual data values in a row of text are separated or delimited by a specific character. In this code, the delimiter is a comma.</p>
-<style type="text/css">
-span.MJX_Assistive_MathML {
-position:absolute!important;
-clip: rect(1px, 1px, 1px, 1px);
-padding: 1px 0 0 0!important;
-border: 0!important;
-height: 1px!important;
-width: 1px!important;
-overflow: hidden!important;
-display:block!important;
-}</style></aside>
-</section>
-<section id="demo-1-print-procedure" class="slide level2">
-<h2>Demo-1, Print procedure</h2>
-<pre><code>proc print
+run;
+
+proc print
     data=perm.comma_delimited(obs=2);
   title1 &quot;First two rows of data&quot;;
 run;
 
 ods pdf close;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Specifying a comma delimiter</li>
+</ul>
+<p>Adding the delimiter keyword to the infile statement informs SAS that individual data values in a row of text are separated or delimited by a specific character. In this code, the delimiter is a comma.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
 </section>
-<section id="break-1" class="slide level2">
-<h2>Break #1</h2>
+<section id="live-demo-2" class="slide level2">
+<h2>Live demo, 2</h2>
+<ul>
+<li>delimiter argument (infile subcommand, data step)</li>
+</ul>
+</section>
+<section id="break-2" class="slide level2">
+<h2>Break #2</h2>
 <ul>
 <li>What you have learned
 <ul>
@@ -1189,107 +1418,667 @@ ods pdf close;</code></pre>
 </ul></li>
 <li>What’s coming next
 <ul>
-<li>Simple descriptive statistics</li>
+<li>Importing tab-delimited files</li>
 </ul></li>
 </ul>
 </section>
-<section id="section" class="slide level2">
-<h2>03-02</h2>
+<section id="a-tab-delimited-file" class="slide level2">
+<h2>A tab delimited file</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>4   8   40
+8   16  80
+12  24  120
+16  32  160
+24  48  240</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>This is the same artificial dataset, using tabs as delimiters. This is also a very common type of file that you will find on the Internet.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
 </section>
-<section id="break-2" class="slide level2">
-<h2>Break #2</h2>
+<section id="documentation-header-2" class="slide level2">
+<h2>Documentation header</h2>
+<pre><code>* 5507-03-simon-import-tab-delimited.sas
+* author: Steve Simon
+* creation date: 2019-07-01
+* purpose: to import a comma delimited file into SAS
+* license: public domain;</code></pre>
+<aside class="notes">
 <ul>
-<li>What you have learned
-<ul>
-<li>Simple descriptive statistics</li>
-</ul></li>
-<li>What’s coming next
-<ul>
-<li>Printing row with smallest/largest value</li>
-</ul></li>
+<li>Comments on the code: Documentation header</li>
 </ul>
+<p>This is my standard for the documentation header. It specifies the filename, author, creation date, purpose, and license.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
 </section>
-<section id="section-1" class="slide level2">
-<h2>03-03</h2>
+<section id="file-locations-2" class="slide level2">
+<h2>File locations</h2>
+<pre><code>%let path=q:/introduction-to-sas;
+
+ods pdf file=
+    &quot;&amp;path/results/5507-03-simon-import-tab-delimited.pdf&quot;;
+
+libname perm
+    &quot;&amp;path/data&quot;;
+
+filename raw_data
+  &quot;&amp;path/data/tab-delimited.txt&quot;;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: File locations</li>
+</ul>
+<p>This code shows where to print output, where to store data, and where to find data.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="specifying-a-tab-delimiter" class="slide level2">
+<h2>Specifying a tab delimiter</h2>
+<pre><code>data perm.tab_delimited;
+  infile raw_data delimiter=&quot;09&quot;X;
+  input x y z;
+run;
+
+proc print
+    data=perm.tab_delimited(obs=2);
+  title1 &quot;First two rows of data&quot;;
+run;
+
+ods pdf close;
+
+* Comments on the code: Specifying a tab delimiter
+
+The code &quot;09&quot;X designates a tab as the
+delimiter.;</code></pre>
+<aside class="notes">
+<p>NA</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="live-demo-3" class="slide level2">
+<h2>Live demo, 3</h2>
+<ul>
+<li>“09”X (SAS code for the tab character)</li>
+</ul>
 </section>
 <section id="break-3" class="slide level2">
 <h2>Break #3</h2>
 <ul>
 <li>What you have learned
 <ul>
-<li>Printing row with smallest/largest value</li>
+<li>Importing tab-delimited files</li>
 </ul></li>
 <li>What’s coming next
 <ul>
-<li>Missing value logic</li>
+<li>Importing files with other delimiters</li>
 </ul></li>
 </ul>
 </section>
-<section id="section-2" class="slide level2">
-<h2>03-04</h2>
+<section id="a-tilde-delimited-file" class="slide level2">
+<h2>A tilde delimited file</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>4~8~40
+8~16~80
+12~24~120
+16~32~160
+24~48~240</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>This is the same artificial dataset, using the tilde symbol (~) as the delimiter. You might use this when a more common symbol, like a comma, would lead to confusion.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="documentation-header-3" class="slide level2">
+<h2>Documentation header</h2>
+<pre><code>* 5507-03-simon-import-tilde-delimited.sas
+* author: Steve Simon
+* creation date: 2019-07-01
+* purpose: to import comma delimited files
+* license: public domain;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Documentation header</li>
+</ul>
+<p>This is my standard for the documentation header. It specifies the filename, author, creation date, purpose, and license.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="file-locations-3" class="slide level2">
+<h2>File locations</h2>
+<pre><code>%let path=q:/introduction-to-sas;
+
+ods pdf file=
+  &quot;&amp;path/results/5507-03-simon-import-tilde-delimited.pdf&quot;;
+
+libname perm
+  &quot;&amp;path/data&quot;;
+
+filename raw_data
+  &quot;&amp;path/data/tilde-delimited.txt&quot;;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: File locations</li>
+</ul>
+<p>This code shows where to print output, where to store data, and where to find data.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="specifying-a-tilde-delimiter" class="slide level2">
+<h2>Specifying a tilde delimiter</h2>
+<pre><code>data perm.tilde_delimited;
+  infile raw_data delimiter=&quot;~&quot;;
+  input x y z;
+run;
+
+proc print
+    data=perm.tilde_delimited(obs=2);
+  title1 &quot;First two rows of data&quot;;
+run;
+
+ods pdf close;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Specifying a tilde delimiter</li>
+</ul>
+<p>Anything, including the tilde symbol (~) can be a delimiter.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="live-demo-4" class="slide level2">
+<h2>Live demo, 4</h2>
+<ul>
+<li>“09”X (SAS code for the tab character)</li>
+</ul>
 </section>
 <section id="break-4" class="slide level2">
 <h2>Break #4</h2>
 <ul>
 <li>What you have learned
 <ul>
-<li>Missing value logic</li>
+<li>Importing files with other delimiters</li>
 </ul></li>
 <li>What’s coming next
 <ul>
-<li>Simple transformations</li>
+<li>Files with names in first row</li>
 </ul></li>
 </ul>
 </section>
-<section id="section-3" class="slide level2">
-<h2>03-05</h2>
+<section id="a-file-with-strings" class="slide level2">
+<h2>A file with strings</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Alpha 4 8
+Bravo 8 16
+Charlie 12 24
+Delta 16 32
+Echo 24 48</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>This is the same artificial dataset, with no delimiters. There are a few stray blanks, but only because some of the numbers are one digit instead of two or two digits instead of three.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="documentation-header-4" class="slide level2">
+<h2>Documentation header</h2>
+<pre><code>* 5507-03-simon-demo-05-string-data.sas
+* author: Steve Simon
+* creation date: 2019-07-02
+* purpose: to import data that includes a string
+* license: public domain;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Documentation header</li>
+</ul>
+<p>This is my standard for the documentation header. It specifies the filename, author, creation date, purpose, and license.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="file-locations-4" class="slide level2">
+<h2>File locations</h2>
+<pre><code>%let path=q:/introduction-to-sas;
+
+ods pdf file=
+    &quot;&amp;path/results/5507-03-simon-import-string-data.pdf&quot;;
+
+libname perm
+    &quot;&amp;path/data&quot;;
+
+filename raw_data
+    &quot;&amp;path/data/string-data.txt&quot;;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: File locations</li>
+</ul>
+<p>This code shows where to print output, where to store data, and where to find data.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="reading-string-data" class="slide level2">
+<h2>Reading string data</h2>
+<pre><code>data perm.string_data;
+  infile raw_data delimiter=&quot; &quot;;
+  input 
+    name $
+    x
+    y;
+run;
+
+proc print
+    data=perm.string_data(obs=2);
+  title1 &quot;First two rows of data&quot;;
+run;
+
+ods pdf close;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Reading string data</li>
+</ul>
+<p>use the dollar sign ($) to designate a particular variable as being string rather than numeric.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="live-demo-5" class="slide level2">
+<h2>Live demo, 5</h2>
 </section>
 <section id="break-5" class="slide level2">
 <h2>Break #5</h2>
 <ul>
 <li>What you have learned
 <ul>
-<li>Simple transformations</li>
+<li>Files with names in first row</li>
 </ul></li>
 <li>What’s coming next
 <ul>
-<li>Histograms</li>
+<li>Fixed width files</li>
 </ul></li>
 </ul>
 </section>
-<section id="section-4" class="slide level2">
-<h2>03-06</h2>
+<section id="a-fixed-width-file" class="slide level2">
+<h2>A fixed-width file</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> 4 8 40
+ 816 80
+1224120
+1632160
+2448240</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>This is the same artificial dataset, using the tilde symbol (~) as the delimiter. You might use this when a more common symbol, like a comma, would lead to confusion.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="documentation-header-5" class="slide level2">
+<h2>Documentation header</h2>
+<pre><code>* 5507-03-simon-import-fixed-width.sas
+* author: Steve Simon
+* creation date: 2019-07-01
+* purpose: to import data in a fixed width format
+* license: public domain;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Documentation header</li>
+</ul>
+<p>This is my standard for the documentation header. It specifies the filename, author, creation date, purpose, and license.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="file-locations-5" class="slide level2">
+<h2>File locations</h2>
+<pre><code>%let path=q:/introduction-to-sas;
+
+ods pdf file=
+    &quot;&amp;path/results/5507-03-simon-import-fixed-width.pdf&quot;;
+
+libname perm
+    &quot;&amp;path/data&quot;;
+
+filename raw_data
+    &quot;&amp;path/data/fixed-width.txt&quot;;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: File locations</li>
+</ul>
+<p>This code shows where to print output, where to store data, and where to find data.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="reading-fixed-width-data" class="slide level2">
+<h2>Reading fixed width data</h2>
+<pre><code>data perm.fixed_width;
+  infile raw_data delimiter=&quot;,&quot;;
+  input 
+    x 1-2
+    y 3-4
+    z 5-7;
+run;
+
+proc print
+    data=perm.fixed_width(obs=2);
+  title1 &quot;First two rows of data&quot;;
+run;
+
+ods pdf close;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Reading fixed width data</li>
+</ul>
+<p>There are several options for reading fixed width data. This code shows how to use a start and end location for each variable. The variable X is located in columns 1 and 2. The variable y is located in columns 3 and 4. The variable z uses three columns: 5, 6, and 7.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="live-demo-6" class="slide level2">
+<h2>Live demo, 6</h2>
+<ul>
+<li>“09”X (SAS code for the tab character)</li>
+</ul>
 </section>
 <section id="break-6" class="slide level2">
 <h2>Break #6</h2>
 <ul>
 <li>What you have learned
 <ul>
-<li>Histograms</li>
+<li>Fixed width files</li>
 </ul></li>
 <li>What’s coming next
 <ul>
-<li>Correlations</li>
+<li>Importing files with strings</li>
 </ul></li>
 </ul>
 </section>
-<section id="section-5" class="slide level2">
-<h2>03-07</h2>
+<section id="a-file-with-names-in-the-first-line" class="slide level2">
+<h2>A file with names in the first line</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>name,x,y
+Alpha,4,8
+Bravo,8,16
+Charlie,12,24
+Delta,16,32
+Echo,24,48</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>This is the same artificial dataset, with the variable names (x, y, and z) as the first line of the file.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="documentation-header-6" class="slide level2">
+<h2>Documentation header</h2>
+<pre><code>* 5507-03-simon-import-first-line-names.sas
+* author: Steve Simon
+* creation date: 2019-07-02
+* purpose: to import data with variable names on the first line
+* license: public domain;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Documentation header</li>
+</ul>
+<p>This is my standard for the documentation header. It specifies the filename, author, creation date, purpose, and license.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="file-locations-6" class="slide level2">
+<h2>File locations</h2>
+<pre><code>%let path=q:/introduction-to-sas;
+
+ods pdf file=
+    &quot;&amp;path/results/5507-03-simon-import-first-line-names.pdf&quot;;
+
+libname perm
+    &quot;&amp;path/data&quot;;
+
+filename raw_data
+    &quot;&amp;path/data/first-line-names.csv&quot;;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: File locations</li>
+</ul>
+<p>This code shows where to print output, where to store data, and where to find data.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="the-import-procedure-works-with-both-text-files-and-binary-files.-the-dataoption-tells-sas-the-location-of-the-text-or-binary-data" class="slide level2">
+<h2>The import procedure works with both text files and binary files. The data=option tells SAS the location of the text or binary data</h2>
+<pre><code>proc import
+    datafile=raw_data dbms=dlm
+    out=perm.first_line_names replace;
+  delimiter=&quot;,&quot;;
+  getnames=yes;
+run;
+
+proc print
+    data=perm.first_line_names(obs=2);
+  title1 &quot;First two rows of data&quot;;
+run;
+
+ods pdf close;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: The import procedure works with both text files and binary files. The data=option tells SAS the location of the text or binary data</li>
+</ul>
+<p>The dbms=delim option tells SAS that this is a delimited text file.</p>
+<p>The replace option tells SAS that it is okay to write this data set on top of another dataset with the same name, if it exists.</p>
+<p>The delimiter subcommand tells SAS to use a comma (,) as a delimiter.</p>
+<p>The getnames=yes subcommand tells SAS to use the first line of the file as the variable names.</p>
+<ul>
+<li></li>
+</ul>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="live-demo-7" class="slide level2">
+<h2>Live demo, 7</h2>
+<ul>
+<li>The import procedure
+<ul>
+<li>The data= option</li>
+<li>The out= option</li>
+<li>The replace option</li>
+</ul></li>
+<li>The dbms subcommand</li>
+<li>The getnames subcommand</li>
+</ul>
 </section>
 <section id="break-7" class="slide level2">
 <h2>Break #7</h2>
 <ul>
 <li>What you have learned
 <ul>
-<li>Correlations</li>
+<li>Importing files with strings</li>
 </ul></li>
 <li>What’s coming next
 <ul>
-<li>Scatterplots</li>
+<li>TBA</li>
 </ul></li>
 </ul>
 </section>
-<section id="section-6" class="slide level2">
+<section id="section" class="slide level2">
 <h2>03-08</h2>
 </section>
 <section id="summary" class="slide level2">
@@ -1297,14 +2086,14 @@ ods pdf close;</code></pre>
 <ul>
 <li>What you have learned
 <ul>
+<li>Importing space-delimited files</li>
 <li>Importing comma-delimited files</li>
-<li>Simple descriptive statistics</li>
-<li>Printing row with smallest/largest value</li>
-<li>Missing value logic</li>
-<li>Simple transformations</li>
-<li>Histograms</li>
-<li>Correlations</li>
-<li>Scatterplots</li>
+<li>Importing tab-delimited files</li>
+<li>Importing files with other delimiters</li>
+<li>Files with names in first row</li>
+<li>Fixed width files</li>
+<li>Importing files with strings</li>
+<li>TBA</li>
 </ul></li>
 </ul>
 <!---

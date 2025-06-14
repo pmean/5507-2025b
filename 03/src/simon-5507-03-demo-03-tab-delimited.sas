@@ -5,6 +5,13 @@
 * license: public domain;
 
 
+* Comments on the code: Documentation header
+
+This is my standard for the documentation
+header. It specifies the filename, author,
+creation date, purpose, and license.;
+
+
 %let path=q:/introduction-to-sas;
 
 ods pdf file=
@@ -15,6 +22,13 @@ libname perm
 
 filename raw_data
   "&path/data/tab-delimited.txt";
+
+
+* Comments on the code: File locations
+
+This code shows where to print output,
+where to store data, and where to find
+data.;
 
 
 data perm.tab_delimited;
@@ -28,3 +42,9 @@ proc print
 run;
 
 ods pdf close;
+
+
+* Comments on the code: Specifying a tab delimiter
+
+The code "09"X designates a tab as the
+delimiter.;

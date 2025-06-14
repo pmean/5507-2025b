@@ -7,4 +7,32 @@ format:
 editor: source
 ---
 
-## 03-03
+```{r}
+#| label: 03-03-read
+sas <- chunk_sas("simon-5507-03-demo-03-tab-delimited.sas")
+text_data <- read_lines("../data/text-tab-delimited.txt")
+```
+
+## A tab delimited file
+
+```{r}
+#| label: 03-03-text
+
+cat(text_data, sep="\n")
+```
+
+::: notes
+
+This is the same artificial dataset, using tabs as delimiters. This is also a very common type of file that you will find on the Internet.
+
+:::
+
+`r sas[1]`
+
+`r sas[2]`
+
+`r sas[3]`
+
+## Live demo, 3
+
+-   "09"X (SAS code for the tab character)

@@ -7,4 +7,32 @@ format:
 editor: source
 ---
 
-## 03-04
+```{r}
+#| label: 03-04-read
+sas <- chunk_sas("simon-5507-03-demo-04-tilde-delimited.sas")
+text_data <- read_lines("../data/text-tilde-delimited.txt")
+```
+
+## A tilde delimited file
+
+```{r}
+#| label: 03-04-text
+
+cat(text_data, sep="\n")
+```
+
+::: notes
+
+This is the same artificial dataset, using the tilde symbol (~) as the delimiter. You might use this when a more common symbol, like a comma, would lead to confusion.
+
+:::
+
+`r sas[1]`
+
+`r sas[2]`
+
+`r sas[3]`
+
+## Live demo, 4
+
+-   "09"X (SAS code for the tab character)

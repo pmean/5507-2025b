@@ -7,5 +7,31 @@ format:
 editor: source
 ---
 
-## 03-05
+```{r}
+#| label: 03-05-read
+sas <- chunk_sas("simon-5507-03-demo-05-string-data.sas")
+text_data <- read_lines("../data/text-with-strings.txt")
+```
+
+## A file with strings
+
+```{r}
+#| label: 03-05-text
+
+cat(text_data, sep="\n")
+```
+
+::: notes
+
+This is the same artificial dataset, with no delimiters. There are a few stray blanks, but only because some of the numbers are one digit instead of two or two digits instead of three.
+
+:::
+
+`r sas[1]`
+
+`r sas[2]`
+
+`r sas[3]`
+
+## Live demo, 5
 
