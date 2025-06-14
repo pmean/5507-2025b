@@ -8,60 +8,40 @@ editor: source
 ---
 
 ```{r}
-#| label: 03-02-read
+#| message: false
+#| warning: false
+#| label: 03-02-setup
 
-# Read the program and break it into 
-# "bite-sized" pieces that fit easily
-# on slides.
-
-read_lines("simon-5507-03-import-comma-delimited.sas") |>
-  paste0(collapse="\n") |>
-  str_split("\n\n\n") |>
-  unlist() |>
-  str_remove("^\n") -> sas
-
-add_note <- function(i) {paste0("::: notes\n", sas[i],"\n:::")}
-add_code <- function(i) {paste0("```{}\n", sas[i], "\n```")}
-
-text_data <- read_lines("../data/comma-delimited.csv")
+library(glue)
+library(tidyverse)
 ```
 
-
+```{r}
+#| label: 03-02-read
+sas <- chunk_sas("simon-5507-03-demo-02-comma-delimited.sas")
+text_data <- read_lines("../data/text-comma-delimited.csv")
+```
 
 ## A comma delimited file
 
 ```{r}
+#| label: 03-02-text
+
 cat(text_data, sep="\n")
 ```
 
 ::: notes
 
-This is an artificial dataset. Each row represents a different patient. Each patient has three numbers.
+This is the same artificial dataset, using commas as delimiters. This is the most common type of file that you will find on the Internet.
 
 :::
 
-## Demo-1, Documentation header
+`r sas[1]`
 
-`r add_code(1)`
+`r sas[2]`
 
-## Demo-1, File locations
+`r sas[3]`
 
-`r add_code(2)`
+## Live demo, 2
 
-`r add_note(3)`
-
-## Demo-1, Data step
-
-`r add_code(4)`
-
-`r add_note(5)`
-
-## Demo-1, Print procedure
-
-`r add_code(6)`
-
-## Live demo, 1
-
--   %let command
--   &path
 -   delimiter argument (infile subcommand, data step)

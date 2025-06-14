@@ -43,6 +43,8 @@ editor: source
     -   `r params$topic_07`
     -   `r params$topic_08`
 
+{{< include ../../general/src/chunk_sas_function.qmd >}}
+
 {{< include _sas-03-01.qmd >}}
 
 ## Break #1
