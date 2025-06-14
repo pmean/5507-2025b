@@ -466,7 +466,7 @@ The drop subcommand will remove the _type_
 variable, as it is no longer needed.
 
 The round function will round to the nearest
-multiploe of 0.01.;
+multiple of 0.01.;
 
 
 proc sort
