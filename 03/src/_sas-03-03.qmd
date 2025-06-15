@@ -13,6 +13,52 @@ sas <- chunk_sas("simon-5507-03-demo-03-tab-delimited.sas")
 text_data <- read_lines("../data/text-tab-delimited.txt")
 ```
 
+## Tabs are evil
+
+[![](../images/tab-key.png)](http://new.pmean.com/pesky-tabs/)
+
+::: notes
+
+Tabs were used on manual typewriters as a time saving device. If you wanted to indent the first line of a paragraph, you could just type five spaces (maybe ten) and then start typing. The tab key on a manual typerwriter would jump automatically to the indent location.
+
+When computer keyoboards came along, the powers-that-be decided to include the tab key. It seemed like a good idea. So good that they designated a special character in ASCII to represent it's heritage.
+
+:::
+
+## The binary representation
+
+-   Tab character: Binary 0000 1001 or hexadecimal 09
+-   Space character: Binary 0010 0000 or hexadecimal 20
+-   Tabs and spaces look similar, but
+    -   A tab delimited file is not a space delimited file
+    -   A space delimited file is not a tab delimited file.
+
+::: notes
+
+The tab character in ASCII is represented by binary 0000 1001 or hexadecimal 09, while the space key is represented by binary 0010 0000 or hexadecimal 20.
+
+::::
+
+## Epilog: The non-breaking space
+
+-   Looks just like a regular space
+    -   Does not allow word wrap
+    -   Does not allow multiple blanks to collapse
+-   Binary 1010 0000, Hexadecimal A0
+-   Represented in html as &nbsp;
+
+::: notes
+
+You may encounter another problematic character, the non-breaking space. These look like the space character and the only difference is that you can't use word wrap with a non-breaking space. This forces the word to the left and the word to the right of the non-breaking space to stay on the same line.
+
+Also, a non-breaking space is preserved in some systems like html which would otherwise collapse multiple blanks into a single blank.
+
+The non-breaking space will sometimes hide among the regular spaces, but since it is not a delimiter, it will often mess up your import efforts.
+
+You won't encounter a non-breaking space too often, but when you do, it is very hard to spot and to fix.
+
+:::
+
 ## A tab delimited file
 
 ```{r}
@@ -24,6 +70,13 @@ cat(text_data, sep="\n")
 ::: notes
 
 This is the same artificial dataset, using tabs as delimiters. This is also a very common type of file that you will find on the Internet.
+
+I've already told you that tabs are evil, but if you encounter a tab delimited file, don't panic. You can handle it.
+
+Here's a simple example of a tab delimited file. Note that the numbers are left justfied, which is a hint that there are tabs lurking in the file. The tabs here stop at columns, 5, 9, and 13, which is a bit weird, but may just represent how my system treats tabs. The classic thing to look for in a tab delimited file, besides the right justification, is the semi-aligned, but not perfectly aligned numbers. This doesn't happen with this data because all of the numbers are three digits or less, but it can happen when the numbers take up a bit more room and the numbers are uneven in size.
+
+You can also detect tabs by opening the file in a text editor like notebook and playing around with adding extra spaces. A lack of action followed by a sudden hop is a pretty good indication that you are dealing with tabs.
+
 
 :::
 
