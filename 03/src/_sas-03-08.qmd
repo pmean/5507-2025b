@@ -7,4 +7,29 @@ format:
 editor: source
 ---
 
-## 03-08
+## Troubleshooting
+
+-   Mistakes often will produce error or warning messages
+    -   Always check the log window!
+-   Using the wrong delimiter
+    -   Data smashed together in a single variable
+-   Misspecifying first line variable names
+    -   Strings as first line of data
+    -   Variable names are actually numbers
+-   Nonstandard missing value codes
+    -   Something other than dot (.)
+    -   Numeric data converted to strings
+    
+::: notes
+
+If you make a mistake in your code, SAS will usually catch it. Once in a while, though, it tries to make the error fit the data, with sometimes cryptic results.
+
+Now I want to encourage you to get in the habit of looking at the log window before looking at the output. If you get any error or warning messages, fix things. Don't turn in output that may be compromised.
+
+If you specify the wrong delimiter, there will be only one variable per line. This often triggers an error. But sometimes, you might see all the individual data smashed together in an ugly looking string.
+
+If you tell SAS that the first line contains variable names (getnames=yes) and it doesn't or if the first line does contrain variable names and you forget to tell SAS, then you might see some odd data sets. Your variable names could become the first line of actual data. Or the names of the variables might actually be numbers.
+
+If you have a non-standard missing value, such as NA (which is what R uses), then SAS may treat all the values for that variable as strings.
+
+:::

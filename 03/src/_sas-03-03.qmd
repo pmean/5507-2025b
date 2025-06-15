@@ -37,7 +37,22 @@ When computer keyoboards came along, the powers-that-be decided to include the t
 
 The tab character in ASCII is represented by binary 0000 1001 or hexadecimal 09, while the space key is represented by binary 0010 0000 or hexadecimal 20.
 
-::::
+:::
+
+## Designations for the tab character
+
+-   "09"X
+-   ^t
+-   \t
+-   0x09
+
+::: notes
+
+If you want to work with the tab character, you need to know the code that your software system uses for the tab and other special characters.
+
+In SAS, the code is "09"X. In Microsoft Word, it is ^t. In R it is either \t or 0x09. The latter also works with Python, C, and other major programming languages.
+
+:::
 
 ## Epilog: The non-breaking space
 

@@ -12,7 +12,7 @@ params:
   topic_05: "Files with names in first row"
   topic_06: "Fixed width files"
   topic_07: "Importing files with strings"
-  topic_08: "TBA"
+  topic_08: "Troubleshooting"
 editor: source
 ---
 
