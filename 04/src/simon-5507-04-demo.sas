@@ -14,13 +14,13 @@
 This is my standard documentation.;
 
 
-%let path=q:/5507-2025b;
+%let path=q:/5507-2025b/04;
 
 ods pdf
   file="&path/results/5507-04-simon-demo.pdf";
 
 filename raw_data
-  "&path/data/titanic_v00.txt";
+  "&path/data/titanic.txt";
 
 libname perm
   "&path/data";
@@ -62,7 +62,7 @@ names. With complicated text files
 individual extends across more than 
 one line) or files without variable 
 names in the first row are usually 
-better handled by a data step.;
+better handled by a data step.
 
 Notice how the age variable is right
 justified. This is caused by the 
@@ -73,8 +73,8 @@ this ahead of time, but we'll fix
 things up after the fact.;
 
 
-data titanic1;
-  set titanic;
+data perm.titanic1;
+  set perm.titanic;
   age_c = input(age, ?? 8.);
 run;
 
@@ -99,7 +99,7 @@ proc format;
 run;
 
 proc freq
-    data=perm.titanic;
+    data=perm.titanic1;
   tables Survived;
   format Survived f_survived.;
   title1 "More than half of all the passengers died";
@@ -116,7 +116,7 @@ Once category codes are defined, you specify which variable or variables use tho
 
 
 proc sgplot
-    data=perm.titanic;
+    data=perm.titanic1;
   vbar Survived;
   format Survived f_survived.;
   title1 "Bar chart for number surviving";
@@ -131,7 +131,7 @@ The vbar subcommand draws vertical bars with heights equal to the number of obse
 
 proc freq
     noprint 
-    data=perm.titanic;
+    data=perm.titanic1;
   tables Survived / out=pct_survived;
 run;
 
@@ -150,7 +150,7 @@ noprint option, because I only want the
 percentages for internal use. It wouldn't have 
 hurt anything to print out a bit extra, but I 
 want to encourage you to limit the amount of 
-output that you present to a consulting client.
+output that you present to a consulting client.;
 
 
 proc sgplot
@@ -170,7 +170,7 @@ The max option sets the upper limit of this axis to 100.;
 
 
 data age_categories;
-  set perm.titanic;
+  set perm.titanic1;
   if age_c = .
     then age_cat = "missing ";
   else if age_c < 6 
@@ -216,7 +216,7 @@ alphabetical, which is probably not what you want.;
 
 
 data age_codes;
-  set perm.titanic;
+  set perm.titanic1;
   if age_c = .
     then age_cat = 9;
   else if age_c < 6 
@@ -271,7 +271,7 @@ Again, a quality check is important.;
 
 
 data first_class;
-  set perm.titanic;
+  set perm.titanic1;
   if PClass = "1st"
     then first_class = "Yes";
 	else first_class = "No ";
@@ -288,11 +288,11 @@ run;
 
 Here's how you combine categories for
 a categorical variable. It uses the same 
-"if - then - else" code.
+"if - then - else" code.;
 
 
 proc freq
-    data=perm.titanic;
+    data=perm.titanic1;
   tables Sex*Survived;
   format Survived f_survived.;
   title1 "Crosstabulation with all percentages";
@@ -311,7 +311,7 @@ show every percentage.;
 
 
 proc freq
-    data=perm.titanic;
+    data=perm.titanic1;
   tables Sex*Survived / nocol nopercent;
   format Survived f_survived.;
   title1 "Crosstabulation with row percentages";
@@ -332,7 +332,7 @@ row.;
 
 
 proc freq
-    data=perm.titanic;
+    data=perm.titanic1;
   tables Sex*Survived / norow nopercent;
   format Survived f_survived.;
   title1 "Crosstabulation with column percentages";
@@ -353,7 +353,7 @@ Among the survivors, 68% were women and 32% were men.
 
 
 proc freq
-    data=perm.titanic;
+    data=perm.titanic1;
   tables Sex*Survived / norow nocol;
   format Survived f_survived.;
   title1 "Crosstabulation with cell percentages";
