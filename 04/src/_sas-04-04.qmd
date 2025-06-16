@@ -1,5 +1,5 @@
 ---
-title: "sas-02-04"
+title: "sas-04-04"
 format: 
   revealjs:
     slide-number: true
@@ -8,3 +8,12 @@ editor: source
 ---
 
 ## 02-04
+
+`r sas[9]`
+
+`r sas[10]`
+
+`r sas[11]`
+
+`r sas[12]`
+

@@ -5,14 +5,14 @@ format:
     slide-number: true
     embed-resources: true
 params:
-  topic_01: "Using variable labels"
-  topic_02: "Simple descriptive statistics"
-  topic_03: "Printing row with smallest/largest value"
-  topic_04: "Missing value logic"
+  topic_01: "Frequency counts"
+  topic_02: "Convert string to numeric"
+  topic_03: "Labels for number codes"
+  topic_04: "Drawing bar charts"
   topic_05: "Simple transformations"
-  topic_06: "Histograms"
-  topic_07: "Correlations"
-  topic_08: "Scatterplots"
+  topic_06: "Converting continuous to categorical"
+  topic_07: "Modifying categorical variables"
+  topic_08: "Modifying categorical variables"
 editor: source
 ---
 
@@ -43,7 +43,9 @@ editor: source
     -   `r params$topic_07`
     -   `r params$topic_08`
 
-{{< include _sas-02-01.qmd >}}
+{{< include ../../general/src/chunk_sas_function.qmd >}}
+
+{{< include _sas-04-01.qmd >}}
 
 ## Break #1
 
@@ -52,7 +54,7 @@ editor: source
 -   What's coming next
     -   `r params$topic_02`
 
-{{< include _sas-02-02.qmd >}}
+{{< include _sas-04-02.qmd >}}
 
 ## Break #2
 
@@ -61,7 +63,7 @@ editor: source
 -   What's coming next
     -   `r params$topic_03`
     
-{{< include _sas-02-03.qmd >}}
+{{< include _sas-04-03.qmd >}}
 
 ## Break #3
 
@@ -70,7 +72,7 @@ editor: source
 -   What's coming next
     -   `r params$topic_04`
     
-{{< include _sas-02-04.qmd >}}
+{{< include _sas-04-04.qmd >}}
 
 ## Break #4
 
@@ -79,7 +81,7 @@ editor: source
 -   What's coming next
     -   `r params$topic_05`
     
-{{< include _sas-02-05.qmd >}}
+{{< include _sas-04-05.qmd >}}
 
 ## Break #5
 
@@ -88,7 +90,7 @@ editor: source
 -   What's coming next
     -   `r params$topic_06`
     
-{{< include _sas-02-06.qmd >}}
+{{< include _sas-04-06.qmd >}}
 
 ## Break #6
 
@@ -97,7 +99,7 @@ editor: source
 -   What's coming next
     -   `r params$topic_07`
     
-{{< include _sas-02-07.qmd >}}
+{{< include _sas-04-07.qmd >}}
 
 ## Break #7
 
@@ -106,7 +108,7 @@ editor: source
 -   What's coming next
     -   `r params$topic_08`
     
-{{< include _sas-02-08.qmd >}}
+{{< include _sas-04-08.qmd >}}
 
 
 
