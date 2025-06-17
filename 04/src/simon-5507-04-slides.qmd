@@ -5,17 +5,16 @@ format:
     slide-number: true
     embed-resources: true
 params:
-  topic_01: "Frequency counts"
-  topic_02: "Convert string to numeric"
-  topic_03: "Labels for number codes"
-  topic_04: "Drawing bar charts"
-  topic_05: "Simple transformations"
-  topic_06: "Converting continuous to categorical"
-  topic_07: "Modifying categorical variables"
-  topic_08: "Modifying categorical variables"
+  topic_01: "Convert string to numeric"
+  topic_02: "Labels for number codes"
+  topic_03: "Drawing bar charts"
+  topic_04: "Creating categories"
+  topic_05: "Modifying categories"
+  topic_06: "Crosstabulations"
+  topic_07: "TBA"
 editor: source
 ---
-
+935.56
 ```{r}
 # Preliminaries, if needed
 
@@ -131,5 +130,5 @@ editor: source
 --->
 
 ---
-title: "simon-5507-02-slides"
+title: "simon-5507-04-slides"
 ---

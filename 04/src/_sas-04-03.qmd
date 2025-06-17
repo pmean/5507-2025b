@@ -1,5 +1,5 @@
 ---
-title: "sas-04-03"
+title: "Drawing bar charts"
 format: 
   revealjs:
     slide-number: true
@@ -7,10 +7,10 @@ format:
 editor: source
 ---
 
-## 04-03
-
-`r sas[6]`
+## Drawing bar charts
 
 `r sas[7]`
 
 `r sas[8]`
+
+`r sas[9]`

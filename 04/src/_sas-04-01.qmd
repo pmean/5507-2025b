@@ -1,5 +1,5 @@
 ---
-title: "sas-02-01"
+title: "Convert string to numeric"
 format: 
   revealjs:
     slide-number: true
@@ -57,4 +57,10 @@ Today, you will see examples involving mostly categorical variables.
 `r sas[2]`
 
 `r sas[3]`
+
+`r sas[4]`
+
+`r sas[5]`
+
+
 
