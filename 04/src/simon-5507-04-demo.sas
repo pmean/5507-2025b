@@ -317,7 +317,7 @@ proc freq
 run;
 
 
-* Comments on the code, Default crosstabulation
+* Comments on the code: Default crosstabulation
 
 To examine relationships among 
 categorical variables use a two dimensional 
