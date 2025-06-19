@@ -32,15 +32,16 @@ If you used a large language model to generate
 SAS code, you should acknowledge this and 
 include the prompt(s) that you used.;
 
+%let path=q:/5507-2025b/02;
 
 filename rawdata
-  "../data/fat.txt";
+  "&path/data/fat.txt";
 
 libname module02
-  "../data";
+  "&path/data";
 
 ods pdf file=
-  "../results/5507-02-simon-demo.pdf";
+  "&path/results/simon-5507-02-demo.pdf";
 
 
 * Comments on the code: Specifying file locations
@@ -370,7 +371,8 @@ raising to a power.;
 proc sgplot
     data=module02.body2;
   histogram ht;
-  title1 "Histogram with default bins";
+  title1 "Histogram shows a roughly normal distribution";
+  title2 "Default bins (not recommended)";
 run;
 
 
@@ -383,30 +385,33 @@ produce a histogram.;
 
 proc sgplot
     data=module02.body2;
-  histogram ht / binstart=60 binwidth=1;
-  title "Histogram with narrow bins";
-run;
-
-
-* Comments on the code: Drawing a histogram (more bars)
-
-The binstart option tells SAS that one of the bins
-(not necessarily the first one) starts at 60. The 
-bindwidth option tells SAS that each bin has a 
-width of 1 unit (or plus or minus 0.5 units);
-
-
-proc sgplot
-    data=module02.body2;
-  histogram ht / binstart=60 binwidth=5;
-  title "Histogram with wide bins";
+  histogram ht / binstart=60 binwidth=5 nofill;
+  xaxis values=(60 to 85 by 5);
+  title "Histogram with wide bins (better)";
 run;
 
 
 * Comments on the code: Drawing a histogram (fewer bars)
 
-This code produce wider bins, 5 units (or plus
-or minus 2.5 inches).;
+The binstart option tells SAS that one of the bins
+(not necessarily the first one) starts at 60. The 
+bindwidth option tells SAS that each bin has a 
+width of 5 units (or plus or minus 2.5 units);
+
+
+proc sgplot
+    data=module02.body2;
+  histogram ht / binstart=62 binwidth=1 nofill;
+  xaxis values=(62 to 80 by 2);
+  title "Histogram with narrow bins (best)";
+run;
+
+
+* Comments on the code: Drawing a histogram (more bars)
+
+The binstart option in this histogram tells SAS to
+draw narrower bins with a width of 1 unit (or plus
+or minus 0.5 units);
 
 
 *---------------- End of part 6 ----------------;
@@ -490,7 +495,8 @@ sometimes help interpretability.;
 
 proc sgplot
     data=module02.body2;
-  scatter x=abdomen y=fat_brozek;
+  scatter x=abdomen y=fat_brozek /
+      markerattrs=(size=10 symbol=circle);
   pbspline x=abdomen y=fat_brozek;
   title1 "Simple scatterplot shows a strong positive trend";
   title2 "It levels off for high values.";
@@ -504,7 +510,10 @@ The scatter subcommand in the sgplot procedure
 produces a scatterplot. 
 
 The pbspline subcommand adds a smoothing to help
-you visualize whether the trend is linear or not.;
+you visualize whether the trend is linear or not.
+
+The markerattrs option controls the size shape
+and color of the symbols on your graph;
 
 
 ods pdf close;
@@ -512,17 +521,7 @@ ods pdf close;
 
 * Comments on the code: Closing the pdf file
 
-I always seem to forget this last statement and 
-then I get upset with SAS for not providing the 
-PDF output. But SAS can't produce the PDF output
-until you tell it you are done. So don't yell at
-your computer when it's your own darn fault 
-(just like Jimmy Buffet in the Margaritaville
-song).
-
-If you don't get any pdf file when you are done,
-or your pdf file is the one left over from a
-previous analysis, it's probably because you
-forgot this last very important statement.;
+Always remember to close ods or you will not
+get your pdf file.;
 
 *---------------- End of part 8 ----------------;
