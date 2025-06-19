@@ -1,16 +1,19 @@
 ---
-title: "Simple descriptive statistics"
+title: "Simple graphs"
 ---
 
 ## General directions
 
--   Continue using the program you adapted from assignment 2a.
+-   Continue using the program you adapted from assignment 2b. Remove the code that answered the questions from that assignment.
 
 ## Add code to answer the following questions
 
--   Q1. What cigarette brand has the lowest tar?
--   Q2. What cigarette brand has the highest tar?
--   Q3. What is the correlation between tar and nicotine.
+-   Q1. Do the data for tar and nicotine follow a normal distribution?
+    -   Use a histogram
+    -   Modify the bar widths (either up or down) from the default
+-   Q2. What is the relationship between tar and nicotine?
+    -   Use a scatterplot with tar on the X-axis.
+    -   Include a smoothing spline.
 -   Provide interpretations in the title statements.
 -   List your name, the date, and the version of SAS as a footnote.
 
