@@ -1,5 +1,5 @@
 ---
-title: "sas-04-06"
+title: "Crosstabulations"
 format: 
   revealjs:
     slide-number: true
@@ -7,10 +7,13 @@ format:
 editor: source
 ---
 
-## 04-06
-
-`r sas[14]`
+## Crosstabulations
 
 `r sas[15]`
 
 `r sas[16]`
+
+`r sas[17]`
+
+`r sas[18]`
+

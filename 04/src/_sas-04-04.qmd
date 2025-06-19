@@ -1,5 +1,5 @@
 ---
-title: "sas-04-04"
+title: "Creating categories"
 format: 
   revealjs:
     slide-number: true
@@ -7,9 +7,7 @@ format:
 editor: source
 ---
 
-## 02-04
-
-`r sas[9]`
+## Creating categories
 
 `r sas[10]`
 
@@ -17,3 +15,4 @@ editor: source
 
 `r sas[12]`
 
+`r sas[13]`

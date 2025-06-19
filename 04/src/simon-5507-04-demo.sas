@@ -9,7 +9,7 @@
     titanic1, age converted to numeric
 
 
-* Comments on the code: Documenting your program.
+* Comments on the code: Documenting your program
 
 This is my standard documentation.;
 
@@ -26,7 +26,7 @@ libname perm
   "&path/data";
 
 
-* Comments on the code: File locations.
+* Comments on the code: File locations
 
 These are my standard file locations.;
 
@@ -38,17 +38,6 @@ proc import
     replace;
   delimiter='09'x;
   getnames=yes;
-run;
-
-proc print
-    data=perm.titanic(obs=10);
-  title1 "The first ten rows of the Titanic dataset";
-  footnote1 "Created by Steve Simon on &sysdate using SAS &sysver";
-run;
-
-proc contents
-    data=perm.titanic;
-  title1 "Internal description of Titanic dataset";
 run;
 
 
@@ -64,10 +53,31 @@ one line) or files without variable
 names in the first row are usually 
 better handled by a data step.
 
-Notice how the age variable is right
-justified. This is caused by the 
-non-standard missing value code of NA,
-as noted in the data dictionary. It 
+There is a small problem with the 
+imported data as you shall see below.;
+
+
+proc print
+    data=perm.titanic(obs=10);
+  title1 "The first ten rows of the Titanic dataset";
+  footnote1 "Created by Steve Simon on &sysdate using SAS &sysver";
+run;
+
+proc contents
+    data=perm.titanic;
+  title1 "Internal description of Titanic dataset";
+run;
+
+
+* Comments on the code: The print and contents procedures
+
+Notice how the age variable is left
+justified. Most of the time, strings are 
+left justified, but age is a numeric
+variable. Or it should have been. This is
+caused by the non-standard (non-standard
+to SAS) missing value code of NA, as 
+noted in the data dictionary. It 
 would have been easier to anticipate 
 this ahead of time, but we'll fix 
 things up after the fact.;
@@ -90,6 +100,8 @@ zero. But you get a warning message for each
 occurence of NA, which can get tedious. The input 
 function with two question marks avoids this 
 issue.;
+
+*---------------- End of part 1 ----------------;
 
 
 proc format;
@@ -114,6 +126,7 @@ The value subcommand designates codes and assigns those codes to a format name, 
 
 Once category codes are defined, you specify which variable or variables use those codes with a format statement. This insures that the number codes are replaced by the proper labels.;
 
+*---------------- End of part 2 ----------------;
 
 proc sgplot
     data=perm.titanic1;
@@ -168,6 +181,7 @@ The yaxis subcommand controls how that axis is displayed.
 
 The max option sets the upper limit of this axis to 100.;
 
+*---------------- End of part 3 ----------------;
 
 data age_categories;
   set perm.titanic1;
@@ -207,7 +221,7 @@ proc means
 run;
 
 
-* Comments on the code: Quality check
+* Comments on the code: Quality check, 1
 
 Always cross check your results against the original variable.
 
@@ -229,7 +243,7 @@ data age_codes;
 run;
 
 
-* Creating categories, number codes.
+* Comments on the code: Creating categories, number codes.
 
 You can control the order by using number codes and formats.; 
 
@@ -265,9 +279,11 @@ proc means
 run;
 
 
-* Comments on the code: Quality check,2
+* Comments on the code: Quality check, 2
 
 Again, a quality check is important.;
+
+*---------------- End of part 4 ----------------;
 
 
 data first_class;
@@ -290,6 +306,8 @@ Here's how you combine categories for
 a categorical variable. It uses the same 
 "if - then - else" code.;
 
+*---------------- End of part 5 ----------------;
+
 
 proc freq
     data=perm.titanic1;
@@ -299,7 +317,7 @@ proc freq
 run;
 
 
-* Comments on the code, Default crosstabulation
+* Comments on the code: Default crosstabulation
 
 To examine relationships among 
 categorical variables use a two dimensional 

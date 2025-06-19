@@ -40,6 +40,8 @@ chunk_sas <- function(fn) {
     str_replace(mark, "## ") -> titles
 
   n <- length(titles)
+  
+  titles <- glue("{titles} ({1:n})")
 
   sas <- paste0(
     titles,

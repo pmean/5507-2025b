@@ -1,5 +1,5 @@
 ---
-title: "sas-04-02"
+title: "Labels for number codes"
 format: 
   revealjs:
     slide-number: true
@@ -7,9 +7,6 @@ format:
 editor: source
 ---
 
-## 04-02
+## Labels for number codes
 
-`r sas[4]`
-
-`r sas[5]`
-
+`r sas[6]`
