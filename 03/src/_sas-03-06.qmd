@@ -35,4 +35,10 @@ This is the same artificial dataset, using the tilde symbol (~) as the delimiter
 
 ## Live demo, 6
 
--   "09"X (SAS code for the tab character)
+-   proc import
+    -   datafile option
+    -   dbms=dlm option
+    -   out option
+    -   replace option
+-   delimiter subcommand
+-   getnames subcommand

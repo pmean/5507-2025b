@@ -35,4 +35,6 @@ This is the same artificial dataset, using commas as delimiters. This is the mos
 
 ## Live demo, 2
 
--   delimiter argument (infile subcommand, data step)
+-   data step
+    -   infile subcommand
+        -   delimiter=","

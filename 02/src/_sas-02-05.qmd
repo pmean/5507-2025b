@@ -19,7 +19,7 @@ Sometimes you want to alter some of your data. This could be a units conversion,
 
 :::
 
-## Non destructive transformations, Different variable name
+## Different variable, same data
 
 ```{}
 data name1;
@@ -36,7 +36,7 @@ If you make a transformation, you should do it in a non-destructive way, meaning
 
 :::
 
-## Non destructive transformations, Different dataset name
+## Same variable, different data
 
 ```{}
 data name2;
@@ -46,6 +46,15 @@ run;
 ```
 
 `r sas[15]`
+
+## Reminder
+
+-   $bmi = \frac{wt}{ht^2}$, if wt and ht correct
+-   $ht = \sqrt{\frac{wt}{bmi}}$, if wt and bmi correct
+-   $wt = bmi \times ht^2$, if ht and bmi correct
+-   Don't forget unit conversions!
+    -   Converting inches to meter, $\times 39.37$
+    -   Converting pounds to kilograms $\div 2.2$
 
 ## Live demo, 5
 

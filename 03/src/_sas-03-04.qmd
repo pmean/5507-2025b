@@ -35,4 +35,6 @@ This is the same artificial dataset, using the tilde symbol (~) as the delimiter
 
 ## Live demo, 4
 
--   "09"X (SAS code for the tab character)
+-   data step
+    -   infile subcommand
+        -   delimiter="~"

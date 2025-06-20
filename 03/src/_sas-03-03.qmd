@@ -43,7 +43,7 @@ The tab character in ASCII is represented by binary 0000 1001 or hexadecimal 09,
 
 -   "09"X
 -   ^t
--   \t
+-   \\t
 -   0x09
 
 ::: notes
@@ -60,7 +60,7 @@ In SAS, the code is "09"X. In Microsoft Word, it is ^t. In R it is either \t or 
     -   Does not allow word wrap
     -   Does not allow multiple blanks to collapse
 -   Binary 1010 0000, Hexadecimal A0
--   Represented in html as &nbsp;
+-   Represented in html as `&nbsp;`
 
 ::: notes
 
@@ -103,4 +103,6 @@ You can also detect tabs by opening the file in a text editor like notebook and 
 
 ## Live demo, 3
 
--   "09"X (SAS code for the tab character)
+-   data step
+    -   infile subcommand
+        -   delimiter="09"X

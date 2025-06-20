@@ -21,8 +21,8 @@ text_data <- read_lines("../data/text-with-strings.txt")
         -   2411 Holmes Street
         -   (816) 235-6617
 -   Also called character data
--   Often enclosed in single quotes (') or double quotes (")
-    -   Avoid smart/curly quotes (‘’ or “”)
+-   Often enclosed in single quotes (`'`) or double quotes (`"`)
+    -   Avoid smart/curly quotes (`‘’` or `“”`)
 
 ::: notes
 
@@ -75,3 +75,6 @@ This is the same artificial dataset, with no delimiters. There are a few stray b
 
 ## Live demo, 5
 
+-   data step
+    -   input subcommand
+        -   $ option
