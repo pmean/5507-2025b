@@ -1003,7 +1003,7 @@ margin-right: 0; }
 <li>Files with names in first row</li>
 <li>Fixed width files</li>
 <li>Importing files with strings</li>
-<li>TBA</li>
+<li>Troubleshooting</li>
 </ul></li>
 </ul>
 </section>
@@ -1196,9 +1196,9 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="documentation-header" class="slide level2">
-<h2>Documentation header</h2>
-<pre><code>* 5507-03-simon-import-space-delimited.sas
+<section id="documentation-header-1" class="slide level2">
+<h2>Documentation header (1)</h2>
+<pre><code>* 5507-03-simon-demo-01-space-delimited.sas
 * author: Steve Simon
 * creation date: 2019-07-01
 * purpose: to import data with spaces as delimiters
@@ -1220,18 +1220,18 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="file-locations" class="slide level2">
-<h2>File locations</h2>
-<pre><code>%let path=q:/introduction-to-sas;
+<section id="file-locations-2" class="slide level2">
+<h2>File locations (2)</h2>
+<pre><code>%let path=q:/5507-2025b/03;
 
 ods pdf file=
-    &quot;&amp;path/results/5507-03-simon-import-space-delimited.pdf&quot;;
+    &quot;&amp;path/results/5507-03-simon-demo-01-space-delimited.pdf&quot;;
 
 libname perm
     &quot;&amp;path/data&quot;;
 
 filename raw_data
-    &quot;&amp;path/data/space-delimited.txt&quot;;</code></pre>
+    &quot;&amp;path/data/text-space-delimited.txt&quot;;</code></pre>
 <aside class="notes">
 <ul>
 <li>Comments on the code: File locations</li>
@@ -1249,8 +1249,8 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="read-space-delimited-file" class="slide level2">
-<h2>Read space-delimited file</h2>
+<section id="read-space-delimited-file-3" class="slide level2">
+<h2>Read space-delimited file (3)</h2>
 <pre><code>data perm.space_delimited;
   infile raw_data;
   input x y z;
@@ -1320,9 +1320,9 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="documentation-header-1" class="slide level2">
-<h2>Documentation header</h2>
-<pre><code>* 5507-03-simon-import-comma-delimited.sas
+<section id="documentation-header-1-1" class="slide level2">
+<h2>Documentation header (1)</h2>
+<pre><code>* 5507-03-simon-demo-02-comma-delimited.sas
 * author: Steve Simon
 * creation date: 2019-07-01
 * purpose: to import comma delimited files
@@ -1344,18 +1344,18 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="file-locations-1" class="slide level2">
-<h2>File locations</h2>
-<pre><code>%let path=q:/introduction-to-sas;
+<section id="file-locations-2-1" class="slide level2">
+<h2>File locations (2)</h2>
+<pre><code>%let path=q:/5507-2025b/03;
 
 ods pdf file=
-    &quot;&amp;path/results/5507-03-simon-import-comma-delimited.pdf&quot;;
+    &quot;&amp;path/results/5507-03-simon-demo-02-comma-delimited.pdf&quot;;
 
 libname perm
     &quot;&amp;path/data&quot;;
 
 filename raw_data
-    &quot;&amp;path/data/comma-delimited.csv&quot;;</code></pre>
+    &quot;&amp;path/data/text-comma-delimited.csv&quot;;</code></pre>
 <aside class="notes">
 <ul>
 <li>Comments on the code: File locations</li>
@@ -1373,8 +1373,8 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="specifying-a-comma-delimiter" class="slide level2">
-<h2>Specifying a comma delimiter</h2>
+<section id="specifying-a-comma-delimiter-3" class="slide level2">
+<h2>Specifying a comma delimiter (3)</h2>
 <pre><code>data perm.comma_delimited;
   infile raw_data delimiter=&quot;,&quot;;
   input x y z;
@@ -1422,6 +1422,100 @@ display:block!important;
 </ul></li>
 </ul>
 </section>
+<section id="tabs-are-evil" class="slide level2">
+<h2>Tabs are evil</h2>
+<p><a href="http://new.pmean.com/pesky-tabs/"><img role="img" data-src="data:image/png;base64,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"></a></p>
+<aside class="notes">
+<p>Tabs were used on manual typewriters as a time saving device. If you wanted to indent the first line of a paragraph, you could just type five spaces (maybe ten) and then start typing. The tab key on a manual typerwriter would jump automatically to the indent location.</p>
+<p>When computer keyoboards came along, the powers-that-be decided to include the tab key. It seemed like a good idea. So good that they designated a special character in ASCII to represent it’s heritage.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="the-binary-representation" class="slide level2">
+<h2>The binary representation</h2>
+<ul>
+<li>Tab character: Binary 0000 1001 or hexadecimal 09</li>
+<li>Space character: Binary 0010 0000 or hexadecimal 20</li>
+<li>Tabs and spaces look similar, but
+<ul>
+<li>A tab delimited file is not a space delimited file</li>
+<li>A space delimited file is not a tab delimited file.</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>The tab character in ASCII is represented by binary 0000 1001 or hexadecimal 09, while the space key is represented by binary 0010 0000 or hexadecimal 20.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="designations-for-the-tab-character" class="slide level2">
+<h2>Designations for the tab character</h2>
+<ul>
+<li>“09”X</li>
+<li>^t</li>
+<li></li>
+<li>0x09</li>
+</ul>
+<aside class="notes">
+<p>If you want to work with the tab character, you need to know the code that your software system uses for the tab and other special characters.</p>
+<p>In SAS, the code is “09”X. In Microsoft Word, it is ^t. In R it is either r 0x09. The latter also works with Python, C, and other major programming languages.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="epilog-the-non-breaking-space" class="slide level2">
+<h2>Epilog: The non-breaking space</h2>
+<ul>
+<li>Looks just like a regular space
+<ul>
+<li>Does not allow word wrap</li>
+<li>Does not allow multiple blanks to collapse</li>
+</ul></li>
+<li>Binary 1010 0000, Hexadecimal A0</li>
+<li>Represented in html as  </li>
+</ul>
+<aside class="notes">
+<p>You may encounter another problematic character, the non-breaking space. These look like the space character and the only difference is that you can’t use word wrap with a non-breaking space. This forces the word to the left and the word to the right of the non-breaking space to stay on the same line.</p>
+<p>Also, a non-breaking space is preserved in some systems like html which would otherwise collapse multiple blanks into a single blank.</p>
+<p>The non-breaking space will sometimes hide among the regular spaces, but since it is not a delimiter, it will often mess up your import efforts.</p>
+<p>You won’t encounter a non-breaking space too often, but when you do, it is very hard to spot and to fix.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
 <section id="a-tab-delimited-file" class="slide level2">
 <h2>A tab delimited file</h2>
 <div class="cell">
@@ -1435,6 +1529,9 @@ display:block!important;
 </div>
 <aside class="notes">
 <p>This is the same artificial dataset, using tabs as delimiters. This is also a very common type of file that you will find on the Internet.</p>
+<p>I’ve already told you that tabs are evil, but if you encounter a tab delimited file, don’t panic. You can handle it.</p>
+<p>Here’s a simple example of a tab delimited file. Note that the numbers are left justfied, which is a hint that there are tabs lurking in the file. The tabs here stop at columns, 5, 9, and 13, which is a bit weird, but may just represent how my system treats tabs. The classic thing to look for in a tab delimited file, besides the right justification, is the semi-aligned, but not perfectly aligned numbers. This doesn’t happen with this data because all of the numbers are three digits or less, but it can happen when the numbers take up a bit more room and the numbers are uneven in size.</p>
+<p>You can also detect tabs by opening the file in a text editor like notebook and playing around with adding extra spaces. A lack of action followed by a sudden hop is a pretty good indication that you are dealing with tabs.</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1447,12 +1544,12 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="documentation-header-2" class="slide level2">
-<h2>Documentation header</h2>
-<pre><code>* 5507-03-simon-import-tab-delimited.sas
+<section id="documentation-header-1-2" class="slide level2">
+<h2>Documentation header (1)</h2>
+<pre><code>* 5507-03-simon-demo-03-tab-delimited.sas
 * author: Steve Simon
 * creation date: 2019-07-01
-* purpose: to import a comma delimited file into SAS
+* purpose: to import a tab-delimited file into SAS
 * license: public domain;</code></pre>
 <aside class="notes">
 <ul>
@@ -1471,18 +1568,18 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="file-locations-2" class="slide level2">
-<h2>File locations</h2>
-<pre><code>%let path=q:/introduction-to-sas;
+<section id="file-locations-2-2" class="slide level2">
+<h2>File locations (2)</h2>
+<pre><code>%let path=q:/5507-2025b/03;
 
 ods pdf file=
-    &quot;&amp;path/results/5507-03-simon-import-tab-delimited.pdf&quot;;
+    &quot;&amp;path/results/5507-03-simon-demo-03-tab-delimited.pdf&quot;;
 
 libname perm
     &quot;&amp;path/data&quot;;
 
 filename raw_data
-  &quot;&amp;path/data/tab-delimited.txt&quot;;</code></pre>
+  &quot;&amp;path/data/text-tab-delimited.txt&quot;;</code></pre>
 <aside class="notes">
 <ul>
 <li>Comments on the code: File locations</li>
@@ -1500,8 +1597,8 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="specifying-a-tab-delimiter" class="slide level2">
-<h2>Specifying a tab delimiter</h2>
+<section id="specifying-a-tab-delimiter-3" class="slide level2">
+<h2>Specifying a tab delimiter (3)</h2>
 <pre><code>data perm.tab_delimited;
   infile raw_data delimiter=&quot;09&quot;X;
   input x y z;
@@ -1512,14 +1609,12 @@ proc print
   title1 &quot;First two rows of data&quot;;
 run;
 
-ods pdf close;
-
-* Comments on the code: Specifying a tab delimiter
-
-The code &quot;09&quot;X designates a tab as the
-delimiter.;</code></pre>
+ods pdf close;</code></pre>
 <aside class="notes">
-<p>NA</p>
+<ul>
+<li>Comments on the code: Specifying a tab delimiter</li>
+</ul>
+<p>The code “09”X designates a tab as the delimiter.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1576,12 +1671,12 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="documentation-header-3" class="slide level2">
-<h2>Documentation header</h2>
-<pre><code>* 5507-03-simon-import-tilde-delimited.sas
+<section id="documentation-header-1-3" class="slide level2">
+<h2>Documentation header (1)</h2>
+<pre><code>* 5507-03-simon-demo-04-tilde-delimited.sas
 * author: Steve Simon
 * creation date: 2019-07-01
-* purpose: to import comma delimited files
+* purpose: to import a tilde-delimited file into SAS
 * license: public domain;</code></pre>
 <aside class="notes">
 <ul>
@@ -1600,18 +1695,18 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="file-locations-3" class="slide level2">
-<h2>File locations</h2>
-<pre><code>%let path=q:/introduction-to-sas;
+<section id="file-locations-2-3" class="slide level2">
+<h2>File locations (2)</h2>
+<pre><code>%let path=q:/5507-2025b/03;
 
 ods pdf file=
-  &quot;&amp;path/results/5507-03-simon-import-tilde-delimited.pdf&quot;;
+    &quot;&amp;path/results/5507-03-simon-demo-04-tilde-delimited.pdf&quot;;
 
 libname perm
   &quot;&amp;path/data&quot;;
 
 filename raw_data
-  &quot;&amp;path/data/tilde-delimited.txt&quot;;</code></pre>
+  &quot;&amp;path/data/text-tilde-delimited.txt&quot;;</code></pre>
 <aside class="notes">
 <ul>
 <li>Comments on the code: File locations</li>
@@ -1629,8 +1724,8 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="specifying-a-tilde-delimiter" class="slide level2">
-<h2>Specifying a tilde delimiter</h2>
+<section id="specifying-a-tilde-delimiter-3" class="slide level2">
+<h2>Specifying a tilde delimiter (3)</h2>
 <pre><code>data perm.tilde_delimited;
   infile raw_data delimiter=&quot;~&quot;;
   input x y z;
@@ -1678,15 +1773,79 @@ display:block!important;
 </ul></li>
 </ul>
 </section>
+<section id="string-data" class="slide level2">
+<h2>String data</h2>
+<ul>
+<li>A combination of letters, numbers, blanks, and/or symbols,
+<ul>
+<li>Examples
+<ul>
+<li>Simon, Stephen D.</li>
+<li>2411 Holmes Street</li>
+<li><ol start="816" type="1">
+<li>235-6617</li>
+</ol></li>
+</ul></li>
+</ul></li>
+<li>Also called character data</li>
+<li>Often enclosed in single quotes (’) or double quotes (“)
+<ul>
+<li>Avoid smart/curly quotes (’’ or “”)</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>String data, also called character data, is a combination of letters, numbers and/or symbols. A patients name, address, and telephone number, all of which are a combination of numbers, letters, and symbols, are examples of data that need strings to represent it.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="cautions-about-strings" class="slide level2">
+<h2>Cautions about strings</h2>
+<ul>
+<li>Strings longer than 8 characters</li>
+<li>Strings that include delimiters</li>
+<li>Strings that include quote marks (Conan O’Brian)</li>
+<li>Symbols outside 7-bit ASCII
+<ul>
+<li>resumé, naïve, façade</li>
+</ul></li>
+<li>Strings with different alphabets</li>
+</ul>
+<aside class="notes">
+<p>SAS (and SPSS) require a bit of care, at times, with strings longer than eight characters. Most of the time, longer strings are okay, but once in a while, you have to take special account for the longer strings.</p>
+<p>Strings can (and often do) include common delimiters like the space and the comma.</p>
+<p>Strings can also include single or double quote marks as part of the string. Common Irish names, like Conan O’Brian, are one example.</p>
+<p>Also be careful with strings outside the 7-bit ASCII code. The term 7-bit ASCII refers to the original character set associated with many early computers. These were limited to only 128 because of computer limits and did not allow for accented characters (resumé), diaeresis (naïve), or the cedilla (façade). Several competing standards were developed for these special characters, and sometimes they clash.</p>
+<p>Strings using different alphabets like Cyrillic, Greek, Hebrew, Arabic, Chinese will also sometimes present difficulties. These alphabets may sometimes require more than 8 bytes (especially Chinese) and the “size” of a string is sometimes tricky to measure.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
 <section id="a-file-with-strings" class="slide level2">
 <h2>A file with strings</h2>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>Alpha 4 8
-Bravo 8 16
-Charlie 12 24
-Delta 16 32
-Echo 24 48</code></pre>
+<pre><code>Alpha,4,8
+Bravo,8,16
+Charlie,12,24
+Delta,16,32
+Echo,24,48</code></pre>
 </div>
 </div>
 <aside class="notes">
@@ -1703,8 +1862,8 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="documentation-header-4" class="slide level2">
-<h2>Documentation header</h2>
+<section id="documentation-header-1-4" class="slide level2">
+<h2>Documentation header (1)</h2>
 <pre><code>* 5507-03-simon-demo-05-string-data.sas
 * author: Steve Simon
 * creation date: 2019-07-02
@@ -1727,18 +1886,18 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="file-locations-4" class="slide level2">
-<h2>File locations</h2>
-<pre><code>%let path=q:/introduction-to-sas;
+<section id="file-locations-2-4" class="slide level2">
+<h2>File locations (2)</h2>
+<pre><code>%let path=q:/5507-2025b/03;
 
 ods pdf file=
-    &quot;&amp;path/results/5507-03-simon-import-string-data.pdf&quot;;
+    &quot;&amp;path/results/5507-03-simon-demo-05-string-data.pdf&quot;;
 
 libname perm
     &quot;&amp;path/data&quot;;
 
 filename raw_data
-    &quot;&amp;path/data/string-data.txt&quot;;</code></pre>
+    &quot;&amp;path/data/text-with-strings.txt&quot;;</code></pre>
 <aside class="notes">
 <ul>
 <li>Comments on the code: File locations</li>
@@ -1756,10 +1915,10 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="reading-string-data" class="slide level2">
-<h2>Reading string data</h2>
+<section id="reading-string-data-3" class="slide level2">
+<h2>Reading string data (3)</h2>
 <pre><code>data perm.string_data;
-  infile raw_data delimiter=&quot; &quot;;
+  infile raw_data delimiter=&quot;,&quot;;
   input 
     name $
     x
@@ -1776,7 +1935,7 @@ ods pdf close;</code></pre>
 <ul>
 <li>Comments on the code: Reading string data</li>
 </ul>
-<p>use the dollar sign ($) to designate a particular variable as being string rather than numeric.;</p>
+<p>Use the dollar sign ($) to designate a particular variable as being string rather than numeric.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1830,9 +1989,9 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="documentation-header-5" class="slide level2">
-<h2>Documentation header</h2>
-<pre><code>* 5507-03-simon-import-fixed-width.sas
+<section id="documentation-header-1-5" class="slide level2">
+<h2>Documentation header (1)</h2>
+<pre><code>* 5507-03-simon-demo-06-fixed-width.sas
 * author: Steve Simon
 * creation date: 2019-07-01
 * purpose: to import data in a fixed width format
@@ -1854,18 +2013,18 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="file-locations-5" class="slide level2">
-<h2>File locations</h2>
-<pre><code>%let path=q:/introduction-to-sas;
+<section id="file-locations-2-5" class="slide level2">
+<h2>File locations (2)</h2>
+<pre><code>%let path=q:/5507-2025b/03;
 
 ods pdf file=
-    &quot;&amp;path/results/5507-03-simon-import-fixed-width.pdf&quot;;
+    &quot;&amp;path/results/5507-03-simon-demo-06-fixed-width.pdf&quot;;
 
 libname perm
     &quot;&amp;path/data&quot;;
 
 filename raw_data
-    &quot;&amp;path/data/fixed-width.txt&quot;;</code></pre>
+    &quot;&amp;path/data/text-fixed-width.txt&quot;;</code></pre>
 <aside class="notes">
 <ul>
 <li>Comments on the code: File locations</li>
@@ -1883,8 +2042,8 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="reading-fixed-width-data" class="slide level2">
-<h2>Reading fixed width data</h2>
+<section id="reading-fixed-width-data-3" class="slide level2">
+<h2>Reading fixed width data (3)</h2>
 <pre><code>data perm.fixed_width;
   infile raw_data delimiter=&quot;,&quot;;
   input 
@@ -1961,9 +2120,9 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="documentation-header-6" class="slide level2">
-<h2>Documentation header</h2>
-<pre><code>* 5507-03-simon-import-first-line-names.sas
+<section id="documentation-header-1-6" class="slide level2">
+<h2>Documentation header (1)</h2>
+<pre><code>* 5507-03-simon-demo-07-first-line-names.sas
 * author: Steve Simon
 * creation date: 2019-07-02
 * purpose: to import data with variable names on the first line
@@ -1985,18 +2144,18 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="file-locations-6" class="slide level2">
-<h2>File locations</h2>
-<pre><code>%let path=q:/introduction-to-sas;
+<section id="file-locations-2-6" class="slide level2">
+<h2>File locations (2)</h2>
+<pre><code>%let path=q:/5507-2025b/03;
 
 ods pdf file=
-    &quot;&amp;path/results/5507-03-simon-import-first-line-names.pdf&quot;;
+    &quot;&amp;path/results/5507-03-simon-demo-07-first-line-names.pdf&quot;;
 
 libname perm
     &quot;&amp;path/data&quot;;
 
 filename raw_data
-    &quot;&amp;path/data/first-line-names.csv&quot;;</code></pre>
+    &quot;&amp;path/data/text-first-line-names.csv&quot;;</code></pre>
 <aside class="notes">
 <ul>
 <li>Comments on the code: File locations</li>
@@ -2014,11 +2173,13 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="the-import-procedure-works-with-both-text-files-and-binary-files.-the-dataoption-tells-sas-the-location-of-the-text-or-binary-data" class="slide level2">
-<h2>The import procedure works with both text files and binary files. The data=option tells SAS the location of the text or binary data</h2>
+<section id="the-import-procedure-3" class="slide level2">
+<h2>The import procedure (3)</h2>
 <pre><code>proc import
-    datafile=raw_data dbms=dlm
-    out=perm.first_line_names replace;
+    datafile=raw_data 
+    dbms=dlm
+    out=perm.first_line_names 
+    replace;
   delimiter=&quot;,&quot;;
   getnames=yes;
 run;
@@ -2031,15 +2192,13 @@ run;
 ods pdf close;</code></pre>
 <aside class="notes">
 <ul>
-<li>Comments on the code: The import procedure works with both text files and binary files. The data=option tells SAS the location of the text or binary data</li>
+<li>Comments on the code: The import procedure</li>
 </ul>
+<p>The import procedure works with both text files and binary files. The data=option tells SAS the location of the text or binary data</p>
 <p>The dbms=delim option tells SAS that this is a delimited text file.</p>
 <p>The replace option tells SAS that it is okay to write this data set on top of another dataset with the same name, if it exists.</p>
 <p>The delimiter subcommand tells SAS to use a comma (,) as a delimiter.</p>
-<p>The getnames=yes subcommand tells SAS to use the first line of the file as the variable names.</p>
-<ul>
-<li></li>
-</ul>
+<p>The getnames=yes subcommand tells SAS to use the first line of the file as the variable names.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -2074,12 +2233,49 @@ display:block!important;
 </ul></li>
 <li>What’s coming next
 <ul>
-<li>TBA</li>
+<li>Troubleshooting</li>
 </ul></li>
 </ul>
 </section>
-<section id="section" class="slide level2">
-<h2>03-08</h2>
+<section id="troubleshooting" class="slide level2">
+<h2>Troubleshooting</h2>
+<ul>
+<li>Mistakes often will produce error or warning messages
+<ul>
+<li>Always check the log window!</li>
+</ul></li>
+<li>Using the wrong delimiter
+<ul>
+<li>Data smashed together in a single variable</li>
+</ul></li>
+<li>Misspecifying first line variable names
+<ul>
+<li>Strings as first line of data</li>
+<li>Variable names are actually numbers</li>
+</ul></li>
+<li>Nonstandard missing value codes
+<ul>
+<li>Something other than dot (.)</li>
+<li>Numeric data converted to strings</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>If you make a mistake in your code, SAS will usually catch it. Once in a while, though, it tries to make the error fit the data, with sometimes cryptic results.</p>
+<p>Now I want to encourage you to get in the habit of looking at the log window before looking at the output. If you get any error or warning messages, fix things. Don’t turn in output that may be compromised.</p>
+<p>If you specify the wrong delimiter, there will be only one variable per line. This often triggers an error. But sometimes, you might see all the individual data smashed together in an ugly looking string.</p>
+<p>If you tell SAS that the first line contains variable names (getnames=yes) and it doesn’t or if the first line does contrain variable names and you forget to tell SAS, then you might see some odd data sets. Your variable names could become the first line of actual data. Or the names of the variables might actually be numbers.</p>
+<p>If you have a non-standard missing value, such as NA (which is what R uses), then SAS may treat all the values for that variable as strings.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
 </section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
@@ -2093,7 +2289,7 @@ display:block!important;
 <li>Files with names in first row</li>
 <li>Fixed width files</li>
 <li>Importing files with strings</li>
-<li>TBA</li>
+<li>Troubleshooting</li>
 </ul></li>
 </ul>
 <!---
