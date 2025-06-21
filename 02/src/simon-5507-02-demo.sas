@@ -11,7 +11,7 @@
     body3, ht_cm calculated;
 
 
-* Comments on the code: Documenting your program.
+* Comments on the code: Documenting your program
 
 The demo programs in class will provide a short
 explanation of pretty much every new piece of
@@ -31,6 +31,7 @@ you found it.
 If you used a large language model to generate
 SAS code, you should acknowledge this and 
 include the prompt(s) that you used.;
+
 
 %let path=q:/5507-2025b/02;
 
@@ -494,10 +495,11 @@ sometimes help interpretability.;
 
 
 proc sgplot
-    data=module02.body2;
+  data=module02.body2;
   scatter x=abdomen y=fat_brozek /
-      markerattrs=(size=10 symbol=circle);
-  pbspline x=abdomen y=fat_brozek;
+    markerattrs=(size=10 symbol=circle);
+  pbspline x=abdomen y=fat_brozek /
+    lineattrs=(pattern=dash color=red);
   title1 "Simple scatterplot shows a strong positive trend";
   title2 "It levels off for high values.";
   title3 "This may be due solely to a single outlier on the high end";
@@ -511,9 +513,13 @@ produces a scatterplot.
 
 The pbspline subcommand adds a smoothing to help
 you visualize whether the trend is linear or not.
+Use reg if you want a linear trend line.
 
 The markerattrs option controls the size shape
-and color of the symbols on your graph;
+and color of the symbols on your graph
+
+The lineattrs option controls the pattern and
+color of the line;
 
 
 ods pdf close;

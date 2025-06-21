@@ -149,10 +149,7 @@ The disadvantage occurs when using less than and greater than comparisons. You m
 
 ## Live demo, 4
 
--   data step
-    -   set subcommand
-    -   if ... then subcommand
--   print procedure
-    -   where subcommand
--   means procedure
-    -   nmiss option
+-   set subcommand (data step)
+-   if ... then subcommand (data step)
+-   where subcommand (proc)
+-   nmiss option (means procedure)
