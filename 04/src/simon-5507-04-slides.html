@@ -1087,13 +1087,13 @@ display:block!important;
 </section>
 <section id="file-locations-2" class="slide level2">
 <h2>File locations (2)</h2>
-<pre><code>%let path=q:/5507-2025b;
+<pre><code>%let path=q:/5507-2025b/04;
 
 ods pdf
   file=&quot;&amp;path/results/5507-04-simon-demo.pdf&quot;;
 
 filename raw_data
-  &quot;&amp;path/data/titanic_v00.txt&quot;;
+  &quot;&amp;path/data/titanic.txt&quot;;
 
 libname perm
   &quot;&amp;path/data&quot;;</code></pre>
@@ -1173,8 +1173,8 @@ display:block!important;
 </section>
 <section id="using-the-input-function-5" class="slide level2">
 <h2>Using the input function (5)</h2>
-<pre><code>data titanic1;
-  set titanic;
+<pre><code>data perm.titanic1;
+  set perm.titanic;
   age_c = input(age, ?? 8.);
 run;</code></pre>
 <aside class="notes">
@@ -1220,7 +1220,7 @@ proc format;
 run;
 
 proc freq
-    data=perm.titanic;
+    data=perm.titanic1;
   tables Survived;
   format Survived f_survived.;
   title1 &quot;More than half of all the passengers died&quot;;
@@ -1263,7 +1263,7 @@ display:block!important;
 <section id="bar-charts-7" class="slide level2">
 <h2>Bar charts (7)</h2>
 <pre><code>proc sgplot
-    data=perm.titanic;
+    data=perm.titanic1;
   vbar Survived;
   format Survived f_survived.;
   title1 &quot;Bar chart for number surviving&quot;;
@@ -1290,7 +1290,7 @@ display:block!important;
 <h2>Computing percentages (8)</h2>
 <pre><code>proc freq
     noprint 
-    data=perm.titanic;
+    data=perm.titanic1;
   tables Survived / out=pct_survived;
 run;
 
@@ -1302,7 +1302,7 @@ run;</code></pre>
 <ul>
 <li>Comments on the code: Computing percentages</li>
 </ul>
-<p>Getting percentages is a bit tricky. You have to run proc freq and output the results to a new data file, pct_survived. I am using the noprint option, because I only want the percentages for internal use. It wouldn’t have hurt anything to print out a bit extra, but I want to encourage you to limit the amount of output that you present to a consulting client.</p>
+<p>Getting percentages is a bit tricky. You have to run proc freq and output the results to a new data file, pct_survived. I am using the noprint option, because I only want the percentages for internal use. It wouldn’t have hurt anything to print out a bit extra, but I want to encourage you to limit the amount of output that you present to a consulting client.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1361,7 +1361,7 @@ display:block!important;
 <section id="creating-categories-strings-10" class="slide level2">
 <h2>Creating categories, strings (10)</h2>
 <pre><code>data age_categories;
-  set perm.titanic;
+  set perm.titanic1;
   if age_c = .
     then age_cat = &quot;missing &quot;;
   else if age_c &lt; 6 
@@ -1426,7 +1426,7 @@ display:block!important;
 <section id="creating-categories-number-codes.-12" class="slide level2">
 <h2>Creating categories, number codes. (12)</h2>
 <pre><code>data age_codes;
-  set perm.titanic;
+  set perm.titanic1;
   if age_c = .
     then age_cat = 9;
   else if age_c &lt; 6 
@@ -1550,7 +1550,7 @@ display:block!important;
 <h2>Modifying categories (15)</h2>
 <pre><code>
 data first_class;
-  set perm.titanic;
+  set perm.titanic1;
   if PClass = &quot;1st&quot;
     then first_class = &quot;Yes&quot;;
     else first_class = &quot;No &quot;;
@@ -1565,7 +1565,7 @@ run;</code></pre>
 <ul>
 <li>Comments on the code: Modifying categories</li>
 </ul>
-<p>Here’s how you combine categories for a categorical variable. It uses the same “if - then - else” code.</p>
+<p>Here’s how you combine categories for a categorical variable. It uses the same “if - then - else” code.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1578,18 +1578,18 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="row-percentages-16" class="slide level2">
-<h2>Row percentages (16)</h2>
+<section id="default-crosstabulation-16" class="slide level2">
+<h2>Default crosstabulation (16)</h2>
 <pre><code>
 proc freq
-    data=perm.titanic;
+    data=perm.titanic1;
   tables Sex*Survived;
   format Survived f_survived.;
   title1 &quot;Crosstabulation with all percentages&quot;;
 run;</code></pre>
 <aside class="notes">
 <ul>
-<li>Comments on the code, Default crosstabulation</li>
+<li>Comments on the code: Default crosstabulation</li>
 </ul>
 <p>To examine relationships among categorical variables use a two dimensional crosstabulation.</p>
 <p>Notice that SAS provides three different percentages. I do NOT recommend that you show every percentage.;</p>
@@ -1605,10 +1605,10 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="column-percentages-17" class="slide level2">
-<h2>Column percentages (17)</h2>
+<section id="row-percentages-17" class="slide level2">
+<h2>Row percentages (17)</h2>
 <pre><code>proc freq
-    data=perm.titanic;
+    data=perm.titanic1;
   tables Sex*Survived / nocol nopercent;
   format Survived f_survived.;
   title1 &quot;Crosstabulation with row percentages&quot;;
@@ -1631,10 +1631,10 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="cell-percentages-18" class="slide level2">
-<h2>Cell percentages (18)</h2>
+<section id="column-percentages-18" class="slide level2">
+<h2>Column percentages (18)</h2>
 <pre><code>proc freq
-    data=perm.titanic;
+    data=perm.titanic1;
   tables Sex*Survived / norow nopercent;
   format Survived f_survived.;
   title1 &quot;Crosstabulation with column percentages&quot;;

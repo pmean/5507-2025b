@@ -11,10 +11,9 @@ params:
   topic_04: "Creating categories"
   topic_05: "Modifying categories"
   topic_06: "Crosstabulations"
-  topic_07: "TBA"
 editor: source
 ---
-935.56
+
 ```{r}
 # Preliminaries, if needed
 
@@ -39,8 +38,6 @@ editor: source
     -   `r params$topic_04`
     -   `r params$topic_05`
     -   `r params$topic_06`
-    -   `r params$topic_07`
-    -   `r params$topic_08`
 
 {{< include ../../general/src/chunk_sas_function.qmd >}}
 
@@ -91,26 +88,6 @@ editor: source
     
 {{< include _sas-04-06.qmd >}}
 
-## Break #6
-
--   What you have learned
-    -   `r params$topic_06`
--   What's coming next
-    -   `r params$topic_07`
-    
-{{< include _sas-04-07.qmd >}}
-
-## Break #7
-
--   What you have learned
-    -   `r params$topic_07`
--   What's coming next
-    -   `r params$topic_08`
-    
-{{< include _sas-04-08.qmd >}}
-
-
-
 ## Summary
 
 -   What you have learned
@@ -120,8 +97,6 @@ editor: source
     -   `r params$topic_04`
     -   `r params$topic_05`
     -   `r params$topic_06`
-    -   `r params$topic_07`
-    -   `r params$topic_08`
 
 <!---
       You have to put the title down 

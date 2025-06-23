@@ -25,6 +25,7 @@ Sometimes you want to alter some of your data. This could be a units conversion,
 data name1;
   set name1;
   wt_kg = wt / 2.2;
+  label wt_kg = Weight (kg);
 run;
 ```
 
@@ -42,6 +43,7 @@ If you make a transformation, you should do it in a non-destructive way, meaning
 data name2;
   set name1;
   wt = wt / 2.2;
+  label wt = Weight (kg);
 run;
 ```
 
