@@ -9,10 +9,10 @@ editor: source
 
 ## Creating categories
 
+`r sas[ 8]`
+
+`r sas[ 9]`
+
 `r sas[10]`
 
 `r sas[11]`
-
-`r sas[12]`
-
-`r sas[13]`

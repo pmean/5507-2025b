@@ -9,8 +9,24 @@ editor: source
 
 ## Drawing bar charts
 
+-   Many features are important
+    -   Horizontal bars are often better
+    -   Adjust aspect ratio to keep bars thin
+
+::: notes
+
+Bar charts can display counts or percentages for your categorical data. The default options for these charts should almost always be modified.
+
+For most bar charts a horizontal orientation is often better. The category labels fit better and are easier to read. A horizontal bar chart will often fit better on the page of a manuscript.
+
+There are exceptions. Charts with many bars, especially with clustering (coding two or more catgorical variables) will often be better in a vertical orientation.
+
+Try things both ways if you are unsure.
+
+The aspect ratio (the ratio the the height of the graph to the width) is also important. Try to avoid a small number of very fat bars. For a horizontal bar chart this often means an aspect ratio less than 1. How much less depends on how many bars you have. For two or three bars, a height of about 2 inches to a width of about 6 inches works well.
+
+Again, try different options and see which one looks best.
+
+:::
+
 `r sas[7]`
-
-`r sas[8]`
-
-`r sas[9]`

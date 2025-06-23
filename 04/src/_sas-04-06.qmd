@@ -9,9 +9,8 @@ editor: source
 
 ## Crosstabulations
 
+`r sas[14]`
+
+`r sas[15]`
+
 `r sas[16]`
-
-`r sas[17]`
-
-`r sas[18]`
-

@@ -7,6 +7,26 @@ format:
 editor: source
 ---
 
-## Labels for number codes
+## Coding categories
+
+-   Use number codes (1, 2, 9)
+-   Use single letter codes (F, M, U)
+-   Use strings (Female, Male, Unspecified)
+
+::: notes
+
+When you have categorical data, you can choose how to represent it. There are several possible choices, each with advantages and disadvantages.
+
+Number codes are useful for controlling the order in which the categories are displayed. If you want to present tables and graphs with males frist, then females, then unspecified, then assign the codes accordingly. The problem with number codes is consistency. If half of your data entry team use 1 for males and half uses 1 for females, you have a serious problem.
+
+Single letter codes are easy to type and easy to remember. A problem occurs with the default in SAS and most other software. They will use alphabetical order to display your data in tables and graphs. Putting females before males might be okay, but it might not. There is also a potential for ambiguity. Your might be okay with W for White, but A could refer to African-American, American Indian, or Asian.
+
+Strings are very easy to remember and avoid many of the ambiguity and inconsistency problems with other representation. The typing can be a bit tedious and error prone.
+
+With both letter codes and strings, please be consistent with capitalization. Most of SAS is fine with upper case, lower case, or a mix. But not with category codes. Capital F female is a different category that lower case F female.
+
+If you use number codes, you should always use proc format to insure that your output is labeled clearly and unambiguously.
+
+:::
 
 `r sas[6]`

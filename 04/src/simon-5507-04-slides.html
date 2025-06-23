@@ -991,10 +991,6 @@ margin-right: 0; }
 </div>
 
 </section>
-<section class="slide level2">
-
-<p>935.56</p>
-</section>
 <section id="topics-to-be-covered" class="slide level2">
 <h2>Topics to be covered</h2>
 <ul>
@@ -1006,8 +1002,6 @@ margin-right: 0; }
 <li>Creating categories</li>
 <li>Modifying categories</li>
 <li>Crosstabulations</li>
-<li>TBA</li>
-<li></li>
 </ul></li>
 </ul>
 </section>
@@ -1286,6 +1280,22 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
+<section id="break-3" class="slide level2">
+<h2>Break #3</h2>
+<ul>
+<li>What you have learned
+<ul>
+<li>Drawing bar charts</li>
+</ul></li>
+<li>What’s coming next
+<ul>
+<li>Creating categories</li>
+</ul></li>
+</ul>
+</section>
+<section id="creating-categories" class="slide level2">
+<h2>Creating categories</h2>
+</section>
 <section id="computing-percentages-8" class="slide level2">
 <h2>Computing percentages (8)</h2>
 <pre><code>proc freq
@@ -1341,22 +1351,6 @@ width: 1px!important;
 overflow: hidden!important;
 display:block!important;
 }</style></aside>
-</section>
-<section id="break-3" class="slide level2">
-<h2>Break #3</h2>
-<ul>
-<li>What you have learned
-<ul>
-<li>Drawing bar charts</li>
-</ul></li>
-<li>What’s coming next
-<ul>
-<li>Creating categories</li>
-</ul></li>
-</ul>
-</section>
-<section id="creating-categories" class="slide level2">
-<h2>Creating categories</h2>
 </section>
 <section id="creating-categories-strings-10" class="slide level2">
 <h2>Creating categories, strings (10)</h2>
@@ -1423,6 +1417,22 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
+<section id="break-4" class="slide level2">
+<h2>Break #4</h2>
+<ul>
+<li>What you have learned
+<ul>
+<li>Creating categories</li>
+</ul></li>
+<li>What’s coming next
+<ul>
+<li>Modifying categories</li>
+</ul></li>
+</ul>
+</section>
+<section id="section" class="slide level2">
+<h2>04-05</h2>
+</section>
 <section id="creating-categories-number-codes.-12" class="slide level2">
 <h2>Creating categories, number codes. (12)</h2>
 <pre><code>data age_codes;
@@ -1481,21 +1491,21 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="break-4" class="slide level2">
-<h2>Break #4</h2>
+<section id="break-5" class="slide level2">
+<h2>Break #5</h2>
 <ul>
 <li>What you have learned
 <ul>
-<li>Creating categories</li>
+<li>Modifying categories</li>
 </ul></li>
 <li>What’s coming next
 <ul>
-<li>Modifying categories</li>
+<li>Crosstabulations</li>
 </ul></li>
 </ul>
 </section>
-<section id="section" class="slide level2">
-<h2>04-05</h2>
+<section id="crosstabulations" class="slide level2">
+<h2>Crosstabulations</h2>
 </section>
 <section id="quality-check-2-14" class="slide level2">
 <h2>Quality check, 2 (14)</h2>
@@ -1529,22 +1539,6 @@ width: 1px!important;
 overflow: hidden!important;
 display:block!important;
 }</style></aside>
-</section>
-<section id="break-5" class="slide level2">
-<h2>Break #5</h2>
-<ul>
-<li>What you have learned
-<ul>
-<li>Modifying categories</li>
-</ul></li>
-<li>What’s coming next
-<ul>
-<li>Crosstabulations</li>
-</ul></li>
-</ul>
-</section>
-<section id="crosstabulations" class="slide level2">
-<h2>Crosstabulations</h2>
 </section>
 <section id="modifying-categories-15" class="slide level2">
 <h2>Modifying categories (15)</h2>
@@ -1605,87 +1599,6 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="row-percentages-17" class="slide level2">
-<h2>Row percentages (17)</h2>
-<pre><code>proc freq
-    data=perm.titanic1;
-  tables Sex*Survived / nocol nopercent;
-  format Survived f_survived.;
-  title1 &quot;Crosstabulation with row percentages&quot;;
-run;</code></pre>
-<aside class="notes">
-<ul>
-<li>Comments on the code: Row percentages</li>
-</ul>
-<p>You get row percentages by excluding column percentages (nocol) and cell percentages (nopercent).</p>
-<p>Notice that among the men, 83% died and 17% survived. 83% and 17% adds up to 100% within that row. Among the women 33% died and 67% survived. 33% and 67% addes up to 100% within that row.;</p>
-<style type="text/css">
-span.MJX_Assistive_MathML {
-position:absolute!important;
-clip: rect(1px, 1px, 1px, 1px);
-padding: 1px 0 0 0!important;
-border: 0!important;
-height: 1px!important;
-width: 1px!important;
-overflow: hidden!important;
-display:block!important;
-}</style></aside>
-</section>
-<section id="column-percentages-18" class="slide level2">
-<h2>Column percentages (18)</h2>
-<pre><code>proc freq
-    data=perm.titanic1;
-  tables Sex*Survived / norow nopercent;
-  format Survived f_survived.;
-  title1 &quot;Crosstabulation with column percentages&quot;;
-run;</code></pre>
-<aside class="notes">
-<ul>
-<li>Comments on the code: Column percentages</li>
-</ul>
-<p>You get column percentages by excluding row percentages (norow) and cell percentages (nopercent).</p>
-<p>Column percentages add up to 100% within each column. Among those who died, 18% were women and 82% were men. 18% and 82% adds up to 100%. Among the survivors, 68% were women and 32% were men. 68% and 32% adds up to 100%.;</p>
-<style type="text/css">
-span.MJX_Assistive_MathML {
-position:absolute!important;
-clip: rect(1px, 1px, 1px, 1px);
-padding: 1px 0 0 0!important;
-border: 0!important;
-height: 1px!important;
-width: 1px!important;
-overflow: hidden!important;
-display:block!important;
-}</style></aside>
-</section>
-<section id="break-6" class="slide level2">
-<h2>Break #6</h2>
-<ul>
-<li>What you have learned
-<ul>
-<li>Crosstabulations</li>
-</ul></li>
-<li>What’s coming next
-<ul>
-<li>TBA</li>
-</ul></li>
-</ul>
-</section>
-<section id="section-1" class="slide level2">
-<h2>02-07</h2>
-</section>
-<section id="break-7" class="slide level2">
-<h2>Break #7</h2>
-<ul>
-<li>What you have learned
-<ul>
-<li>TBA</li>
-</ul></li>
-<li><h2 id="whats-coming-next">What’s coming next</h2></li>
-</ul>
-</section>
-<section id="section-2" class="slide level2">
-<h2>02-08</h2>
-</section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
 <ul>
@@ -1697,8 +1610,6 @@ display:block!important;
 <li>Creating categories</li>
 <li>Modifying categories</li>
 <li>Crosstabulations</li>
-<li>TBA</li>
-<li></li>
 </ul></li>
 </ul>
 <!---
