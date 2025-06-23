@@ -45,9 +45,9 @@ This assignment was written by Steve Simon on 2025-06-19 and is placed in the pu
 
 [ref-simon-energy01]: https://github.com/pmean/data/blob/main/files/energy01.csv
 [ref-simon-dictionary01]: https://github.com/pmean/data/blob/main/files/energy01.yaml
-[ref-simon-energy02]: https://github.com/pmean/data/blob/main/files/energy02.csv
+[ref-simon-energy02]: https://github.com/pmean/data/blob/main/files/energy02.tsv
 [ref-simon-dictionary02]: https://github.com/pmean/data/blob/main/files/energy02.yaml
-[ref-simon-energy03]: https://github.com/pmean/data/blob/main/files/energy03.csv
+[ref-simon-energy03]: https://github.com/pmean/data/blob/main/files/energy03.txt
 [ref-simon-dictionary03]: https://github.com/pmean/data/blob/main/files/energy03.yaml
 [ref-simon-energy04]: https://github.com/pmean/data/blob/main/files/energy04.csv
 [ref-simon-dictionary04]: https://github.com/pmean/data/blob/main/files/energy04.yaml
