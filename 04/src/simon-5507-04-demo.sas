@@ -112,7 +112,7 @@ run;
 
 proc freq
     data=perm.titanic1;
-  tables Survived;
+  tables Survived / nocum;
   format Survived f_survived.;
   title1 "More than half of all the passengers died";
 run;
@@ -120,66 +120,62 @@ run;
 
 * Comments on the code: The format procedure
 
-You define category values using the format procedure. This is similar to the value labels in SPSS and the factor function in R.
+You define category values using the 
+format procedure. This is similar to 
+the value labels in SPSS and the 
+factor function in R.
 
-The value subcommand designates codes and assigns those codes to a format name, in this case, f_survived. You can use any reasonable name. I choose to prefix any category format with f_.
+The value subcommand designates codes 
+and assigns those codes to a format 
+name, in this case, f_survived. You 
+can use any reasonable name. I choose
+to prefix any category format with f_.
 
-Once category codes are defined, you specify which variable or variables use those codes with a format statement. This insures that the number codes are replaced by the proper labels.;
+Once category codes are defined, you
+specify which variable or variables
+use those codes with a format 
+statement. This insures that the 
+number codes are replaced by the 
+proper labels.;
 
 *---------------- End of part 2 ----------------;
 
+ods graphics / height=1.5 in width=6 in;
+
 proc sgplot
     data=perm.titanic1;
-  vbar Survived;
-  format Survived f_survived.;
-  title1 "Bar chart for number surviving";
-  title2 "More than half of the passengers died";
+  hbar Sex / 
+      nofill 
+      stat=percent;
+  xaxis 
+      label = " "
+      values = (0 0.2 0.4 0.6 0.8 1)
+      valuesdisplay = ("0%" "20%" "40%" "60%" "80%" "100%") 
+      max = 1;
+  yaxis label = " ";
+  title1 "Most of the passengers were male";
 run;
 
 
 * Comments on the code: Bar charts
 
-The vbar subcommand draws vertical bars with heights equal to the number of observations in each category. Notice the use of the format statement to use category labels rather than numbers in the bar chart.;
+The ods graphics options controls some
+general options for the graphs produced
+by SAS.
+
+The height and width options control the
+vertical and horizontal dimentions of
+the graphing window.
+
+The hbar subcommand draws horizontal bars.
+
+The nofill option uses no color for the
+interior of the bar. 
+
+The stat=percent makes the length of the
+bars equal to the percentage.;
 
 
-proc freq
-    noprint 
-    data=perm.titanic1;
-  tables Survived / out=pct_survived;
-run;
-
-proc print
-    data=pct_survived;
-  title1 "Dataset created by proc freq";
-run;
-
-
-* Comments on the code: Computing percentages
-
-Getting percentages is a bit tricky. 
-You have to run proc freq and output the results 
-to a new data file, pct_survived. I am using the 
-noprint option, because I only want the 
-percentages for internal use. It wouldn't have 
-hurt anything to print out a bit extra, but I 
-want to encourage you to limit the amount of 
-output that you present to a consulting client.;
-
-
-proc sgplot
-    data=pct_survived;
-  vbar Survived / response=Percent;
-  yaxis max=100;
-  format Survived f_survived.;
-  title1 "Bar chart for percent surviving";
-run;
-
-
-* Comments on the code: Bar chart for percentages
-
-The yaxis subcommand controls how that axis is displayed.
-
-The max option sets the upper limit of this axis to 100.;
 
 *---------------- End of part 3 ----------------;
 
