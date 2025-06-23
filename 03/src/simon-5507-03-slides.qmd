@@ -10,8 +10,8 @@ params:
   topic_03: "Importing tab-delimited files"
   topic_04: "Importing files with other delimiters"
   topic_05: "Importing files with strings"
-  topic_06: "Files with names in first row"
-  topic_07: "Fixed width files"
+  topic_06: "Fixed width files"
+  topic_07: "Files with names in first row"
   topic_08: "Troubleshooting"
 editor: source
 ---
