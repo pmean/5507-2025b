@@ -1201,8 +1201,31 @@ display:block!important;
 </ul></li>
 </ul>
 </section>
-<section id="labels-for-number-codes" class="slide level2">
-<h2>Labels for number codes</h2>
+<section id="coding-categories" class="slide level2">
+<h2>Coding categories</h2>
+<ul>
+<li>Use number codes (1, 2, 9)</li>
+<li>Use single letter codes (F, M, U)</li>
+<li>Use strings (Female, Male, Unspecified)</li>
+</ul>
+<aside class="notes">
+<p>When you have categorical data, you can choose how to represent it. There are several possible choices, each with advantages and disadvantages.</p>
+<p>Number codes are useful for controlling the order in which the categories are displayed. If you want to present tables and graphs with males frist, then females, then unspecified, then assign the codes accordingly. The problem with number codes is consistency. If half of your data entry team use 1 for males and half uses 1 for females, you have a serious problem.</p>
+<p>Single letter codes are easy to type and easy to remember. A problem occurs with the default in SAS and most other software. They will use alphabetical order to display your data in tables and graphs. Putting females before males might be okay, but it might not. There is also a potential for ambiguity. Your might be okay with W for White, but A could refer to African-American, American Indian, or Asian.</p>
+<p>Strings are very easy to remember and avoid many of the ambiguity and inconsistency problems with other representation. The typing can be a bit tedious and error prone.</p>
+<p>With both letter codes and strings, please be consistent with capitalization. Most of SAS is fine with upper case, lower case, or a mix. But not with category codes. Capital F female is a different category that lower case F female.</p>
+<p>If you use number codes, you should always use proc format to insure that your output is labeled clearly and unambiguously.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
 </section>
 <section id="the-format-procedure-6" class="slide level2">
 <h2>The format procedure (6)</h2>
@@ -1215,7 +1238,7 @@ run;
 
 proc freq
     data=perm.titanic1;
-  tables Survived;
+  tables Survived / nocum;
   format Survived f_survived.;
   title1 &quot;More than half of all the passengers died&quot;;
 run;</code></pre>
@@ -1253,21 +1276,58 @@ display:block!important;
 </section>
 <section id="drawing-bar-charts" class="slide level2">
 <h2>Drawing bar charts</h2>
+<ul>
+<li>Many features are important
+<ul>
+<li>Horizontal bars are often better</li>
+<li>Adjust aspect ratio to keep bars thin</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>Bar charts can display counts or percentages for your categorical data. The default options for these charts should almost always be modified.</p>
+<p>For most bar charts a horizontal orientation is often better. The category labels fit better and are easier to read. A horizontal bar chart will often fit better on the page of a manuscript.</p>
+<p>There are exceptions. Charts with many bars, especially with clustering (coding two or more catgorical variables) will often be better in a vertical orientation.</p>
+<p>Try things both ways if you are unsure.</p>
+<p>The aspect ratio (the ratio the the height of the graph to the width) is also important. Try to avoid a small number of very fat bars. For a horizontal bar chart this often means an aspect ratio less than 1. How much less depends on how many bars you have. For two or three bars, a height of about 2 inches to a width of about 6 inches works well.</p>
+<p>Again, try different options and see which one looks best.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
 </section>
 <section id="bar-charts-7" class="slide level2">
 <h2>Bar charts (7)</h2>
-<pre><code>proc sgplot
+<pre><code>ods graphics / height=1.5 in width=6 in;
+
+proc sgplot
     data=perm.titanic1;
-  vbar Survived;
-  format Survived f_survived.;
-  title1 &quot;Bar chart for number surviving&quot;;
-  title2 &quot;More than half of the passengers died&quot;;
+  hbar Sex / 
+      nofill 
+      stat=percent;
+  xaxis 
+      label = &quot; &quot;
+      values = (0 0.2 0.4 0.6 0.8 1)
+      valuesdisplay = (&quot;0%&quot; &quot;20%&quot; &quot;40%&quot; &quot;60%&quot; &quot;80%&quot; &quot;100%&quot;) 
+      max = 1;
+  yaxis label = &quot; &quot;;
+  title1 &quot;Most of the passengers were male&quot;;
 run;</code></pre>
 <aside class="notes">
 <ul>
 <li>Comments on the code: Bar charts</li>
 </ul>
-<p>The vbar subcommand draws vertical bars with heights equal to the number of observations in each category. Notice the use of the format statement to use category labels rather than numbers in the bar chart.;</p>
+<p>The ods graphics options controls some general options for the graphs produced by SAS.</p>
+<p>The height and width options control the vertical and horizontal dimentions of the graphing window.</p>
+<p>The hbar subcommand draws horizontal bars.</p>
+<p>The nofill option uses no color for the interior of the bar.</p>
+<p>The stat=percent makes the length of the bars equal to the percentage.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1296,65 +1356,11 @@ display:block!important;
 <section id="creating-categories" class="slide level2">
 <h2>Creating categories</h2>
 </section>
-<section id="computing-percentages-8" class="slide level2">
-<h2>Computing percentages (8)</h2>
-<pre><code>proc freq
-    noprint 
-    data=perm.titanic1;
-  tables Survived / out=pct_survived;
-run;
+<section id="creating-categories-strings-8" class="slide level2">
+<h2>Creating categories, strings (8)</h2>
+<pre><code>
 
-proc print
-    data=pct_survived;
-  title1 &quot;Dataset created by proc freq&quot;;
-run;</code></pre>
-<aside class="notes">
-<ul>
-<li>Comments on the code: Computing percentages</li>
-</ul>
-<p>Getting percentages is a bit tricky. You have to run proc freq and output the results to a new data file, pct_survived. I am using the noprint option, because I only want the percentages for internal use. It wouldn’t have hurt anything to print out a bit extra, but I want to encourage you to limit the amount of output that you present to a consulting client.;</p>
-<style type="text/css">
-span.MJX_Assistive_MathML {
-position:absolute!important;
-clip: rect(1px, 1px, 1px, 1px);
-padding: 1px 0 0 0!important;
-border: 0!important;
-height: 1px!important;
-width: 1px!important;
-overflow: hidden!important;
-display:block!important;
-}</style></aside>
-</section>
-<section id="bar-chart-for-percentages-9" class="slide level2">
-<h2>Bar chart for percentages (9)</h2>
-<pre><code>proc sgplot
-    data=pct_survived;
-  vbar Survived / response=Percent;
-  yaxis max=100;
-  format Survived f_survived.;
-  title1 &quot;Bar chart for percent surviving&quot;;
-run;</code></pre>
-<aside class="notes">
-<ul>
-<li>Comments on the code: Bar chart for percentages</li>
-</ul>
-<p>The yaxis subcommand controls how that axis is displayed.</p>
-<p>The max option sets the upper limit of this axis to 100.;</p>
-<style type="text/css">
-span.MJX_Assistive_MathML {
-position:absolute!important;
-clip: rect(1px, 1px, 1px, 1px);
-padding: 1px 0 0 0!important;
-border: 0!important;
-height: 1px!important;
-width: 1px!important;
-overflow: hidden!important;
-display:block!important;
-}</style></aside>
-</section>
-<section id="creating-categories-strings-10" class="slide level2">
-<h2>Creating categories, strings (10)</h2>
-<pre><code>data age_categories;
+data age_categories;
   set perm.titanic1;
   if age_c = .
     then age_cat = &quot;missing &quot;;
@@ -1385,8 +1391,8 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="quality-check-1-11" class="slide level2">
-<h2>Quality check, 1 (11)</h2>
+<section id="quality-check-1-9" class="slide level2">
+<h2>Quality check, 1 (9)</h2>
 <pre><code>proc sort
     data=age_categories;
   by age_cat;
@@ -1417,24 +1423,8 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="break-4" class="slide level2">
-<h2>Break #4</h2>
-<ul>
-<li>What you have learned
-<ul>
-<li>Creating categories</li>
-</ul></li>
-<li>What’s coming next
-<ul>
-<li>Modifying categories</li>
-</ul></li>
-</ul>
-</section>
-<section id="section" class="slide level2">
-<h2>04-05</h2>
-</section>
-<section id="creating-categories-number-codes.-12" class="slide level2">
-<h2>Creating categories, number codes. (12)</h2>
+<section id="creating-categories-number-codes.-10" class="slide level2">
+<h2>Creating categories, number codes. (10)</h2>
 <pre><code>data age_codes;
   set perm.titanic1;
   if age_c = .
@@ -1464,8 +1454,8 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="the-format-procedure-13" class="slide level2">
-<h2>The format procedure (13)</h2>
+<section id="the-format-procedure-11" class="slide level2">
+<h2>The format procedure (11)</h2>
 <pre><code>proc format;
   value f_age
     1 = &quot;toddler&quot;
@@ -1491,24 +1481,24 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="break-5" class="slide level2">
-<h2>Break #5</h2>
+<section id="break-4" class="slide level2">
+<h2>Break #4</h2>
 <ul>
 <li>What you have learned
 <ul>
-<li>Modifying categories</li>
+<li>Creating categories</li>
 </ul></li>
 <li>What’s coming next
 <ul>
-<li>Crosstabulations</li>
+<li>Modifying categories</li>
 </ul></li>
 </ul>
 </section>
-<section id="crosstabulations" class="slide level2">
-<h2>Crosstabulations</h2>
+<section id="section" class="slide level2">
+<h2>04-05</h2>
 </section>
-<section id="quality-check-2-14" class="slide level2">
-<h2>Quality check, 2 (14)</h2>
+<section id="quality-check-2-12" class="slide level2">
+<h2>Quality check, 2 (12)</h2>
 <pre><code>proc sort
     data=age_codes;
   by age_cat;
@@ -1540,8 +1530,8 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="modifying-categories-15" class="slide level2">
-<h2>Modifying categories (15)</h2>
+<section id="modifying-categories-13" class="slide level2">
+<h2>Modifying categories (13)</h2>
 <pre><code>
 data first_class;
   set perm.titanic1;
@@ -1572,8 +1562,24 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="default-crosstabulation-16" class="slide level2">
-<h2>Default crosstabulation (16)</h2>
+<section id="break-5" class="slide level2">
+<h2>Break #5</h2>
+<ul>
+<li>What you have learned
+<ul>
+<li>Modifying categories</li>
+</ul></li>
+<li>What’s coming next
+<ul>
+<li>Crosstabulations</li>
+</ul></li>
+</ul>
+</section>
+<section id="crosstabulations" class="slide level2">
+<h2>Crosstabulations</h2>
+</section>
+<section id="default-crosstabulation-14" class="slide level2">
+<h2>Default crosstabulation (14)</h2>
 <pre><code>
 proc freq
     data=perm.titanic1;
@@ -1587,6 +1593,58 @@ run;</code></pre>
 </ul>
 <p>To examine relationships among categorical variables use a two dimensional crosstabulation.</p>
 <p>Notice that SAS provides three different percentages. I do NOT recommend that you show every percentage.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="row-percentages-15" class="slide level2">
+<h2>Row percentages (15)</h2>
+<pre><code>proc freq
+    data=perm.titanic1;
+  tables Sex*Survived / nocol nopercent;
+  format Survived f_survived.;
+  title1 &quot;Crosstabulation with row percentages&quot;;
+run;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Row percentages</li>
+</ul>
+<p>You get row percentages by excluding column percentages (nocol) and cell percentages (nopercent).</p>
+<p>Notice that among the men, 83% died and 17% survived. 83% and 17% adds up to 100% within that row. Among the women 33% died and 67% survived. 33% and 67% addes up to 100% within that row.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="column-percentages-16" class="slide level2">
+<h2>Column percentages (16)</h2>
+<pre><code>proc freq
+    data=perm.titanic1;
+  tables Sex*Survived / norow nopercent;
+  format Survived f_survived.;
+  title1 &quot;Crosstabulation with column percentages&quot;;
+run;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Column percentages</li>
+</ul>
+<p>You get column percentages by excluding row percentages (norow) and cell percentages (nopercent).</p>
+<p>Column percentages add up to 100% within each column. Among those who died, 18% were women and 82% were men. 18% and 82% adds up to 100%. Among the survivors, 68% were women and 32% were men. 68% and 32% adds up to 100%.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;

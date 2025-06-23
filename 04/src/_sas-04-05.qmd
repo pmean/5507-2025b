@@ -9,6 +9,4 @@ editor: source
 
 ## 04-05
 
-`r sas[12]`
-
 `r sas[13]`
