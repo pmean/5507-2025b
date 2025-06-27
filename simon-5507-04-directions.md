@@ -1,5 +1,5 @@
 ---
-title: "Simple graphs"
+title: "Analyze the Garadail dataset"
 ---
 
 ## General directions
