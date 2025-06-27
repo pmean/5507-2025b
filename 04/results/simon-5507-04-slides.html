@@ -1355,62 +1355,58 @@ display:block!important;
 </section>
 <section id="creating-categories" class="slide level2">
 <h2>Creating categories</h2>
+<ul>
+<li>Converting continuous variables
+<ul>
+<li>Ease of interpretation</li>
+<li>Loss of information</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>Often you may be asked to convert a continuous variable into a categorical variable.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
 </section>
-<section id="creating-categories-strings-8" class="slide level2">
-<h2>Creating categories, strings (8)</h2>
-<pre><code>
+<section id="creating-categories-number-codes-8" class="slide level2">
+<h2>Creating categories, number codes (8)</h2>
+<pre><code></code></pre>
+<aside class="notes">
+<p>data age_codes; set perm.titanic1; if age_c = . then age_cat = 9; else if age_c &lt; 6 then age_cat = 1; else if age_c &lt; 13 then age_cat = 2; else if age_c &lt; 21 then age_cat = 3; else age_cat = 4; run;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="the-format-procedure-9" class="slide level2">
+<h2>The format procedure (9)</h2>
+<pre><code>* Comments on the code: Creating categories, number codes
 
-data age_categories;
-  set perm.titanic1;
-  if age_c = .
-    then age_cat = &quot;missing &quot;;
-  else if age_c &lt; 6 
-    then age_cat = &quot;toddler &quot;;
-  else if age_c &lt; 13
-    then age_cat = &quot;pre-teen&quot;;
-  else if age_c &lt; 21
-    then age_cat = &quot;teenager&quot;;
-  else age_cat   = &quot;adult   &quot;;
-run;</code></pre>
-<aside class="notes">
-<ul>
-<li>Comments on the code: Creating categories, strings</li>
-</ul>
-<p>If you want to create categories from a continuous variable, use a series of</p>
-<p>if - then - else</p>
-<p>statements;</p>
-<style type="text/css">
-span.MJX_Assistive_MathML {
-position:absolute!important;
-clip: rect(1px, 1px, 1px, 1px);
-padding: 1px 0 0 0!important;
-border: 0!important;
-height: 1px!important;
-width: 1px!important;
-overflow: hidden!important;
-display:block!important;
-}</style></aside>
-</section>
-<section id="quality-check-1-9" class="slide level2">
-<h2>Quality check, 1 (9)</h2>
-<pre><code>proc sort
-    data=age_categories;
-  by age_cat;
-run;
+Create new categories using the 
 
-proc means
-    min max
-    data=age_categories;
-  by age_cat;
-  var age_c;
-  title1 &quot;Quality check for conversion&quot;;
-run;</code></pre>
+  if ... then ... else subcommand.
+
+Create a series of conditions that can 
+evaluate to true or false and assign
+codes. Always account for missing 
+values first.; </code></pre>
 <aside class="notes">
-<ul>
-<li>Comments on the code: Quality check, 1</li>
-</ul>
-<p>Always cross check your results against the original variable.</p>
-<p>Notice, however, that the order for age_cat is alphabetical, which is probably not what you want.;</p>
+<p>proc format; value f_age 1 = “toddler” 2 = “pre-teen” 3 = “teenager” 4 = “adult” 9 = “unknown”; run;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1423,25 +1419,13 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="creating-categories-number-codes.-10" class="slide level2">
-<h2>Creating categories, number codes. (10)</h2>
-<pre><code>data age_codes;
-  set perm.titanic1;
-  if age_c = .
-    then age_cat = 9;
-  else if age_c &lt; 6 
-    then age_cat = 1;
-  else if age_c &lt; 13
-    then age_cat = 2;
-  else if age_c &lt; 21
-    then age_cat = 3;
-  else age_cat = 4;
-run;</code></pre>
+<section id="sort-the-data-for-a-quality-check-10" class="slide level2">
+<h2>Sort the data for a quality check; (10)</h2>
+<pre><code>* Comments on the code: The format procedure
+
+The format statement attaches a label to each number code.;</code></pre>
 <aside class="notes">
-<ul>
-<li>Comments on the code: Creating categories, number codes.</li>
-</ul>
-<p>You can control the order by using number codes and formats.;</p>
+<p>proc sort data=age_codes; by age_cat; run;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1454,21 +1438,31 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="the-format-procedure-11" class="slide level2">
-<h2>The format procedure (11)</h2>
-<pre><code>proc format;
-  value f_age
-    1 = &quot;toddler&quot;
-    2 = &quot;pre-teen&quot;
-    3 = &quot;teenager&quot;
-    4 = &quot;adult&quot;
-    9 = &quot;unknown&quot;;
-run;</code></pre>
+<section id="compute-ranges-for-each-category-11" class="slide level2">
+<h2>Compute ranges for each category; (11)</h2>
+<pre><code>* Comments on the code: Sort the data for a quality check;</code></pre>
+<aside class="notes">
+<p>proc means min max data=age_codes; by age_cat; var age_c; format age_cat f_age.; title1 “Quality check for conversion”; title2 “Coding appears to be fine”; run;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="quality-check-2-12" class="slide level2">
+<h2>Quality check, 2 (12)</h2>
+<pre><code>* Comments on the code: Compute ranges for each category;</code></pre>
 <aside class="notes">
 <ul>
-<li>Comments on the code: The format procedure</li>
+<li>Comments on the code: Quality check, 2</li>
 </ul>
-<p>The format statement attaches a label to each number code.;</p>
+<p>Always check the new categorical variable against the range of values of the original continuous variable.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1496,39 +1490,6 @@ display:block!important;
 </section>
 <section id="section" class="slide level2">
 <h2>04-05</h2>
-</section>
-<section id="quality-check-2-12" class="slide level2">
-<h2>Quality check, 2 (12)</h2>
-<pre><code>proc sort
-    data=age_codes;
-  by age_cat;
-run;
-
-proc means
-    min max
-    data=age_codes;
-  by age_cat;
-  var age_c;
-  format age_cat f_age.;
-  title1 &quot;Quality check for conversion&quot;;
-  title2 &quot;Revision to control ordering&quot;;
-run;</code></pre>
-<aside class="notes">
-<ul>
-<li>Comments on the code: Quality check, 2</li>
-</ul>
-<p>Again, a quality check is important.;</p>
-<style type="text/css">
-span.MJX_Assistive_MathML {
-position:absolute!important;
-clip: rect(1px, 1px, 1px, 1px);
-padding: 1px 0 0 0!important;
-border: 0!important;
-height: 1px!important;
-width: 1px!important;
-overflow: hidden!important;
-display:block!important;
-}</style></aside>
 </section>
 <section id="modifying-categories-13" class="slide level2">
 <h2>Modifying categories (13)</h2>
@@ -1645,6 +1606,34 @@ run;</code></pre>
 </ul>
 <p>You get column percentages by excluding row percentages (norow) and cell percentages (nopercent).</p>
 <p>Column percentages add up to 100% within each column. Among those who died, 18% were women and 82% were men. 18% and 82% adds up to 100%. Among the survivors, 68% were women and 32% were men. 68% and 32% adds up to 100%.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="cell-percentages-17" class="slide level2">
+<h2>Cell percentages (17)</h2>
+<pre><code>proc freq
+    data=perm.titanic1;
+  tables Sex*Survived / norow nocol;
+  format Survived f_survived.;
+  title1 &quot;Crosstabulation with cell percentages&quot;;
+run;
+
+ods pdf close;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Cell percentages</li>
+</ul>
+<p>You get cell percentages by excluding row percents (norow) and column percents (nocol).</p>
+<p>Cell percentages add up to 100% across the entire table. There were 12% female deaths among all the passengers, 54% male deaths, 23% female survivors, and 11% male survivors. These four percentages (12%, 54%, 23%, and 11%) all add up to 100%. Which is best: row, column, or cell percents. The answer is “it depends.” I have a handout that talks about these issues.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
