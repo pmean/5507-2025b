@@ -88,6 +88,13 @@ data perm.titanic1;
   age_c = input(age, ?? 8.);
 run;
 
+proc means
+    nmiss n mean std min max
+    data=perm.titanic1;
+  var age;
+  title1 "There are a lot of missing values for age";
+run;
+
 
 * Comments on the code: Using the input function
 
@@ -310,6 +317,7 @@ proc freq
   tables Sex*Survived;
   format Survived f_survived.;
   title1 "Crosstabulation with all percentages";
+  title2 "Not recommended";
 run;
 
 
