@@ -1,0 +1,90 @@
+---
+title: "Sweep html files from src to results"
+format: 
+  html:
+    embed-resources: true
+execute: 
+  echo: false
+---
+
+## File details
+
+This program moves files from the src folder to results folder in each of the modules. It was written by Steve Simon on 2025-01-08 and is placed in the public domain. 
+
+## Remind on how to print pdf files with speaker notes
+
+To print speaker notes, add
+
+-   ?print-pdf&showNotes=separate-page 
+
+to the end of the URL. Then open the print dialog box (ctrl-P) and choose
+
+-   Save as PDF
+
+for the printer. Other options, like Microsoft Print to PDF, do not seem to work.
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+
+library(glue)
+library(tidyverse)
+```
+
+## Identify html files
+
+```{r}
+#| label: identify
+
+identify_files <- function(subdir, ext) {
+  list.files(
+    path=glue("{subdir}/src"),
+    pattern=ext)
+}
+```
+
+## Move html files
+
+```{r}
+#| label: sweep
+
+sweep_files <- function(subdir, file_name) {
+  old <- glue("{subdir}/src/{file_name}")
+  new <- glue("{subdir}/results/{file_name}")
+  file.rename(from=old, to=new)
+}
+```
+
+## Loop across folders
+
+```{r}
+#| label: loop
+
+z99 <- c(glue("0{1:9}"), as.character(10:99))
+
+loop_folders <- function(n) {
+  modules <- z99[1:n]
+  for (s in modules) {
+  	s00 <- glue("{s}/src")
+    print(glue("Searching in module {s00}"))
+    file_list <- character(0)
+    for (ext in c("docx", "html", "pdf", "pptx")) {
+      file_list <- c(file_list, identify_files(s, ext))
+    }
+    if (length(file_list) == 0) next
+    print(glue("---{s}/src/{file_list}"))
+    for (f in file_list) {
+      sweep_files(s, f)
+    }
+  }
+}
+```
+
+## 5507
+
+```{r}
+#| label: r-5507
+
+loop_folders(5)
+```

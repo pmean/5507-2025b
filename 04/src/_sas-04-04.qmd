@@ -9,10 +9,22 @@ editor: source
 
 ## Creating categories
 
+-   Converting continuous variables
+    -   Ease of interpretation
+    -   Loss of information
+    
+::: notes
+
+Often you may be asked to convert a continuous variable into a categorical variable.
+
+:::
+
+`r sas[ 8]`
+
+`r sas[ 9]`
+
 `r sas[10]`
 
 `r sas[11]`
 
 `r sas[12]`
-
-`r sas[13]`

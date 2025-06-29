@@ -186,51 +186,6 @@ bars equal to the percentage.;
 
 *---------------- End of part 3 ----------------;
 
-data age_categories;
-  set perm.titanic1;
-  if age_c = .
-    then age_cat = "missing ";
-  else if age_c < 6 
-    then age_cat = "toddler ";
-  else if age_c < 13
-    then age_cat = "pre-teen";
-  else if age_c < 21
-    then age_cat = "teenager";
-  else age_cat   = "adult   ";
-run;
-
-
-* Comments on the code: Creating categories, strings
-
-If you want to create categories from a
-continuous variable, use a series of
-
-if - then - else
-  
-statements;
-
-
-proc sort
-    data=age_categories;
-  by age_cat;
-run;
-
-proc means
-    min max
-    data=age_categories;
-  by age_cat;
-  var age_c;
-  title1 "Quality check for conversion";
-run;
-
-
-* Comments on the code: Quality check, 1
-
-Always cross check your results against the original variable.
-
-Notice, however, that the order for age_cat is 
-alphabetical, which is probably not what you want.;
-
 
 data age_codes;
   set perm.titanic1;
@@ -246,9 +201,16 @@ data age_codes;
 run;
 
 
-* Comments on the code: Creating categories, number codes.
+* Comments on the code: Creating categories, number codes
 
-You can control the order by using number codes and formats.; 
+Create new categories using the 
+
+  if ... then ... else subcommand.
+
+Create a series of conditions that can 
+evaluate to true or false and assign
+codes. Always account for missing 
+values first.; 
 
 
 proc format;
@@ -271,6 +233,10 @@ proc sort
   by age_cat;
 run;
 
+
+* Comments on the code: Sort the data for a quality check;
+
+
 proc means
     min max
     data=age_codes;
@@ -278,13 +244,18 @@ proc means
   var age_c;
   format age_cat f_age.;
   title1 "Quality check for conversion";
-  title2 "Revision to control ordering";
+  title2 "Coding appears to be fine";
 run;
+
+
+* Comments on the code: Compute ranges for each category;
 
 
 * Comments on the code: Quality check, 2
 
-Again, a quality check is important.;
+Always check the new categorical variable
+against the range of values of the
+original continuous variable.;
 
 *---------------- End of part 4 ----------------;
 
