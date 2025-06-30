@@ -42,6 +42,20 @@ You can find a description of this data set at
 
 ;
 
+## Labels and formats
+
+-   Document your data
+    -   Formats for number codes
+    -   Labels for all variables
+    
+::: notes
+
+Documenting your code is important. If your categorical data uses number codes, make sure to define what those codes represent using proc format.
+
+Also use labels for all variables, with the possible exception of simple variables that are self-explanatory with the variable name alone.
+
+:::
+
 `r sas[1]`
 
 `r sas[2]`
@@ -51,6 +65,3 @@ You can find a description of this data set at
 `r sas[4]`
 
 `r sas[5]`
-
-`r sas[6]`
-

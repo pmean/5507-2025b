@@ -996,14 +996,11 @@ margin-right: 0; }
 <ul>
 <li>What you will learn
 <ul>
-<li>TBA-1</li>
-<li>TBA-2</li>
-<li>TBA-3</li>
-<li>TBA-4</li>
-<li>TBA-5</li>
-<li>TBA-6</li>
-<li>TBA-7</li>
-<li>TBA-8</li>
+<li>Labels and formats</li>
+<li>Descriptive statistics</li>
+<li>Correlations and scatterplots</li>
+<li>Boxplots and group statistics</li>
+<li>Investiage anomaly</li>
 </ul></li>
 </ul>
 </section>
@@ -1014,8 +1011,32 @@ margin-right: 0; }
 <p>http://jse.amstat.org/datasets/fev.txt</p>
 <p>;</p>
 </section>
-<section id="this-is-the-standard-documentation-header.-1" class="slide level2">
-<h2>This is the standard documentation header.; (1)</h2>
+<section id="labels-and-formats" class="slide level2">
+<h2>Labels and formats</h2>
+<ul>
+<li>Document your data
+<ul>
+<li>Formats for number codes</li>
+<li>Labels for all variables</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>Documenting your code is important. If your categorical data uses number codes, make sure to define what those codes represent using proc format.</p>
+<p>Also use labels for all variables, with the possible exception of simple variables that are self-explanatory with the variable name alone.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="documentation-header-1" class="slide level2">
+<h2>Documentation header; (1)</h2>
 <pre><code>* 5507-05-simon-working-with-a-mix-of-variables.sas
   author: Steve Simon
   date created: 2018-11-27
@@ -1025,7 +1046,7 @@ margin-right: 0; }
   license: public domain;</code></pre>
 <aside class="notes">
 <ul>
-<li>Comments on the code: This is the standard documentation header.;</li>
+<li>Comments on the code: Documentation header;</li>
 </ul>
 <style type="text/css">
 span.MJX_Assistive_MathML {
@@ -1041,7 +1062,7 @@ display:block!important;
 </section>
 <section id="file-locations-2" class="slide level2">
 <h2>File locations; (2)</h2>
-<pre><code>%let path=q:/introduction-to-sas;
+<pre><code>%let path=q:/5507-2025b/05;
 
 ods pdf
   file=&quot;&amp;path/results/5507-05-simon-working-with-mix-of-variables.pdf&quot;;
@@ -1068,10 +1089,15 @@ display:block!important;
 }</style></aside>
 </section>
 <section id="reading-the-data-using-a-data-step-3" class="slide level2">
-<h2>Reading the data using a data step; (3)</h2>
+<h2>Reading the data using a data step (3)</h2>
 <pre><code>data perm.fev;
-  infile raw_data delimiter=&quot;,&quot; firstobs=2;
-  input age fev ht sex smoke;
+  infile raw_data delimiter=&quot;,&quot;;
+  input 
+    age 2-3
+    fev 5-11
+    ht 12-16
+    sex 19
+    smoke 25;
   label
     age=Age in years
     fev=Forced Expiratory Volume (liters)
@@ -1082,7 +1108,7 @@ display:block!important;
 run;</code></pre>
 <aside class="notes">
 <ul>
-<li>Comments on the code: Reading the data using a data step;</li>
+<li>Comments on the code: Reading the data using a data step</li>
 </ul>
 <p>The data file is comma delimited and the first row includes variable names.</p>
 <p>Normally, this means that you can save a bit of time by using proc import, but I chose to read in the data using a data step. The number of variables was so small that this didn’t matter that much. It also allowed me to define variable labels in the initial data step rather than later.;</p>
@@ -1127,61 +1153,20 @@ display:block!important;
 }</style></aside>
 </section>
 <section id="print-the-first-ten-rows-of-data-5" class="slide level2">
-<h2>Print the first ten rows of data; (5)</h2>
+<h2>Print the first ten rows of data (5)</h2>
 <pre><code>proc print
     data=perm.fev(obs=10);
   format 
-    sex fsex. 
-    smoke fsmoke.
-  ;
+      sex fsex. 
+      smoke fsmoke.;
   title1 &quot;Pulmonary function study&quot;;
-  title2 &quot;Listing of first ten rows of fev data&quot;;
-  title3 &quot;There are no obvious problems with this dataset&quot;;
+  title2 &quot;There are no obvious problems with this dataset&quot;;
 run;</code></pre>
 <aside class="notes">
 <ul>
-<li>Comments on the code: Print the first ten rows of data;</li>
+<li>Comments on the code: Print the first ten rows of data</li>
 </ul>
 <p>It’s always a good idea to peek at the first few rows of data.</p>
-<style type="text/css">
-span.MJX_Assistive_MathML {
-position:absolute!important;
-clip: rect(1px, 1px, 1px, 1px);
-padding: 1px 0 0 0!important;
-border: 0!important;
-height: 1px!important;
-width: 1px!important;
-overflow: hidden!important;
-display:block!important;
-}</style></aside>
-</section>
-<section id="proc-freq-and-proc-means-6" class="slide level2">
-<h2>Proc freq and proc means (6)</h2>
-<pre><code>
-proc freq
-    data=perm.fev;
-  tables sex smoke / missing;
-  format 
-    sex fsex. 
-    smoke fsmoke.
-  ;
-  title2 &quot;Frequency counts&quot;;
-run;
-
-proc means
-    n nmiss mean std min max
-    data=perm.fev;
-  var age fev ht;
-  title2 &quot;Descriptive statistics&quot;;
-run;</code></pre>
-<aside class="notes">
-<ul>
-<li>Comments on the code: Proc freq and proc means</li>
-</ul>
-<p>There is a mix of categorical and continuous variables in this data set. Recall that you use proc freq for categorical variables and proc means for continuous variables.</p>
-<p>Always get in the habit of checking for missing values.</p>
-<p>Look for problems. This could mean a lot more categories than you expected, a particular category level that is unexpectedly small, or multiple categories caused by misspelling or inconsistent capitalization. There are no problems here.</p>
-<p>Look for minimum or maximum values that are unusual. Also make sure that you don’t have a continuous variable that is constant (zero variation).;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1199,32 +1184,33 @@ display:block!important;
 <ul>
 <li>What you have learned
 <ul>
-<li>TBA-1</li>
+<li>Labels and formats</li>
 </ul></li>
 <li>What’s coming next
 <ul>
-<li>TBA-2</li>
+<li>Descriptive statistics</li>
 </ul></li>
 </ul>
 </section>
 <section id="descriptive-statistics" class="slide level2">
 <h2>Descriptive statistics</h2>
-</section>
-<section id="correlation-matrix-7" class="slide level2">
-<h2>Correlation matrix (7)</h2>
-<pre><code>
-title2 &quot;Correlations&quot;;
-proc corr
-    nosimple noprob
-    data=perm.fev;
-  var age fev ht;
-run;</code></pre>
-<aside class="notes">
 <ul>
-<li>Comments on the code: Correlation matrix</li>
+<li>Use proc freq to look for
+<ul>
+<li>Inconsistencies</li>
+<li>Rare/missing category levels</li>
+</ul></li>
+<li>Use proc means to look for
+<ul>
+<li>Unusual minimum/maximum values</li>
+<li>Zero standard deviation</li>
+</ul></li>
 </ul>
-<p>The Pearson correlation coefficient gives you a numeric measure of the strength of association between two continuous variables.</p>
-<p>Remember the cut-offs. A correlation between +0.7 and 1.0 implies a strong positive association. A correlation between +0.3 and +0.7 implies a weak positive association. A correlation between -0.3 and +0.3 implies little or no association. A correlation between -0.3 and -0.7 implies a weak negative association. A correlation between -0.7 and -1.0 implies a strong negative association.;</p>
+<aside class="notes">
+<p>There is a mix of categorical and continuous variables in this data set. Recall that you use proc freq for categorical variables and proc means for continuous variables.</p>
+<p>Always get in the habit of checking for missing values.</p>
+<p>Look for problems. This could mean a lot more categories than you expected, a particular category level that is unexpectedly small, or multiple categories caused by misspelling or inconsistent capitalization. There are no problems here.</p>
+<p>Look for minimum or maximum values that are unusual. Also make sure that you don’t have a continuous variable that is constant (zero variation).</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1237,19 +1223,45 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="scatterplot-proc-sgplot-8" class="slide level2">
-<h2>Scatterplot, proc sgplot; (8)</h2>
-<pre><code>title2 &quot;Scatterplots&quot;;
-proc sgplot
+<section id="get-statistics-for-categorical-variables-6" class="slide level2">
+<h2>Get statistics for categorical variables; (6)</h2>
+<pre><code>
+proc freq
     data=perm.fev;
-  scatter x=ht y=fev;
+  tables sex smoke / missing;
+  format 
+      sex fsex. 
+      smoke fsmoke.;
+  title2 &quot;Frequency counts&quot;;
 run;</code></pre>
 <aside class="notes">
 <ul>
-<li>Comments on the code: Scatterplot, proc sgplot;</li>
+<li>Comments on the code: Get statistics for categorical variables;</li>
 </ul>
-<p>You should also examine the association between continuous variables using a scatterplot.</p>
-<p>I am only showing the plot of ht versus fev, but you should also examine the plot of age versus fev.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="get-statistics-for-continuous-variables-7" class="slide level2">
+<h2>Get statistics for continuous variables; (7)</h2>
+<pre><code>proc means
+    n nmiss mean std min max
+    data=perm.fev;
+  var age fev ht;
+  title2 &quot;Descriptive statistics&quot;;
+run;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Get statistics for continuous variables;</li>
+</ul>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1267,50 +1279,34 @@ display:block!important;
 <ul>
 <li>What you have learned
 <ul>
-<li>TBA-2</li>
+<li>Descriptive statistics</li>
 </ul></li>
 <li>What’s coming next
 <ul>
-<li>TBA-3</li>
+<li>Correlations and scatterplots</li>
 </ul></li>
 </ul>
 </section>
-<section id="correlations-and-scatterplots" class="slide level2">
-<h2>Correlations and scatterplots</h2>
-</section>
-<section id="break-3" class="slide level2">
-<h2>Break #3</h2>
+<section id="look-at-relationships" class="slide level2">
+<h2>Look at relationships</h2>
 <ul>
-<li>What you have learned
+<li>Between two continuous variables
 <ul>
-<li>TBA-3</li>
+<li>Correlations, Scatterplots</li>
 </ul></li>
-<li>What’s coming next
+<li>Between two categorical variables
 <ul>
-<li>TBA-4</li>
+<li>Crosstabulations</li>
+</ul></li>
+<li>Between a categorical and a continuous variables
+<ul>
+<li>Boxplots</li>
 </ul></li>
 </ul>
-</section>
-<section id="section" class="slide level2">
-<h2>05-04</h2>
-</section>
-<section id="scatterplot-smoothing-curve-9" class="slide level2">
-<h2>Scatterplot, smoothing curve; (9)</h2>
-<pre><code>title3 &quot;with loess, smooth=0.1&quot;;
-proc sgplot
-    data=perm.fev;
-  scatter x=ht y=fev;
-  loess x=ht y=fev / 
-    nomarkers 
-    smooth=0.1
-    lineattrs=(color=Red);
-run;</code></pre>
 <aside class="notes">
-<ul>
-<li>Comments on the code: Scatterplot, smoothing curve;</li>
-</ul>
-<p>Sometimes a trend line can help. You should consider a smoothing method like loess or pbspline, as this will help you visualize any potential nonlinear relationships.</p>
-<p>The relationship looks reasonably close to linear.;</p>
+<p>After looking at descriptive statistics for individual variables, you should look for relationships between pairs of variables.</p>
+<p>Correlations, covered earlier, are a simple way to examine relationships between two continuous variables.</p>
+<p>Remember the cut-offs. A correlation between +0.7 and 1.0 implies a strong positive association. A correlation between +0.3 and +0.7 implies a weak positive association. A correlation between -0.3 and +0.3 implies little or no association. A correlation between -0.3 and -0.7 implies a weak negative association. A correlation between -0.7 and -1.0 implies a strong negative association.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1323,22 +1319,185 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="boxplot-proc-sgplot-10" class="slide level2">
-<h2>Boxplot, proc sgplot (10)</h2>
+<section id="compute-a-correlation-matrix-8" class="slide level2">
+<h2>Compute a correlation matrix; (8)</h2>
 <pre><code>
-
-title2 &quot;Boxplots&quot;;
-proc sgplot
-    data=perm.fev;
-  vbox fev / category=smoke;
-  format smoke fsmoke.;
+proc corr
+    data=perm.fev
+    noprint
+    outp=correlations;
+  var age fev ht;
 run;</code></pre>
 <aside class="notes">
 <ul>
-<li>Comments on the code: Boxplot, proc sgplot</li>
+<li>Comments on the code: Compute a correlation matrix;</li>
 </ul>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="round-the-correlations-9" class="slide level2">
+<h2>Round the correlations; (9)</h2>
+<pre><code>data correlations;
+  set correlations;
+  if _type_ NE &quot;CORR&quot; then delete;
+  drop _type_;
+  age=round(age, 0.01);
+  fev=round(fev, 0.01);
+  ht=round(ht, 0.01);
+run;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Round the correlations;</li>
+</ul>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="print-the-correlations-10" class="slide level2">
+<h2>Print the correlations (10)</h2>
+<pre><code>proc print 
+    data=correlations;
+  title2 &quot;All variables show a positive correlations&quot;;
+run;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Print the correlations</li>
+</ul>
+<p>With a small number of variables, there is no need to sort the correlations when there are just a few of them.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="draw-scatterplots-11" class="slide level2">
+<h2>Draw scatterplots; (11)</h2>
+<pre><code>proc sgplot
+    data=perm.fev;
+  scatter x=age y=fev /
+      markerattrs=(size=10 symbol=circle);
+  pbspline x=abdomen y=fat_brozek /
+      lineattrs=(pattern=dash color=red)
+      nomarkers;
+  title2 &quot;There is a positive association, close to linear&quot;;
+run;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Draw scatterplots;</li>
+</ul>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="break-3" class="slide level2">
+<h2>Break #3</h2>
+<ul>
+<li>What you have learned
+<ul>
+<li>Correlations and scatterplots</li>
+</ul></li>
+<li>What’s coming next
+<ul>
+<li>Boxplots and group statistics</li>
+</ul></li>
+</ul>
+</section>
+<section id="section" class="slide level2">
+<h2>05-04</h2>
+<aside class="notes">
 <p>When you want to look at a relationship between a categorical variable and a continuous variable, you should use a boxplot. Notice that you use proc sgplot for both a scatterplot and a boxplot. This is a big improvement over previous methods in SAS to produce plots because it is easier to learn one procedure and minor variations in that procedure rather than having to learn multiple procedures.</p>
 <p>The bottom and top of the boxplot represents the 25th and 75th percentiles, respectively. A thin line, or whisker, is drawn down to the minimum value and up to the maximum value. Extreme values are shown as individual data points. Notice the discrepancy in fev. Smokers seem to have a much higher FEV than non-smokers. This is quite surprising.;</p>
+<ul>
+<li>Notes10. Also look at how the means and standard deviations of your continuous variable change for each level of your categorical variable.</li>
+</ul>
+<p>Output, page 8. Notice again the discrepancy in fev by smoking status. This is quite surprising.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="draw-a-boxplot-12" class="slide level2">
+<h2>Draw a boxplot; (12)</h2>
+<pre><code>ods graphics / height=1.5 in width=6 in;
+
+proc sgplot
+    data=perm.fev;
+  hbox fev / category=smoke;
+  format smoke fsmoke.;
+  title2 &quot;Smokers tend to have higher fev values&quot;;
+  title3 &quot;This is a surprising and counter-intutive finding&quot;;
+run;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Draw a boxplot;</li>
+</ul>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="compute-statistics-with-a-by-statement-13" class="slide level2">
+<h2>Compute statistics with a by statement; (13)</h2>
+<pre><code>proc sort
+    data=perm.fev;
+  by smoke;
+run;
+
+proc means
+    data=perm.fev;
+  var fev;
+  by smoke;
+  title2 &quot;Descriptive statistics by group&quot;;
+run;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Compute statistics with a by statement;</li>
+</ul>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1356,19 +1515,59 @@ display:block!important;
 <ul>
 <li>What you have learned
 <ul>
-<li>TBA-4</li>
+<li>Boxplots and group statistics</li>
 </ul></li>
 <li>What’s coming next
 <ul>
-<li>TBA-5</li>
+<li>Investiage anomaly</li>
 </ul></li>
 </ul>
 </section>
 <section id="section-1" class="slide level2">
 <h2>05-05</h2>
+<aside class="notes">
+<p>This is very odd. You can get a hint as to why smokers might have higher fev values than non-smokers by looking at how height and smoking status are related.</p>
+<p>Smokers are taller than non-smokers, and by quite a bit.</p>
+<p>These statistics show the same trend. It is obvious that smoking is confined to mostly older children. And since the older children are bigger, that may explain the odd relationship we saw earlier. You should also examine the relationship between sex and fev. Do this on your own, but there is no need to turn anything in. ;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
 </section>
-<section id="descriptive-statistics-by-statement-11" class="slide level2">
-<h2>Descriptive statistics, by statement; (11)</h2>
+<section id="investigate-unusual-trend-with-boxplots-14" class="slide level2">
+<h2>Investigate unusual trend with boxplots; (14)</h2>
+<pre><code>
+proc sgplot
+    data=perm.fev;
+  hbox age / category=smoke;
+  format smoke fsmoke.;
+  title2 &quot;Boxplots&quot;;
+run;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Investigate unusual trend with boxplots;</li>
+</ul>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="investigate-unusual-trend-with-descriptive-statistics-15" class="slide level2">
+<h2>Investigate unusual trend with descriptive statistics; (15)</h2>
 <pre><code>proc sort
     data=perm.fev;
   by smoke;
@@ -1376,40 +1575,16 @@ run;
 
 proc means
     data=perm.fev;
-  var fev;
+  var age;
   by smoke;
   format smoke fsmoke.;
   title2 &quot;Descriptive statistics by group&quot;;
-run;</code></pre>
+run;
+
+ods pdf close;</code></pre>
 <aside class="notes">
 <ul>
-<li><p>Comments on the code: Descriptive statistics, by statement;</p></li>
-<li><p>Notes10. Also look at how the means and standard deviations of your continuous variable change for each level of your categorical variable.</p></li>
-</ul>
-<p>Output, page 8. Notice again the discrepancy in fev by smoking status. This is quite surprising.;</p>
-<style type="text/css">
-span.MJX_Assistive_MathML {
-position:absolute!important;
-clip: rect(1px, 1px, 1px, 1px);
-padding: 1px 0 0 0!important;
-border: 0!important;
-height: 1px!important;
-width: 1px!important;
-overflow: hidden!important;
-display:block!important;
-}</style></aside>
-</section>
-<section id="investigate-unusual-trend-proc-sgplot-12" class="slide level2">
-<h2>Investigate unusual trend, proc sgplot; (12)</h2>
-<pre><code>proc sgplot
-    data=perm.fev;
-  vbox ht / category=smoke;
-  format smoke fsmoke.;
-  title2 &quot;Boxplots&quot;;
-run;</code></pre>
-<aside class="notes">
-<ul>
-<li>Comments on the code: Investigate unusual trend, proc sgplot;</li>
+<li>Comments on the code: Investigate unusual trend with descriptive statistics;</li>
 </ul>
 <style type="text/css">
 span.MJX_Assistive_MathML {
@@ -1422,68 +1597,17 @@ width: 1px!important;
 overflow: hidden!important;
 display:block!important;
 }</style></aside>
-</section>
-<section id="break-5" class="slide level2">
-<h2>Break #5</h2>
-<ul>
-<li>What you have learned
-<ul>
-<li>TBA-5</li>
-</ul></li>
-<li>What’s coming next
-<ul>
-<li>TBA-6</li>
-</ul></li>
-</ul>
-</section>
-<section id="section-2" class="slide level2">
-<h2>05-06</h2>
-</section>
-<section id="break-6" class="slide level2">
-<h2>Break #6</h2>
-<ul>
-<li>What you have learned
-<ul>
-<li>TBA-6</li>
-</ul></li>
-<li>What’s coming next
-<ul>
-<li>TBA-7</li>
-</ul></li>
-</ul>
-</section>
-<section id="section-3" class="slide level2">
-<h2>05-07</h2>
-</section>
-<section id="break-7" class="slide level2">
-<h2>Break #7</h2>
-<ul>
-<li>What you have learned
-<ul>
-<li>TBA-7</li>
-</ul></li>
-<li>What’s coming next
-<ul>
-<li>TBA-8</li>
-</ul></li>
-</ul>
-</section>
-<section id="section-4" class="slide level2">
-<h2>05-08</h2>
 </section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
 <ul>
 <li>What you have learned
 <ul>
-<li>TBA-1</li>
-<li>TBA-2</li>
-<li>TBA-3</li>
-<li>TBA-4</li>
-<li>TBA-5</li>
-<li>TBA-6</li>
-<li>TBA-7</li>
-<li>TBA-8</li>
+<li>Labels and formats</li>
+<li>Descriptive statistics</li>
+<li>Correlations and scatterplots</li>
+<li>Boxplots and group statistics</li>
+<li>Investiage anomaly</li>
 </ul></li>
 </ul>
 <!---

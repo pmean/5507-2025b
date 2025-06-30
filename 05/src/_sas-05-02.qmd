@@ -9,6 +9,39 @@ editor: source
 
 ## Descriptive statistics
 
-`r sas[7]`
+-   Use proc freq to look for 
+    -   Inconsistencies
+    -   Rare/missing category levels
+-   Use proc means to look for 
+    -   Unusual minimum/maximum values
+    -   Zero standard deviation
+    
+::: notes
 
-`r sas[8]`
+There is a mix of categorical and 
+continuous variables in this data set.
+Recall that you use proc freq for 
+categorical variables and proc means
+for continuous variables. 
+
+Always get in the habit of checking 
+for missing values.
+
+Look for problems. This could mean
+a lot more categories than you 
+expected, a particular category level
+that is unexpectedly small, or multiple
+categories caused by misspelling or 
+inconsistent capitalization. There are
+no problems here.
+
+Look for minimum or maximum values 
+that are unusual. Also make sure that you don't have
+a continuous variable that is constant (zero
+variation).
+
+:::
+
+`r sas[6]`
+
+`r sas[7]`

@@ -5,14 +5,11 @@ format:
     slide-number: true
     embed-resources: true
 params:
-  topic_01: "TBA-1"
-  topic_02: "TBA-2"
-  topic_03: "TBA-3"
-  topic_04: "TBA-4"
-  topic_05: "TBA-5"
-  topic_06: "TBA-6"
-  topic_07: "TBA-7"
-  topic_08: "TBA-8"
+  topic_01: "Labels and formats"
+  topic_02: "Descriptive statistics"
+  topic_03: "Correlations and scatterplots"
+  topic_04: "Boxplots and group statistics"
+  topic_05: "Investiage anomaly"
 editor: source
 ---
 
@@ -39,9 +36,6 @@ editor: source
     -   `r params$topic_03`
     -   `r params$topic_04`
     -   `r params$topic_05`
-    -   `r params$topic_06`
-    -   `r params$topic_07`
-    -   `r params$topic_08`
 
 {{< include _sas-05-01.qmd >}}
 
@@ -81,35 +75,6 @@ editor: source
     
 {{< include _sas-05-05.qmd >}}
 
-## Break #5
-
--   What you have learned
-    -   `r params$topic_05`
--   What's coming next
-    -   `r params$topic_06`
-    
-{{< include _sas-05-06.qmd >}}
-
-## Break #6
-
--   What you have learned
-    -   `r params$topic_06`
--   What's coming next
-    -   `r params$topic_07`
-    
-{{< include _sas-05-07.qmd >}}
-
-## Break #7
-
--   What you have learned
-    -   `r params$topic_07`
--   What's coming next
-    -   `r params$topic_08`
-    
-{{< include _sas-05-08.qmd >}}
-
-
-
 ## Summary
 
 -   What you have learned
@@ -118,9 +83,6 @@ editor: source
     -   `r params$topic_03`
     -   `r params$topic_04`
     -   `r params$topic_05`
-    -   `r params$topic_06`
-    -   `r params$topic_07`
-    -   `r params$topic_08`
 
 <!---
       You have to put the title down 

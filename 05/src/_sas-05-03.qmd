@@ -7,6 +7,32 @@ format:
 editor: source
 ---
 
-## Correlations and scatterplots
+## Look at relationships
+
+-   Between two continuous variables
+    -   Correlations, Scatterplots
+-   Between two categorical variables
+    -   Crosstabulations
+-   Between a categorical and a continuous variables
+    -   Boxplots
+    
+::: notes
+
+After looking at descriptive statistics for individual variables, you should look for relationships between pairs of variables.
+
+Correlations, covered earlier, are a simple way to examine relationships between two continuous variables.
+
+Remember the cut-offs. A correlation between +0.7 and 1.0 implies a
+strong positive association. A correlation between +0.3 and +0.7 implies a weak positive association. A correlation between -0.3 and +0.3 implies little or no association. A correlation between -0.3 and -0.7 implies a weak negative association. A correlation between -0.7 and -1.0 implies a strong negative association.;
 
 
+
+:::
+
+`r sas[8]`
+
+`r sas[9]`
+
+`r sas[10]`
+
+`r sas[11]`

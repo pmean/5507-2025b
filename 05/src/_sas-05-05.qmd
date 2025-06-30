@@ -9,7 +9,28 @@ editor: source
 
 ## 05-05
 
-`r sas[11]`
+::: notes
 
-`r sas[12]`
+This is very odd. You can get a hint as 
+to why smokers might have higher fev values than
+non-smokers by looking at how height and smoking
+status are related.
+
+Smokers are taller than 
+non-smokers, and by quite a bit.
+
+These statistics show the same
+trend. It is obvious that smoking is confined to
+mostly older children. And since the older
+children are bigger, that may explain the odd
+relationship we saw earlier. You should also
+examine the relationship between sex and fev.
+Do this on your own, but there is no need to 
+turn anything in. ;
+
+:::
+
+`r sas[14]`
+
+`r sas[15]`
 
