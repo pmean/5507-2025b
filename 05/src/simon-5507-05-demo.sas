@@ -168,7 +168,8 @@ run;
 
 *---------------- End of part 3 ----------------;
 
-ods graphics / height=1.5 in width=6 in;
+
+ods graphics / height=2.5 in width=6 in;
 
 proc sgplot
     data=perm.fev;
@@ -177,6 +178,8 @@ proc sgplot
   title2 "Smokers tend to have higher fev values";
   title3 "This is a surprising and counter-intutive finding";
 run;
+
+ods graphics on / reset=all;
 
 
 * Comments on the code: Draw a boxplot;
@@ -200,12 +203,16 @@ run;
 *---------------- End of part 4 ----------------;
 
 
+ods graphics / height=2.5 in width=6 in;
+
 proc sgplot
     data=perm.fev;
   hbox age / category=smoke;
   format smoke fsmoke.;
   title2 "Boxplots";
 run;
+
+ods graphics on / reset=all;
 
 
 * Comments on the code: Investigate unusual trend with boxplots;

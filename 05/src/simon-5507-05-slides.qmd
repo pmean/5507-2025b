@@ -9,7 +9,7 @@ params:
   topic_02: "Descriptive statistics"
   topic_03: "Correlations and scatterplots"
   topic_04: "Boxplots and group statistics"
-  topic_05: "Investiage anomaly"
+  topic_05: "Investigate anomaly"
 editor: source
 ---
 

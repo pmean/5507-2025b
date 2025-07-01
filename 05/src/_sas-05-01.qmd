@@ -30,17 +30,20 @@ sas <- chunk_sas("simon-5507-05-demo.sas")
 
 ## Overview
 
-Today, you will analyze some data sets
-that have a mix of categorical and 
-continuous variables. The first data 
-set looks at pulmonary function in a
-group of children.
+-   Mix of categorical and continuous variables
+    -   Review methods for continuous variables
+    -   Review methods for categorical variables
+    -   New methods for mix of categorical and continuous variables
+
+::: notes
+
+Today, you will analyze some data sets that have a mix of categorical and continuous variables. The first data set looks at pulmonary function in a group of children.
 
 You can find a description of this data set at
 
   http://jse.amstat.org/datasets/fev.txt
 
-;
+:::
 
 ## Labels and formats
 
