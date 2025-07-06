@@ -13,7 +13,7 @@
 %let path=q:/5507-2025b/05;
 
 ods pdf
-  file="&path/results/5507-05-simon-working-with-mix-of-variables.pdf";
+  file="&path/results/simon-5507-05-demo.pdf";
 
 filename raw_data
   "&path/data/fev.txt";
@@ -79,6 +79,7 @@ proc print
       smoke fsmoke.;
   title1 "Pulmonary function study";
   title2 "There are no obvious problems with this dataset";
+  footnote1 "Created by Steve Simon on &sysdate using SAS &sysver";
 run;
 
 
@@ -153,15 +154,19 @@ is no need to sort the correlations when
 there are just a few of them.;
 
 
+ods graphics /
+  height=6 in width=6 in
+  attrpriority=none;
+
 proc sgplot
     data=perm.fev;
-  scatter x=age y=fev /
-      markerattrs=(size=10 symbol=circle);
-  pbspline x=abdomen y=fat_brozek /
-      lineattrs=(pattern=dash color=red)
-      nomarkers;
-  title2 "There is a positive association, close to linear";
+  pbspline x=age y=fev /
+      markerattrs=(size=10 symbol=circle color=black)
+      lineattrs=(pattern=dash color=red);
+  title2 "There is a positive association, with slight bends at low and high ages";
 run;
+
+ods graphics on / reset=all;
 
 
 * Comments on the code: Draw scatterplots;
@@ -169,11 +174,13 @@ run;
 *---------------- End of part 3 ----------------;
 
 
-ods graphics / height=2.5 in width=6 in;
+ods graphics / 
+    height=2.5 in width=6 in;
 
 proc sgplot
     data=perm.fev;
   hbox fev / category=smoke nofill;
+  yaxis label=" ";
   format smoke fsmoke.;
   title2 "Smokers tend to have higher fev values";
   title3 "This is a surprising and counter-intuitive finding";
@@ -203,12 +210,14 @@ run;
 *---------------- End of part 4 ----------------;
 
 
-ods graphics / height=3.5 in width=6 in;
+ods graphics / 
+  height=3.5 in width=6 in;
 
-proc sgplot
+proc sgpanel
     data=perm.fev;
-  hbox fev / category=smoke group=sex nofill;
-  format smoke fsmoke.;
+  panelby sex / columns=1 rows=2;
+  hbox fev / category=smoke nofill;
+  format smoke fsmoke. sex fsex.;
   title2 "Our first guess is that sex is a confounder";
   title3 "This is not supported by the data";
 run;
@@ -216,25 +225,67 @@ run;
 ods graphics on / reset=all;
 
 
-* Comments on the code: Clustered boxplots
+* Comments on the code: Boxplots in separate panels
 
 The group option in hbox draws separate 
 boxplots for each combination of group
 and category.;
 
 
-proc sgplot
+ods graphics / 
+  height=6 in width=6 in
+  attrpriority=none;
+
+proc sort
     data=perm.fev;
-  reg x=age y=fev /
-      group=smoker
-      markerattrs=(size=10);
-  styleattrs 
-    datacontrastcolor=(black)
-    datalinepatterns=(solid)
-    datasymbols=(circlefilled squarefilled);
+  by smoke;
 run;
 
+
+* Comments on the code: Important setup options for grouped plots
+
+The attrpriorty option tells SAS how to 
+cycle through various attributes (color,
+maker, linestyle) to distinguish among
+different groups. By default, SAS will 
+cycle through a list of colors and only
+switch to other features after that list
+is exhausted. Most of the time, you do
+not want this option, so specify none.
+
+It is important to sort your data when
+you have groups, to control how colors,
+markers, and linestylesare asigned to
+each group.;
+
+
+proc sgplot
+    data=perm.fev;
+  scatter x=age y=fev /
+      group=smoke
+      markerattrs=(size=10);
+  format smoke fsmoke.;
+  styleattrs
+    datacontrastcolors=(lightgray black)
+    datasymbols=(circle plus);
+  title2 "Second hypothesis is that age is a confounder";
+  title3 "This hypothesis is supported by the data";
+run;
+
+ods graphics on / reset=all;
+
 ods pdf close;
+
+
+* Comments on the code: Distinguishing groups in a scatterplot
+
+The group option tells SAS to make
+distinctions in a graph using
+a categorical variable.
+
+The styleattrs statement tells SAS what
+particular colors, symbols, linestyles, etc.
+to use to make group distinctions.;
 
 
 * Comments on the code: Using symbols to designate group
