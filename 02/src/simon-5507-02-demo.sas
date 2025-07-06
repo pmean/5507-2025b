@@ -9,6 +9,12 @@
     body1, row with ht=29.5 removed
     body2, ht=29.5 converted to missing
     body3, ht_cm calculated;
+    
+* Note to myself
+    When I revise this program next time,
+    I should use ods graphics to always
+    specify height and width and use
+    styleattrs to specify colors, etc.;
 
 
 * Comments on the code: Documenting your program
