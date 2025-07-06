@@ -23,6 +23,8 @@ library(tidyverse)
 ```{r}
 #| label: general-chunk
 
+if (!exists("add_numbers")) add_numbers <- TRUE
+
 chunk_sas <- function(fn) {
 
   text <- read_lines(fn)
@@ -41,8 +43,10 @@ chunk_sas <- function(fn) {
 
   n <- length(titles)
   
-  titles <- glue("{titles} ({1:n})")
+  titles <- str_remove(titles, ";")
 
+  if (add_numbers) titles <- glue("{titles} ({1:n})")
+  
   sas <- paste0(
     titles,
     "\n\n```{}\n",

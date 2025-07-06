@@ -69,8 +69,17 @@ Also use labels for all variables, with the possible exception of simple variabl
 
 `r sas[5]`
 
+## Live demo, part 1 (review)
+
+-   documentation header
+-   file locations
+-   data step
+-   label subcommand
+-   proc format
+-   format subcommand
+
 ```{r}
 #| label: 05-01-save
 
-save.image(file="../data/slides-05.RData")
+save(sas, file="../data/slides-05.RData")
 ```

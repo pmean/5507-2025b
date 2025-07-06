@@ -40,3 +40,15 @@ turn anything in. ;
 
 `r sas[15]`
 
+## Live demo, part 5
+
+-   proc sgplot
+    -   hbox subcommand
+        -   group option
+    -   scatter subcommand
+        -   group option
+    -   styleattrs subcommand
+       -   datasymbols
+       -   datacontrastcolors
+       -   datalinepatterns
+

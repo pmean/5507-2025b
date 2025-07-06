@@ -173,10 +173,10 @@ ods graphics / height=2.5 in width=6 in;
 
 proc sgplot
     data=perm.fev;
-  hbox fev / category=smoke;
+  hbox fev / category=smoke nofill;
   format smoke fsmoke.;
   title2 "Smokers tend to have higher fev values";
-  title3 "This is a surprising and counter-intutive finding";
+  title3 "This is a surprising and counter-intuitive finding";
 run;
 
 ods graphics on / reset=all;
@@ -203,37 +203,42 @@ run;
 *---------------- End of part 4 ----------------;
 
 
-ods graphics / height=2.5 in width=6 in;
+ods graphics / height=3.5 in width=6 in;
 
 proc sgplot
     data=perm.fev;
-  hbox age / category=smoke;
+  hbox fev / category=smoke group=sex nofill;
   format smoke fsmoke.;
-  title2 "Boxplots";
+  title2 "Our first guess is that sex is a confounder";
+  title3 "This is not supported by the data";
 run;
 
 ods graphics on / reset=all;
 
 
-* Comments on the code: Investigate unusual trend with boxplots;
+* Comments on the code: Clustered boxplots
+
+The group option in hbox draws separate 
+boxplots for each combination of group
+and category.;
 
 
-proc sort
+proc sgplot
     data=perm.fev;
-  by smoke;
-run;
-
-proc means
-    data=perm.fev;
-  var age;
-  by smoke;
-  format smoke fsmoke.;
-  title2 "Descriptive statistics by group";
+  reg x=age y=fev /
+      group=smoker
+      markerattrs=(size=10);
+  styleattrs 
+    datacontrastcolor=(black)
+    datalinepatterns=(solid)
+    datasymbols=(circlefilled squarefilled);
 run;
 
 ods pdf close;
 
 
-* Comments on the code: Investigate unusual trend with descriptive statistics;
+* Comments on the code: Using symbols to designate group
+
+The group option in scatter 
 
 *---------------- End of part 5 ----------------;

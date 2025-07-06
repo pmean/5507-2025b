@@ -51,3 +51,8 @@ variation).
 `r sas[6]`
 
 `r sas[7]`
+
+## Live demo, part 2 (review)
+
+-   proc freq
+-   proc means

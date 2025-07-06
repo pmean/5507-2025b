@@ -42,3 +42,12 @@ strong positive association. A correlation between +0.3 and +0.7 implies a weak 
 `r sas[10]`
 
 `r sas[11]`
+
+## Live demo, part 3 (review)
+
+-   proc corr
+-   proc sgplot
+    -   scatter subcommand
+        -   markerattrs option
+    -   pbspline subcommand
+        -   lineattrs option

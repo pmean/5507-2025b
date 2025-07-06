@@ -52,3 +52,12 @@ fev by smoking status. This is quite surprising.;
 `r sas[12]`
 
 `r sas[13]`
+
+## Live demo, part 4
+
+-   proc sgplot
+    -   hbox subcommand
+        -   category option
+        -   nofill option
+
+

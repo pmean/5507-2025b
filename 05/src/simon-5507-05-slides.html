@@ -1000,16 +1000,35 @@ margin-right: 0; }
 <li>Descriptive statistics</li>
 <li>Correlations and scatterplots</li>
 <li>Boxplots and group statistics</li>
-<li>Investiage anomaly</li>
+<li>Investigate anomaly</li>
 </ul></li>
 </ul>
 </section>
 <section id="overview" class="slide level2">
 <h2>Overview</h2>
+<ul>
+<li>Mix of categorical and continuous variables
+<ul>
+<li>Review methods for continuous variables</li>
+<li>Review methods for categorical variables</li>
+<li>New methods for mix of categorical and continuous variables</li>
+</ul></li>
+</ul>
+<aside class="notes">
 <p>Today, you will analyze some data sets that have a mix of categorical and continuous variables. The first data set looks at pulmonary function in a group of children.</p>
 <p>You can find a description of this data set at</p>
 <p>http://jse.amstat.org/datasets/fev.txt</p>
-<p>;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
 </section>
 <section id="labels-and-formats" class="slide level2">
 <h2>Labels and formats</h2>
@@ -1036,8 +1055,8 @@ display:block!important;
 }</style></aside>
 </section>
 <section id="documentation-header-1" class="slide level2">
-<h2>Documentation header; (1)</h2>
-<pre><code>* 5507-05-simon-working-with-a-mix-of-variables.sas
+<h2>Documentation header (1)</h2>
+<pre><code>* simon-5507-05-demo.sas
   author: Steve Simon
   date created: 2018-11-27
   purpose: to illustrate how to work with
@@ -1061,7 +1080,7 @@ display:block!important;
 }</style></aside>
 </section>
 <section id="file-locations-2" class="slide level2">
-<h2>File locations; (2)</h2>
+<h2>File locations (2)</h2>
 <pre><code>%let path=q:/5507-2025b/05;
 
 ods pdf
@@ -1125,7 +1144,7 @@ display:block!important;
 }</style></aside>
 </section>
 <section id="label-your-categorical-variables-4" class="slide level2">
-<h2>Label your categorical variables; (4)</h2>
+<h2>Label your categorical variables (4)</h2>
 <pre><code>proc format;
   value fsex
     0 = &quot;Female&quot;
@@ -1179,6 +1198,9 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
+<section id="live-demo-part-1" class="slide level2">
+<h2>Live demo, part 1</h2>
+</section>
 <section id="break-1" class="slide level2">
 <h2>Break #1</h2>
 <ul>
@@ -1224,7 +1246,7 @@ display:block!important;
 }</style></aside>
 </section>
 <section id="get-statistics-for-categorical-variables-6" class="slide level2">
-<h2>Get statistics for categorical variables; (6)</h2>
+<h2>Get statistics for categorical variables (6)</h2>
 <pre><code>
 proc freq
     data=perm.fev;
@@ -1251,7 +1273,7 @@ display:block!important;
 }</style></aside>
 </section>
 <section id="get-statistics-for-continuous-variables-7" class="slide level2">
-<h2>Get statistics for continuous variables; (7)</h2>
+<h2>Get statistics for continuous variables (7)</h2>
 <pre><code>proc means
     n nmiss mean std min max
     data=perm.fev;
@@ -1273,6 +1295,9 @@ width: 1px!important;
 overflow: hidden!important;
 display:block!important;
 }</style></aside>
+</section>
+<section id="live-demo-part-2" class="slide level2">
+<h2>Live demo, part 2</h2>
 </section>
 <section id="break-2" class="slide level2">
 <h2>Break #2</h2>
@@ -1320,7 +1345,7 @@ display:block!important;
 }</style></aside>
 </section>
 <section id="compute-a-correlation-matrix-8" class="slide level2">
-<h2>Compute a correlation matrix; (8)</h2>
+<h2>Compute a correlation matrix (8)</h2>
 <pre><code>
 proc corr
     data=perm.fev
@@ -1345,7 +1370,7 @@ display:block!important;
 }</style></aside>
 </section>
 <section id="round-the-correlations-9" class="slide level2">
-<h2>Round the correlations; (9)</h2>
+<h2>Round the correlations (9)</h2>
 <pre><code>data correlations;
   set correlations;
   if _type_ NE &quot;CORR&quot; then delete;
@@ -1394,7 +1419,7 @@ display:block!important;
 }</style></aside>
 </section>
 <section id="draw-scatterplots-11" class="slide level2">
-<h2>Draw scatterplots; (11)</h2>
+<h2>Draw scatterplots (11)</h2>
 <pre><code>proc sgplot
     data=perm.fev;
   scatter x=age y=fev /
@@ -1419,6 +1444,9 @@ width: 1px!important;
 overflow: hidden!important;
 display:block!important;
 }</style></aside>
+</section>
+<section id="live-demo-part-3" class="slide level2">
+<h2>Live demo, part 3</h2>
 </section>
 <section id="break-3" class="slide level2">
 <h2>Break #3</h2>
@@ -1455,8 +1483,9 @@ display:block!important;
 }</style></aside>
 </section>
 <section id="draw-a-boxplot-12" class="slide level2">
-<h2>Draw a boxplot; (12)</h2>
-<pre><code>ods graphics / height=1.5 in width=6 in;
+<h2>Draw a boxplot (12)</h2>
+<pre><code>
+ods graphics / height=2.5 in width=6 in;
 
 proc sgplot
     data=perm.fev;
@@ -1464,7 +1493,9 @@ proc sgplot
   format smoke fsmoke.;
   title2 &quot;Smokers tend to have higher fev values&quot;;
   title3 &quot;This is a surprising and counter-intutive finding&quot;;
-run;</code></pre>
+run;
+
+ods graphics on / reset=all;</code></pre>
 <aside class="notes">
 <ul>
 <li>Comments on the code: Draw a boxplot;</li>
@@ -1482,7 +1513,7 @@ display:block!important;
 }</style></aside>
 </section>
 <section id="compute-statistics-with-a-by-statement-13" class="slide level2">
-<h2>Compute statistics with a by statement; (13)</h2>
+<h2>Compute statistics with a by statement (13)</h2>
 <pre><code>proc sort
     data=perm.fev;
   by smoke;
@@ -1510,6 +1541,9 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
+<section id="live-demo-part-4" class="slide level2">
+<h2>Live demo, part 4</h2>
+</section>
 <section id="break-4" class="slide level2">
 <h2>Break #4</h2>
 <ul>
@@ -1519,7 +1553,7 @@ display:block!important;
 </ul></li>
 <li>What’s coming next
 <ul>
-<li>Investiage anomaly</li>
+<li>Investigate anomaly</li>
 </ul></li>
 </ul>
 </section>
@@ -1542,14 +1576,18 @@ display:block!important;
 }</style></aside>
 </section>
 <section id="investigate-unusual-trend-with-boxplots-14" class="slide level2">
-<h2>Investigate unusual trend with boxplots; (14)</h2>
+<h2>Investigate unusual trend with boxplots (14)</h2>
 <pre><code>
+ods graphics / height=2.5 in width=6 in;
+
 proc sgplot
     data=perm.fev;
   hbox age / category=smoke;
   format smoke fsmoke.;
   title2 &quot;Boxplots&quot;;
-run;</code></pre>
+run;
+
+ods graphics on / reset=all;</code></pre>
 <aside class="notes">
 <ul>
 <li>Comments on the code: Investigate unusual trend with boxplots;</li>
@@ -1567,7 +1605,7 @@ display:block!important;
 }</style></aside>
 </section>
 <section id="investigate-unusual-trend-with-descriptive-statistics-15" class="slide level2">
-<h2>Investigate unusual trend with descriptive statistics; (15)</h2>
+<h2>Investigate unusual trend with descriptive statistics (15)</h2>
 <pre><code>proc sort
     data=perm.fev;
   by smoke;
@@ -1598,6 +1636,9 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
+<section id="live-demo-part-5" class="slide level2">
+<h2>Live demo, part 5</h2>
+</section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
 <ul>
@@ -1607,7 +1648,7 @@ display:block!important;
 <li>Descriptive statistics</li>
 <li>Correlations and scatterplots</li>
 <li>Boxplots and group statistics</li>
-<li>Investiage anomaly</li>
+<li>Investigate anomaly</li>
 </ul></li>
 </ul>
 <!---
