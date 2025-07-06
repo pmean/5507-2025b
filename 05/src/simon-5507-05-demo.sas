@@ -1,4 +1,4 @@
-* 5507-05-simon-working-with-a-mix-of-variables.sas
+* simon-5507-05-demo.sas
   author: Steve Simon
   date created: 2018-11-27
   purpose: to illustrate how to work with

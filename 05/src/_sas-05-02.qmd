@@ -7,6 +7,12 @@ format:
 editor: source
 ---
 
+```{r}
+#| label: 05-02-load
+
+load(file="../data/slides-05.RData")
+```
+
 ## Descriptive statistics
 
 -   Use proc freq to look for 

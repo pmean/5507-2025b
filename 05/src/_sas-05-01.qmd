@@ -68,3 +68,9 @@ Also use labels for all variables, with the possible exception of simple variabl
 `r sas[4]`
 
 `r sas[5]`
+
+```{r}
+#| label: 05-01-save
+
+save.image(file="../data/slides-05.RData")
+```

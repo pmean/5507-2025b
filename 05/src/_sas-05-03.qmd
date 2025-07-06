@@ -7,6 +7,12 @@ format:
 editor: source
 ---
 
+```{r}
+#| label: 05-03-load
+
+load(file="../data/slides-05.RData")
+```
+
 ## Look at relationships
 
 -   Between two continuous variables

@@ -7,6 +7,12 @@ format:
 editor: source
 ---
 
+```{r}
+#| label: 05-05-load
+
+load(file="../data/slides-05.RData")
+```
+
 ## 05-05
 
 ::: notes

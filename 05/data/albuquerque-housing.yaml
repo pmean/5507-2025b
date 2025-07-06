@@ -1,0 +1,77 @@
+---
+data_dictionary: albuquerque-housing
+
+format: 
+  txt: tab-delimited
+  csv: comma-delimited
+  sas7bdat: proprietary SAS
+  sav: proprietary SPSS
+  
+varnames: 
+  first row of data
+
+missing_value_code: 
+  "."
+  
+description: >
+  From the original source (no longer available) 
+  A random sample of records of resales of homes
+  from Feb 15 to Apr 30, 1993 from the files 
+  maintained by the Albuquerque Board of Realtors.
+  This type of data is collected by multiple 
+  listing agencies in many cities and is used by 
+  realtors as an information base.
+
+download_url:
+  https://raw.githubusercontent.com/pmean/datasets/master/albuquerque-housing.csv
+  
+source: >
+  DASL (Data and Story Library), a repository for various
+  data sets useful for teaching. This file was lost in the
+  transition of DASL from statlib to datadescription.
+
+copyright: >
+  Unknown. You should be able to use this data for
+  individual educational purposes under the Fair Use
+  guidelines of U.S. copyright law.
+
+size:  
+  rows: 117
+  columns: 7
+
+vars:
+  price:
+    label: Sales price of house
+    scale: ratio
+    unit: dollars
+    
+  sqft:
+    label: Square footage of house
+    scale: ratio
+    unit: square feet
+    
+  age:
+    label: Age of house
+    scale: ratio
+    unit: years
+    
+  features:
+    label: Number of features of house
+    scale: ratio
+    range: 0 to 13
+    
+  northeast:
+    label: Is house located in Northeast Albuquerque?
+    scale: nominal
+    value: yes/no
+
+  custom_build:
+    label: Is the house custom built?
+    scale: nominal
+    value: yes/no
+      
+  corner_lot:
+    label: Is the house on a corner lot?
+    scale: nominal
+    value: yes/no
+---
