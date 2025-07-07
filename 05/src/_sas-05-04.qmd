@@ -15,20 +15,40 @@ load(file="../data/slides-05.RData")
 
 ## Boxplots
 
+-   Summarizes five numbers
+    -   Lower whisker: minimum value
+    -   Bottom of box: 25th percentile
+    -   Middle of box: 50th percentile
+    -   Top of box: 75th percentile
+    -   Upper whisker: maximum value
+-   Options
+    -   Highlight individual outliers
+    -   Plus sign (mean)
+
+
 ::: notes
 
-When you want to look at a relationship
-between a categorical variable and a continuous
-variable, you should use a boxplot. 
+When you want to look at a relationship between a categorical variable and a continuous variable, you should use a boxplot. 
 
-The bottom and top of the box
-represents the 25th and 75th percentiles,
-respectively. A thin line, or whisker, is drawn
-down to the minimum value and up to the maximum
-value. Extreme values are shown as individual
-data points. Notice the discrepancy in fev.
-Smokers seem to have a much higher FEV than
-non-smokers. This is quite surprising.;
+The bottom and top of the box represents the 25th and 75th percentiles, respectively. A thin line, or whisker, is drawn down to the minimum value and up to the maximum value. Extreme values are shown as individual data points.
+
+In the fev data set, as you will see in a minute, there is an odds result involving fev. Smokers seem to have a much higher Fev than non-smokers. This is quite surprising.
+
+:::
+
+## Group statistics
+
+-   proc means with a by subcommand
+    -   produces statistics for each subgroup
+-   Look for
+    -   Shifts in the mean
+    -   Changes in variation
+
+::: notes
+
+the by subcommand in proc means will produce statistics on a continuous variable, but separately for each subgroup identified by a level of your categorical variable.
+
+Look for shifts in the mean and changes in variation. Don't overreact to small changes in variation. Typically, you need to see at least a doubling or tripling of the standard deviation from one level to another before worrying about it.
 
 :::
 

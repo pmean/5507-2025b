@@ -1434,8 +1434,7 @@ display:block!important;
 <section id="draw-scatterplots-11" class="slide level2">
 <h2>Draw scatterplots (11)</h2>
 <pre><code>ods graphics /
-  height=6 in width=6 in
-  attrpriority=none;
+  height=6 in width=6 in;
 
 proc sgplot
     data=perm.fev;
@@ -1494,9 +1493,53 @@ display:block!important;
 </section>
 <section id="boxplots" class="slide level2">
 <h2>Boxplots</h2>
+<ul>
+<li>Summarizes five numbers
+<ul>
+<li>Lower whisker: minimum value</li>
+<li>Bottom of box: 25th percentile</li>
+<li>Middle of box: 50th percentile</li>
+<li>Top of box: 75th percentile</li>
+<li>Upper whisker: maximum value</li>
+</ul></li>
+<li>Options
+<ul>
+<li>Highlight individual outliers</li>
+<li>Plus sign (mean)</li>
+</ul></li>
+</ul>
 <aside class="notes">
 <p>When you want to look at a relationship between a categorical variable and a continuous variable, you should use a boxplot.</p>
-<p>The bottom and top of the box represents the 25th and 75th percentiles, respectively. A thin line, or whisker, is drawn down to the minimum value and up to the maximum value. Extreme values are shown as individual data points. Notice the discrepancy in fev. Smokers seem to have a much higher FEV than non-smokers. This is quite surprising.;</p>
+<p>The bottom and top of the box represents the 25th and 75th percentiles, respectively. A thin line, or whisker, is drawn down to the minimum value and up to the maximum value. Extreme values are shown as individual data points.</p>
+<p>In the fev data set, as you will see in a minute, there is an odds result involving fev. Smokers seem to have a much higher Fev than non-smokers. This is quite surprising.</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="group-statistics" class="slide level2">
+<h2>Group statistics</h2>
+<ul>
+<li>proc means with a by subcommand
+<ul>
+<li>produces statistics for each subgroup</li>
+</ul></li>
+<li>Look for
+<ul>
+<li>Shifts in the mean</li>
+<li>Changes in variation</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>the by subcommand in proc means will produce statistics on a continuous variable, but separately for each subgroup identified by a level of your categorical variable.</p>
+<p>Look for shifts in the mean and changes in variation. Don’t overreact to small changes in variation. Typically, you need to see at least a doubling or tripling of the standard deviation from one level to another before worrying about it.</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1549,6 +1592,7 @@ display:block!important;
 run;
 
 proc means
+    n nmiss mean std min max
     data=perm.fev;
   var fev;
   by smoke;
@@ -1693,7 +1737,42 @@ width: 1px!important;
 overflow: hidden!important;
 display:block!important;
 }</style></aside>
-<p>1r sas[16]`</p>
+</section>
+<section id="distinguishing-groups-in-a-scatterplot-16" class="slide level2">
+<h2>Distinguishing groups in a scatterplot (16)</h2>
+<pre><code>proc sgplot
+    data=perm.fev;
+  scatter x=age y=fev /
+      group=smoke
+      markerattrs=(size=10);
+  format smoke fsmoke.;
+  styleattrs
+    datacontrastcolors=(lightgray black)
+    datasymbols=(circle plus);
+  title2 &quot;Second hypothesis is that age is a confounder&quot;;
+  title3 &quot;This hypothesis is supported by the data&quot;;
+run;
+
+ods graphics on / reset=all;
+
+ods pdf close;</code></pre>
+<aside class="notes">
+<ul>
+<li>Comments on the code: Distinguishing groups in a scatterplot</li>
+</ul>
+<p>The group option tells SAS to make distinctions in a graph using a categorical variable.</p>
+<p>The styleattrs statement tells SAS what particular colors, symbols, linestyles, etc. to use to make group distinctions.;</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
 </section>
 <section id="live-demo-part-5" class="slide level2">
 <h2>Live demo, part 5</h2>

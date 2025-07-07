@@ -52,7 +52,7 @@ You can also use some combination of these.
 
 `r sas[15]`
 
-1r sas[16]`
+`r sas[16]`
 
 ## Live demo, part 5
 

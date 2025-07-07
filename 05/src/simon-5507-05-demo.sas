@@ -155,8 +155,7 @@ there are just a few of them.;
 
 
 ods graphics /
-  height=6 in width=6 in
-  attrpriority=none;
+  height=6 in width=6 in;
 
 proc sgplot
     data=perm.fev;
@@ -198,6 +197,7 @@ proc sort
 run;
 
 proc means
+    n nmiss mean std min max
     data=perm.fev;
   var fev;
   by smoke;
