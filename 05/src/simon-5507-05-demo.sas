@@ -287,9 +287,4 @@ The styleattrs statement tells SAS what
 particular colors, symbols, linestyles, etc.
 to use to make group distinctions.;
 
-
-* Comments on the code: Using symbols to designate group
-
-The group option in scatter 
-
 *---------------- End of part 5 ----------------;

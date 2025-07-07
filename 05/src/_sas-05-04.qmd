@@ -13,21 +13,15 @@ editor: source
 load(file="../data/slides-05.RData")
 ```
 
-## 05-04
+## Boxplots
 
 ::: notes
 
 When you want to look at a relationship
 between a categorical variable and a continuous
-variable, you should use a boxplot. Notice that
-you use proc sgplot for both a scatterplot and a 
-boxplot. This is a big improvement over previous
-methods in SAS to produce plots because it is 
-easier to learn one procedure and minor variations
-in that procedure rather than having to learn
-multiple procedures.
+variable, you should use a boxplot. 
 
-The bottom and top of the boxplot
+The bottom and top of the box
 represents the 25th and 75th percentiles,
 respectively. A thin line, or whisker, is drawn
 down to the minimum value and up to the maximum
@@ -35,17 +29,6 @@ value. Extreme values are shown as individual
 data points. Notice the discrepancy in fev.
 Smokers seem to have a much higher FEV than
 non-smokers. This is quite surprising.;
-
-* Notes10. Also look at how the means and standard
-deviations of your continuous variable change for
-each level of your categorical variable.
-
-Output, page 8. Notice again the discrepancy in 
-fev by smoking status. This is quite surprising.;
-
-
-
-
 
 :::
 
