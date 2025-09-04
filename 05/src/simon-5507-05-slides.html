@@ -1084,7 +1084,7 @@ display:block!important;
 <pre><code>%let path=q:/5507-2025b/05;
 
 ods pdf
-  file=&quot;&amp;path/results/5507-05-simon-working-with-mix-of-variables.pdf&quot;;
+  file=&quot;&amp;path/results/simon-5507-05-demo.pdf&quot;;
 
 filename raw_data
   &quot;&amp;path/data/fev.txt&quot;;
@@ -1180,6 +1180,7 @@ display:block!important;
       smoke fsmoke.;
   title1 &quot;Pulmonary function study&quot;;
   title2 &quot;There are no obvious problems with this dataset&quot;;
+  footnote1 &quot;Created by Steve Simon on &amp;sysdate using SAS &amp;sysver&quot;;
 run;</code></pre>
 <aside class="notes">
 <ul>
@@ -1198,8 +1199,16 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="live-demo-part-1" class="slide level2">
-<h2>Live demo, part 1</h2>
+<section id="live-demo-part-1-review" class="slide level2">
+<h2>Live demo, part 1 (review)</h2>
+<ul>
+<li>documentation header</li>
+<li>file locations</li>
+<li>data step</li>
+<li>label subcommand</li>
+<li>proc format</li>
+<li>format subcommand</li>
+</ul>
 </section>
 <section id="break-1" class="slide level2">
 <h2>Break #1</h2>
@@ -1296,8 +1305,12 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="live-demo-part-2" class="slide level2">
-<h2>Live demo, part 2</h2>
+<section id="live-demo-part-2-review" class="slide level2">
+<h2>Live demo, part 2 (review)</h2>
+<ul>
+<li>proc freq</li>
+<li>proc means</li>
+</ul>
 </section>
 <section id="break-2" class="slide level2">
 <h2>Break #2</h2>
@@ -1420,15 +1433,19 @@ display:block!important;
 </section>
 <section id="draw-scatterplots-11" class="slide level2">
 <h2>Draw scatterplots (11)</h2>
-<pre><code>proc sgplot
+<pre><code>ods graphics /
+  height=6 in width=6 in
+  attrpriority=none;
+
+proc sgplot
     data=perm.fev;
-  scatter x=age y=fev /
-      markerattrs=(size=10 symbol=circle);
-  pbspline x=abdomen y=fat_brozek /
-      lineattrs=(pattern=dash color=red)
-      nomarkers;
-  title2 &quot;There is a positive association, close to linear&quot;;
-run;</code></pre>
+  pbspline x=age y=fev /
+      markerattrs=(size=10 symbol=circle color=black)
+      lineattrs=(pattern=dash color=red);
+  title2 &quot;There is a positive association, with slight bends at low and high ages&quot;;
+run;
+
+ods graphics on / reset=all;</code></pre>
 <aside class="notes">
 <ul>
 <li>Comments on the code: Draw scatterplots;</li>
@@ -1445,8 +1462,22 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="live-demo-part-3" class="slide level2">
-<h2>Live demo, part 3</h2>
+<section id="live-demo-part-3-review" class="slide level2">
+<h2>Live demo, part 3 (review)</h2>
+<ul>
+<li>proc corr</li>
+<li>proc sgplot
+<ul>
+<li>scatter subcommand
+<ul>
+<li>markerattrs option</li>
+</ul></li>
+<li>pbspline subcommand
+<ul>
+<li>lineattrs option</li>
+</ul></li>
+</ul></li>
+</ul>
 </section>
 <section id="break-3" class="slide level2">
 <h2>Break #3</h2>
@@ -1485,14 +1516,16 @@ display:block!important;
 <section id="draw-a-boxplot-12" class="slide level2">
 <h2>Draw a boxplot (12)</h2>
 <pre><code>
-ods graphics / height=2.5 in width=6 in;
+ods graphics / 
+    height=2.5 in width=6 in;
 
 proc sgplot
     data=perm.fev;
-  hbox fev / category=smoke;
+  hbox fev / category=smoke nofill;
+  yaxis label=&quot; &quot;;
   format smoke fsmoke.;
   title2 &quot;Smokers tend to have higher fev values&quot;;
-  title3 &quot;This is a surprising and counter-intutive finding&quot;;
+  title3 &quot;This is a surprising and counter-intuitive finding&quot;;
 run;
 
 ods graphics on / reset=all;</code></pre>
@@ -1543,6 +1576,16 @@ display:block!important;
 </section>
 <section id="live-demo-part-4" class="slide level2">
 <h2>Live demo, part 4</h2>
+<ul>
+<li>proc sgplot
+<ul>
+<li>hbox subcommand
+<ul>
+<li>category option</li>
+<li>nofill option</li>
+</ul></li>
+</ul></li>
+</ul>
 </section>
 <section id="break-4" class="slide level2">
 <h2>Break #4</h2>
@@ -1575,23 +1618,27 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="investigate-unusual-trend-with-boxplots-14" class="slide level2">
-<h2>Investigate unusual trend with boxplots (14)</h2>
+<section id="boxplots-in-separate-panels-14" class="slide level2">
+<h2>Boxplots in separate panels (14)</h2>
 <pre><code>
-ods graphics / height=2.5 in width=6 in;
+ods graphics / 
+  height=3.5 in width=6 in;
 
-proc sgplot
+proc sgpanel
     data=perm.fev;
-  hbox age / category=smoke;
-  format smoke fsmoke.;
-  title2 &quot;Boxplots&quot;;
+  panelby sex / columns=1 rows=2;
+  hbox fev / category=smoke nofill;
+  format smoke fsmoke. sex fsex.;
+  title2 &quot;Our first guess is that sex is a confounder&quot;;
+  title3 &quot;This is not supported by the data&quot;;
 run;
 
 ods graphics on / reset=all;</code></pre>
 <aside class="notes">
 <ul>
-<li>Comments on the code: Investigate unusual trend with boxplots;</li>
+<li>Comments on the code: Boxplots in separate panels</li>
 </ul>
+<p>The group option in hbox draws separate boxplots for each combination of group and category.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1604,26 +1651,22 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="investigate-unusual-trend-with-descriptive-statistics-15" class="slide level2">
-<h2>Investigate unusual trend with descriptive statistics (15)</h2>
-<pre><code>proc sort
+<section id="important-setup-options-for-grouped-plots-15" class="slide level2">
+<h2>Important setup options for grouped plots (15)</h2>
+<pre><code>ods graphics / 
+  height=6 in width=6 in
+  attrpriority=none;
+
+proc sort
     data=perm.fev;
   by smoke;
-run;
-
-proc means
-    data=perm.fev;
-  var age;
-  by smoke;
-  format smoke fsmoke.;
-  title2 &quot;Descriptive statistics by group&quot;;
-run;
-
-ods pdf close;</code></pre>
+run;</code></pre>
 <aside class="notes">
 <ul>
-<li>Comments on the code: Investigate unusual trend with descriptive statistics;</li>
+<li>Comments on the code: Important setup options for grouped plots</li>
 </ul>
+<p>The attrpriorty option tells SAS how to cycle through various attributes (color, maker, linestyle) to distinguish among different groups. By default, SAS will cycle through a list of colors and only switch to other features after that list is exhausted. Most of the time, you do not want this option, so specify none.</p>
+<p>It is important to sort your data when you have groups, to control how colors, markers, and linestylesare asigned to each group.;</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -1638,6 +1681,23 @@ display:block!important;
 </section>
 <section id="live-demo-part-5" class="slide level2">
 <h2>Live demo, part 5</h2>
+<ul>
+<li>proc sgplot
+<ul>
+<li>hbox subcommand
+<ul>
+<li>group option</li>
+</ul></li>
+<li>scatter subcommand
+<ul>
+<li>group option</li>
+</ul></li>
+<li>styleattrs subcommand</li>
+<li>datasymbols</li>
+<li>datacontrastcolors</li>
+<li>datalinepatterns</li>
+</ul></li>
+</ul>
 </section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
