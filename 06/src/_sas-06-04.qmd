@@ -1,0 +1,25 @@
+---
+title: "sas-06-01"
+format: 
+  revealjs:
+    slide-number: true
+    embed-resources: true
+editor: source
+---
+
+```{r}
+#| label: 06-04-read
+#| message: false
+#| warning: false
+
+library(tidyverse)
+
+text_data <- read_lines("todd-5507-06-demo.sas")
+```
+
+## Defining a macro variable
+
+```{r}
+
+cat(text_data[41:45], sep="\n")
+```

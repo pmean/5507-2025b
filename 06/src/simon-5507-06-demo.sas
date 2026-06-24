@@ -1,0 +1,290 @@
+* simon-5507-06-demo.sas
+  author: Steve Simon
+  date created: 2018-11-27
+  purpose: to illustrate how to work with
+    data that has a mix of categorical and
+    continuous variables.
+  license: public domain;
+
+
+* Comments on the code: Documentation header;
+
+
+%let path=q:/5507-2025b/05;
+
+ods pdf
+  file="&path/results/simon-5507-05-demo.pdf";
+
+filename raw_data
+  "&path/data/fev.txt";
+
+libname perm
+  "&path/data";
+
+
+* Comments on the code: File locations;
+
+
+data perm.fev;
+  infile raw_data delimiter=",";
+  input 
+    age 2-3
+    fev 5-11
+    ht 12-16
+    sex 19
+    smoke 25;
+  label
+    age=Age in years
+    fev=Forced Expiratory Volume (liters)
+    ht=Height in inches
+    sex=Sex
+    smoke=Smoking status
+  ;
+run;
+
+
+* Comments on the code: Reading the data using a data step
+
+The data file is comma delimited and the first 
+row includes variable names.
+
+Normally, this means that you can save a bit of
+time by using proc import, but I chose to read
+in the data using a data step. The number of 
+variables was so small that this didn't matter
+that much. It also allowed me to define 
+variable labels in the initial data step rather
+than later.;
+
+
+proc format;
+  value fsex
+    0 = "Female"
+    1 = "Male"
+  ;
+  value fsmoke
+    0 = "Nonsmoker"
+    1 = "Smoker"
+  ;
+run;
+
+
+* Comments on the code: Label your categorical variables;
+
+
+proc print
+    data=perm.fev(obs=10);
+  format 
+      sex fsex. 
+      smoke fsmoke.;
+  title1 "Pulmonary function study";
+  title2 "There are no obvious problems with this dataset";
+  footnote1 "Created by Steve Simon on &sysdate using SAS &sysver";
+run;
+
+
+* Comments on the code: Print the first ten rows of data
+
+It's always a good idea to peek at the first few
+rows of data.
+
+*---------------- End of part 1 ----------------;
+
+
+proc freq
+    data=perm.fev;
+  tables sex smoke / missing;
+  format 
+      sex fsex. 
+      smoke fsmoke.;
+  title2 "Frequency counts";
+run;
+
+
+* Comments on the code: Get statistics for categorical variables;
+
+
+proc means
+    n nmiss mean std min max
+    data=perm.fev;
+  var age fev ht;
+  title2 "Descriptive statistics";
+run;
+
+
+* Comments on the code: Get statistics for continuous variables;
+
+*---------------- End of part 2 ----------------;
+
+
+proc corr
+    data=perm.fev
+    noprint
+    outp=correlations;
+  var age fev ht;
+run;
+
+
+* Comments on the code: Compute a correlation matrix;
+
+
+data correlations;
+  set correlations;
+  if _type_ NE "CORR" then delete;
+  drop _type_;
+  age=round(age, 0.01);
+  fev=round(fev, 0.01);
+  ht=round(ht, 0.01);
+run;
+
+
+* Comments on the code: Round the correlations;
+
+
+proc print 
+    data=correlations;
+  title2 "All variables show a positive correlations";
+run;
+
+
+* Comments on the code: Print the correlations
+
+With a small number of variables, there 
+is no need to sort the correlations when
+there are just a few of them.;
+
+
+ods graphics /
+  height=6 in width=6 in;
+
+proc sgplot
+    data=perm.fev;
+  pbspline x=age y=fev /
+      markerattrs=(size=10 symbol=circle color=black)
+      lineattrs=(pattern=dash color=red);
+  title2 "There is a positive association, with slight bends at low and high ages";
+run;
+
+ods graphics on / reset=all;
+
+
+* Comments on the code: Draw scatterplots;
+
+*---------------- End of part 3 ----------------;
+
+
+ods graphics / 
+    height=2.5 in width=6 in;
+
+proc sgplot
+    data=perm.fev;
+  hbox fev / category=smoke nofill;
+  yaxis label=" ";
+  format smoke fsmoke.;
+  title2 "Smokers tend to have higher fev values";
+  title3 "This is a surprising and counter-intuitive finding";
+run;
+
+ods graphics on / reset=all;
+
+
+* Comments on the code: Draw a boxplot;
+
+
+proc sort
+    data=perm.fev;
+  by smoke;
+run;
+
+proc means
+    n nmiss mean std min max
+    data=perm.fev;
+  var fev;
+  by smoke;
+  title2 "Descriptive statistics by group";
+run;
+
+
+* Comments on the code: Compute statistics with a by statement;
+
+*---------------- End of part 4 ----------------;
+
+
+ods graphics / 
+  height=3.5 in width=6 in;
+
+proc sgpanel
+    data=perm.fev;
+  panelby sex / columns=1 rows=2;
+  hbox fev / category=smoke nofill;
+  format smoke fsmoke. sex fsex.;
+  title2 "Our first guess is that sex is a confounder";
+  title3 "This is not supported by the data";
+run;
+
+ods graphics on / reset=all;
+
+
+* Comments on the code: Boxplots in separate panels
+
+The group option in hbox draws separate 
+boxplots for each combination of group
+and category.;
+
+
+ods graphics / 
+  height=6 in width=6 in
+  attrpriority=none;
+
+proc sort
+    data=perm.fev;
+  by smoke;
+run;
+
+
+* Comments on the code: Important setup options for grouped plots
+
+The attrpriorty option tells SAS how to 
+cycle through various attributes (color,
+maker, linestyle) to distinguish among
+different groups. By default, SAS will 
+cycle through a list of colors and only
+switch to other features after that list
+is exhausted. Most of the time, you do
+not want this option, so specify none.
+
+It is important to sort your data when
+you have groups, to control how colors,
+markers, and linestylesare asigned to
+each group.;
+
+
+proc sgplot
+    data=perm.fev;
+  scatter x=age y=fev /
+      group=smoke
+      markerattrs=(size=10);
+  format smoke fsmoke.;
+  styleattrs
+    datacontrastcolors=(lightgray black)
+    datasymbols=(circle plus);
+  title2 "Second hypothesis is that age is a confounder";
+  title3 "This hypothesis is supported by the data";
+run;
+
+ods graphics on / reset=all;
+
+ods pdf close;
+
+
+* Comments on the code: Distinguishing groups in a scatterplot
+
+The group option tells SAS to make
+distinctions in a graph using
+a categorical variable.
+
+The styleattrs statement tells SAS what
+particular colors, symbols, linestyles, etc.
+to use to make group distinctions.;
+
+*---------------- End of part 5 ----------------;
