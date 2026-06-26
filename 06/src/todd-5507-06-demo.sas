@@ -14,16 +14,16 @@ ods pdf
     file= "&path/results/todd-5507-06-demo.pdf";
 
 libname storage 
-    "&path/data";
+    "&path/data/";
 
 filename bmTall
-    "&path/data/bmTall.txt";
+    "&path/data/balance-measures-tall.txt";
   
 filename bmWide
-    "&path/data/bmWide.txt";
+    "&path/data/balance-measures-wide.txt";
 
 
-* Comments on the code: File locations
+* Comments on the code: File locations;
 
 
 data storage.bmTall;
@@ -96,138 +96,80 @@ run;
 * Comments on the code: Print the data and the metadata;
 
 
-proc sort 
-    data=storage.bmTall
-    out=bmTall_first
-    nodupkey;
+data storage.time_constant_tall;
+    set storage.bmTall;
+    keep Subject Sex Age Height Weight;
 run;
 
-proc print data=bmTall_first (obs=10);
-    title1 "First 10 rows of the BM Tall dataset";
-    title2 "With the repeated measures removed.";
+proc sort
+    data=storage.time_constant_tall nodup;
+	by _all_;
+run;
+
+proc print
+   data=storage.time_constant_tall (obs=10);
+   title "First ten rows of time constant data";
 run;
 
 
-* Comments on the code: Create a subset with first observation
+* Comments on the code: The nodup option removes
+    duplicate observations. There is now only one
+    row per patient. It is very important to keep
+    the subject number in this and any other data
+    subsets from either the tall format or the
+    wide format.;
 
-The nodupkey forces sas to remove duplicate for 
-same variable combination in this case, the 
-repeated measure for norm/closed by Subject 
-Surface Vision;
 
-
-data bmWide_first;
-    set storage.bmwide;
-    drop N02 NC2 ND2 F02 FC2 FD2;
-run;
-
-proc print data=bmWide_first (obs=10);
-    title1 "First 10 rows of the BM Wide dataset";
-    title2 "With the repeated measures removed.";
+data storage.time_varying_tall;
+    set storage.bmTall;
+	keep Subject Surface Vision CTSIB;
 run;
 
-* 
 
-*5. Discuss how some statistics and/or graphs are easier to compute with
-the tall format and other statistics and/or graphs with the wide
-format.;
-*Tall is good for aggregating statistics, analyzing the repeated measures
-and visualizing trends over time. Wide is best for comparing different measurements
-and simple descriptive statistics. Grouped bar charts are simple with tall
-format.;
-*6. Write a SAS program that reads in cholesterol-after-heart-attack and
-displays the first ten rows.;
-proc import datafile="/home/u63903237/5507/data/cholesterol-after-heart-attack.csv"
-out=storage.cholesterol
-dbms=csv
-replace;
-getnames=yes;
+proc print
+   data=storage.time_varying_tall (obs=10);
+   title "First ten rows of time constant data";
 run;
-proc print data=storage.cholesterol (obs=10);
-title1 "First ten rows of the cholesterol after heart attack data.";
-footnote "Reagan Todd, 2025-09-10, SAS Version 9.4";
+
+
+* Comments on the code: Getting the time-varying
+    data from the tall format requires no special
+    effort. You must always include the subject
+    number, even though it is not time varying.
+
+
+data storage.time_constant_wide;
+    set storage.BMWide;
+    keep Subject Sex Age Height Weight;
 run;
-*7. Calculate descriptive statistics on group, day, and cholest.;
-proc means data=storage.cholesterol;
-var cholest;
-title1 "Descriptive statistics for cholesterol.";
-footnote "Reagan Todd, 2025-09-10, SAS Version 9.4";
+
+proc print
+   data=storage.time_constant_wide (obs=10);
+   title "First ten rows of time constant data";
 run;
-*frequency for patient and day;
-proc freq data=storage.cholesterol;
-tables patient*day / norow nocol nopercent;
-title1 "Frequency count for patients and day.";
-*to show the inconsistency with day 14 for some patients.;
-footnote "Reagan Todd, 2025-09-10, SAS Version 9.4";
+
+
+* Comments on the code: There is no need to remove
+    duplicates here because the wide format
+    alraady has just one row per patient.;
+
+
+data storage.time_varying_wide;
+    set storage.BMWide;
+    keep Subject NO1 NO2 NC1 NC2 ND1 ND2 FO1 FO2 FC1 FC2 FD1	FD2;
 run;
-*8. Draw a scatterplot of day on the x-axis and cholest on the y-axis.;
-proc sgplot data=storage.cholesterol;
-scatter x=day y=cholest;
-xaxis label="Day" values=(1 to 15 by 1);
-yaxis label="Cholesterol" min=115 max=361;
-title "Scatterplot of Cholesterol by Day";
-footnote "Reagan Todd, 2025-09-09, SAS Version 9.4";
+
+proc print
+   data=storage.time_varying_wide (obs=10);
+   title "First ten rows of time constant data";
 run;
-*9. Create three smaller files from this data: one for day equals 2,
-one for day equals 4, and one for day eqauls 14. Ignore the data for
-day is NA.;
-data cholesterol_day2;
-set storage.cholesterol;
-if day = 2;
-run;
-data cholesterol_day4;
-set storage.cholesterol;
-if day = 4;
-run;
-data cholesterol_day14;
-set storage.cholesterol;
-if day = 14;
-run;
-*10. Merge the three files you created into one file with data in the wide
-format. Calculate the correlation between cholest_2, cholest_4, and
-cholest_14.;
-*Will look into proc transpose;
-*renaming cholesterols by the day;
-data day2;
-set cholesterol_day2;
-rename cholest = cholest_2;
-drop day;
-run;
-data day4;
-set cholesterol_day4;
-rename cholest = cholest_4;
-drop day;
-run;
-data day14;
-set cholesterol_day14;
-rename cholest = cholest_14;
-drop day;
-run;
-*Sort by patient;
-proc sort data=day2;
-by Patient;
-run;
-proc sort data=day4;
-by Patient;
-run;
-proc sort data=day14;
-by Patient;
-run;
-*merge;
-data cholesterol_wide;
-merge day2 day4 day14;
-by Patient;
-run;
-proc print data=cholesterol_wide (obs=10);
-title1 "First ten observations of the Cholesterol Wide merged data.";
-footnote "Reagan Todd, 2025-09-10, SAS Version 9.4";
-run;
-*correlation between the days;
-proc corr data=cholesterol_wide;
-var cholest_2 cholest_4 cholest_14;
-title1 "Those with high cholesterol at day 2 tend to have high cholesterol at day 4.";
-title2 "Those with high cholesterol at day 4 tend to have high cholesterol at day 14.";
-title3 "There is no significant relationship between day 2 and day 14.";
-footnote "Reagan Todd, 2025-09-10, SAS Version 9.4";
-run;
+
+
+* Comments on the code: Notice that the time 
+    varying data looks different from the 
+    previous example. You will need to use proc
+    transpose to convert one format to the 
+    other.;
+
+
 ods pdf close;

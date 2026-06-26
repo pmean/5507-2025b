@@ -22,12 +22,12 @@ read_lines("simon-5507-06-demo1.sas") |>
 
 ```{r}
 #| label: display-chunks
-#| asis: true
+#| output: asis
 
 for (i in 1:length(code_chunks)) {
   cat("\n\n## Code chunk ")
   cat(i)
   cat("\n\n")
-  cat(code_chunk[i])
+  cat(code_chunks[i])
 }
 ```

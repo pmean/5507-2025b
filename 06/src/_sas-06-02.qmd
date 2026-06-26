@@ -31,14 +31,25 @@ Testing notes text
 
 ```{r}
 
-cat(text_data[11:15], sep="\n")
+cat(text_data[1:5], sep="\n")
+>>>>>>> 97c7faf4f68264102f4cdf44f1276f341fe159a5
 ```
 
 ```{r}
-#| output: asis
+#| label: display-chunks
+#| asis: true
 
+<<<<<<< HEAD
+for (i in 1:length(code_chunks)) {
+  cat("\n\n## Code chunk ")
+  cat(i)
+  cat("\n\n")
+  cat(code_chunk[i])
+}
+```
+=======
 cat("\n\n::: {.notes}\n\n")
-cat(text_data[16:19], sep="\n")
+cat(text_data[8], sep="\n")
 cat("\n\n:::\n\n")
 ```
 
@@ -46,11 +57,89 @@ cat("\n\n:::\n\n")
 
 ```{r}
 
-cat(text_data[21:25], sep="\n")
+cat(text_data[11:23], sep="\n")
 ```
 
-::: {.notes}
+```{r}
+#| output: asis
 
-Testing
+cat("\n\n::: {.notes}\n\n")
+cat(text_data[26], sep="\n")
+cat("\n\n:::\n\n")
+```
 
-:::
+## 06-02 slide 3
+
+```{r}
+
+cat(text_data[29:40], sep="\n")
+```
+
+```{r}
+#| output: asis
+
+cat("\n\n::: {.notes}\n\n")
+cat(text_data[43], sep="\n")
+cat("\n\n:::\n\n")
+```
+
+## 06-02 slide 4
+
+```{r}
+
+cat(text_data[46:54], sep="\n")
+```
+
+```{r}
+#| output: asis
+
+cat("\n\n::: {.notes}\n\n")
+cat(text_data[57], sep="\n")
+cat("\n\n:::\n\n")
+```
+
+## 06-02 slide 5
+
+```{r}
+
+cat(text_data[46:80], sep="\n")
+```
+
+```{r}
+#| output: asis
+
+cat("\n\n::: {.notes}\n\n")
+cat(text_data[83], sep="\n")
+cat("\n\n:::\n\n")
+```
+
+## 06-02 slide 6
+
+```{r}
+
+cat(text_data[86:93], sep="\n")
+```
+
+```{r}
+#| output: asis
+
+cat("\n\n::: {.notes}\n\n")
+cat(text_data[96], sep="\n")
+cat("\n\n:::\n\n")
+```
+
+
+## 06-02 slide 7
+
+```{r}
+
+cat(text_data[99:108], sep="\n")
+```
+
+```{r}
+#| output: asis
+
+cat("\n\n::: {.notes}\n\n")
+cat(text_data[111:116], sep="\n")
+cat("\n\n:::\n\n")
+```
