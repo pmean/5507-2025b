@@ -1,5 +1,5 @@
 ---
-title: "sas-06-01"
+title: "sas-06-08"
 format: 
   revealjs:
     slide-number: true
@@ -7,19 +7,6 @@ format:
 editor: source
 ---
 
-```{r}
-#| label: 06-08-read
-#| message: false
-#| warning: false
+## sas-06-08
 
-library(tidyverse)
-
-text_data <- read_lines("todd-5507-06-demo.sas")
-```
-
-## Defining a macro variable
-
-```{r}
-
-cat(text_data[81:85], sep="\n")
-```
+Test

@@ -1,11 +1,13 @@
-* todd-5507-06-demo.sas
+* Documentation header
+
+    todd-5507-06-demo.sas
     author: Reagan Todd
     date created: 2025-09-09
     purpose: to understand how to manipulate data widths.
     license: public domain;
 
 
-* Comments on the code: Documentation header;
+* File locations;
 
 
 %let path=q:/5507-2025b/06;
@@ -23,7 +25,7 @@ filename bmWide
     "&path/data/balance-measures-wide.txt";
 
 
-* Comments on the code: File locations;
+* Read tall format;
 
 
 data storage.bmTall;
@@ -40,7 +42,7 @@ data storage.bmTall;
 run;
 
 
-* Comments on the code: Read the data using a data step;
+* Print data and metadata;
 
 
 proc print
@@ -54,7 +56,7 @@ proc contents data=storage.bmTall;
 run;
 
 
-* Comments on the code: Print the data and the metadata;
+* Read wide format;
 
 
 data storage.bmWide;
@@ -80,7 +82,7 @@ data storage.bmWide;
 run;
 
 
-* Comments on the code: Read the data using a data step;
+* Print data and metadata;
 
 
 proc print
@@ -93,7 +95,7 @@ proc contents data=storage.bmWide;
 run;
 
 
-* Comments on the code: Print the data and the metadata;
+* Create time constant data from tall format;
 
 
 data storage.time_constant_tall;
@@ -120,11 +122,13 @@ run;
     wide format.;
 
 
+* Create time varying data from tall format
+
+
 data storage.time_varying_tall;
     set storage.bmTall;
 	keep Subject Surface Vision CTSIB;
 run;
-
 
 proc print
    data=storage.time_varying_tall (obs=10);
@@ -136,6 +140,9 @@ run;
     data from the tall format requires no special
     effort. You must always include the subject
     number, even though it is not time varying.
+
+
+* Creating time constant data from wide format;
 
 
 data storage.time_constant_wide;
@@ -154,6 +161,9 @@ run;
     alraady has just one row per patient.;
 
 
+* Creating time varying data from wide format;
+
+
 data storage.time_varying_wide;
     set storage.BMWide;
     keep Subject NO1 NO2 NC1 NC2 ND1 ND2 FO1 FO2 FC1 FC2 FD1	FD2;
@@ -170,6 +180,9 @@ run;
     previous example. You will need to use proc
     transpose to convert one format to the 
     other.;
+
+
+* Always remember to close your pdf file;
 
 
 ods pdf close;
