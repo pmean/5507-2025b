@@ -1,0 +1,103 @@
+---
+title: "convert_to_markdown"
+format: 
+  html:
+    embed-resources: true
+editor: source
+---
+
+```{r}
+#| label: setup
+#| message: false
+#| warning: false
+
+library(tidyverse)
+
+marker_heads <- "^\\* "
+prefix_heads <- "\n\n## ",
+postfix_heads <- "\n\n"
+
+marker_notes <- "^\\* Comments on the code: "
+prefix_notes <- "\n\n::: {.notes}\n\n"
+postfix_notes <- 
+
+prefix_sas <- "```{}\n"
+postfix_sas <- "\n\n:::\n\n"
+
+semicolon <- ";" 
+```
+
+```{r}
+#| label: read
+
+read_code <- function(code_file) {
+  # reads sas file and splits into chunks
+  read_lines(paste0(code_file, ".sas")) |>
+  paste0(collapse="\n") |>
+  str_split(pattern="\n\n\n") |>
+  unlist()
+}
+```
+
+```{r}
+#| label: parse-heads
+
+parse_heads <- function(chunks) {
+  # find chunks which look like heads, add prefix and postfix
+  heads <- str_detect(chunks, marker_heads) & !str_detect(chunks, marker_notes)
+
+  chunks[heads] <- str_remove(chunks[heads], marker_heads)
+  chunks[heads] <- str_remove(chunks[heads], semicolon)
+
+  chunks[heads] <- paste0(
+    prefix_heads,
+    chunks[heads],
+    postfix_heads)
+  
+  return(chunks)
+}
+
+parse_notes <- function(chunks) {
+  # find chunks which look like notes, add prefix and postfix
+  notes <- str_detect(chunks, marker_notes)
+
+  chunks[notes] <- str_remove(chunks[notes], market_notes)
+  chunks[notes] <- str_remove(chunks[notes], semicolon)
+  
+  chunks[notes] <- paste0(
+    prefix_notes,
+    chunks[notes],
+    postfix_notes)
+}
+
+parse_sas <- function(chunks) {
+  # find chunks which look like sas, add prefix and postfix
+  sas <- !str_detect(marker_heads)
+
+  chunks[sas] <- paste0(
+    prefix_sas,
+    chunks[sas],
+    postfix_sas)
+
+  return(chunks)
+  
+}
+
+parse_code <- function(chunks) {
+
+
+  sas <- !notes & !heads
+
+
+}
+```
+
+
+```{r}
+#| label: write
+
+write_markdown <- function(chunks) {
+  cat("\n\n## Documentation header\n\n")
+  cat(chunks, sep="\n")
+}
+```
