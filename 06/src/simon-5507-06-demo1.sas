@@ -1,4 +1,7 @@
-* simon-5507-06-demo1.sas
+* Documentation header
+
+
+    simon-5507-06-demo1.sas
     author: Steve Simon
     date created: 2026-06-25
     purpose: to illustrate managing multiple datasets
@@ -26,17 +29,8 @@ filename d70yr
 filename d71yr
     "&path/data/draft71yr.dat.txt";
   
-filename d72yr
-    "&path/data/draft72yr.dat.txt";
-
 filename d70mn
     "&path/data/draft70mn.dat.txt";
-
-filename d71mn
-    "&path/data/draft71mn.dat.txt";
-  
-filename d72mn
-    "&path/data/draft72mn.dat.txt";
 
 
 * Read tab delimited files;
@@ -165,6 +159,7 @@ proc print
 	title1 "Partial listing of side by side stacked data";
 run;
 
+
 * Read a fixed width file;
 
 
@@ -187,37 +182,7 @@ data storage.draft70mn;
 run;
 
 
-* Read a second fixed width file;
-
-
-data storage.draft71mn;
-    infile d71mn;
-    input
-        jan_order 3-5
-        feb_order 7-9
-        mar_order 11-13
-        apr_order 15-17
-        may_order 19-21
-        jun_order 23-25
-        jul_order 27-29
-        aug_order 31-33
-        sep_order 35-37
-        oct_order 39-41
-        nov_order 43-45
-        dec_order 47-49;
-	day_of_month=_n_;
-run;
-
-
 * Print a small piece of the data.;
-
-
-proc print
-    data=storage.draft71mn;
-	var jan_order -- may_order;
-    title1 "First five columns of the 1971 draft lottery data";
-    title2 "Using a month long format";
-run;
 
 
 proc print
@@ -226,7 +191,6 @@ proc print
     title1 "First five columns of the 1970 draft lottery data";
     title2 "Using a month long format";
 run;
-
 
 
 * Comments on the code: Notice that the months with less than 31 days
@@ -249,7 +213,7 @@ proc print
 run;
 
 
-* Convery yearly data to monthly data;
+* Add day_of_month column;
 
 
 data day_of_month;
@@ -262,28 +226,30 @@ data storage.draft70yr;
 	merge day_of_month;
 run;
 
+
+* Convert yearly data to monthly data;
+
+
 proc sort
     data=storage.draft70yr;
 	by day_of_month month;
 run;
 
-proc print
-    data=storage.draft70yr;
-    title1 "Listing of data with day_of_month added";
-run;
-
-
 proc transpose
     data=storage.draft70yr
     out=stack4
-    prefix=x;
+    prefix=Month;
 	id Month;
 	by day_of_month;
-	var draft_order;
+	* var draft_order;
 run;
 
 proc print
     data=stack4;
 run;
+
+
+* Don't forget to close your PDF file;
+
 
 ods pdf close;
