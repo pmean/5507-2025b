@@ -7,4 +7,97 @@ format:
 editor: source
 ---
 
-{{< include simon-5507-06-demo1.md >}}
+## what is a dataset option?
+
+-   Inserted next to a dataset name
+    -   Inside parentheses
+    -   Either in the data statement or the set statement.
+    
+```{}
+data small_piece;
+    set big_piece(obs=10);
+run;
+```
+
+::: {.notes}
+A dataset option is a piece of code placed next to a dataset name and inside a set of parentheses. In the example shown here, obs=10 is a dataset option.
+:::
+
+## Breaking up data
+
+-   Column subsets
+    -   `keep` dataset option or statement
+    -   `drop` dataset option or statement
+-   Row subset
+    -   `obs` dataset option
+    -   `firstobs` dataset option
+    -   `if` statement
+    
+::: {.notes}
+If you want to split apart a large dataset into smaller pieces, you need to know the direction that the splits will occur. 
+
+Use keep or drop to get subsets of the columns of your dataset. Both keep and drop can be used as a dataset option or as a statement in the data step.
+
+Use the dataset options obs or firstobs to get subsets of rows. These work to get consecutive observations at the top or at the bottom of a dataset.
+
+The if statement incorporates a logical condition that creates a subset of rows that meet or do not meet a logical condition.
+:::
+
+## The keep dataset option with the set statement
+
+```{}
+* Using keep in the set statement
+data small_piece;
+    set big_piece (keep = variable_list);
+`   optional processing steps;
+run;
+```
+
+::: {.notes}
+You can place keep as an option in the data set mentioned in the set statement. You may wish to do additional processing, such as creating new variables, adding labels, etc. When you place the keep statement as an option for the set statement, the processing occurs only after applying the keep statement.
+:::
+
+## The keep statement inside the data step
+
+```{}
+* Using keep in the data step
+data small_piece;
+    set big_piece;
+    optional processing steps;
+    keep = variable_list;
+    more optional processing steps;
+run;
+```
+
+::: {.notes}
+You can place the keep statement as a separate command in the data step. When you place it here, you can execute additional processing steps before or afterwards.
+:::
+
+## The keep dataset option with the data statement
+
+```{}
+* Using keep in the data statement
+data small_piece(keep = variable_list);
+    set big_piece;
+    optional processing steps;
+run;    
+```
+
+::: {.notes}
+You can also place keep in the data statement. When you place it here, any optional processing steps will be done before applying the keep statement.
+
+If you have no optional processing statements, then you can place the keep statement anywhere you like. For a very large dataset, you might get a slight gain in efficiency  using keep within the set statement.
+:::
+
+## The drop statement 
+
+-   Inverse of the keep statement
+-   Same locations
+    -   set statement
+    -   data step
+    -   data statement
+    
+::: {.notes}
+The drop statement is useful if many variables are kept and only a few are dropped. You can place it in the same three locations. This only makes a difference if you have some additional processing statements in the data step.
+:::
+

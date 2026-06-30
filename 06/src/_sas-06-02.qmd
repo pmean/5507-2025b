@@ -7,4 +7,67 @@ format:
 editor: source
 ---
 
-{{< include todd-5507-06-demo2.md >}}
+## The obs dataset option
+
+```{}
+data small_piece;
+    set big_piece(obs=n);
+    optional processing steps;
+run;
+```
+
+```{}
+data small_piece(obs=n);
+    set big_piece;
+    optional processing steps;
+run;
+```
+
+::: {.notes}
+The obs dataset option will select the first n rows of a dataset. You can place it in the set statement, which will reduce the number of rows before any optional processing steps. Or you can place it in the data statement, which will reduce that number after any optional processing steps.
+:::
+
+## The firstobs dataset option
+
+```{}
+data small_piece;
+    set big_piece(firstobs=n);
+    optional processing steps;
+run;
+```
+
+```{}
+data small_piece(firstobs=n);
+    set big_piece;
+    optional processing steps;
+run;
+```
+
+::: {.notes}
+The firstobs dataset option will start selecting rows after the first n rows of a dataset. Where you place it will control when the optional processing steps, if any, are run.
+:::
+
+## The if statement
+
+```{}
+data small_piece;
+    set big_piece;
+    optional processing steps;
+    if logical-condition;
+    more optional processing steps;
+run;
+```
+
+```{}
+data small_piece;
+    set big_piece;
+    optional processing steps;
+    if logical-condition then delete;
+    more optional processing steps;
+run;
+```
+
+::: {.notes}
+The if statement will keep rows meeting a certain logical condition (as in the first example) or delete rows meeting a logical condition (as in the second example). You can run optional processing steps before and/or after the if statement.
+:::
+

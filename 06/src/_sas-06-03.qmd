@@ -7,6 +7,32 @@ format:
 editor: source
 ---
 
-## sas-06-03
+## Combining datasets using set statement
 
-Test
+-   List two or more datasets
+    -   Stacks one beneath the other
+    -   Variable names should match
+    
+::: {.notes}
+
+:::
+    
+## Combining datasets using merge statement   
+
+- List two or more datasets
+    -   Stacks side-by-side
+    -   Beware of misalignment
+    
+::: {.notes}
+
+:::
+    
+## Using the by statement
+
+-   `by` key
+-   key controls the match
+
+::: {.notes}
+
+:::
+    

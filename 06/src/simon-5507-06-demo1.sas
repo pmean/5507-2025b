@@ -92,7 +92,7 @@ run;
     avoid ambiguities.;
 
 
-* Stack the two datasets one beneath the other;
+* Stack datasets one beneath the other;
 
 
 data dec_stack1;
@@ -109,7 +109,7 @@ run;
     statement, SAS will combine the datasets one beneath the other.;
 
 
-* Boxplot for comparing 1970 and 1971 draft orders;
+* Boxplot comparing 1970 and 1971;
 
 
 ods graphics / 
@@ -241,7 +241,7 @@ proc transpose
     prefix=Month;
 	id Month;
 	by day_of_month;
-	* var draft_order;
+	var draft_order;
 run;
 
 proc print
