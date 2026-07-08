@@ -1,5 +1,5 @@
 ---
-title: "sas-06-04"
+title: "Longitudinal data and repeated measures"
 format: 
   revealjs:
     slide-number: true
@@ -7,6 +7,40 @@ format:
 editor: source
 ---
 
-{{< include simon-5507-06-demo1.md >}}
+## What is longitudinal/repeated measures data
 
-## Live demo
+-   Longitudinal data
+    -   Measurement of the same subject at different times.
+-   Repeated measures data
+    -   Measurement of the same subject under different conditions
+-   No independence assumption
+    -   Varying data analysis approaches
+    -   Similar data management approaches
+    
+::: {.notes}
+You will encounter longitudinal data and repeated measures data quite often. Longitudinal data is data where you have multiple measures of the same subject, each measurement at a different time. Repeated measures data is data where you have multiple measures of the same subject, each measurement under a different treatment condition. 
+
+You could argue that repeated measures is just a type of longitudinal data or you could argue that they are quite different. Don't worry too much about this. The thing that both datasets have is the concept of multiple measurements on the same subject. This means that you can't rely on the independence assumption that is required for t-tests, regression, and analysis of variance. The data analytic approaches are quite varied, but the data management for similar for longitudinal data and repeated measures data.
+:::
+
+## Longitudinal data
+
+![](../images/babenko-2023.png)
+
+::: {.notes}
+Here's an example of longitudinal data from a peer-reviewed artilce. In this study, a residents-as-teachers (RAT) program was evaluated four times: "before and after the RAT program and at one and three years into practice". The researchers measured "interest, comfort, confidence, skill, familiarity with aspects of clinical teaching".  
+:::
+
+## Repeated measures data
+
+![](../images/smits-2016.png)
+
+::: {.notes}
+Here is an example of repeated measures data in a peer-reviewed article. Sixteen subjects born in the Netherlands, but fluent in English, were given both the Dutch and the American English versions of the digits-in-noise test. This is a test used to diagnose hearing loss. Both versions were presented with different background noises. They were also tested in the left ear along, the right ear alone, both ears, and a dichotic condition (different sounds placed in the left and right ear). Each subject had to listen to the two language version times two noise conditions times four ear conditions. This represents 16 measures on each person.
+:::
+
+## The tall versus wide formats
+
+
+
+The four multiple measurements inherent in the longitudinal study of the residents as trainers teaching approach could be laid out horizontally across multiple columns or vertically across mutliple rows. The former approach would have four columns for each outcome measure, one for each time point. The latter would have a single column for each outcome measure and there would be four separate rows for each patient.or the sixteen measurements in the repeated measures study 
