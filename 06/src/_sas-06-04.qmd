@@ -39,8 +39,53 @@ Here's an example of longitudinal data from a peer-reviewed artilce. In this stu
 Here is an example of repeated measures data in a peer-reviewed article. Sixteen subjects born in the Netherlands, but fluent in English, were given both the Dutch and the American English versions of the digits-in-noise test. This is a test used to diagnose hearing loss. Both versions were presented with different background noises. They were also tested in the left ear along, the right ear alone, both ears, and a dichotic condition (different sounds placed in the left and right ear). Each subject had to listen to the two language version times two noise conditions times four ear conditions. This represents 16 measures on each person.
 :::
 
-## The tall versus wide formats
+## The wide format
+
+$\begin{matrix}
+1 & O_{11} & O_{12} & O_{13} & O_{14} & A_1 & B_1 & \cdots \\
+2 & O_{21} & O_{22} & O_{23} & O_{24} & A_2 & B_2 & \cdots \\
+3 & O_{21} & O_{22} & O_{23} & O_{24} & A_3 & B_3 & \cdots \\
+4 & O_{21} & O_{22} & O_{23} & O_{24} & A_4 & B_4 & \cdots \\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & 
+\end{matrix}$
 
 
+::: {.notes}
+How would the outcome measured at the four time points in the longitudinal study be stored? There are two formats, the wide format and the tall format. Here is the data stored in the wide format.
 
-The four multiple measurements inherent in the longitudinal study of the residents as trainers teaching approach could be laid out horizontally across multiple columns or vertically across mutliple rows. The former approach would have four columns for each outcome measure, one for each time point. The latter would have a single column for each outcome measure and there would be four separate rows for each patient.or the sixteen measurements in the repeated measures study 
+The first column (1, 2, 3, 4, ...) is an identification number that indicates which subject is which. It doesn't have to be a strict sequence like shown here. It could be a medical record number, for example, but you do want to be careful with medical record numbers from a confidentiality perspective.
+
+The next four columns represent the outcome, arranged horizontally. The double subscript used here is interpreted as follows. The first subscript identifies which subject and the second subscript identifies the time point in the longitudinal study.
+
+The remaining columns represent additional variables that are not repeated. The columns might represent demographics about the subject such as age and gender. Since these are not time-varying, you only need a single subscript.
+
+Strictly speaking, you do not need an identification number when the data is in the wide format, but it is a good practice to follow.
+:::
+
+## The tall format
+
+$\begin{matrix}
+1 & 1 & O_{11} & A_1 & B_1 & \cdots \\
+1 & 2 & O_{12} & A_1 & B_1 & \cdots \\
+1 & 3 & O_{13} & A_1 & B_1 & \cdots \\
+1 & 4 & O_{14} & A_1 & B_1 & \cdots \\
+2 & 1 & O_{21} & A_2 & B_2 & \cdots \\
+2 & 2 & O_{22} & A_2 & B_2 & \cdots \\
+\vdots & \vdots & \vdots& \vdots & \vdots &
+\end{matrix}$
+
+::: {.notes}
+Here is what the data looks like in the tall format. The first column isthe identification number. You definitely need this. You also need a column that tells you whether this is the first, second, third, or fourth longitudinal measure. The outcome is arranged vertically in a single column. The remaining columns represent additional variables. Since these are not time-varying, you need to repeat these values four times.  
+:::
+
+## Which format is better?
+
+-   Neither is uniformly superior
+-   Tall format
+    -   Time constant data is repeated
+    -   Extra space requirements
+    -   Increase chance for data quality problems
+-   Wide format
+    -   Excessive number of columns
+    -   Difficult to scroll left/right
+-   Wide format difficul
