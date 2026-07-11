@@ -7,30 +7,8 @@ format:
 editor: source
 ---
 
-## Time-constant and Time-varying data
+## Storing time-constant and time-varying data in separate datasets
 
--   Time constant data
-    -   Does not change across time/repeated measures
-    -   Should be stored as one row per patient
--   Time varying data
-    -   Changes across time/repeated measures
-    -   Could be stored one row per patient
-    -   Could be stored one row per time/measure
+## Converting from long to wide format
 
-::: {.notes}
-When you have longitudinal data or repeated measures, it helps to classify every variable as either time-constant or time-varying.
-
-Time-constant data is data that is fixed across all time points or across all repeated measures. Most demographic variables are time-constant. A patients gender or race is generally the same. If you have age, you might consider age at the start of the study as a time-constant variable.
-
-Time constant data is best stored as one row per patient rather than one row per time point or measurement.
-
-Time varying data changes from one time point to another or from one repeated measurement condition to another. Your outcome variables in either setting would be considered time-varying data. Some covariates that change over time or with different measurement conditions would be time-varying data. In a study of developmental milestones during puberty, age at the time of each visit would be time-varying data.
-
-Time varying data could be stored as one row per subject with the varying values represented as a sequence of columns. This is known as the wide format. 
-
-It could also be stored as one row per time point with the varying values represented as a sequence of rows. This is known as the tall format.
-
-There are some gray areas besides age where it is unsure whether a variable is time-constant or time-varying. Don't worry too much about this. The context in which you collected your data should allow you to make the appropriate distinction.
-
-
-:::
+## Converting from wide to long format
