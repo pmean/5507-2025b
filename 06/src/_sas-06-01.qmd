@@ -7,7 +7,7 @@ format:
 editor: source
 ---
 
-## what is a dataset option?
+## What is a dataset option?
 
 -   Inserted next to a dataset name
     -   Inside parentheses

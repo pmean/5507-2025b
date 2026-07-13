@@ -203,14 +203,25 @@ run;
 proc transpose 
     data=storage.draft70mn
     out=stack3 (rename=(col1=draft_order));
-	var jan_order -- dec_order;
 	by day_of_month;
+	var jan_order -- dec_order;
 run;
 
 proc print
    data=stack3;
    title1 "Listing of transposed draft70mn";
 run;
+
+
+* Comments on the code: Use the data keyword to
+    specify the source and the out keyword to 
+    specify where you want to converted data to
+    be located. Place day_of_month in the by 
+    statement to insure that the order of the 
+    outcomes after transposing stays consistent.
+    You tell SAS the names of the twelve columns
+    that you want to combine into a single 
+    column.;
 
 
 * Add day_of_month column;
@@ -225,6 +236,18 @@ data storage.draft70yr;
     set storage.draft70yr;
 	merge day_of_month;
 run;
+
+
+* Comments on the code: Before you can restructure
+    the data from a yearly format to a monthly
+    format, you need to designate the days of the
+    month (1 to 31 for January, 1 to 29 for
+    February, 1 to 31 for March, etc.). Without
+    this, the data will not line up properly. I 
+    created a dataset with 366 rows with 1 to 31 
+    for January, 1 to 29 for Febraury, etc. You
+    need to merge this with the original data 
+    before transposing anything.;
 
 
 * Convert yearly data to monthly data;
@@ -247,6 +270,17 @@ run;
 proc print
     data=stack4;
 run;
+
+
+* Comments on the code: Use the data keyword to
+    specify the source and the out keyword to 
+    specify where you want to converted data to
+    be located. Put month in the id statement to
+    let SAS know that you want a separate column
+    for each month. Place day_of_month in the by 
+    statement to insure proper matching. You tell
+    SAS that the column containing the outcomes
+    is draft_order.;
 
 
 * Don't forget to close your PDF file;

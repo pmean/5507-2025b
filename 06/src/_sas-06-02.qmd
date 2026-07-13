@@ -16,9 +16,11 @@ editor: source
     -   Can combine more than two datasets
     
 ::: {.notes}
-You have already seen the set statement in previous code. If you specify two with the set statement, SAS will stack one beneath the other. 
+You have already seen the set statement in previous code. If you specify two datasets with the set statement, SAS will stack one beneath the other. 
 
-The variable names should match. Don't try this if one variable is one dataset is numeric and the variable with the same name in the other dataset is strings. If you have extra variables in one dataset, SAS will use missing values in the other dataset before stacking them. 
+The variable names should match. Don't try this if one variable is one dataset is numbers and the variable with the same name in the other dataset is strings. 
+
+If you have extra variables in one dataset, SAS will use missing values in the other dataset before stacking them. 
 
 The number of rows do not have to match. The combined dataset will have a number of rows equal to the sum of the row numbers in the two datasets.
 

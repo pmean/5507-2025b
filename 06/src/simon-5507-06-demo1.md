@@ -130,7 +130,7 @@ The if statement without a condition tells
 
 
 
-## Stack the two datasets one beneath the other
+## Stack datasets one beneath the other
 
 
 ```{}
@@ -158,7 +158,7 @@ If you place more than one dataset in the set
 
 
 
-## Boxplot for comparing 1970 and 1971 draft orders
+## Boxplot comparing 1970 and 1971
 
 
 ```{}
@@ -290,8 +290,8 @@ Notice that the months with less than 31 days
 proc transpose 
     data=storage.draft70mn
     out=stack3 (rename=(col1=draft_order));
-	var jan_order -- dec_order;
 	by day_of_month;
+	var jan_order -- dec_order;
 run;
 
 proc print
@@ -300,6 +300,23 @@ proc print
 run;
 
 ```
+
+
+
+
+::: {.notes}
+
+Use the data keyword to
+    specify the source and the out keyword to 
+    specify where you want to converted data to
+    be located. Place day_of_month in the by 
+    statement to insure that the order of the 
+    outcomes after transposing stays consistent.
+    You tell SAS the names of the twelve columns
+    that you want to combine into a single 
+    column.
+
+:::
 
 
 
@@ -338,7 +355,7 @@ proc transpose
     prefix=Month;
 	id Month;
 	by day_of_month;
-	* var draft_order;
+	var draft_order;
 run;
 
 proc print
@@ -346,6 +363,23 @@ proc print
 run;
 
 ```
+
+
+
+
+::: {.notes}
+
+Use the data keyword to
+    specify the source and the out keyword to 
+    specify where you want to converted data to
+    be located. Put month in the id statement to
+    let SAS know that you want a separate column
+    for each month. Place day_of_month in the by 
+    statement to insure proper matching. You tell
+    SAS that the column containing the outcomes
+    is draft_order.
+
+:::
 
 
 

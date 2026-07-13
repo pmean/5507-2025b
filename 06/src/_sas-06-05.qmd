@@ -24,6 +24,35 @@ I generally recommend the long format for your time varying data because it hand
 
 ## Converting from long to wide format
 
+```{}
+proc transpose
+    data=
+    out= ;
+    id ;
+    by ;
+    var ;
+run;
+```
 
+::: {.notes}
+When you are converting the long format to the wide format, you can use the same proc transpose code that was used earlier for the draft lottery example. Look at the code that translated the file from a single column for the entire year to twelve columns, one for each month.
+
+You specify the original data after the data keyword and the converted data after the out keyword. You list the time or condition variable in the id statement and the patient identifier in the by statement. Make sure that your data is sorted properly. The var statement lists the column containming the outcome measure. In the long format, there is only one column.
+:::
 
 ## Converting from wide to long format
+
+```{}
+proc transpose
+    data=
+    out= ;
+    by Subject;
+    var ;
+run;
+```
+
+::: {.notes}
+When you are converting the wide format to the long format, you can use the same proc transpose code that was used earlier for the draft lottery example. Look at the code that translated the file from a twelve monthly columns to a single column for the entire year.
+
+You specify the original data after the data keyword and the converted data after the out keyword. There is no id statement. SAS will create an id variable listing the times or conditions from the variables listed in the var statement. You list the patient identifier in the by statement. With exactly one row for each patient identifier, you may not need to, but it is good form to make sure that your data is sorted properly. The var statement lists the columns containming the outcome measures. In the wide format, there are multiple columns.
+:::

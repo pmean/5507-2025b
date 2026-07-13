@@ -1,7 +1,7 @@
 * Documentation header
 
     todd-5507-06-demo.sas
-    author: Reagan Todd
+    author: Reagan Todd, Steve Simon
     date created: 2025-09-09
     purpose: to understand how to manipulate data widths.
     license: public domain;
@@ -178,7 +178,7 @@ run;
 
 * Comments on the code: There is no need to remove
     duplicates here because the wide format
-    alraady has just one row per patient.;
+    already has just one row per patient.;
 
 
 * Creating time varying data from wide format;
