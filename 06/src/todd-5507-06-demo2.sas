@@ -1,6 +1,6 @@
 * Documentation header
 
-    todd-5507-06-demo.sas
+    todd-5507-06-demo2.sas
     author: Reagan Todd, Steve Simon
     date created: 2025-09-09
     purpose: to understand how to manipulate data widths.
@@ -13,7 +13,7 @@
 %let path=q:/5507-2025b/06;
 
 ods pdf 
-    file= "&path/results/todd-5507-06-demo.pdf";
+    file= "&path/results/todd-5507-06-demo2.pdf";
 
 libname storage 
     "&path/data/";

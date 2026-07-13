@@ -7,6 +7,6 @@ format:
 editor: source
 ---
 
-{{< include todd-5507-06-demo2.md >}}
+{{< include ../results/todd-5507-06-demo2.md >}}
 
 ## Live demo

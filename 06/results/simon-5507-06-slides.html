@@ -1793,19 +1793,6 @@ data storage.draft70yr;
     merge day_of_month;
 run;
 </code></pre>
-<aside class="notes">
-<p>Before you can restructure the data from a yearly format to a monthly format, you need to designate the days of the month (1 to 31 for January, 1 to 29 for February, 1 to 31 for March, etc.). Without this, the data will not line up properly. I created a dataset with 366 rows with 1 to 31 for January, 1 to 29 for Febraury, etc. You need to merge this with the original data before transposing anything.</p>
-<style type="text/css">
-span.MJX_Assistive_MathML {
-position:absolute!important;
-clip: rect(1px, 1px, 1px, 1px);
-padding: 1px 0 0 0!important;
-border: 0!important;
-height: 1px!important;
-width: 1px!important;
-overflow: hidden!important;
-display:block!important;
-}</style></aside>
 </section>
 <section id="convert-yearly-data-to-monthly-data" class="slide level2">
 <h2>Convert yearly data to monthly data</h2>
@@ -2160,7 +2147,7 @@ display:block!important;
 </section>
 <section id="documentation-header-1" class="slide level2">
 <h2>Documentation header</h2>
-<pre><code>todd-5507-06-demo2.sas
+<pre><code>todd-5507-06-demo.sas
 author: Reagan Todd, Steve Simon
 date created: 2025-09-09
 purpose: to understand how to manipulate data widths.
@@ -2171,7 +2158,7 @@ license: public domain</code></pre>
 <pre><code>%let path=q:/5507-2025b/06;
 
 ods pdf 
-    file= &quot;&amp;path/results/todd-5507-06-demo2.pdf&quot;;
+    file= &quot;&amp;path/results/todd-5507-06-demo.pdf&quot;;
 
 libname storage 
     &quot;&amp;path/data/&quot;;

@@ -340,6 +340,24 @@ run;
 
 
 
+::: {.notes}
+
+Before you can restructure
+    the data from a yearly format to a monthly
+    format, you need to designate the days of the
+    month (1 to 31 for January, 1 to 29 for
+    February, 1 to 31 for March, etc.). Without
+    this, the data will not line up properly. I 
+    created a dataset with 366 rows with 1 to 31 
+    for January, 1 to 29 for Febraury, etc. You
+    need to merge this with the original data 
+    before transposing anything.
+
+:::
+
+
+
+
 ## Convert yearly data to monthly data
 
 
