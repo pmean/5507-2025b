@@ -93,11 +93,12 @@ parse_sas <- function(chunks) {
 #| label: convert
 
 convert_to_markdown <- function(code_file) {
+  output_file <- str_replace(code_file, "/src/", "/results/")
   read_code(code_file) |>
     parse_sas() |>
     parse_notes() |>
     parse_heads() |>
-    write_lines(file=paste0(code_file, ".md"))
+    write_lines(file=paste0(output_file, ".md"))
 }
 ```
 
