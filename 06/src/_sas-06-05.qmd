@@ -9,6 +9,21 @@ editor: source
 
 ## Storing time-constant and time-varying data in separate datasets
 
+-   Best approach: split your data (normalization)
+-   Time-constant data in one table
+    -   Always one row per patient
+-   Time-varying data in another table
+    -   Could be one row per patient (wide format)
+    -   Could be multiple rows per patient (long format)
+
+::: {.notes}
+The best approach in most settings is to split your data. The time-constant data goes in one dataset. There will be only one row per patient for the time-constant data. The time-varying data goes in another table. You have two choices here. You could use a wide format for the time-varing data. A wide format would stretch the time-varying data across multiple columns and would have exactly one row per patient. A long format would place the time-varying data in single column and have muiltiple rows per patient.
+
+I generally recommend the long format for your time varying data because it handles missing values more gracefully.
+:::
+
 ## Converting from long to wide format
+
+
 
 ## Converting from wide to long format

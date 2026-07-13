@@ -134,4 +134,42 @@ There are several quality checks that you can run when you combine two datasets,
 
 ## When should you use a many-to-one join?
 
+-   Very dependent on context
+-   Adding labels to category codes
+-   Adding time-varying data
+-   Try to avoid many-to-many joins
+
+::: {.notes}
+It is not always obvious when you want/need a many-to-one join. It does depend a lot on the context of the problem. 
+
+Adding labels is  a commen situation where a many-to-one join is needed. Your data table has a code for a particular category and you want to match that with a data table that has descriptive labels for each category code. There is only one value for each code and label, but many records in the first table could have the same category code. 
+
+Time-varying data in a longitudinal or repeated measures data set is often merged with the time-constant data. For each single record in the time-constant data there are multiple matching records in the time-varying data.
+
+Although there are a limited number of cases where you might have a many-to-many join where there are multiple matches on either side, this should generally be avoided. Instead you should try to segment your many-to-many joins with a sequence of many-to-one joins.
+:::
+
 ## How should you choose between inner, left, right, and outer joins?
+
+-   Also very dependent on context
+-   Filling in gaps
+-   Complete cases only
+
+::: {.notes}
+It is also difficult to decide amon the inner, left, right, and outer joins. This depends quite often on the context of the problem.
+
+Sometimes you are using a join to fill in gaps in your data. You may have event counts for each date, but the dates without any events are not included in your data. You could do a right join with data listing all the values in the date range and then convert any mismatches to zero.
+
+Sometimes you might want an analysis restricted to complete cases only and an inner join will insure that every variable needed in your model does not have missing data.
+:::
+
+## An example of a dataset with labels
+
+![](../images/race-ethnicity-table.png "A partial listing of CDC approved race/ethnicity codes and labels")
+
+::: {.notes}
+This is a partial listing of an official CDC table on race/ethnicity. It has quite a bit of detail (over one thousand rows!), much of which may not be needed for your particular research study. That's why a left join of the original data with the CDC table makes sense. Everyone in the study stays in the study, even if their race/ethnicity code does not match one of the CDC codes. But codes in the CDC table that are not found in your database are not included.
+
+It is also a many-to-one marge because multiple patients within your original table might have the same race/ethnicity code.
+:::
+

@@ -26,8 +26,8 @@ A dataset option is a piece of code placed next to a dataset name and inside a s
 ## Breaking up data
 
 -   Column subsets
-    -   `keep` dataset option or statement
-    -   `drop` dataset option or statement
+    -   `keep` statement or dataset option
+    -   `drop` statement or dataset option
 -   Row subset
     -   `obs` dataset option
     -   `firstobs` dataset option
@@ -54,7 +54,7 @@ run;
 ```
 
 ::: {.notes}
-You can place keep as an option in the data set mentioned in the set statement. You may wish to do additional processing, such as creating new variables, adding labels, etc. When you place the keep statement as an option for the set statement, the processing occurs only after applying the keep statement.
+You can place keep as a dataset option in the set statement. You may wish to do additional processing, such as creating new variables, adding labels, etc. When you place the keep statement as an option for the set statement, the processing occurs only after applying the keep statement.
 :::
 
 ## The keep statement inside the data step
