@@ -7,5 +7,89 @@ format:
 editor: source
 ---
 
-## 08-01
+## A historical perspective on our calendar
 
+-   One day = time for the earth to rotate once
+-   One year = time to orbit once around the sun
+    -   Problem: one year equals 365.242535 days
+    -   Complications:
+        -   unequal days in a month
+        -   leap years
+    
+::: {.notes}
+Measuring time is one of the most vexing tasks in statistics. The problem is that a day (the amount of time for the earth to rotate once) and a year (the amount of time that it takes the earth to orbit once around the sun) clash. There are 365.242535 days in a year. If only this were shortened to a nice round number that is evenly divisible by a large number of values. If the earth had sped things up just a little bit, we would have 360 days in every year, and every month would have exactly 30 days.
+
+But we aren't so lucky. So we have to invent poems like "30 days has September..." and we have to deal with every fourth year having a February 29..
+:::
+
+## What happened between October 4, 1582 and October 15, 1582?
+
+-   Julian calendar invented leap years
+    -   365.25 $\ne$ 365.242535
+    -   About 3/4 of a day error across a century
+-   Gregorian calendar (1582)
+    -   Jumped calendar forward 10 days
+    -   Removed 3 leap years out of every 400 years
+    -   365.2425 much closer to 365.242535
+-   Read more on [Wikipedia][ref-wikipedia-nodate]
+
+[ref-wikipedia-nodate]: https://en.wikipedia.org/wiki/Gregorian_calendar
+    
+::: {.notes}
+A leap year was quite an intelligent invention. It came during the time of Julius Caesar, and is called the Julian calendar. Inserting an extra day every fourth year came closer to the actual time that the earth travels around the sun. But it was still off. Saying that a year was, on average, 365.25 days, as opposed to 365.242535 days, led to a small error, but one that added up over time. Every century, the calendar would be off by about 3/4 of a day. By the end of the middle ages, this added up to an error of about 10 or 11 days. 
+
+This bothered the church because Easter, defined relative to the first full moon after Spring equinox, was coming earlier and earlier in the year. The church didn't want snow on the ground for Easter. So Pope Gregory XIII amended the calendar in two ways. First, he removed three leap years out of every 400 years. This created a year that was 365.2425 days on average. He also pushed the calendar forward by 10 days. So what happened between October 4, 1582 and October 15, 1582? Nothing. Those days do not exist in the Gregorian calendar. Now the countries dominated by Protestant and Orthodox churches did not trust a calendar invented by a Catholic pope, at least not at first. Great Britain and its colonies in America waited until 1752 to switch to the Gregorian calenar. It took an overthrow of the Czar in 1917 for Russia to decide to switch. Greece and Turkey were some of the last holdouts, switching to the Gregorian calendar only in 1923 and 1926 respectively.
+
+You can read more about this on Wikpedia.
+
+The complexities of the switch to the Gregorian calendar does cause problems for historians, but not so much for statisticians. Even the earliest of our retrospective studies does not reach back far enough for considerations. But a more recent event does impact statistics.
+:::
+
+## What happened on December 31, 1999?
+
+-   Y2K bug
+    -   Two digit years (99 versus 1999)
+    -   Still an issue in statistics
+    
+::: {.notes}
+Some of you may remember the Y2K bug. Many computer programs represented the year of an event using two digits (for example, 99 instead of 1999). The problem was that when you added a year to 99 it became 100 which no longer could fit inside a two digit year.
+
+There was concern that many computer systems would crash when December 31, 1999 turned over to January 1, 2000. So a concerted effort was made a few years before 1999 to update as many programs as possible to use four digits for a year instead of only two digits. Adding 1 to 1999 still produces a year that fits in a four digit slot.
+
+The fix worked and almost everything went smoothly in the transition. But in Statistics, we are still having problems today. Pediatric studies may have patients who are 101 years old or -99 years old, thanks to the continued use of two digit years.
+:::
+
+## How does SAS read in dates, 1
+
+-   Easiest to read in as a string ("May 4, 2026")
+-   Limitation: You cannot manipulate strings
+    -   Cannot add/subtract a week/month from a string
+    -   Cannot calculate the time between two strings
+
+::: {.notes}
+You can read in dates as a string. The date May 4, 2026 is a collection of letters, numbers, and symbols, so it is easy to read it as a string.
+
+An important limitation is that you cannot do basic manipulations using strings. You can't calculate something like a week or month before or after a date if the date is stored as a string. You can't calculate the time elapsed between dates if they are stored as strings. This makes it impossible, for example to do a length of stay calculation as the difference between the admission date and the discharge date.
+:::
+
+## How does SAS read in dates, 1
+
+-   Reading in as a date, variety of formats
+    -   Delimiters (5-4-2026, 5/4/2026, 5.4.2026)
+    -   Numeric month versus word (5-4-2026 versus May 4, 2026)
+    -   Leading zeros (05-04-2026)
+    -   Month first versus day first (5-4-2026 versus 4-5-2026)
+    
+::: {.notes}
+Reading in dates as dates is tricky because of the variety of formats. You can separate the parts of the date with dashes, slashes, dots, or other delimiters. You can represent the month as a number (5) or a word (May). You can record months less than 10 with a leading zero and days less than 10 with a leading zero (05-04-2026). You can list hte month, followed by the day, followed by the years, as is done in the United States of as the day, followed by the month, followed by the year as is done in Europe. This difference causes confusion at times. Is 5-4 May the Fourth or the Fifth of April?
+
+Word months also cause ambiguities because the months have different names in different languages.
+
+All in all, dates are very chaotic. 
+:::
+    
+## Recommended format: ISO 8601
+
+![](https://imgs.xkcd.com/comics/iso_8601.png "XKCD comic satirizing alternatives to the ISO 8601 format")
+
+## Reading in two digit years
