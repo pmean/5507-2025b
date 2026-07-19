@@ -1,5 +1,3 @@
-
-
 ## Documentation header
 
     todd-5507-06-demo2.sas
@@ -8,11 +6,7 @@
     purpose: to understand how to manipulate data widths.
     license: public domain
 
-
-
-
 ## File locations
-
 
 ```{}
 %let path=q:/5507-2025b/06;
@@ -28,14 +22,10 @@ filename balance1
   
 filename balance2
     "&path/data/balance-measures-wide.txt";
-
 ```
 
 
-
-
 ::: {.notes}
-
 I would have preferred to use longer names
 	than balance1 and balance2, but the filename statement has an
 	odd holdover from IBM maingrame days. The name that you associate
@@ -44,14 +34,9 @@ I would have preferred to use longer names
 	be eight characters or less. Most have been updated (thank 
 	goodness) but the filename statement has one of the rare exceptions
 	that has not been updated.
-
 :::
 
-
-
-
 ## Read long format
-
 
 ```{}
 data storage.balance_long;
@@ -66,14 +51,9 @@ data storage.balance_long;
         Vision $
         CTSIB;
 run;
-
 ```
 
-
-
-
 ## Print data and metadata
-
 
 ```{}
 proc print
@@ -85,14 +65,9 @@ run;
 proc contents data=storage.balance_long;
     title1 "Contents of the long balance data";
 run;
-
 ```
 
-
-
-
 ## Read wide format
-
 
 ```{}
 data storage.balance_wide;
@@ -116,14 +91,10 @@ data storage.balance_wide;
         FD1
         FD2;
 run;
-
 ```
 
 
-
-
 ::: {.notes}
-
 I (Steve) made a subtle mistake in an
     earlierversion of this code. I used a zero when I should 
     have used a capital O. The O stands for open. That 
@@ -132,14 +103,9 @@ I (Steve) made a subtle mistake in an
     FO1, FO2) and SAS got confused. Always be careful with 
     the number 0 and the upper case letter O. Also be careful
     with the number 1 and the lower case letter l.
-
 :::
 
-
-
-
 ## Print data and metadata
-
 
 ```{}
 proc print
@@ -150,14 +116,9 @@ run;
 proc contents data=storage.balance_wide;
     title1 "Contents of the wide balance data";
 run;
-
 ```
 
-
-
-
 ## Create time constant data from long format
-
 
 ```{}
 data storage.time_constant_long;
@@ -174,28 +135,19 @@ proc print
    data=storage.time_constant_long (obs=10);
    title "First ten rows of time constant data";
 run;
-
 ```
 
 
-
-
 ::: {.notes}
-
 The nodup option removes
     duplicate observations. There is now only one
     row per patient. It is very important to keep
     the subject number in this and any other data
     subsets from either the long format or the
     wide format.
-
 :::
 
-
-
-
 ## Create time varying data from long format
-
 
 ```{}
 data storage.time_varying_long;
@@ -207,26 +159,17 @@ proc print
    data=storage.time_varying_long (obs=10);
    title "First ten rows of time constant data";
 run;
-
 ```
 
 
-
-
 ::: {.notes}
-
 Getting the time-varying
     data from the long format requires no special
     effort. You must always include the subject
     number, even though it is not time varying.
-
 :::
 
-
-
-
 ## Creating time constant data from wide format
-
 
 ```{}
 data storage.time_constant_wide;
@@ -238,25 +181,16 @@ proc print
    data=storage.time_constant_wide (obs=10);
    title "First ten rows of time-constant data";
 run;
-
 ```
 
 
-
-
 ::: {.notes}
-
 There is no need to remove
     duplicates here because the wide format
     already has just one row per patient.
-
 :::
 
-
-
-
 ## Creating time varying data from wide format
-
 
 ```{}
 data storage.time_varying_wide;
@@ -268,27 +202,18 @@ proc print
    data=storage.time_varying_wide (obs=10);
    title "First ten rows of time-varying data";
 run;
-
 ```
 
 
-
-
 ::: {.notes}
-
 Notice that the time 
     varying data looks different from the 
     previous example. You will need to use proc
     transpose to convert one format to the 
     other.
-
 :::
 
-
-
-
 ## Transposing long to wide, part 1
-
 
 ```{}
 proc sort
@@ -303,14 +228,10 @@ data storage.time_varying_long;
         then rep=1;
         else rep=2;
 run;
-
 ```
 
 
-
-
 ::: {.notes}
-
 Each treatment condition 
     in this repeated measures is repeated twice, but
     the long format version of the data does not make
@@ -319,14 +240,9 @@ Each treatment condition
     evaluating to true if the record represents the first
     observation within your by groups. This allows you to
     designate replications 1 versus 2.
-
 :::
 
-
-
-
 ## Transposing long to wide, part 2
-
 
 ```{}
 proc sort
@@ -346,14 +262,10 @@ proc print
     data=wide_conversion (obs=10);
 	title1 "Listing of long converted to wide format";
 run;
-
 ```
 
 
-
-
 ::: {.notes}
-
 You specify the orginal
     dataset with data keyword and the new 
     transposed dataset with out keyword. You 
@@ -368,14 +280,9 @@ You specify the orginal
     the single column that represents the 
     outcomes in a longitudinal or repeated 
     measures data with the var statement.
-
 :::
 
-
-
-
 ## Transposing wide to long
-
 
 ```{}
 proc sort
@@ -394,14 +301,10 @@ proc print
     data=long_conversion (obs=10);
 	title1 "Listing of wide converted to long format";
 run;
-
 ```
 
 
-
-
 ::: {.notes}
-
 Like in the earlier example, 
     you specify the original dataset and the new
     transposed dataset with data and out keywords.
@@ -416,18 +319,11 @@ Like in the earlier example,
     You specify multiple columns in the var 
     statement rather than a single column when 
     converting from a wide format. 
-
 :::
-
-
-
 
 ## Always remember to close your pdf file
 
-
 ```{}
 ods pdf close;
-
 ```
-
 

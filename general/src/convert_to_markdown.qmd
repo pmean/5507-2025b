@@ -14,15 +14,15 @@ editor: source
 library(tidyverse)
 
 marker_heads <- "^\\* "
-prefix_heads <- "\n\n## "
-postfix_heads <- "\n\n"
+prefix_heads <- "## "
+postfix_heads <- "\n"
 
 marker_notes <- "^\\* Comments on the code: "
-prefix_notes <- "\n\n::: {.notes}\n\n"
-postfix_notes <- "\n\n:::\n\n"
+prefix_notes <- "\n::: {.notes}\n"
+postfix_notes <- "\n:::\n"
 
 prefix_sas <- "```{}\n"
-postfix_sas <- "\n\n```\n\n"
+postfix_sas <- "\n```\n"
 
 semicolon <- ";" 
 ```
@@ -107,6 +107,7 @@ convert_to_markdown <- function(code_file) {
 
 "../../06/src/simon-5507-06-demo1" |> convert_to_markdown()
 "../../06/src/todd-5507-06-demo2" |> convert_to_markdown()
+"../../08/src/simon-5507-08-demo" |> convert_to_markdown()
 ```
 
 ```{r}

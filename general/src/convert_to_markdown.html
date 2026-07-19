@@ -2228,15 +2228,15 @@ vertical-align: -.125em;
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>marker_heads <span class="ot">&lt;-</span> <span class="st">&quot;^</span><span class="sc">\\</span><span class="st">* &quot;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>prefix_heads <span class="ot">&lt;-</span> <span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">## &quot;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>postfix_heads <span class="ot">&lt;-</span> <span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">&quot;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>prefix_heads <span class="ot">&lt;-</span> <span class="st">&quot;## &quot;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>postfix_heads <span class="ot">&lt;-</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>marker_notes <span class="ot">&lt;-</span> <span class="st">&quot;^</span><span class="sc">\\</span><span class="st">* Comments on the code: &quot;</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>prefix_notes <span class="ot">&lt;-</span> <span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">::: {.notes}</span><span class="sc">\n\n</span><span class="st">&quot;</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>postfix_notes <span class="ot">&lt;-</span> <span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">:::</span><span class="sc">\n\n</span><span class="st">&quot;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>prefix_notes <span class="ot">&lt;-</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">::: {.notes}</span><span class="sc">\n</span><span class="st">&quot;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>postfix_notes <span class="ot">&lt;-</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">:::</span><span class="sc">\n</span><span class="st">&quot;</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>prefix_sas <span class="ot">&lt;-</span> <span class="st">&quot;```{}</span><span class="sc">\n</span><span class="st">&quot;</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>postfix_sas <span class="ot">&lt;-</span> <span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">```</span><span class="sc">\n\n</span><span class="st">&quot;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>postfix_sas <span class="ot">&lt;-</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">```</span><span class="sc">\n</span><span class="st">&quot;</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>semicolon <span class="ot">&lt;-</span> <span class="st">&quot;;&quot;</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -2306,7 +2306,8 @@ vertical-align: -.125em;
 </div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;../../06/src/simon-5507-06-demo1&quot;</span> <span class="sc">|&gt;</span> <span class="fu">convert_to_markdown</span>()</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;../../06/src/todd-5507-06-demo2&quot;</span> <span class="sc">|&gt;</span> <span class="fu">convert_to_markdown</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;../../06/src/todd-5507-06-demo2&quot;</span> <span class="sc">|&gt;</span> <span class="fu">convert_to_markdown</span>()</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;../../08/src/simon-5507-08-demo&quot;</span> <span class="sc">|&gt;</span> <span class="fu">convert_to_markdown</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save.image</span>(<span class="at">file=</span><span class="st">&quot;../data/convert-to-markdown.RData&quot;</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
