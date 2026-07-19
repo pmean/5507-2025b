@@ -147,27 +147,61 @@ run;
     leap year considerations).;
 
 
-* Don't forget to close your PDF file;
+* Calculate months since first Potter movie;
 
 
-* Calculate months between openings;
-
-
-data first_opening;
-  set storage.potter (obs=1 keep=opening_date);
-  rename opening_date=first_opening;
-run;
-
-data merged_files;
-  merge storage.potter first_opening;
-  months_since_first_opening=
-    intck("month", opening_date, first_opening);
+data elapsed_time;
+  set storage.potter;
+  first_opening=input("11-18-2001", mmddyy10.);
+  months_since_first_movie =
+    intck("month", first_opening, opening_date, "cont");
 run;
 
 proc print
-    data=merged_files;
-  title1 "Months since first opening";
+    data=elapsed_time;
+  format first_opening mmddyy10.;
+  title1 "Waiting times";
 run;
+
+
+* Comment on the code: There are two things going
+    on here. First, you need to add the first 
+    opening date to every row of the dataset. You
+    specify the first opening date as a string and
+    use the input function to covert it from a 
+    string into a date. Then you use the intck 
+    function to calculate the number of months 
+    between the opening date for each movie and
+    the first opening date. There are two ways to
+    calculate months, continuous and discrete. 
+
+    The discrete approach would count 12 months 
+    between Sorceror's Stone and Chamber of 
+    Secrets because you flipped the calendar twelve
+    times to get from 11-18-2001 to 11-17-2002.
+    The continuous approach would not count the
+    last month until you had gone at least 18 days
+    into the last month. In most research settings,
+    you will probably want the continuous approach.
+
+    Both the discrete and continuous approaches
+    produce a whole number. To get a fractional
+    number of months, calculate the number of days
+    between the dates and divide by 365.25 to get
+    a fractional number of years and then multiply
+    by 12 to get a fractional number of months.
+
+    This might look something like
+
+    (intck("day", first_opening, opening_date, "cont")/365.25)*12
+
+    An odd quirk of SAS is that proc print will
+    often display a date value as the number of
+    days since January 1, 1960. Use the format
+    statement to prevent this.;
+
+
+* Don't forget to close your PDF file;
 
 
 ods pdf close;
