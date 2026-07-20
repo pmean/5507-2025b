@@ -103,11 +103,18 @@ convert_to_markdown <- function(code_file) {
 ```
 
 ```{r}
-#| label: run
+#| label: run-06
+#| eval: false
 
 "../../06/src/simon-5507-06-demo1" |> convert_to_markdown()
 "../../06/src/todd-5507-06-demo2" |> convert_to_markdown()
-"../../08/src/simon-5507-08-demo" |> convert_to_markdown()
+```
+
+```{r}
+#| label: run-08
+
+"../../08/src/simon-5507-08-demo1" |> convert_to_markdown()
+"../../08/src/simon-5507-08-demo2" |> convert_to_markdown()
 ```
 
 ```{r}

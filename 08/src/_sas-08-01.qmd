@@ -92,4 +92,41 @@ All in all, dates are very chaotic.
 
 ![](https://imgs.xkcd.com/comics/iso_8601.png "XKCD comic satirizing alternatives to the ISO 8601 format")
 
+::: {.notes}
+The recommended format for dates is a four digit year, followed by a two digit month, followed by a two digit day. It is very important to use a leading zero for values of 1 through 9. So you don't use "2" for the month of Februay, but "02". Also, use dashes as delimiters. And always use four digit years, not two digit years.
+
+This is known as the ISO 8601 format. The nice thing about this format is that even if the date is read in as a string, your software will sort things properly, first by year, then by month for dates within the same year, and then by day for dates within the same month.
+:::
+
 ## Reading in two digit years
+
+-   What if your file has two digit years?
+    -   Put small values for the two digits in the current century
+    -   Put large values for the two digits in the past century
+        -   Example: 12 is 2012, 96 is 1996
+-   `options yearcufoff=1950`
+
+::: {.notes}
+Sometimes you will be given a file with dates and the years are listed as two digit years. A reasonable assumption is that small values like 12 represent a date in this century (that is, 2012) while large values like 96 represent values in the previous century (that is, 1996). Where do you draw the line? If a pediatric study, almost every date should be in the current century, but in a geriatric study, many dates (especially birth dates) should be in the previous century. Just use a bit of common sense and you should be able to resolve most ambiguities.
+
+SAS will use a yearcutoff value with two digit values about the cutoff in the previous century and values below the cutoff in the current century. You can change this value with the yearcutoff keyword in the options statement.
+:::
+
+## SAS formats for dates
+
+-   Useful for both input and output
+    -   `mmddyy10.` (US standard)
+    -   `ddmmyy10.` (European standard)
+    -   `yymmdd10.` (ISO 8601 standard)
+    -   `worddate.` (Spell out the month)
+    -   `weekdate.` (Adds day of the week)
+
+::: {.notes}
+SAS has a variety of formats that you can use to read in dates properly and to display them in the way you prefer.
+
+If you have dates in a file that use the US standard, specify mmddyy10. on the input statement. If they follow the European standard, specify ddmmyy10. instead. If you are lucky enough to get dates using the ISO 8601 standard, use yymmdd10.
+
+A couple words of caution. The use of "yy" instead of "yyyy" implies that you have or want two digit years. It turns out that the formats using "yy" will read either two digit years or four digit years The "yy" will always display four digit years, exptrapolating the century according to the yearcutoff if needed. In the unlikely event that you want to display two digit years, shorten the length from 10 to 8 (for example, mmddyy8.).
+
+if you want to spell out the month (January, February, etc.) use the worddate. format. If you want to weekday as well (Monday, Tuesday, etc.) use the weekdate format.
+:::
