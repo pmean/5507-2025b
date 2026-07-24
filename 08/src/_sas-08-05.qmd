@@ -26,8 +26,7 @@ There are various functions that you can use with time values. The hms function 
 
 -   Stored as the number of seconds since midnight on Janaury 1, 1960
 -   Time zones, daylight savings time can become important
--   
--   Fuctions for datetime values
+-   Functions for datetime values
     -   datetime, returns current date AND time
     -   datepart, selects the date part of a datetime value
     -   timepart, selects the time part of a datetime value
