@@ -26,6 +26,11 @@ There are various functions that you can use with time values. The hms function 
 
 -   Stored as the number of seconds since midnight on Janaury 1, 1960
 -   Time zones, daylight savings time can become important
+-   
+-   Fuctions for datetime values
+    -   datetime, returns current date AND time
+    -   datepart, selects the date part of a datetime value
+    -   timepart, selects the time part of a datetime value
 
 ::: {.notes}
 For applications where you have to track times across multiple days, SAS offers a datetime value. It is stored internally as the number of seconds since midnight on January 1, 1960. I have never needed to track times within a single day, much less times across several days. But it is there if you need it. 
