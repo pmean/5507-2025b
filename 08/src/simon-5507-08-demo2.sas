@@ -59,31 +59,6 @@ run;
     MMDDYY10.;
 
 
-* Modify the date formats;
-
-
-proc print
-    data=storage.potter;
-  format opening_date yymmdd10.;
-  title1 "All rows"; 
-run;
-
-proc print
-    data=storage.potter;
-  format opening_date 8.;
-  title1 "All rows"; 
-run;
-
-
-* Comments on the code: You can change the display
-    of the data using the format statement. The 
-    first example shows how you can display dates
-    using the ISO 8601 standard. The second 
-    example shows how you cn display the
-    underlying number, which represents the 
-    number of days since January 1, 1960.'
-
-
 * Check the day of the week;
 
 
