@@ -5,12 +5,12 @@ format:
     slide-number: true
     embed-resources: true
 params:
-  topic_01: "08-01"
-  topic_02: "08-02"
-  topic_03: "08-03"
-  topic_04: "08-04"
-  topic_05: "08-05"
-  topic_06: "08-06"
+  topic_01: "Formats for dates"
+  topic_02: "Live demo, part 1"
+  topic_03: "Date manipulations"
+  topic_04: "Live demo, part 2"
+  topic_05: "Time and datetime values"
+  topic_06: "Live demo, part 3"
 editor: source
 ---
 

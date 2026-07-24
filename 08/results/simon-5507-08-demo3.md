@@ -1,16 +1,16 @@
-* Documentation header
+## Documentation header
 
-
+```{}
     simon-5507-08-demo3.sas
     author: Steve Simon
     date created: 2026-07-24
     purpose: to illustrate datetime manipulations
     license: public domain;
+```
 
+## File locations
 
-* File locations;
-
-
+```{}
 %let path=q:/5507-2025b/08;
 
 ods pdf 
@@ -20,11 +20,11 @@ ods pdf
 * Comments on the code: In this program, there is
     no libname statement or filename statement. The
 	program creates a few small datasets from scratch.
+```
 
+## Time the calculation of pi
 
-* Time the calculation of pi;
-
-
+```{}
 data pi_approximations;
   t1 = time();
   pix=0;
@@ -44,9 +44,11 @@ proc print
   title2 "David H. Bailey, 2021-12-10";
   title3 "A catalogue of mathematical formulas involving p, with analysis";
 run;
+```
 
 
-* Comments on the code: The formula used here to
+::: {.notes}
+The formula used here to
     approximate pi is not the best choice as it
     converges slowly. The loop do i=0 to 1e9 runs
     through one billion iterations. The times
@@ -56,11 +58,11 @@ run;
     much time has elapsed. In SAS, this is not
     really needed here as the time for each 
     data step and proc is noted in the log.
+:::
 
+## Calculate current date and time
 
-* Calculate current date and time;
-
-
+```{}
 data current_date_and_time;
   dt = datetime();
   output;
@@ -76,18 +78,20 @@ proc print
   format dt datetime20.2;
   title1 "Current date and time";
 run;
+```
 
 
-* Comments on the code: The datetime function
+::: {.notes}
+The datetime function
     produces a datetime value representing the
     current date and time. If you do not use a
     format statement, SAS will display this as
-    the number of seconds since midnight.;
+    the number of seconds since midnight.
+:::
 
+## Separate date and time and display both in a title
 
-* Separate date and time and display both in a title;
-
-
+```{}
 data separate_time_and_date;
   set current_date_and_time;
   d = put(datepart(dt), yymmdd10.);
@@ -100,19 +104,23 @@ proc print
     data=separate_time_and_date;
   title1 "This program was run on &current_date at &current_time";
 run;
+```
 
 
-* Comments on the code: The datepart and
+::: {.notes}
+The datepart and
     timepart functions split the datetime
     value into the date and the time. The
     put statement reformats these values as
     strings and the symput function converts
     the values into macro variables. You can
     then place the macro variables in a 
-    title statement.;
+    title statement.
+:::
 
+## Don't forget to close your PDF file
 
-* Don't forget to close your PDF file;
-
-
+```{}
 ods pdf close;
+```
+

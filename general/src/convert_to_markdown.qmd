@@ -98,7 +98,11 @@ convert_to_markdown <- function(code_file) {
     parse_sas() |>
     parse_notes() |>
     parse_heads() |>
-    write_lines(file=paste0(output_file, ".md"))
+    write_lines(file=paste0(output_file, ".md")) -> chunks
+  n1 <- sum(str_detect(chunks, "## "))
+  n2 <- sum(str_detect(chunks, "```\\{\\}"))
+  n3 <- sum(str_detect(chunks, "::: \\{.notes\\}"))
+  paste0(n1, " heads, ", n2, " code blocks, ", n3, " notes")
 }
 ```
 
@@ -115,6 +119,7 @@ convert_to_markdown <- function(code_file) {
 
 "../../08/src/simon-5507-08-demo1" |> convert_to_markdown()
 "../../08/src/simon-5507-08-demo2" |> convert_to_markdown()
+"../../08/src/simon-5507-08-demo3" |> convert_to_markdown()
 ```
 
 ```{r}

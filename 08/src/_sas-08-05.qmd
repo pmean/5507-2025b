@@ -10,9 +10,9 @@ editor: source
 ## Time values
 
 -   Stored as the number of seconds since midnight
-    -    Cannot exceed 86,400 (=24*60*60)
+    -    Cannot exceed 86,400 (=24 $\times$ 60 $\times$ 60)
 -   Various functions
-    -   hms, converts numeric values of hours, minuntes, and seconds to a time value
+    -   hms, converts numeric values of hours, minutes, and seconds to a time value
     -   hour, produces a numeric value for the hour
     -   minute, produces a numeric value for the minute
     

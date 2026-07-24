@@ -1,16 +1,16 @@
-* Documentation header
+## Documentation header
 
-
+```{}
     simon-5507-08-demo1.sas
     author: Steve Simon
     date created: 2026-07-20
     purpose: to illustrate date manipulations
     license: public domain;
+```
 
+## File locations
 
-* File locations;
-
-
+```{}
 %let path=q:/5507-2025b/08;
 
 ods pdf 
@@ -25,11 +25,11 @@ filename raw_data
     exists only to illustrate a few date 
     calculations and does not need permanent
     storage.;
+```
 
+## Read dates as a string
 
-* Read dates as a string;
-
-
+```{}
 data storage.sw1;
   infile raw_data;
   input star_wars_day $;
@@ -44,19 +44,21 @@ proc contents
     data=storage.sw1;
   title1 "Description of sw1 dataset";
 run;
+```
 
 
-* Comments on the code: Using the dollar sign
+::: {.notes}
+Using the dollar sign
     in the input statement will tell SAS to read
     the date in as a string. This is a simple
     and reasonable approach, especially if you
     do not plan to do any calculations or 
-    manipulations.;
+    manipulations.
+:::
 
+## Read dates using a date format
 
-* Read dates using a date format;
-
-
+```{}
 options yearcutoff=1977;
 
 data sw2;
@@ -73,9 +75,11 @@ proc contents
     data=sw2;
   title1 "Description of sw2 dataset";
 run;
+```
 
 
-* Comments on the code: Dates like 5-4 are 
+::: {.notes}
+Dates like 5-4 are 
     ambiguous because they would be read in as
     May 4 using the US standard and as April 5
     using the European standard. Specifying the
@@ -95,12 +99,12 @@ Since the first Star Wars was released in 1977,
     keyword in the options statement assures
     that any two digit year from 76 and 
     earlier has to be placed in the current
-    century.;
+    century.
+:::
 
+## Displaying the dates with nicer formats
 
-* Displaying the dates with nicer formats;
-
-
+```{}
 proc sort
     data=sw2;
   by star_wars_day;
@@ -117,16 +121,20 @@ proc print
   format star_wars_day weekdate.;
   title1 "Listing of dates using weekdate. format";
 run;
+```
 
 
-* Comments on the code: There are a wide range of
+::: {.notes}
+There are a wide range of
     date formats in SAS. I recommend the yymmdd10.
     format which follows the ISO 8601 standard. If
     you want day of the week and the month spellled
-    out, you can use the weeddate. format.;
+    out, you can use the weeddate. format.
+:::
 
+## Don't forget to close your PDF file
 
-* Don't forget to close your PDF file;
-
-
+```{}
 ods pdf close;
+```
+
