@@ -7,5 +7,6 @@ format:
 editor: source
 ---
 
-## 08-04
+{{< include ../results/simon-5507-08-demo2.md >}}
 
+## Live demo

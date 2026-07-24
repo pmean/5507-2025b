@@ -1,5 +1,5 @@
 ---
-title: "sas-08-05"
+title: "Time and Datetime values"
 format: 
   revealjs:
     slide-number: true
@@ -7,4 +7,46 @@ format:
 editor: source
 ---
 
-## 08-05
+## Time values
+
+-   Stored as the number of seconds since midnight
+    -    Cannot exceed 86,400 (=24*60*60)
+-   Various functions
+    -   hms, converts numeric values of hours, minuntes, and seconds to a time value
+    -   hour, produces a numeric value for the hour
+    -   minute, produces a numeric value for the minute
+    
+::: {.notes}
+SAS also has time values. These are stored as the number of seconds since midnight. There are 86,400 seconds in a single day. 
+
+There are various functions that you can use with time values. The hms function will create a time value if you give it the numbers for the hour, minute, and second. You can also extract the hour or the minute as a numeric value from a time value.
+:::
+
+## Datetime values
+
+-   Stored as the number of seconds since midnight on Janaury 1, 1960
+-   Time zones, daylight savings time can become important
+-   
+-   Fuctions for datetime values
+    -   datetime, returns current date AND time
+    -   datepart, selects the date part of a datetime value
+    -   timepart, selects the time part of a datetime value
+
+::: {.notes}
+For applications where you have to track times across multiple days, SAS offers a datetime value. It is stored internally as the number of seconds since midnight on January 1, 1960. I have never needed to track times within a single day, much less times across several days. But it is there if you need it. 
+
+Do consider the impact of time zones if you are collecting datetime values at several different geographic locations. And you might have to worry about daylight savings time rules, which vary from location to location and also vary by the year. 
+:::
+
+## Dates in other programs, pure chaos
+
+-   Microsoft Excel, counting days since December 31, 1899
+-   Python, see datetime library
+-   R, counting days since January 1, 1970
+-   SPSS, counting seconds since October 14, 1582
+-   SQL, counting "clock ticks" 3.33 milliseconds, days since January 1, 1900
+-   Unix, number of seconds since midnight, January 1, 1970
+
+::: {.notes}
+A big issue of concern is how different programs use different approaches to store dates and times. This can lead to inconsistencies when you move data from one program to another. Always do a few quality checks when you move data. Simple things like looking at the range. If you expect a day counting date and you get a second counting date instead, the values will be off by several orders of magnitude.
+:::

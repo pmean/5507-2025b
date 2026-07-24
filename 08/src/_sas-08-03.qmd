@@ -7,6 +7,62 @@ format:
 editor: source
 ---
 
-{{< include ../results/simon-5507-08-demo.md >}}
+## Extracting parts of a date
 
-## Live demo
+-   Largely self-explanatory
+    -   day
+    -   month
+    -   qtr
+    -   year
+    -   weekday
+    
+::: {.notes}
+Sometimes, you may only need to analyze a portion of a date, and SAS offers a variety of functions that can help. These are self explanatory. The day function extracts the four from the May the Fourth day, while month extracts the five. The qtr function produces a value from 1 to 4 depending on which three months of the year the date falls in. The year function pulls out the year. The weekday function produces a 1 for Sunday, 2 for Monday,  and so forth through 7 for Saturday. All of these functions produce a number and not a date or string.
+:::
+
+## Convert numbers into dates
+
+-   mdy
+    -   Example: mdy(5, 4, 2026) produces May 4, 2026
+-   yyq
+    -   Example: yyq(2026,2) produces April 1, 2026
+
+::: {.notes}
+If you have numbers for the month, day, and year, you can create a date in SAS with the mdy function. Do put in a four digit number for the year please. If you put in a two digit number, SAS will assign it to the current century or the previous century using the yearcutoff value.
+
+The yyq value will create a date at the beginning of the first quarter (January 1), second quarter (April 1), third quarter (July 1), or the fourth quarter (October 1) for a specified year. Again, try to use a four digit number for the year.
+:::
+
+## Shifting a date
+
+-   Add or subtract number of days
+-   intnx function
+    -   "day", "week", "month", or "year"
+    
+::: {.notes}
+Since SAS stores dates internally as the number of days since January 1, 1960, you can move from Star Wars Day (May 4, 2026) to Cinco de Mayo (May 5, 2026) just by adding one. You can move back to April Fool's day (April 1, 2026) by subtracting 33--3 days to get to the beginning of May and 30 days to get from the beginning of May to the beginning of April.
+
+SAS offers an alternative, the intnx function, which will add or subtract a specific number of days, weeks, months, or years. The intx will know when to use 366 days instead of 365 days when your year shift includes the leap day (February 29 of every fourth year). It will properly account for the differing number of days if you shift by one or more months. 
+:::
+
+## Calculating time between two dates
+
+-   Subtract one date from another for days
+-   Unit conversions
+    -   Divide by 7 for weeks
+    -   Divide by 365.25 for years
+    -   Divide by 365.25/12 or 30.4375 for months
+-   intck function
+    -   "day", "week", "month", or "year"
+    -   always produces a whole number
+    -   discrete or continuous calculation
+
+::: {.notes}
+If you want to calculate the amount of time between two dates, a simple subtraction will get you that value as a number of days. Divide by 7 to convert from days to weeks. If you want to convert to years, dividing by 365.25 is reasonable, though you might be slightly off depending on when the leap years fall. If you want months, divide by 365.25/12 or 30.4375 for months. Again this is an approximation because of the unequal number of days in a month, but should be close enough to be reasonable.
+
+You can also use the intck function. This has arguments for day, week, month, or year. The function always produces a whole number, so the number of years between events is zero, one, two, etc.
+
+There are discrete and continuous calculations. To understand the distinction, think of a calendar with a different page for each month. If you went from May 4, 2026 to June 2, 2026, you'd have to flip one calendar page. That's how discrete calculations work. It counts the number of times that you cross a time interval. For continuous calculations, you'd need a couple more days to catch up with the fourth of the month before you say that a month has elapsed. So the discrete difference between May 4, 2026 and June 2, 2026 is one month, but it is zero months with a continuous difference.
+
+The distinction is tricky and a bit technical, but don't worry too much about it. In most applications, you would prefer the continuous difference.
+:::
