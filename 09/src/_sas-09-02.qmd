@@ -1,0 +1,20 @@
+---
+title: "sas-09-02"
+format: 
+  revealjs:
+    slide-number: true
+    embed-resources: true
+editor: source
+---
+
+## Reading strings
+
+## Fancy formatting
+
+-   ODS escapechar="~";
+-    xaxis type=log minor label="log~{unicode '2081'x}~{unicode '2080'x}x"
+         labelattrs=GraphUnicodeText
+   inset ( "Y~{unicode bar}"="62.34" "R~{sup '2'}"="0.94"
+            "~{unicode alpha}"=".05" ) /  position=TopLeft border;
+            
+https://blogs.sas.com/content/graphicallyspeaking/2011/11/14/the-power-of-unicode/

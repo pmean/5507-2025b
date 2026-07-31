@@ -1,0 +1,102 @@
+---
+title: "A historical perspective on strings"
+format: 
+  revealjs:
+    slide-number: true
+    embed-resources: true
+editor: source
+---
+
+## The teletype
+
+![](../images/teletype-codes.png "Table of the 32 teletype codes")
+
+::: {.notes}
+Everything that is stored in the computer is stored as a number. One of the earliest examples of this was the teletype machine. It used 5 bit code to represent 32 separate values. This could be expanded somewhat with the use of "Figures" and "Letters" codes that worked somewhat like the shift key on a computer keyboard.
+
+Image found at https://www.cryptomuseum.com/ref/ita2/index.htm
+:::
+
+## EBCDIC, 1
+
+![](../images/ebcdic-codes.png "EBCDIC codes shown on a punched card")
+
+::: {.notes}
+IBM mainframe computers used punched cards and coding system called EBCDIC, short for Extended Binary Coded Decimal Interchange Code. It is an eight-bit system, but left a lot of blank spots.`
+
+https://en.wikipedia.org/wiki/EBCDIC
+:::
+
+## EBCDIC, 2
+
+![](../images/punched-cards.png "EBCDIC codes shown on a punched card")
+
+::: {.notes}
+Here are the EBCDIC codes laid out on a punched card. The layout seems reasonably logical for the numbers 0 to 9 and the letters A to Z. One limitation of punched cards was the need to avoid more than three punched locations for any column. More than that would weaken the card and make it prone to tears.
+
+https://en.wikipedia.org/wiki/EBCDIC
+:::
+
+## Seven bit ASCII
+
+![](../images/ascii-7-bit-codes.png)
+
+::: {.notes}
+ASCII, short for American Standard Code for Information Interchange, came along shortly before the advent of microcomputers. It used 7 bits rather than 5 and handled upper and lower case very gracefully. It has a reasonable set of symbols. It is still missing a large number of letters that are needed in various European languages. 
+
+Image found at https://en.wikipedia.org/wiki/ASCII
+:::
+
+## Eight bit ASCII, 1
+
+![](../images/ascii-8-bit-extension-01.png "Listing of extra codes available in an 8 bit versus 7 bit system")
+
+::: {.notes}
+Most microprocessors at the time would pull out information in 8, 16, or 32 bytes. So programmers looked at the 128 characters in a 7 bit system and thought that you could switch to an 8 bit system, get a total of 256 characters, and not lose any speed or storage. So here is one example of the 8-bit extension to ASCII. This is iso-8859-1, also known as Latin-1. It includes the accent grave, the accent acute, the cedilla, the circumflex, the tilde, the diaresis, and other letter extensions that are needed for a variety of European languages.
+
+Image found at https://www.marshallsoft.com/iso-8859.htm
+:::
+
+## Eight bit ASCII, 2
+
+![](../images/ascii-8-bit-extension-02.png "Listing of extra codes available in an 8 bit versus 7 bit system")
+
+::: {.notes}
+A different set of extensions was developed for our friends in Russia using letters from the Cyrillic alphabet.
+
+Image found at https://www.marshallsoft.com/iso-8859.htm
+:::
+
+## Eight bit ASCII, 3
+
+![](../images/ascii-8-bit-extension-03.png "Listing of extra codes available in an 8 bit versus 7 bit system")
+
+::: {.notes}
+A third set of extensions was developed for our friends in Greece. Other 8 bit extensions helped with Hebrew, Arabic, and Nordic languages. All well and good, but there were two problems. First, if your computer thought a text file had Greek letters when it actually had Cyrillic letters, you would get gibberish. Second, certain languages required more than 8 bits. In particular, the CJK alphabets representing Chinese, Japanese, and Korean letters needed much more than 8 bits. The Chinese alphabet in particular, has over 40,000 characters.
+
+Image found at https://www.marshallsoft.com/iso-8859.htm
+:::
+
+## Unicode to the rescue
+
+![](../images/unicode-logo.png "Logo for the Unicode consortium")
+
+::: {.notes}
+In the early 1990s, a group of computer scientists developed the Unicode standard. This was originally a 16 bit system. Using 16 bits provided room for 65,536 characters. This was later extended to 1,112,064 characters, approximately 20 bits. Backward compatibility made it impossible to use an exact power of 2.
+
+All of the CJK alphabet fits easily inside this limit and there is room emojis and for obsolete characters, such as hieroglyphics. Unicode has been a boon to many languages spoken by a dwindling population. It has provided a way for the few speakers of those languages to preserve their heritage.
+
+Image found at https://en.wikipedia.org/wiki/Unicode
+:::
+
+## UTF-8
+
+
+
+## Problems
+
+-   Ligatures
+-   Non-breaking space
+-   Smart or curly quotes
+-   Dashes (em and en)
+-   Mojibake

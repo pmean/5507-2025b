@@ -1,0 +1,39 @@
+---
+title: "sas-09-03"
+format: 
+  revealjs:
+    slide-number: true
+    embed-resources: true
+editor: source
+---
+
+## String size
+
+-   Same for all values within a column
+-   Shorter strings are padded with blanks
+-   Adjust size with length statement
+
+## Search inside strings
+
+-   scan
+-   find
+
+## Removing excess blanks
+
+-   compress
+-   trim
+-   compbl
+-   strip
+
+## Combine two or more strings
+
+-   ||
+    -   Watch out for excess blanks
+
+
+
+## String functions
+
+-   tranwrd
+-   substr
+-   translate

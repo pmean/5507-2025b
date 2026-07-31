@@ -1,0 +1,13 @@
+---
+title: "sas-09-06"
+format: 
+  revealjs:
+    slide-number: true
+    embed-resources: true
+editor: source
+---
+
+{{< include ../results/simon-5507-09-demo2.md >}}
+
+## Live demo
+
