@@ -6,7 +6,7 @@ format:
     embed-resources: true
 params:
   topic_01: "Breaking apart datasets"
-  topic_02: "Combining datasets"
+  topic_02: "Combining datasets" 
   topic_03: "simon-5507-06-demo1"
   topic_04: "Longitudinal data and repeated measures"
   topic_05: "Time-constant and time-varying data"

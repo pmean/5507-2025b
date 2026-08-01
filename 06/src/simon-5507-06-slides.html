@@ -1465,7 +1465,7 @@ display:block!important;
 </ul>
 <aside class="notes">
 <p>It is not always obvious when you want/need a many-to-one join. It does depend a lot on the context of the problem.</p>
-<p>Adding labels is a commen situation where a many-to-one join is needed. Your data table has a code for a particular category and you want to match that with a data table that has descriptive labels for each category code. There is only one value for each code and label, but many records in the first table could have the same category code.</p>
+<p>Adding labels is a common situation where a many-to-one join is needed. Your data table has a code for a particular category and you want to match that with a data table that has descriptive labels for each category code. There is only one value for each code and label, but many records in the first table could have the same category code.</p>
 <p>Time-varying data in a longitudinal or repeated measures data set is often merged with the time-constant data. For each single record in the time-constant data there are multiple matching records in the time-varying data.</p>
 <p>Although there are a limited number of cases where you might have a many-to-many join where there are multiple matches on either side, this should generally be avoided. Instead you should try to segment your many-to-many joins with a sequence of many-to-one joins.</p>
 <style type="text/css">
@@ -1540,8 +1540,7 @@ display:block!important;
     author: Steve Simon
     date created: 2026-06-25
     purpose: to illustrate managing multiple datasets
-    license: public domain;
-</code></pre>
+    license: public domain;</code></pre>
 </section>
 <section id="file-locations" class="slide level2">
 <h2>File locations</h2>
@@ -1551,8 +1550,7 @@ ods pdf
     file= &quot;&amp;path/results/simon-5507-06-demo1.pdf&quot;;
 
 libname storage 
-    &quot;&amp;path/data/&quot;;
-</code></pre>
+    &quot;&amp;path/data/&quot;;</code></pre>
 </section>
 <section id="more-file-locations" class="slide level2">
 <h2>More file locations</h2>
@@ -1563,8 +1561,7 @@ filename d71yr
     &quot;&amp;path/data/draft71yr.dat.txt&quot;;
   
 filename d70mn
-    &quot;&amp;path/data/draft70mn.dat.txt&quot;;
-</code></pre>
+    &quot;&amp;path/data/draft70mn.dat.txt&quot;;</code></pre>
 </section>
 <section id="read-tab-delimited-files" class="slide level2">
 <h2>Read tab delimited files</h2>
@@ -1582,8 +1579,7 @@ data storage.draft71yr;
         day_of_year
         draft_order
         month;
-run;
-</code></pre>
+run;</code></pre>
 </section>
 <section id="print-the-first-few-rows" class="slide level2">
 <h2>Print the first few rows</h2>
@@ -1598,8 +1594,7 @@ proc print
     data=storage.draft71yr (obs=10);
     title1 &quot;First ten rows of the 1971 draft lottery data&quot;;
     title2 &quot;Using a year long format&quot;;
-run;
-</code></pre>
+run;</code></pre>
 </section>
 <section id="create-small-subsets-of-the-data" class="slide level2">
 <h2>Create small subsets of the data</h2>
@@ -1613,8 +1608,7 @@ data dec_1971a;
     set storage.draft71yr;
     if month=12;
     year=1971;
-run;
-</code></pre>
+run;</code></pre>
 <aside class="notes">
 <p>The if statement without a condition tells SAS to include rows only if the logical condition evaluates to true. You need to add a year variable before combining the data to avoid ambiguities.</p>
 <style type="text/css">
@@ -1638,8 +1632,7 @@ run;
 proc print
     data=dec_stack1 (obs=10);
     title1 &quot;First ten rows of stacked data&quot;;
-run;
-</code></pre>
+run;</code></pre>
 <aside class="notes">
 <p>If you place more than one dataset in the set statement, SAS will combine the datasets one beneath the other.</p>
 <style type="text/css">
@@ -1668,8 +1661,7 @@ proc sgplot
   title4 &quot;is closer to 100&quot;;
 run;
 
-ods graphics on / reset=all;
-</code></pre>
+ods graphics on / reset=all;</code></pre>
 </section>
 <section id="create-small-subsets-of-the-data-1" class="slide level2">
 <h2>Create small subsets of the data</h2>
@@ -1681,8 +1673,7 @@ run;
 data dec_1971b (rename=(draft_order=draft_order_1971));
     set storage.draft71yr;
     if month=12;
-run;
-</code></pre>
+run;</code></pre>
 <aside class="notes">
 <p>When you stack the data side by side, it is the common variable name (draft_order) that can create an ambiguity. You can avoid this by renaming the variables to distinct names before combining them.</p>
 <style type="text/css">
@@ -1706,8 +1697,7 @@ run;
 proc print
     data=dec_stack2(obs=10);
     title1 &quot;Partial listing of side by side stacked data&quot;;
-run;
-</code></pre>
+run;</code></pre>
 </section>
 <section id="read-a-fixed-width-file" class="slide level2">
 <h2>Read a fixed width file</h2>
@@ -1727,8 +1717,7 @@ run;
         nov_order 43-45
         dec_order 47-49;
     day_of_month=_n_;
-run;
-</code></pre>
+run;</code></pre>
 </section>
 <section id="print-a-small-piece-of-the-data." class="slide level2">
 <h2>Print a small piece of the data.</h2>
@@ -1737,8 +1726,7 @@ run;
     var jan_order -- may_order;
     title1 &quot;First five columns of the 1970 draft lottery data&quot;;
     title2 &quot;Using a month long format&quot;;
-run;
-</code></pre>
+run;</code></pre>
 <aside class="notes">
 <p>Notice that the months with less than 31 days have missing values.</p>
 <style type="text/css">
@@ -1765,8 +1753,7 @@ run;
 proc print
    data=stack3;
    title1 &quot;Listing of transposed draft70mn&quot;;
-run;
-</code></pre>
+run;</code></pre>
 <aside class="notes">
 <p>Use the data keyword to specify the source and the out keyword to specify where you want to converted data to be located. Place day_of_month in the by statement to insure that the order of the outcomes after transposing stays consistent. You tell SAS the names of the twelve columns that you want to combine into a single column.</p>
 <style type="text/css">
@@ -1791,8 +1778,7 @@ run;
 data storage.draft70yr;
     set storage.draft70yr;
     merge day_of_month;
-run;
-</code></pre>
+run;</code></pre>
 <aside class="notes">
 <p>Before you can restructure the data from a yearly format to a monthly format, you need to designate the days of the month (1 to 31 for January, 1 to 29 for February, 1 to 31 for March, etc.). Without this, the data will not line up properly. I created a dataset with 366 rows with 1 to 31 for January, 1 to 29 for Febraury, etc. You need to merge this with the original data before transposing anything.</p>
 <style type="text/css">
@@ -1825,8 +1811,7 @@ run;
 
 proc print
     data=stack4;
-run;
-</code></pre>
+run;</code></pre>
 <aside class="notes">
 <p>Use the data keyword to specify the source and the out keyword to specify where you want to converted data to be located. Put month in the id statement to let SAS know that you want a separate column for each month. Place day_of_month in the by statement to insure proper matching. You tell SAS that the column containing the outcomes is draft_order.</p>
 <style type="text/css">
@@ -1843,8 +1828,7 @@ display:block!important;
 </section>
 <section id="dont-forget-to-close-your-pdf-file" class="slide level2">
 <h2>Don’t forget to close your PDF file</h2>
-<pre><code>ods pdf close;
-</code></pre>
+<pre><code>ods pdf close;</code></pre>
 </section>
 <section id="live-demo" class="slide level2">
 <h2>Live demo</h2>
@@ -1968,8 +1952,9 @@ display:block!important;
 <p><span class="math inline">\(\begin{matrix}
 1 &amp; O_{11} &amp; O_{12} &amp; O_{13} &amp; O_{14} &amp; A_1 &amp; B_1 &amp; \cdots \\
 2 &amp; O_{21} &amp; O_{22} &amp; O_{23} &amp; O_{24} &amp; A_2 &amp; B_2 &amp; \cdots \\
-3 &amp; O_{21} &amp; O_{22} &amp; O_{23} &amp; O_{24} &amp; A_3 &amp; B_3 &amp; \cdots \\
-4 &amp; O_{21} &amp; O_{22} &amp; O_{23} &amp; O_{24} &amp; A_4 &amp; B_4 &amp; \cdots \\
+3 &amp; O_{31} &amp; O_{32} &amp; O_{33} &amp; O_{34} &amp; A_3 &amp; B_3 &amp; \cdots \\
+4 &amp; O_{41} &amp; O_{42} &amp; O_{43} &amp; O_{44} &amp; A_4 &amp; B_4 &amp; \cdots \\
+4 &amp; O_{51} &amp; O_{52} &amp; O_{53} &amp; O_{54} &amp; A_5 &amp; B_5 &amp; \cdots \\
 \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp;
 \end{matrix}\)</span></p>
 <aside class="notes">
@@ -2040,7 +2025,7 @@ display:block!important;
 <p>You might ask which approach is superior. It turns out that neither approach is uniformly superior. The long format has multiple rows for each patient which requires repetition of the time-constant data. This creates extra space requirements for the dataset. This is not an issue for small and moderate size datasets, but can be a problem for very large datasets.</p>
 <p>More importantly, the repetition increases the chances for data quality problems. A small typographical error could convert a male patient into a female patient halfway through a longitudinal study or reclassify a pediatric patient as a senior citizen.</p>
 <p>The wide format can has an excessive number of columns. This depends on the number of time points or repeated measures, but it often makes a dataset unwieldy.</p>
-<p>Scrolling left and right on a computer screen is more difficult than scrolling up and down. Your computer has a Page Up and a Page Down key, but it does not have Page Left and Page Right keys. Even if it did, it is very easy to accidentally jump up or down a line of data when there are lots of columns to scroll through.</p>
+<p>Scrolling left and right on a computer screen is more difficult than scrolling up and down. Your computer has a Page Up and a Page Down key, but it does not have Page Left and Page Right keys. Even if it did, it is very easy visually to accidentally jump up or down a line of data when there are lots of columns to scroll through.</p>
 <p>Have you noticed how newspapers will print their articles. No article spans the entire page, which in a newspaper is quite wide. Instead, the articles are placed in relatively narrow columns. The reason for this is if you are reading a very wide line of text, when you reach the end of a line and have to jump back to the beginning, it is difficult to start a fresh line. It takes a very disciplined eye to trace back to the left side of the page and do so without straying up or down. It’s best to keep the articles to about 40 characters of text. The eye doesn’t have to work as hard and you can more easily jump to the start of the correct line.</p>
 <p>A bigger problem is missing values. If a subject drops out after the second of ten longitudinal measurements, that subject just has two lines in the long format. But you have to keep the ten columns of longitudinal measurements for that subject because other subjects will need all of those columns. The result is missing values for 8 of the 10 columns. As a general rule, you want to try to minimize the use of missing value codes because they create such problems.</p>
 <p>It turns out that different analyses require different formats. Correlations, for example, require the wide format while most plots require the long format.</p>
@@ -2132,7 +2117,7 @@ display:block!important;
 run;</code></pre>
 <aside class="notes">
 <p>When you are converting the wide format to the long format, you can use the same proc transpose code that was used earlier for the draft lottery example. Look at the code that translated the file from a twelve monthly columns to a single column for the entire year.</p>
-<p>You specify the original data after the data keyword and the converted data after the out keyword. There is no id statement. SAS will create an id variable listing the times or conditions from the variables listed in the var statement. You list the patient identifier in the by statement. With exactly one row for each patient identifier, you may not need to, but it is good form to make sure that your data is sorted properly. The var statement lists the columns containming the outcome measures. In the wide format, there are multiple columns.</p>
+<p>You specify the original data after the data keyword and the converted data after the out keyword. There is no id statement. SAS will create an id variable listing the times or conditions from the variables listed in the var statement. You list the patient identifier in the by statement. With exactly one row for each patient identifier, you may not need to, but it is good form to make sure that your data is sorted properly. The var statement lists the columns containing the outcome measures. In the wide format, there are multiple columns.</p>
 <style type="text/css">
 span.MJX_Assistive_MathML {
 position:absolute!important;
@@ -2180,8 +2165,7 @@ filename balance1
     &quot;&amp;path/data/balance-measures-long.txt&quot;;
   
 filename balance2
-    &quot;&amp;path/data/balance-measures-wide.txt&quot;;
-</code></pre>
+    &quot;&amp;path/data/balance-measures-wide.txt&quot;;</code></pre>
 <aside class="notes">
 <p>I would have preferred to use longer names than balance1 and balance2, but the filename statement has an odd holdover from IBM maingrame days. The name that you associate in a filename statement has to be eight characters or less. Back in the days of mainframes, almost everything you did in SAS had to be eight characters or less. Most have been updated (thank goodness) but the filename statement has one of the rare exceptions that has not been updated.</p>
 <style type="text/css">
@@ -2209,8 +2193,7 @@ display:block!important;
         Surface $
         Vision $
         CTSIB;
-run;
-</code></pre>
+run;</code></pre>
 </section>
 <section id="print-data-and-metadata" class="slide level2">
 <h2>Print data and metadata</h2>
@@ -2222,8 +2205,7 @@ run;
 
 proc contents data=storage.balance_long;
     title1 &quot;Contents of the long balance data&quot;;
-run;
-</code></pre>
+run;</code></pre>
 </section>
 <section id="read-wide-format" class="slide level2">
 <h2>Read wide format</h2>
@@ -2247,8 +2229,7 @@ run;
         FC2
         FD1
         FD2;
-run;
-</code></pre>
+run;</code></pre>
 <aside class="notes">
 <p>I (Steve) made a subtle mistake in an earlierversion of this code. I used a zero when I should have used a capital O. The O stands for open. That shouldn’t hurt anything but later in the program, I switched back to the correct variable names (NO1, NO2, FO1, FO2) and SAS got confused. Always be careful with the number 0 and the upper case letter O. Also be careful with the number 1 and the lower case letter l.</p>
 <style type="text/css">
@@ -2272,8 +2253,7 @@ run;
 
 proc contents data=storage.balance_wide;
     title1 &quot;Contents of the wide balance data&quot;;
-run;
-</code></pre>
+run;</code></pre>
 </section>
 <section id="create-time-constant-data-from-long-format" class="slide level2">
 <h2>Create time constant data from long format</h2>
@@ -2290,8 +2270,7 @@ run;
 proc print
    data=storage.time_constant_long (obs=10);
    title &quot;First ten rows of time constant data&quot;;
-run;
-</code></pre>
+run;</code></pre>
 <aside class="notes">
 <p>The nodup option removes duplicate observations. There is now only one row per patient. It is very important to keep the subject number in this and any other data subsets from either the long format or the wide format.</p>
 <style type="text/css">
@@ -2316,8 +2295,7 @@ run;
 proc print
    data=storage.time_varying_long (obs=10);
    title &quot;First ten rows of time constant data&quot;;
-run;
-</code></pre>
+run;</code></pre>
 <aside class="notes">
 <p>Getting the time-varying data from the long format requires no special effort. You must always include the subject number, even though it is not time varying.</p>
 <style type="text/css">
@@ -2342,8 +2320,7 @@ run;
 proc print
    data=storage.time_constant_wide (obs=10);
    title &quot;First ten rows of time-constant data&quot;;
-run;
-</code></pre>
+run;</code></pre>
 <aside class="notes">
 <p>There is no need to remove duplicates here because the wide format already has just one row per patient.</p>
 <style type="text/css">
@@ -2368,8 +2345,7 @@ run;
 proc print
    data=storage.time_varying_wide (obs=10);
    title &quot;First ten rows of time-varying data&quot;;
-run;
-</code></pre>
+run;</code></pre>
 <aside class="notes">
 <p>Notice that the time varying data looks different from the previous example. You will need to use proc transpose to convert one format to the other.</p>
 <style type="text/css">
@@ -2397,8 +2373,7 @@ data storage.time_varying_long;
     if first.Subject 
         then rep=1;
         else rep=2;
-run;
-</code></pre>
+run;</code></pre>
 <aside class="notes">
 <p>Each treatment condition in this repeated measures is repeated twice, but the long format version of the data does not make directly designate the first and second repliclation. With sorted data, first.Subject is a logical variable evaluating to true if the record represents the first observation within your by groups. This allows you to designate replications 1 versus 2.</p>
 <style type="text/css">
@@ -2431,8 +2406,7 @@ run;
 proc print
     data=wide_conversion (obs=10);
     title1 &quot;Listing of long converted to wide format&quot;;
-run;
-</code></pre>
+run;</code></pre>
 <aside class="notes">
 <p>You specify the orginal dataset with data keyword and the new transposed dataset with out keyword. You specify the time variable in a longitudinal design or the treatment conditions in a repeated measures design using the id statement. You specify the variable that identifies the values associated with each subject using the by statement. You should make sure that the data is sorted properly before using the by statement. You specify the single column that represents the outcomes in a longitudinal or repeated measures data with the var statement.</p>
 <style type="text/css">
@@ -2464,8 +2438,7 @@ run;
 proc print
     data=long_conversion (obs=10);
     title1 &quot;Listing of wide converted to long format&quot;;
-run;
-</code></pre>
+run;</code></pre>
 <aside class="notes">
 <p>Like in the earlier example, you specify the original dataset and the new transposed dataset with data and out keywords. Also like the earlier example, you specify the variable which tells you which row is associated with which subject using the by statement. You should make sure the data is sorted properly before using the by statement. In this example, the data was already sorted properly, but it never hurts to be safe. You do not need an id statement when converting from wide to long. You specify multiple columns in the var statement rather than a single column when converting from a wide format.</p>
 <style type="text/css">
@@ -2482,8 +2455,7 @@ display:block!important;
 </section>
 <section id="always-remember-to-close-your-pdf-file" class="slide level2">
 <h2>Always remember to close your pdf file</h2>
-<pre><code>ods pdf close;
-</code></pre>
+<pre><code>ods pdf close;</code></pre>
 </section>
 <section id="live-demo-1" class="slide level2">
 <h2>Live demo</h2>

@@ -71,8 +71,9 @@ There are some gray areas besides age where it is unsure whether a variable is t
 $\begin{matrix}
 1 & O_{11} & O_{12} & O_{13} & O_{14} & A_1 & B_1 & \cdots \\
 2 & O_{21} & O_{22} & O_{23} & O_{24} & A_2 & B_2 & \cdots \\
-3 & O_{21} & O_{22} & O_{23} & O_{24} & A_3 & B_3 & \cdots \\
-4 & O_{21} & O_{22} & O_{23} & O_{24} & A_4 & B_4 & \cdots \\
+3 & O_{31} & O_{32} & O_{33} & O_{34} & A_3 & B_3 & \cdots \\
+4 & O_{41} & O_{42} & O_{43} & O_{44} & A_4 & B_4 & \cdots \\
+4 & O_{51} & O_{52} & O_{53} & O_{54} & A_5 & B_5 & \cdots \\
 \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & 
 \end{matrix}$
 
@@ -126,7 +127,7 @@ More importantly, the repetition increases the chances for data quality problems
 
 The wide format can has an excessive number of columns. This depends on the number of time points or repeated measures, but it often makes a dataset unwieldy.
 
-Scrolling left and right on a computer screen is more difficult than scrolling up and down. Your computer has a Page Up and a Page Down key, but it does not have Page Left and Page Right keys. Even if it did, it is very easy to accidentally jump up or down a line of data when there are lots of columns to scroll through.
+Scrolling left and right on a computer screen is more difficult than scrolling up and down. Your computer has a Page Up and a Page Down key, but it does not have Page Left and Page Right keys. Even if it did, it is very easy visually to accidentally jump up or down a line of data when there are lots of columns to scroll through.
 
 Have you noticed how newspapers will print their articles. No article spans the entire page, which in a newspaper is quite wide. Instead, the articles are placed in relatively narrow columns. The reason for this is if you are reading a very wide line of text, when you reach the end of a line and have to jump back to the beginning, it is difficult to start a fresh line. It takes a very disciplined eye to trace back to the left side of the page and do so without straying up or down. It's best to keep the articles to about 40 characters of text. The eye doesn't have to work as hard and you can more easily jump to the start of the correct line.
 

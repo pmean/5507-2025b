@@ -144,7 +144,7 @@ There are several quality checks that you can run when you combine two datasets,
 ::: {.notes}
 It is not always obvious when you want/need a many-to-one join. It does depend a lot on the context of the problem. 
 
-Adding labels is  a commen situation where a many-to-one join is needed. Your data table has a code for a particular category and you want to match that with a data table that has descriptive labels for each category code. There is only one value for each code and label, but many records in the first table could have the same category code. 
+Adding labels is  a common situation where a many-to-one join is needed. Your data table has a code for a particular category and you want to match that with a data table that has descriptive labels for each category code. There is only one value for each code and label, but many records in the first table could have the same category code. 
 
 Time-varying data in a longitudinal or repeated measures data set is often merged with the time-constant data. For each single record in the time-constant data there are multiple matching records in the time-varying data.
 
