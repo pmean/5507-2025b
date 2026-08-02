@@ -89,9 +89,69 @@ All of the CJK alphabet fits easily inside this limit and there is room emojis a
 Image found at https://en.wikipedia.org/wiki/Unicode
 :::
 
+## Some Unicode Latin characters
+
+![](../images/unicode-01.png "Unicode chart for letters A through F")
+
+## Some Unicode modified Latin characters
+
+![](../images/unicode-02.png "Unicode chart for modified characters A and C")
+
+## Some Unicode Greek characters
+
+![](../images/unicode-03.png "Unicode chart for Greek characters alpha through kappa")
+
+## Some Unicode Cherokee characters
+
+![](../images/unicode-04.png "Unicode chart for Cherokee letters A through GE")
+
+## Some Unicode Chinese characters
+
+![](../images/unicode-05.png "Unicode chart for various CJK characters")
+
+
+
 ## UTF-8
 
+-   Accommodates unicode characters
+-   Maintains compatibility with 7-bit ASCII
+    -   0xxx xxxx is a single byte
+    -   1xxx xxxx is multiple bytes
+        -   110x xxxx is two bytes
+        -   1110 xxxx is three bytes
+        -   1111 0xxx is four bytes
+    -   Second, third, fourth bytes are 10xx xxxx
 
+## Non-alphabetic Unicode
+
+-   General punctuation
+-   Arrows
+-   Mathematical operators
+-   Box drawing
+-   Geometric shapes
+
+## UTF-8 example 1
+
+-   0100 0001
+    -   Leading 0 means a single byte
+    -   Remaining bits are 100 0001
+    -   Equals decimal 65 or "A"
+
+## UTF-8 example 2
+
+-   1100 0100 1000 0001
+    -   Leading 110 means two bytes
+    -   Second byte must start with 10
+    -   Remaining bits are 001 0000 0001
+    -   Equals decimal 257 or "ā"
+
+## UTF-8 example 3
+
+-   1110 0001 1000 1110 1010 0011
+    -   Leading 1110 means three bytes
+    -   Second and third bytes must start with 10
+    -   Remaining bits are 0001 0011 1010 0011
+    -   Equals decimal 4096+512+256+128+32+2+1 or 5027 or "Ꭳ"
 
 ## Problems
 
